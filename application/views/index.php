@@ -1,122 +1,168 @@
-<!Doctype html>
-<html>
-        <head>
-                 <link rel="stylesheet" href="css/jquery-ui.css">
-                 <script src="js/jquery.js"></script>
-                 <script src="js/jsf/jquery.ui.core.js"></script>
-                 <script src="js/jsf/jquery.ui.widget.js"></script>
-                 <script src="js/jsf/jquery.ui.tabs.js"></script>
-        
-                  <link rel="stylesheet" href="galery/css/style.css" type="text/css" media="screen" charset="utf-8" />
-                  <link rel='stylesheet' type='text/css'  href='css/style.css'/>
-                  <script type="text/javascript" src="galery/js/startstop-slider.js"></script>
-                  <script>
-                                $(function() {
-                                    $( "#tabs" ).tabs();
-                                });
-                  </script>
-        </head>
-        <body>
-                 <div id='content'>
+    <div class="sb-block">
+    <h2>Categories</h2>
+    <ul>
+      <li><a href="#">Web Design</a></li>
+    <li><a href="#">Computers</a></li>
+    <li><a href="#">Gadgets</a></li>
+    <li><a href="#">CSS Templates</a></li>
+    <li><a href="#">Graphics Design</a></li>
+    <li><a href="#">Photography</a></li>
+    <li><a href="#">General</a></li>
+    </ul>
+    </div>
+    
+    
+    
+    <div id="sociallinks"> 
+        <a href="#"><img src="<?php echo base_url();?>public/images/fb-icon.jpg" width="33" height="32" alt="facebook"></a> 
+        <a href="#"><img src="<?php echo base_url();?>public/images/twt-icon.jpg" width="33" height="32" alt="twitter"></a> 
+        <a href="#"><img src="<?php echo base_url();?>public/images/flkr-icon.jpg" width="33" height="32" alt="flickr"></a> 
+        <a href="#"><img src="<?php echo base_url();?>public/images/be-icon.jpg" width="33" height="32" alt="behance"></a> 
+    </div>
+    </section>
+</section>
 
-                           <div id='encabezado'>
-                                 <div class='logo'></div> 
-                                 <div class='buscador'> 
-                                          <table>
-                                                  <tr>
-                                                         <td><input type='text' name='texto' /></td> 
-                                                         <td><input type='button' value='Buscar'/></td>
-                                                  </tr>
-                                          </table>
-                                 </div> 
-                                 <div class='login'>
-                                          <table>
-                                                <tr>
-                                                    <td>
-                                                    <input type="text" name="usuario" placeholder='Usuario...'>
-                                                    </td>
-                                                    <td>
-                                                    <input type="text" name="clave" placeholder='Clave...'>
-                                                    </td>
-                                                    <td>
-                                                           <input type="button" value="Entrar">
-                                                    </td>
-                                                </tr>
-                                          </table>
-                                 </div>
-                           </div>
-                           <div id='menu'>
-                                <div class='option'>Inicio</div>
-                                <div class='option'>Quienes somos</div>
-                                <div class='option'>Servicios</div>
-                                <div class='option'>Cursos</div>
-                                <div class='option'>Novedades</div>
-                           </div>
-                           <div id='galeria'>
-                                                                                <div id="slider">
+<section id="right">
+  <header id="pageheader">
+      <div id="intro">
+          <div id="introwrap">
+            <h2>Hello there,</h2>
+            <p>I am a Web User Interface designer with passion for art, photography and web standards. I make clean, smart & usable websites. If you need a website, <a href="#">let's talk</a></p>
+            </div>
+                    <a href="#" class="resume">Download Resume</a>
 
-                                                                                    <div id="mover">
-                                                                                
-                                                                                        <div id="slide-1" class="slide">
-                                                                                        
-                                                                                            <h1>Videos</h1>
-                                                                                            
-                                                                                            <p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus.</p>
-                                                                                            
-                                                                                            <a href="#"><img src="images/slide-1-image.png" alt="learn more" /></a>
-                                                                                            
-                                                                                        </div>
-                                                                                        
-                                                                                        <div class="slide">
-                                                                                        
-                                                                                            <h1>Audios</h1>
-                                                                                            
-                                                                                            <p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus.</p>
-                                                                                            
-                                                                                            <a href="#"><img src="images/slide-2-image.png" alt="learn more" /></a>
-                                                                                            
-                                                                                        </div>
-                                                                                        
-                                                                                        <div class="slide">
-                                                                                        
-                                                                                            <h1>Ejercicios</h1>
-                                                                                            
-                                                                                            <p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus.</p>
-                                                                                            
-                                                                                            <a href="#"><img src="images/slide-3-image.png" alt="learn more" /></a>
-                                                                                            
-                                                                                        </div>
-                                                                                    
-                                                                                    </div>
-                                                                                
-                                                                                </div>
-                           </div>
+        </div>
+    </header>
+    
+    <section id="contents">
+    <section id="homemain">
+    <article class="post">
+    <header>
+    <h2><a href="#">Article Title</a></h2>
+    <span class="articlemeta">Posted on 12 June 2010 under <a href="#">CSS Templates</a></span>
+    
+    </header>
+    <div class="entry">
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque    
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis.  <a href="#">Read More</a></p>
+    
+    </div>
+    </article>
+    
+    <article class="post">
+    <header>
+    <h2><a href="#">Article Title</a></h2>
+    <span class="articlemeta">Posted on 12 June 2010 under <a href="#">CSS Templates</a></span>
+    
+    </header>
+    <div class="entry">
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque    
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis.  <a href="#">Read More</a></p>
+    
+    </div>
+    </article>
+    
+    <article class="post">
+    <header>
+    <h2><a href="#">Article Title</a></h2>
+    <span class="articlemeta">Posted on 12 June 2010 under <a href="#">CSS Templates</a></span>
+    
+    </header>
+    <div class="entry">
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque    
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis.  <a href="#">Read More</a></p>
+    
+    </div>
+    </article>
+    <article class="post">
+    <header>
+    <h2><a href="#">Article Title</a></h2>
+    <span class="articlemeta">Posted on 12 June 2010 under <a href="#">CSS Templates</a></span>
+    
+    </header>
+    <div class="entry">
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque    
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis.  <a href="#">Read More</a></p>
+    
+    </div>
+    </article>
+    
+      <a href="blog.html"><img src="<?php echo base_url();?>public/images/viewmorebtn.jpg" width="135" height="36" alt="view more"></a>
+    </section>
+    <section id="photos">
+    <h2 class="subhead">Photoblog</h2>
+    <div class="imagepost">
+    <img src="<?php echo base_url();?>public/images/rain.jpg" width="170" height="113" alt="rain">
+    <p class="caption"><a href="#">It Rained Last Night</a></p>
+    </div>
+    
+    <div class="imagepost">
+    <img src="<?php echo base_url();?>public/images/guitar.jpg" width="170" height="113" alt="rain">
+    <p class="caption"><a href="#">It Rained Last Night</a></p>
+    </div>
+    
+    <div class="imagepost">
+    <img src="<?php echo base_url();?>public/images/bandw.jpg" width="170" height="113" alt="rain">
+    <p class="caption"><a href="#">It Rained Last Night</a></p>
+    </div>
+    <a href="photo.html"><img src="<?php echo base_url();?>public/images/viewmorebtn.jpg" width="135" height="36" alt="view more"></a> </section>
+    
+    <div class="clear"></div>
+    </section>
+</section>
+<div class="clear"></div>
+</div>
+<footer id="pagefooter">
 
-                           <div id='noticias'>
-                                        <div id="tabs">
-                                            <ul>
-                                                <li><a href="#tabs-1">Afianzamiento</a></li>
-                                                <li><a href="#tabs-2">Ejemplos</a></li>
-                                                <li><a href="#tabs-3">Talleres</a></li>
-                                            </ul>
-                                            <div id="tabs-1">
-                                                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-                                                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                            </div>
-                                            <div id="tabs-2">
-                                                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-                                                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                            </div>
-                                            <div id="tabs-3">
-                                                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                            </div>
-                                        </div>
-                           </div>
-                 </div>
-        </body>
+<div id="footerwrap">
+
+<div id="about">
+
+<h2>About</h2>
+<div class="myphoto">
+
+
+  <img src="<?php echo base_url();?>public/images/imgthumb.jpg" width="120" height="130" alt="your photo"></div>
+<div class="about-text">
+<p>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque     
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis. <a href="/about"> Read More </a></p>
+
+</div>
+</div>
+<div id="services">
+<h2>Services</h2>
+<ul>
+
+  <li>Website &amp; UI design</li>
+  <li>WordPress Themes</li>
+  <li>Custom CSS Templates</li>
+  <li>PSD to HTML / CSS</li>
+  <li>Graphics Design</li>
+  <li>Web Development</li>
+</ul>
+</div>
+<div id="tools">
+<h2>Expertise</h2>
+<ul>
+
+  <li>Clean, Accessible &amp; Usable Web Designs.</li>
+    <li>HTML, XHTML, HTML5, CSS3 &amp; jQuery</li>
+    <li>Developing Custom WordPress Themes</li>
+    <li>Graphics Design</li>
+    <li>Web Development</li>
+    <li>Web Standards</li>
+</ul>
+</div>
+<div class="clear"></div>
+</div>
+<div id="credits">
+2010 &copy; YourDomain.Com | Web Designer  | <a href="http://www.cssheaven.org">Free CSS Template</a> By CSSHeaven.org </div>
+</footer>
+</body>
 </html>

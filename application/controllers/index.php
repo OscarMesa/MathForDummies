@@ -17,6 +17,7 @@ class index extends CI_Controller {
     }
 
     public function index() {  
+    		$data['prueba'] = true;
             $this->plantilla->Render('index',$data);   
     }
 
