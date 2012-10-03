@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Math For Dummies</title>
-
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="<?php echo base_url();?>public/css/style.css" rel="stylesheet" type="text/css">
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,15 +24,14 @@
 <section id="left">
   <header id="mainheader">
   <a href="index.html"><img src="<?php echo base_url();?>public/images/logo.jpg" width="250" height="120" alt="CleanRed | Free CSS Template"></a> 
-    <h1 id="sitename">YourDomain.Com - Welcome to CleanRed's Web Design Portfolio</h1>
+    <h1 id="sitename">Hola Diego</h1>
     </header>
     <nav id="mainnav">
     <ul>
-          <li class="current"><a href="index.html">Home</a></li>
-            <li><a href="works.html">Works</a></li>
-            <li><a href="single.html">Blog</a></li>
-            <li><a href="page.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li class="current"><a href="#">Inicio</a></li>
+            <li><a href="#">Mensajes</a></li>
+            <li><a href="#">Editar</a></li>
+            <li><a href="#">Configuracion</a></li>
         </ul>
   </nav>
 

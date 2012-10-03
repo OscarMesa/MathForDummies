@@ -1,17 +1,15 @@
     <div class="sb-block">
     <h2>Categories</h2>
     <ul>
-      <li><a href="#">Web Design</a></li>
-    <li><a href="#">Computers</a></li>
-    <li><a href="#">Gadgets</a></li>
-    <li><a href="#">CSS Templates</a></li>
-    <li><a href="#">Graphics Design</a></li>
-    <li><a href="#">Photography</a></li>
-    <li><a href="#">General</a></li>
+          <li><a href="#">Cursos</a></li>
+        <li><a href="#">Profesores</a></li>
+        <li><a href="#">Ejercicios</a></li>
+        <li><a href="#">Videos</a></li>
+        <li><a href="#">Video conferencia</a></li>
+        <li><a href="#">Foros</a></li>
+        <li><a href="#">Examenes</a></li>
     </ul>
     </div>
-    
-    
     
     <div id="sociallinks"> 
         <a href="#"><img src="<?php echo base_url();?>public/images/fb-icon.jpg" width="33" height="32" alt="facebook"></a> 
@@ -113,56 +111,16 @@
     
     <div class="clear"></div>
     </section>
-</section>
-<div class="clear"></div>
-</div>
-<footer id="pagefooter">
 
-<div id="footerwrap">
-
-<div id="about">
-
-<h2>About</h2>
-<div class="myphoto">
-
-
-  <img src="<?php echo base_url();?>public/images/imgthumb.jpg" width="120" height="130" alt="your photo"></div>
-<div class="about-text">
-<p>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque     
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis. <a href="/about"> Read More </a></p>
-
-</div>
-</div>
-<div id="services">
-<h2>Services</h2>
-<ul>
-
-  <li>Website &amp; UI design</li>
-  <li>WordPress Themes</li>
-  <li>Custom CSS Templates</li>
-  <li>PSD to HTML / CSS</li>
-  <li>Graphics Design</li>
-  <li>Web Development</li>
-</ul>
-</div>
-<div id="tools">
-<h2>Expertise</h2>
-<ul>
-
-  <li>Clean, Accessible &amp; Usable Web Designs.</li>
-    <li>HTML, XHTML, HTML5, CSS3 &amp; jQuery</li>
-    <li>Developing Custom WordPress Themes</li>
-    <li>Graphics Design</li>
-    <li>Web Development</li>
-    <li>Web Standards</li>
-</ul>
-</div>
-<div class="clear"></div>
-</div>
-<div id="credits">
-2010 &copy; YourDomain.Com | Web Designer  | <a href="http://www.cssheaven.org">Free CSS Template</a> By CSSHeaven.org </div>
-</footer>
-</body>
-</html>
+<article class="pfitem">
+    <div class="pfthumb">
+    <img src="workthumbs/cssheaven.jpg" width="440" height="230" alt="web design and development - ramblingsoul.com"></div>
+    <div class="pfdetails">
+    <h3><span class="sitename">RamblingSoul.com</span>
+    Works : Website Design, HTML, CSS Coding, jQuery, WordPress Themes, Search Engine Optimization &amp; CSS Templates 
+        
+    </h3>
+    <p> <a href="#">Preview Work</a></p>
+    </div>
+    <div class="clear"></div>
+    </article>
