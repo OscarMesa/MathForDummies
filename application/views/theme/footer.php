@@ -7,47 +7,44 @@
 
 <div id="about">
 
-<h2>About</h2>
-<div class="myphoto">
-
-
-  <img src="<?php echo base_url();?>public/images/imgthumb.jpg" width="120" height="130" alt="your photo"></div>
+<h2>Quienes somos?</h2>
 <div class="about-text">
 <p>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis placerat eleifend. Nam vel cursus nulla. Nunc quis tellus et tellus auctor ullamcorper. Cum sociis natoque     
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum id purus risus, id vestibulum felis. <a href="/about"> Read More </a></p>
+Las Tecnologías de Información y las organizaciones, dan lugar a laimplementación 
+de una enorme cantidad de servicios y/o productos, ypresentan una gran expectativa de 
+crecimiento y demanda en la industria delInternet y desarrollo de sistemas computarizados (software) <a href="/about"> Leer mas. </a></p>
 
 </div>
 </div>
 <div id="services">
-<h2>Services</h2>
+<h2>Cursos</h2>
 <ul>
 
-  <li>Website &amp; UI design</li>
-  <li>WordPress Themes</li>
-  <li>Custom CSS Templates</li>
-  <li>PSD to HTML / CSS</li>
-  <li>Graphics Design</li>
-  <li>Web Development</li>
+  <li>Pre-Calculo</li>
+  <li>Suma</li>
+  <li>Resata</li>
+  <li>División</li>
+  <li>Polinomios</li>
+  <li>Fracciones</li>
 </ul>
 </div>
 <div id="tools">
-<h2>Expertise</h2>
+<h2>Contenidos</h2>
 <ul>
 
-  <li>Clean, Accessible &amp; Usable Web Designs.</li>
-    <li>HTML, XHTML, HTML5, CSS3 &amp; jQuery</li>
-    <li>Developing Custom WordPress Themes</li>
-    <li>Graphics Design</li>
-    <li>Web Development</li>
-    <li>Web Standards</li>
+  <li>Videos</li>
+    <li>Ejercicios</li>
+    <li>Talleres</li>
+    <li>Foros</li>
+    <li>Chat</li>
+    <li>Preguta al profé</li>
 </ul>
 </div>
 <div class="clear"></div>
 </div>
 <div id="credits">
-2010 &copy; YourDomain.Com | Web Designer  | <a href="http://www.cssheaven.org">Free CSS Template</a> By CSSHeaven.org </div>
+2012 &copy; MathForDummies.com | Kimera |  By Quimera.kf </div>
 </footer>
 </body>
 </html>
