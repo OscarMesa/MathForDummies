@@ -10,10 +10,10 @@
  <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="<?php echo base_url(); ?>public/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>public/script/MathForDummies.js"></script>
-<script src="<?php echo base_url(); ?>public/script/edit.js"></script>
-<script src="<?php echo base_url(); ?>public/script/sha1.js"></script>
+<script src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js'); ?>"></script>
+<script src="<?php echo base_url('public/script/MathForDummies.js'); ?>"></script>
+<script src="<?php echo base_url('public/script/edit.js'); ?>"></script>
+<script src="<?php echo base_url('public/script/sha1.js'); ?>"></script>
 
 <title>Math For Dummies</title>
  <script src="http://code.jquery.com/jquery-latest.js"></script>
