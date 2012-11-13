@@ -9,6 +9,7 @@ function start(){
 
 	$('#nuevo_curso').live('click',NewCurso);
 
+	$('#usuarios').live('click', LoadViewUsuarios);
 	StartFieldEdit();
 }
 
@@ -16,6 +17,12 @@ function LoadViewCursos(){
 	$("#homemain").html(CapaLoadImages()).load('cursos/LoadViewCursos',null,function(data){
 		$(this).html(data);
 	});
+}
+
+function LoadViewUsuarios(){
+	$("#homemain").html(CapaLoadImages()).load('usuario/LoadViewUsers',null,function(data){
+		$(this).html(data);
+	}) 
 }
 
 function CapaLoadImages(){

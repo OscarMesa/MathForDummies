@@ -19,9 +19,7 @@ class usuario extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->mensajes_error = array(
-            'sesion_error' => 'El nombre de usuario o la contraseña introducidos no son correctos.'
-        );
+        $this->load->model('model_usuario','muser');
     }
 
     public function index() {
@@ -136,23 +134,7 @@ class usuario extends CI_Controller {
     * @return TRUE | FALSE si el usuario es verdedero y corresponde su password retorna TRUE, en caso contrario devuelve FALSE 
     */
     public function IniciarSesionUsuario() {
-  
-        $this->load->model('model_Usuario', 'usr');
-        $resp = $this->usr->ValidarSesionUsuario($this->input->post('login-field'), $this->input->post('password-field'));
-        if ($resp['validate']) {
-             $newdata = array(
-              'session_id' => date('Y-m-d:H:i:s').  $this->com_create_guid1(),
-              'ip_address' => $_SERVER['REMOTE_ADDR'],
-              'user_agent' => $resp['elements'][0]['usuario'],
-              'username' => $resp['elements'][0]['nombre'],
-              'email' => $resp['elements'][0]['mail'],
-              'logged_in' => TRUE
-              );
-            $this->session->set_userdata($newdata);
-            echo json_encode(array('res' => 'true'));
-        } else {
-            echo json_encode(array('res' => $this->mensajes_error));
-        }
+
     }
     
     /**
@@ -164,6 +146,15 @@ class usuario extends CI_Controller {
         $this->session->sess_destroy();
     }
 
+    /**
+    *   Este metodo llama la vista que se encarga de listar todos los usaurios
+    *   @author Oskar
+    *   @return View La vista con todos los usuarios en el sistema.
+    */
+    public function LoadViewUsers(){
+        $data['users'] = $this->muser->getAllUser();
+        $this->load->view('view_usuarios',$data);
+    }
 }
 
 ?>

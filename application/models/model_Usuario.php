@@ -12,37 +12,8 @@
  */
 class model_usuario extends CI_Model {
 
-    function __construct() {
-        //$data = array('descripcion' => 'Manizales');
-        //$str = $this->db->insert_string('mosterbook_ciudades', $data);
-        // $str = $this->db->query($str);
-
-        /* echo $this->load->helper('prueba');
-          Hola(); */
-        //$this->load->helper('url');
-        /*
-          echo site_url('index');
-          echo base_url('url');
-          echo current_url();
-          echo uri_string();
-          echo index_page();
-          echo anchor('www.goolge.com', 'oscar mesa', 'medellin');
-          $atts = array(
-          'width'      => '800',
-          'height'     => '600',
-          'scrollbars' => 'yes',
-          'status'     => 'yes',
-          'resizable'  => 'yes',
-          'screenx'    => '0',
-          'screeny'    => '0'
-          );
-
-          echo anchor_popup('news/local/123', 'Click Me!', $atts);
-          echo mailto('me@my-site.com', 'Click Here to Contact Me'); */
-
-
-        //   $sql = "SELECT * FROM  mosterbook_ciudades WHERE id = ? AND descripcion=?"; 
-        //   $query = $this->db->query($sql, array('1', 'Medellin')); 
+    public function __construct() {
+        parent::__construct();
     }
 
     /**
@@ -138,15 +109,13 @@ class model_usuario extends CI_Model {
         $this->db->insert('mb_usuarios_perfiles', array('id_usuario' => $id, 'id_perfil' => 1));
     }
 
-    public function Eliminar_Usuario($key) {
-        $this->db->where('id_usuario', $key);
-        $this->db->delete('mb_usuarios_perfiles');
+    /**
+    * Este metodo elimina a un usuario mediante su ID
+    * @author Oskar
+    * @return Number Numero de registros afectados.
+    */
+    public function DeleteUser($id) {
 
-        $this->db->where('id_usuario', $key);
-        $this->db->delete('mb_mail');
-
-        $this->db->where('id_usuario', $key);
-        $this->db->delete('mb_usuarios');
     }
 
     /**
@@ -158,20 +127,17 @@ class model_usuario extends CI_Model {
      * @return true|false si el correo es valido devolvera true, en caso contraio retorna flase 
      */
     public function ValidarSesionUsuario($mail_user, $password) {
-        $query = $this->db->query('SELECT mb_mail.mail, MbU.usuario, MbU.password, MbU.nombre, MbU.id_usuario, MbU.salt
-                                   FROM mb_usuarios AS MbU
-                                   JOIN mb_mail ON MbU.id_usuario = mb_mail.id_usuario
-                                   WHERE mb_mail.mail = ? 
-                                         OR MbU.usuario = ? LIMIT 0 , 30', array($mail_user, $mail_user));
-        $data['validate']=FALSE;
-        foreach ($query->result() as $row) {
-            if ($row->password == sha1(sha1($password) . sha1($row->salt))) {
-                $data['validate'] = TRUE;
-                $data['elements'] = $query->result_array();
-            }
-                break;
-        }
-        return $data;
+   
+    }
+    /**
+    *   Este metodo retorna a todos los usuarios con su perfil y su profesion
+    *   @author Oskar
+    *   @return array
+    */
+    public function getAllUser(){
+        $query = $this->db->query('SELECT u.*, prf.nombre, p.descripcion FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
+                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion');
+        return $query->result_array();
     }
 
 }

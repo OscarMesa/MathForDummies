@@ -2,6 +2,7 @@
         <h2>Opciones</h2>
         <ul>
           <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
+          <li><a href="#" id="usuarios" href="javascript:void(0)">Usuarios</a></li>
           <li><a href="#">Profesores</a></li>
           <li><a href="#">Ejercicios</a></li>
           <li><a href="#">Videos</a></li>
