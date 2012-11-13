@@ -4,7 +4,13 @@ class Contents extends CI_Controller {
 
     public function __construct()
     {
-        
+        parent::__construct();
+        $this->load->model('model_contens','mcontent');
+    }
+
+    public function LoadViewTypeContents(){
+    	$data['TypeContent'] = $this->mcontent->getAllTypeContens();
+    	$this->load->view('view_TypeContent',$data);
     }
 
 }

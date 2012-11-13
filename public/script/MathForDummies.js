@@ -21,6 +21,9 @@ function start(){
 	StartFieldEdit();
 }
 
+function LoadViewTypeContenten(){
+	$("#homemain").html(CapaLoadImages()).load('contents/LoadViewTypeContents');
+}
 function LoadViewCursos(){
 	$("#homemain").html(CapaLoadImages()).load('cursos/LoadViewCursos',null,function(data){
 		$(this).html(data);
