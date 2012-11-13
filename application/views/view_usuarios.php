@@ -12,8 +12,8 @@
 	  	<tr>
 	  		<th>#</th>
 	  		<th>Nombres</th>
-	  		<th>Apellido 1</th>
-	  		<th>Apellido 2</th>
+	  		<th>Apellido1</th>
+	  		<th>Apellido2</th>
 	  		<th>Teléfono</th>
 	  		<th>Celular</th>
 	  		<th>Correo</th>
@@ -22,8 +22,11 @@
 	  	</tr>
 	</thead>
 	<tbody>
-		<?php 
-		print_r($users);
+		<?php foreach ($users as $key=>$value) {
+			echo "<tr id='row_".$value['id_usuario']."'><td>".$value['id_usuario']."</td><td>".$value['nombre']."</td><td>".$value['apellido1']."</td>
+														<td>".$value['apellido2']."</td><td>".$value['telefono']."</td><td>".$value['celular']."</td>
+														<td>".$value['correo']."</td><td>".$value['profesion_name']."</td><td>".$value['perfil_name']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id_usuario']."><i class='icon-trash'></i></a></td></tr>";
+		}
 		?>
 	</tbody>
 </table>

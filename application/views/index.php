@@ -3,7 +3,10 @@
         <ul>
           <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
           <li><a href="#" id="usuarios" href="javascript:void(0)">Usuarios</a></li>
-          <li><a href="#">Profesores</a></li>
+          <li><a href="#" id="profesiones">Profesiones</a></li>
+          <li><a href="#" id="universidades">Universidades</a></li>
+          <li><a href="#" id="tipo_cursos">Tipo de cursos</a></li>
+          <li><a href="#" id="tipo_contenidos">Tipo de contenidos</a></li>
           <li><a href="#">Ejercicios</a></li>
           <li><a href="#">Videos</a></li>
           <li><a href="#">Video conferencia</a></li>

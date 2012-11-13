@@ -1,5 +1,5 @@
 <div class="btn-group">
-  <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Usuarios</a>
+  <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Tipo de curso</a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
   <ul class="dropdown-menu">
     <li><a href="#" id="nuevo_curso"><i class="icon-pencil"></i> Nuevo</a></li>
@@ -11,14 +11,12 @@
 	<thead> 
 	  	<tr>
 	  		<th>#</th>
-	  		<th>Nombre</th>
 	  		<th>Descripción</th>
-	  		<th>Eliminar</th>
 	  	</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($cursos as $key=>$value) {
-			echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['nombre']."</td><td>".$value['descripcion']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td></tr>";
+		<?php foreach ($typecurses as $value) {
+			echo "<tr id='row_".$value['id_tipo_curso']."'><td>".$value['id_tipo_curso']."</td><td>".$value['nombre']."</td><td><a href='javascript:void(0);' class='delete_profession' id=".$value['id_tipo_curso']."><i class='icon-trash'></i></a></td></tr>";
 		}
 		?>
 	</tbody>

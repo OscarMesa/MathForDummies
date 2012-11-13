@@ -10,6 +10,14 @@ function start(){
 	$('#nuevo_curso').live('click',NewCurso);
 
 	$('#usuarios').live('click', LoadViewUsuarios);
+
+	$('#profesiones').live('click',LoadViewProfessions);
+
+	$('#universidades').live('click',LoadViewUniversities);
+
+	$('#tipo_cursos').live('click',LoadViewTypeCourse);
+
+	$('#tipo_contenidos').live('click',LoadViewTypeContenten);
 	StartFieldEdit();
 }
 
@@ -18,13 +26,22 @@ function LoadViewCursos(){
 		$(this).html(data);
 	});
 }
-
+function LoadViewUniversities(){
+	$("#homemain").html(CapaLoadImages()).load('university/LoadViewUniversity',null,function(data){
+		$(this).html(data);
+	}) 	
+}
 function LoadViewUsuarios(){
 	$("#homemain").html(CapaLoadImages()).load('usuario/LoadViewUsers',null,function(data){
 		$(this).html(data);
 	}) 
 }
-
+function LoadViewProfessions(){
+	$("#homemain").html(CapaLoadImages()).load('professions/LoadViewProfessions');
+}
+function LoadViewTypeCourse(){
+	$("#homemain").html(CapaLoadImages()).load('curses/LoadViewTypeCourse')
+}
 function CapaLoadImages(){
 	imageLoad = document.createElement('img');
 	$(imageLoad).attr('src', base_url + 'public/images/loading.gif');
