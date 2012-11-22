@@ -11,14 +11,14 @@
 	<thead> 
 	  	<tr>
 	  		<th>#</th>
-	  		<th>Nombre</th>
-	  		<th>Descripción</th>
+	  		<th>Ecuación</th>
+	  		<th>Eliminar</th>
 	  	</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($TypeContent as $value) {
-			echo "<tr id='row_".$value['id_tipo_contenido']."'><td>".$value['id_tipo_contenido']."</td>
-															   <td>".$value['nombre']."</td><td>".$value['descripcion']."</td><td><a href='javascript:void(0);' class='delete_profession' id=".$value['id_tipo_contenido']."><i class='icon-trash'></i></a></td></tr>";
+		<?php foreach ($equations as $value) {
+			echo "<tr id='row_".$value['id_ecuacion']."'><td>".$value['id_ecuacion']."</td>
+															   <td>".$value['formula_matematica']."</td><td><a href='javascript:void(0);' class='delete_ecuacion' id=".$value['id_ecuacion']."><i class='icon-trash'></i></a></td></tr>";
 		}
 		?>
 	</tbody>

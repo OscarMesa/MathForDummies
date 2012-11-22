@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>agogo_webs-standards</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>4233973767939638652</string>
+			<key>name</key>
+			<string>root@127.0.0.1</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelectedIndexSet</key>
+			<array>
+				<integer>0</integer>
+			</array>
+			<key>contentSortCol</key>
+			<string>coordinates_coordinates</string>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1068, 591}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>table</key>
+			<string>companies</string>
+			<key>view</key>
+			<string>SP_VIEW_CONTENT</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>211</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>SELECT cc.content_categories_id,cc.content_categories_title, cc.content_categories_content,cc.content_categories_price, cc.content_categories_type_category_id AS type_id FROM content_categories AS cc
+																				INNER JOIN companies AS c ON cc.content_categories_companies_id = c.companies_id AND c.companies_id = 1 ORDER BY type_id</string>
+		<string>UPDATE user SET user_password = SHA1('123') WHERE user_email = 'oscarmesa.elpoli@gmail.com'</string>
+		<string>SELECT u.*, prf.nombre, p.descripcion FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
+						   INNER JOIN Profesion p ON p.id_profesion = u.id_profesion</string>
+		<string>SELECT u.* FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
+						   INNER JOIN Profesion p ON p.id_profesion = u.id_profesion</string>
+		<string>SELECT u.* FROM usuarios u INNER JOIN perfieles prf ON prf.id_perfil = u.tipo_perfil
+						   INNER JOIN Profesion p ON p.id_profesion = u.id_profesion</string>
+		<string>UPDATE user SET user_password = MD5('123') WHERE user_email = 'oscarmesa.elpoli@gmail.com'</string>
+		<string>SELECT u.user_email, u.user_name, u.user_type FROM user u
+    											INNER JOIN user_branch ub ON u.user_email = ub.user_email
+    											AND ub.branch_id IN (116,118,119,120) GROUP BY u.user_name</string>
+		<string>SELECT u.user_email, u.user_name, u.user_type FROM user u
+    											INNER JOIN user_branch ub ON u.user_email = ub.user_email
+    											AND ub.branch_id IN (116,118,119,120)</string>
+		<string>UPDATE user SET user_password = MD5('123') WHERE user_email = 'afroditana0528@hotmail.com'</string>
+		<string>SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+DROP SCHEMA IF EXISTS `math1`;
+CREATE SCHEMA IF NOT EXISTS `math1` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `math1`;
+-- -----------------------------------------------------
+-- Table `math1`.`perfiles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`perfiles`;
+CREATE  TABLE IF NOT EXISTS `math1`.`perfiles` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `id_perfil` INT NULL ,
+  `nombre` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`tipo_curso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`tipo_curso`;
+CREATE  TABLE IF NOT EXISTS `math1`.`tipo_curso` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nombre` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`Profesion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`Profesion`;
+CREATE  TABLE IF NOT EXISTS `math1`.`Profesion` (
+  `id` INT(5) NOT NULL ,
+  `descripcion` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`usuarios`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`usuarios`;
+CREATE  TABLE IF NOT EXISTS `math1`.`usuarios` (
+  `id_docente` INT NOT NULL ,
+  `nombre` VARCHAR(30) NOT NULL ,
+  `apellido1` VARCHAR(30) NOT NULL ,
+  `apellido2` VARCHAR(30) NULL ,
+  `telefono` INT(15) NOT NULL ,
+  `celular` INT(15) NOT NULL ,
+  `correo` VARCHAR(50) NOT NULL ,
+  `id_profesion` INT NULL ,
+  `tipo_perfil` INT NULL ,
+  PRIMARY KEY (`id_docente`) ,
+  INDEX `fk_docentes_Profesion1` (`id_profesion` ASC) ,
+  INDEX `fk_usuarios_perfiles1` (`tipo_perfil` ASC) ,
+  CONSTRAINT `fk_docentes_Profesion1`
+    FOREIGN KEY (`id_profesion` )
+    REFERENCES `math1`.`Profesion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuarios_perfiles1`
+    FOREIGN KEY (`tipo_perfil` )
+    REFERENCES `math1`.`perfiles` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`cursos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`cursos`;
+CREATE  TABLE IF NOT EXISTS `math1`.`cursos` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `id_tipo_curso` VARCHAR(45) NULL ,
+  `id_docente` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_cursos_tipo_curso1` (`id_tipo_curso` ASC) ,
+  INDEX `fk_cursos_docentes1` (`id_docente` ASC) ,
+  CONSTRAINT `fk_cursos_tipo_curso1`
+    FOREIGN KEY (`id_tipo_curso` )
+    REFERENCES `math1`.`tipo_curso` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cursos_docentes1`
+    FOREIGN KEY (`id_docente` )
+    REFERENCES `math1`.`usuarios` (`id_docente` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`integrantes_curso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`integrantes_curso`;
+CREATE  TABLE IF NOT EXISTS `math1`.`integrantes_curso` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `cursos_id` INT NOT NULL ,
+  `id_integrante` INT NOT NULL ,
+  `fecha_registro` DATE NOT NULL ,
+  `estado` INT NOT NULL ,
+  INDEX `fk_usuarios_has_cursos_cursos1` (`cursos_id` ASC) ,
+  PRIMARY KEY (`id`, `cursos_id`, `id_integrante`) ,
+  INDEX `fk_integrantes_curso_usuarios1` (`id_integrante` ASC) ,
+  CONSTRAINT `fk_usuarios_has_cursos_cursos1`
+    FOREIGN KEY (`cursos_id` )
+    REFERENCES `math1`.`cursos` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_integrantes_curso_usuarios1`
+    FOREIGN KEY (`id_integrante` )
+    REFERENCES `math1`.`usuarios` (`id_docente` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`tipo_contenido`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`tipo_contenido`;
+CREATE  TABLE IF NOT EXISTS `math1`.`tipo_contenido` (
+  `id` INT NOT NULL ,
+  `nombre` VARCHAR(50) NULL ,
+  `descripcion` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`contenidos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`contenidos`;
+CREATE  TABLE IF NOT EXISTS `math1`.`contenidos` (
+  `id` INT NOT NULL ,
+  `titulo` VARCHAR(45) NULL ,
+  `texto` TEXT NULL ,
+  `observacion` TEXT NULL ,
+  `tipo_contenido_id` INT NOT NULL ,
+  PRIMARY KEY (`id`, `tipo_contenido_id`) ,
+  INDEX `fk_contenidos_tipo_contenido1_idx` (`tipo_contenido_id` ASC) ,
+  CONSTRAINT `fk_contenidos_tipo_contenido1`
+    FOREIGN KEY (`tipo_contenido_id` )
+    REFERENCES `math1`.`tipo_contenido` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`img_videos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`img_videos`;
+CREATE  TABLE IF NOT EXISTS `math1`.`img_videos` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `url` VARCHAR(45) NULL ,
+  `nombre` TEXT NULL ,
+  `descripcion` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`contenidos_curso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`contenidos_curso`;
+CREATE  TABLE IF NOT EXISTS `math1`.`contenidos_curso` (
+  `cursos_id` INT NOT NULL ,
+  `contenidos_id` INT NOT NULL ,
+  PRIMARY KEY (`cursos_id`, `contenidos_id`) ,
+  INDEX `fk_cursos_has_contenidos_contenidos1` (`contenidos_id` ASC) ,
+  INDEX `fk_cursos_has_contenidos_cursos1` (`cursos_id` ASC) ,
+  CONSTRAINT `fk_cursos_has_contenidos_cursos1`
+    FOREIGN KEY (`cursos_id` )
+    REFERENCES `math1`.`cursos` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cursos_has_contenidos_contenidos1`
+    FOREIGN KEY (`contenidos_id` )
+    REFERENCES `math1`.`contenidos` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`evaluaciones`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`evaluaciones`;
+CREATE  TABLE IF NOT EXISTS `math1`.`evaluaciones` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `porcentaje` FLOAT NOT NULL ,
+  `tiempo_limite` INT NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`ejercicios`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`ejercicios`;
+CREATE  TABLE IF NOT EXISTS `math1`.`ejercicios` (
+  `id_ejercicio` INT NOT NULL ,
+  `ejercicio` VARCHAR(45) NOT NULL ,
+  `solucion` VARCHAR(45) NOT NULL ,
+  `dificultada` INT(3) NOT NULL COMMENT 'Esta tabla permite ingresase a una ecuación su grado de dificultad ' ,
+  `valoracion_porcentaje` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id_ejercicio`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`contenidos_ejercicio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`contenidos_ejercicio`;
+CREATE  TABLE IF NOT EXISTS `math1`.`contenidos_ejercicio` (
+  `contenidos_id` INT NOT NULL ,
+  `ejercicios_id` INT NOT NULL ,
+  PRIMARY KEY (`contenidos_id`, `ejercicios_id`) ,
+  INDEX `fk_contenidos_has_ejercicios_ejercicios1` (`ejercicios_id` ASC) ,
+  INDEX `fk_contenidos_has_ejercicios_contenidos1` (`contenidos_id` ASC) ,
+  CONSTRAINT `fk_contenidos_has_ejercicios_contenidos1`
+    FOREIGN KEY (`contenidos_id` )
+    REFERENCES `math1`.`contenidos` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_contenidos_has_ejercicios_ejercicios1`
+    FOREIGN KEY (`ejercicios_id` )
+    REFERENCES `math1`.`ejercicios` (`id_ejercicio` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`permisos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`permisos`;
+CREATE  TABLE IF NOT EXISTS `math1`.`permisos` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nombre` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`permisos_perfil`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`permisos_perfil`;
+CREATE  TABLE IF NOT EXISTS `math1`.`permisos_perfil` (
+  `perfiles_id` INT NOT NULL ,
+  `permisos_id` INT NOT NULL ,
+  PRIMARY KEY (`perfiles_id`, `permisos_id`) ,
+  INDEX `fk_perfiles_has_permisos_permisos1` (`permisos_id` ASC) ,
+  INDEX `fk_perfiles_has_permisos_perfiles1` (`perfiles_id` ASC) ,
+  CONSTRAINT `fk_perfiles_has_permisos_perfiles1`
+    FOREIGN KEY (`perfiles_id` )
+    REFERENCES `math1`.`perfiles` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_perfiles_has_permisos_permisos1`
+    FOREIGN KEY (`permisos_id` )
+    REFERENCES `math1`.`permisos` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`universidad`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`universidad`;
+CREATE  TABLE IF NOT EXISTS `math1`.`universidad` (
+  `id` INT(5) NOT NULL ,
+  `nombre_universidad` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`usuario_universidades`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`usuario_universidades`;
+CREATE  TABLE IF NOT EXISTS `math1`.`usuario_universidades` (
+  `id_usuario` INT NOT NULL ,
+  `universidades_id` INT NOT NULL ,
+  PRIMARY KEY (`id_usuario`, `universidades_id`) ,
+  INDEX `fk_docentes_has_universidades_docentes1` (`id_usuario` ASC) ,
+  INDEX `fk_usuario_universidades_universidad1` (`universidades_id` ASC) ,
+  CONSTRAINT `fk_docentes_has_universidades_docentes1`
+    FOREIGN KEY (`id_usuario` )
+    REFERENCES `math1`.`usuarios` (`id_docente` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_universidades_universidad1`
+    FOREIGN KEY (`universidades_id` )
+    REFERENCES `math1`.`universidad` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`evalucacion_integrante`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`evalucacion_integrante`;
+CREATE  TABLE IF NOT EXISTS `math1`.`evalucacion_integrante` (
+  `id_evaluacion` INT NOT NULL ,
+  `id_ejercicio` VARCHAR(45) NOT NULL ,
+  `id_integrante_curso` VARCHAR(45) NOT NULL ,
+  `tiempo_duracion` INT NULL ,
+  `nota` INT NULL ,
+  PRIMARY KEY (`id_evaluacion`, `id_ejercicio`, `id_integrante_curso`) ,
+  INDEX `fk_evalucacion_integrante_integrantes_curso1` (`id_integrante_curso` ASC) ,
+  INDEX `fk_evalucacion_integrante_ejercicios1` (`id_ejercicio` ASC) ,
+  INDEX `fk_evalucacion_integrante_evaluaciones1` (`id_evaluacion` ASC) ,
+  CONSTRAINT `fk_evalucacion_integrante_integrantes_curso1`
+    FOREIGN KEY (`id_integrante_curso` )
+    REFERENCES `math1`.`integrantes_curso` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_evalucacion_integrante_ejercicios1`
+    FOREIGN KEY (`id_ejercicio` )
+    REFERENCES `math1`.`ejercicios` (`id_ejercicio` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_evalucacion_integrante_evaluaciones1`
+    FOREIGN KEY (`id_evaluacion` )
+    REFERENCES `math1`.`evaluaciones` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`img_videos_has_contenidos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`img_videos_has_contenidos`;
+CREATE  TABLE IF NOT EXISTS `math1`.`img_videos_has_contenidos` (
+  `img_videos_id` INT NOT NULL ,
+  `contenidos_id` INT NOT NULL ,
+  `contenidos_tipo_contenido_id` INT NOT NULL ,
+  PRIMARY KEY (`img_videos_id`, `contenidos_id`, `contenidos_tipo_contenido_id`) ,
+  INDEX `fk_img_videos_has_contenidos_contenidos1_idx` (`contenidos_id` ASC, `contenidos_tipo_contenido_id` ASC) ,
+  INDEX `fk_img_videos_has_contenidos_img_videos1_idx` (`img_videos_id` ASC) ,
+  CONSTRAINT `fk_img_videos_has_contenidos_img_videos1`
+    FOREIGN KEY (`img_videos_id` )
+    REFERENCES `math1`.`img_videos` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_img_videos_has_contenidos_contenidos1`
+    FOREIGN KEY (`contenidos_id` , `contenidos_tipo_contenido_id` )
+    REFERENCES `math1`.`contenidos` (`id` , `tipo_contenido_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`Ecuaciones`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`Ecuaciones`;
+CREATE  TABLE IF NOT EXISTS `math1`.`Ecuaciones` (
+  `id_ecuacion` INT NOT NULL AUTO_INCREMENT ,
+  `formula_matematica` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id_ecuacion`) )
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `math1`.`Ejercicios_Ecuaciones`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `math1`.`Ejercicios_Ecuaciones`;
+CREATE  TABLE IF NOT EXISTS `math1`.`Ejercicios_Ecuaciones` (
+  `ejercicios_id` INT NOT NULL ,
+  `Ecuaciones_id_ecuacion` INT NOT NULL ,
+  PRIMARY KEY (`ejercicios_id`, `Ecuaciones_id_ecuacion`) ,
+  INDEX `fk_ejercicios_has_Ecuaciones_Ecuaciones1` (`Ecuaciones_id_ecuacion` ASC) ,
+  INDEX `fk_ejercicios_has_Ecuaciones_ejercicios1` (`ejercicios_id` ASC) ,
+  CONSTRAINT `fk_ejercicios_has_Ecuaciones_ejercicios1`
+    FOREIGN KEY (`ejercicios_id` )
+    REFERENCES `math1`.`ejercicios` (`id_ejercicio` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ejercicios_has_Ecuaciones_Ecuaciones1`
+    FOREIGN KEY (`Ecuaciones_id_ecuacion` )
+    REFERENCES `math1`.`Ecuaciones` (`id_ecuacion` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS</string>
+		<string>DROP VIEW orders_view_product;
+CREATE VIEW `orders_view_product`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `p`.`product_name` AS `product_name`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `pod`.`product_units` AS `product_units`,
+   `pod`.`product_price` AS `product_price`,
+   `p`.`product_code` AS `product_code`,
+   `p`.`product_price` AS `p_product_price`,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `p`.`product_id` AS `product_id`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `ad`.`add_code` AS `add_code`,
+   `opa`.`opa_unit` AS `opa_unit`,
+   `opa`.`product_orders_id` AS `product_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `product_order_detail` `pod` on((`o`.`orders_id` = `pod`.`orders_id`))) left join `product` `p` on((`pod`.`product_id` = `p`.`product_id`))) left join `orders_products_adds` `opa` on((`opa`.`product_orders_id` = `pod`.`product_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `opa`.`opa_add_id`))) where `p`.`product_id` order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_combos;
+CREATE VIEW `orders_view_combos`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `comb`.`combos_name` AS `combos_name`,
+   `comb`.`combos_code` AS `combos_code`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `cod`.`combos_units` AS `combos_units`,
+   `cod`.`combos_price` AS `combos_price`,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `comb`.`combos_id` AS `combos_id`,
+   `comb`.`combos_price` AS `c_combos_price`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `ad`.`add_code` AS `add_code`,
+   `cpa`.`oca_unit` AS `oca_unit`,
+   `cpa`.`oca_combos_orders_id` AS `combos_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `combos_order_detail` `cod` on((`o`.`orders_id` = `cod`.`orders_id`))) left join `combos` `comb` on((`cod`.`combos_id` = `comb`.`combos_id`))) left join `orders_combos_adds` `cpa` on((`cpa`.`oca_combos_orders_id` = `cod`.`combos_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `cpa`.`oca_add_id`)))
+where ((`o`.`orders_state` &lt; _latin1'2') and `comb`.`combos_id`) order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_combos;
+CREATE `orders_view_combos`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `comb`.`combos_name` AS `combos_name`,
+   `comb`.`combos_code` AS `combos_code`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `cod`.`combos_units` AS `combos_units`,
+   `cod`.`combos_price` AS `combos_price`,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `comb`.`combos_id` AS `combos_id`,
+   `comb`.`combos_price` AS `c_combos_price`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `ad`.`add_code` AS `add_code`,
+   `cpa`.`oca_unit` AS `oca_unit`,
+   `cpa`.`oca_combos_orders_id` AS `combos_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `combos_order_detail` `cod` on((`o`.`orders_id` = `cod`.`orders_id`))) left join `combos` `comb` on((`cod`.`combos_id` = `comb`.`combos_id`))) left join `orders_combos_adds` `cpa` on((`cpa`.`oca_combos_orders_id` = `cod`.`combos_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `cpa`.`oca_add_id`)))
+where ((`o`.`orders_state` &lt; _latin1'2') and `comb`.`combos_id`) order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_combos;
+CREATE VIEW `orders_view_combos`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `comb`.`combos_name` AS `combos_name`,
+   `comb`.`combos_code` AS `combos_code`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `cod`.`combos_units` AS `combos_units`,
+   `cod`.`combos_price` AS `combos_price`,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `comb`.`combos_id` AS `combos_id`,
+   comb.`combos_price` AS c_combos_price,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `ad`.`add_code` AS `add_code`,
+   `cpa`.`oca_unit` AS `oca_unit`,
+   `cpa`.`oca_combos_orders_id` AS `combos_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `combos_order_detail` `cod` on((`o`.`orders_id` = `cod`.`orders_id`))) left join `combos` `comb` on((`cod`.`combos_id` = `comb`.`combos_id`))) left join `orders_combos_adds` `cpa` on((`cpa`.`oca_combos_orders_id` = `cod`.`combos_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `cpa`.`oca_add_id`)))
+where ((`o`.`orders_state` &lt; '2') and `comb`.`combos_id`) order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_product;
+CREATE VIEW `orders_view_product`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `p`.`product_name` AS `product_name`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `pod`.`product_units` AS `product_units`,
+   `pod`.`product_price` AS `product_price`,
+   `p`.`product_code` AS `product_code`,
+   p.`product_price` AS p_product_price,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `p`.`product_id` AS `product_id`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `ad`.`add_code` AS `add_code`,
+   `opa`.`opa_unit` AS `opa_unit`,
+   `opa`.`product_orders_id` AS `product_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `product_order_detail` `pod` on((`o`.`orders_id` = `pod`.`orders_id`))) left join `product` `p` on((`pod`.`product_id` = `p`.`product_id`))) left join `orders_products_adds` `opa` on((`opa`.`product_orders_id` = `pod`.`product_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `opa`.`opa_add_id`))) where `p`.`product_id` order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_product;
+CREATE VIEW `orders_view_product`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `p`.`product_name` AS `product_name`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `pod`.`product_units` AS `product_units`,
+   `pod`.`product_price` AS `product_price`,
+   `p`.`product_code` AS `product_code`,
+   p.`product_price` AS product_price,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `p`.`product_id` AS `product_id`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `ad`.`add_code` AS `add_code`,
+   `opa`.`opa_unit` AS `opa_unit`,
+   `opa`.`product_orders_id` AS `product_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `product_order_detail` `pod` on((`o`.`orders_id` = `pod`.`orders_id`))) left join `product` `p` on((`pod`.`product_id` = `p`.`product_id`))) left join `orders_products_adds` `opa` on((`opa`.`product_orders_id` = `pod`.`product_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `opa`.`opa_add_id`))) where `p`.`product_id` order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>UPDATE user SET `user_password` = MD5('vele@sebas#') WHERE `user_email` = 'pizzafactorymedellin@gmail.com'</string>
+		<string>DROP VIEW orders_view_combos;
+CREATE VIEW `orders_view_combos`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `comb`.`combos_name` AS `combos_name`,
+   comb.combos_code as combos_code,
+   `o`.`orders_notes` AS `orders_notes`,
+   `cod`.`combos_units` AS `combos_units`,
+   `cod`.`combos_price` AS `combos_price`,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `comb`.`combos_id` AS `combos_id`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   ad.`add_code` AS add_code,
+   `cpa`.`oca_unit` AS `oca_unit`,
+   `cpa`.`oca_combos_orders_id` AS `combos_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `combos_order_detail` `cod` on((`o`.`orders_id` = `cod`.`orders_id`))) left join `combos` `comb` on((`cod`.`combos_id` = `comb`.`combos_id`))) left join `orders_combos_adds` `cpa` on((`cpa`.`oca_combos_orders_id` = `cod`.`combos_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `cpa`.`oca_add_id`)))
+where ((`o`.`orders_state` &lt; '2') and `comb`.`combos_id`) order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_product;
+CREATE VIEW `orders_view_product`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `p`.`product_name` AS `product_name`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `pod`.`product_units` AS `product_units`,
+   `pod`.`product_price` AS `product_price`,
+   p.product_code AS product_code,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `p`.`product_id` AS `product_id`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   ad.add_code AS add_code,
+   `opa`.`opa_unit` AS `opa_unit`,
+   `opa`.`product_orders_id` AS `product_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `product_order_detail` `pod` on((`o`.`orders_id` = `pod`.`orders_id`))) left join `product` `p` on((`pod`.`product_id` = `p`.`product_id`))) left join `orders_products_adds` `opa` on((`opa`.`product_orders_id` = `pod`.`product_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `opa`.`opa_add_id`)))
+where ((`o`.`orders_state` &lt; _utf8'2') and `p`.`product_id`) order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+		<string>DROP VIEW orders_view_product;
+CREATE VIEW `orders_view_product`
+AS select
+   `o`.`orders_state` AS `orders_state`,
+   `o`.`orders_neighborhood` AS `orders_neighborhood`,
+   `o`.`motorized_id` AS `motorized_id`,
+   `o`.`orders_id` AS `orders_id`,
+   `o`.`branch_id` AS `branch_id`,
+   `c`.`clients_phone` AS `clients_phone`,
+   `c`.`clients_name` AS `clients_name`,
+   `c`.`clients_address` AS `clients_address`,
+   `c`.`clients_home` AS `clients_home`,
+   `p`.`product_name` AS `product_name`,
+   `o`.`orders_notes` AS `orders_notes`,
+   `pod`.`product_units` AS `product_units`,
+   `pod`.`product_price` AS `product_price`,
+   p.product_code AS product_code,
+   `o`.`orders_date` AS `orders_date`,
+   `o`.`clients_id` AS `clients_id`,
+   `p`.`product_id` AS `product_id`,
+   `ad`.`add_id` AS `add_id`,
+   `ad`.`add_name` AS `add_name`,
+   `ad`.`add_price` AS `add_price`,
+   `opa`.`opa_unit` AS `opa_unit`,
+   `opa`.`product_orders_id` AS `product_orders_id`
+from (((((`clients` `c` left join `orders` `o` on((`c`.`clients_id` = `o`.`clients_id`))) left join `product_order_detail` `pod` on((`o`.`orders_id` = `pod`.`orders_id`))) left join `product` `p` on((`pod`.`product_id` = `p`.`product_id`))) left join `orders_products_adds` `opa` on((`opa`.`product_orders_id` = `pod`.`product_orders_detail_id`))) left join `adds` `ad` on((`ad`.`add_id` = `opa`.`opa_add_id`)))
+where ((`o`.`orders_state` &lt; _utf8'2') and `p`.`product_id`) order by `o`.`orders_state` desc,`o`.`orders_date` desc</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.1.44</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

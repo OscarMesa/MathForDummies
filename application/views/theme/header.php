@@ -6,11 +6,17 @@
 <meta charset="UTF-8" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
- <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js'); ?>"></script>
+<link rel="stylesheet" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css">
+<link rel="stylesheet" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css">
+
+
+<link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="<?php echo base_url('public/script/MathForDummies.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/edit.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/sha1.js'); ?>"></script>
@@ -20,6 +26,9 @@
  <script src="<?php echo base_url(); ?>public/script/prefixfree.min.js"></script> 
  <script src="<?php echo base_url(); ?>public/script/modernizr.js"></script> 
 <link href="<?php echo base_url();?>public/css/style.css" rel="stylesheet" type="text/css">
+
+    <script src="http://cdn.kendostatic.com/2012.2.710/js/kendo.web.min.js"></script>
+
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -29,7 +38,10 @@
   DD_belatedPNG.fix('*');
 </script>
 <![endif]-->
-  <script type="text/javascript">base_url = "<?php echo base_url();?>";</script>
+  <script type="text/javascript">
+    base_url = "<?php echo base_url();?>";
+    server = "http://<?php echo $_SERVER['SERVER_NAME'];?>/";  
+  </script>
 
 </head>
 
@@ -60,4 +72,9 @@
       <div class="sb-block" id="sb-photoProfile">
         <img src="<?php echo base_url();?>public/images/perfil/default.png"/>
       </div>
+
+
+
+
+
 

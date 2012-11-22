@@ -1,3 +1,4 @@
+var Curses = {};
 
 $(document).live('ready',start);
 
@@ -7,7 +8,7 @@ function start(){
 
 	$('.delete_curso').live('click',DeleteCurso);
 
-	$('#nuevo_curso').live('click',NewCurso);
+	//$('#nuevo_curso').live('click',NewCurso);
 
 	$('#usuarios').live('click', LoadViewUsuarios);
 
@@ -18,9 +19,70 @@ function start(){
 	$('#tipo_cursos').live('click',LoadViewTypeCourse);
 
 	$('#tipo_contenidos').live('click',LoadViewTypeContenten);
+
+	$('#ejercicios').live('click',LoadViewExcercices);
+
+	$('#ecuaciones').live('click',LoadViewEquations);
+
+	$('#btn-savecurse').live('click',SaveCurse);
+
+
 	StartFieldEdit();
 }
-
+function SaveCurse(e){
+	if(document.querySelector("#frm-newcurse").checkValidity()){ 
+		$.ajax({
+			type:"POST",
+			dataType: "JSON",
+			url: base_url + "curses/NewCurse",
+			data: Curses,
+			success: function(data){
+				if(!data.rpt){
+							for(x in data.step_msg){
+								$('#error_' + x).html(data.step_msg[x]);
+							}
+				}else{
+					$('#mcurces').modal('hide');
+					LoadViewCursos();
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}else{
+		document.getElementById("btn-validatecurse").click();
+	}
+	e.preventDefault();
+}
+function LoadDataTypeCurce(e){
+	if(e.keyCode!=8 && $(this).val()!='' && $(this).val().length>2)
+	{
+		$.ajax({
+			type:'POST',
+			dataType: 'JSON',
+			url: base_url + 'curses/LoadDataTypeCurce',
+			data: 'filter=' + $(this).val(),
+			success: function(data){
+				$('#LayerTypeCurces').html('');
+				$.each(data,function(key,value){
+					$('#LayerTypeCurces').html($('#LayerTypeCurces').html()+'<option value="'+value.nombre+'">');
+					console.log($('#LayerTypeCurces').html());
+				});
+				
+			},
+			error: function(data){
+				conosle.log(data);
+			} 
+		});
+	}	
+}
+function LoadViewEquations(){
+	$("#homemain").html(CapaLoadImages()).load('equations/getAllEcuations');
+}
+function LoadViewExcercices(){
+	$("#homemain").html(CapaLoadImages()).load('ejercicios/getAllExcrcies');
+}
 function LoadViewTypeContenten(){
 	$("#homemain").html(CapaLoadImages()).load('contents/LoadViewTypeContents');
 }
@@ -46,8 +108,9 @@ function LoadViewTypeCourse(){
 	$("#homemain").html(CapaLoadImages()).load('curses/LoadViewTypeCourse')
 }
 function CapaLoadImages(){
-	imageLoad = document.createElement('img');
-	$(imageLoad).attr('src', base_url + 'public/images/loading.gif');
+	imageLoad = document.createElement('div');
+	$(imageLoad).attr('id','content-loading');
+	$(imageLoad).html('<div class="circle"></div><div class="circle1"></div>');
 	return $(imageLoad);
 }
 
@@ -126,3 +189,9 @@ function StartFieldEdit(){
 
 
 }
+
+
+
+
+
+

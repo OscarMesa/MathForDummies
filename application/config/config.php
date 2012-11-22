@@ -17,7 +17,7 @@
 //SSH
 // correo:  enviosfr@host351.hostmoster.com
 // pass: 159263
-$config['base_url']	= 'http://localhost/MathForDummies';
+$config['base_url']	= 'http://'. $_SERVER['HTTP_HOST'] . '/MathForDummies';
 
 /*
 |--------------------------------------------------------------------------

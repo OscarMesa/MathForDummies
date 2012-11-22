@@ -1,4 +1,4 @@
-    <div class="sb-block">
+  <div class="sb-block">
         <h2>Opciones</h2>
         <ul>
           <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
@@ -7,7 +7,8 @@
           <li><a href="#" id="universidades">Universidades</a></li>
           <li><a href="#" id="tipo_cursos">Tipo de cursos</a></li>
           <li><a href="#" id="tipo_contenidos">Tipo de contenidos</a></li>
-          <li><a href="#">Ejercicios</a></li>
+          <li><a href="#" id="ejercicios">Ejercicios</a></li>
+           <li><a href="#" id="ecuaciones">Ecuaciones</a></li>
           <li><a href="#">Videos</a></li>
           <li><a href="#">Video conferencia</a></li>
           <li><a href="#">Foros</a></li>
@@ -23,6 +24,12 @@
 </div>
 </section>
 </section>
+
+
+
+
+
+
 
 <section id="right">
   <header id="pageheader">
@@ -162,3 +169,8 @@
                     </div>
                     <div class="clear"></div>
                 </article>
+<a data-toggle="modal" href="#curces" class="btn btn-primary btn-large">Abrir ventana modal</a>
+
+
+  
+           

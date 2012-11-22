@@ -48,3 +48,5 @@ crecimiento y demanda en la industria delInternet y desarrollo de sistemas compu
 </footer>
 </body>
 </html>
+
+    <script src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js'); ?>"></script>
