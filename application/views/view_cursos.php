@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  ccurses = new CollectionCurces();
+</script>
 <div class="btn-group">
   <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Usuarios</a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
@@ -14,16 +17,22 @@
 	  		<th>Docente</th>
 	  		<th>Nombre</th>
 	  		<th>Eliminar</th>
+        <th>Editar</th>
 	  	</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($cursos as $key=>$value) {
-			echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['docente']."</td><td>".$value['curso']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td></tr>";
+		<?php foreach ($cursos as $value) {    
+      echo "<script>
+        ccurses.add([{Id:'".$value['id']."',id_type:'".$value['id_tipo_curso'].
+                                              "',name_type:'".$value['curso']."',id_tacher:'".$value['id_docente'].
+                                              "',name_tache:'".$value['docente']."'}]);
+      </script>";
+			echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['docente']."</td><td>".$value['curso']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td>   <td><a href='javascript:void(0);' class='edit_curso' id=".$value['id']."><i class='icon-edit'></i></a></td>  </tr>";
 		}
 		?>
 	</tbody>
 </table>
-<div id="mcurces" class="modal hide fade in" style="display: none;" data-toggle="modal" data-target="#mcurces">
+<div id="mcurces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <a data-dismiss="modal" class="close">×</a>
         <h3>Nuevo Curso</h3>
@@ -55,9 +64,23 @@
         </div>
     </form>
     <div class="modal-footer">
-        <a href="index.html" id="btn-savecurse" class="btn btn-success">Guardar</a>
+        <a href="#" id="btn-savecurse" class="btn btn-success">Guardar</a>
         <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
     </div>
+</div>
+
+<div id="message-delte-curse" class="modal hide fade" style="display: none;" >
+    <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="message-label-delete">Eliminar Curso</h3>
+     </div>
+      <div class="modal-body">
+        <p>¿Realmente desea eliminar este curso?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" id="btn-deletecurse" class="btn btn-success">Aceptar</a>
+         <a href="#" data-dismiss="modal" class="btn">Cancelar</a>
+      </div>
 </div>
 
 <script type="text/javascript">

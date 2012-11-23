@@ -1,14 +1,12 @@
-
-<!DOCTYPE html>
-
+<!DOCTYPE HTML>
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css">
-<link rel="stylesheet" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/kendo-css/kendo.common.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/kendo-css/kendo.default.min.css">
 
 
 <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -16,7 +14,7 @@
 
 
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="<?php echo base_url('public/script/MathForDummies.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/edit.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/sha1.js'); ?>"></script>

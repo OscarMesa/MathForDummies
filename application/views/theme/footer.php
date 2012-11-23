@@ -46,7 +46,29 @@ crecimiento y demanda en la industria delInternet y desarrollo de sistemas compu
 <div id="credits">
 2012 &copy; MathForDummies.com | Kimera |  By Quimera.kf </div>
 </footer>
-</body>
-</html>
+<div id="message" class="modal hide fade in" style="display: none;" >
+    <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="message-label"></h3>
+     </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+         <a href="#" data-dismiss="modal" class="btn">Aceptar</a>
+      </div>
+</div>
 
     <script src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/script/underscore-1.3.1.js'); ?>"></script>
+    <script src="<?php echo base_url('public/script/json2.js'); ?>"></script>
+    <script src="<?php echo base_url('public/script/backbone.js'); ?>"></script>
+
+    <script type="text/javascript">
+         
+
+  
+    </script>
+
+</body>
+</html>

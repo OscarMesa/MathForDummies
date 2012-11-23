@@ -44,6 +44,16 @@ class Curses extends CI_Controller {
         }
         echo json_encode($rpt);
     }
+
+    /**
+    *   Este metodo se encarga de hacer la logica de negocio para eliminar un curso
+    *   @author Oskar
+    *   @return Int Numero de registros eliminados.
+    */
+    public function DeleteCurse(){
+        echo json_encode(array('col_afetada' => $this->cursos->delteCurse($this->input->post('id'))));
+    }
+
 }
 
 /* End of file curses.php */
