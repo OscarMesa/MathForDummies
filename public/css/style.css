@@ -128,7 +128,9 @@ img.alignleft, img.alignright {display:block; padding:5px; border:solid 1px #ddd
     height:50px;
     width:50px;
 }
-
+.input-append button.add-on {
+    height: inherit !important;
+}
 .circle {
     background-color: rgba(0,0,0,0);
     border:5px solid rgba(0,183,229,0.9);
@@ -143,7 +145,12 @@ img.alignleft, img.alignright {display:block; padding:5px; border:solid 1px #ddd
     -moz-animation:spinPulse 1s infinite ease-in-out;
     -webkit-animation:spinPulse 1s infinite linear;
 }
-
+#frm-search-curse{
+    margin-top: 3em;
+}
+.search-query{
+    width: 31em !important;
+}
 .circle1 {
     background-color: rgba(0,0,0,0);
     border:5px solid rgba(0,183,229,0.9);

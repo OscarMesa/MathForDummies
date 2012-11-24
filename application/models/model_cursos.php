@@ -17,6 +17,14 @@ class Model_cursos extends CI_Model {
 	public function delteCurse($id){
 		return $this->db->query('DELETE FROM cursos WHERE id = ?',array($id));
 	}
+	public function EditCurse($array_edit){
+		return $this->db->query('UPDATE cursos SET id_tipo_curso = ?, id_docente = ? WHERE id = ?',array($array_edit['id_typecurse'],$array_edit['id_teacher'],$array_edit['id']));
+	}
+	public function SearchCurse($SearchValue){
+		$query = $this->db->query('SELECT cu.*,u.nombre docente,tp.nombre curso FROM cursos cu INNER JOIN tipo_curso tp ON tp.id_tipo_curso = cu.id_tipo_curso
+							INNER JOIN usuarios u ON cu.id_docente = u.id_usuario AND u.tipo_perfil = "2" AND (tp.nombre LIKE "%'.$SearchValue.'%" OR u.nombre LIKE "%'.$SearchValue.'%")');
+		return $query->result_array();
+	}
 
 }
 

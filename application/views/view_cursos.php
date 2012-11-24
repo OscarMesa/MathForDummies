@@ -6,32 +6,40 @@
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
   <ul class="dropdown-menu">
     <li><a data-toggle="modal" href="#mcurces" id="nuevo_curso"><i class="icon-pencil"></i> Nuevo</a></li>
-    <li><a href="#"><i class="icon-search"></i> Buscar</a></li>
   </ul>
 </div>
 
-<table class="table table-hover">
-	<thead> 
-	  	<tr>
-	  		<th>#</th>
-	  		<th>Docente</th>
-	  		<th>Nombre</th>
-	  		<th>Eliminar</th>
-        <th>Editar</th>
-	  	</tr>
-	</thead>
-	<tbody>
-		<?php foreach ($cursos as $value) {    
-      echo "<script>
-        ccurses.add([{Id:'".$value['id']."',id_type:'".$value['id_tipo_curso'].
-                                              "',name_type:'".$value['curso']."',id_tacher:'".$value['id_docente'].
-                                              "',name_tache:'".$value['docente']."'}]);
-      </script>";
-			echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['docente']."</td><td>".$value['curso']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td>   <td><a href='javascript:void(0);' class='edit_curso' id=".$value['id']."><i class='icon-edit'></i></a></td>  </tr>";
-		}
-		?>
-	</tbody>
-</table>
+
+<form class="form-search" id="frm-search-curse">
+  <div class="input-append">
+    <input type="text" class="span2 search-query" id="input-search-curse" placeholder="Buscar curso">
+    <button type="submit" id="serach-curse" class="btn">Buscar</button>
+  </div>
+</form>
+<article id="sec-table-search">
+  <table class="table table-hover" id="tbl-curses">
+  	<thead> 
+  	  	<tr>
+  	  		<th>#</th>
+  	  		<th>Docente</th>
+  	  		<th>Nombre</th>
+  	  		<th>Eliminar</th>
+          <th>Editar</th>
+  	  	</tr>
+  	</thead>
+  	<tbody>
+  		<?php foreach ($cursos as $value) {    
+        echo "<script>
+          ccurses.add([{Id:'".$value['id']."',id_type:'".$value['id_tipo_curso'].
+                                                "',name_type:'".$value['curso']."',id_tacher:'".$value['id_docente'].
+                                                "',name_tache:'".$value['docente']."'}]);
+        </script>";
+  			echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['docente']."</td><td>".$value['curso']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td>   <td><a href='javascript:void(0);' class='edit_curso' id=".$value['id']."><i class='icon-edit'></i></a></td>  </tr>";
+  		}
+  		?>
+  	</tbody>
+  </table>
+</article>
 <div id="mcurces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <a data-dismiss="modal" class="close">×</a>

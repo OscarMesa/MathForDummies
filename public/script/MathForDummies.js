@@ -21,7 +21,9 @@ function start(){
 
 	$('.delete_curso').live('click',OpenWindowDeleteCurse);
 
-	$('.edit_curso').live('click',OpenWindowCurse)
+	$('.edit_curso').live('click',OpenWindowCurse);
+
+	$('#serach-curse').live('click',SearchFilterCurse);
 
 	$('#usuarios').live('click', LoadViewUsuarios);
 
@@ -41,7 +43,19 @@ function start(){
 
 	InitElementBackbone();
 }
-
+function SearchFilterCurse(e){
+	field = 'value-search:' + $("#input-search-curse").val();
+	if($('#input-search-curse').val()!=''){
+		$('#sec-table-search').html('');
+		$('#sec-table-search').html(CapaLoadImages());
+		$.post(base_url + 'curses/SearchCurse', { valuesearch:$("#input-search-curse").val() },
+	 		function(data) {
+	   			$('#sec-table-search').html(data);
+	 		}
+		);
+	}
+	e.preventDefault();
+}
 function InitElementBackbone(){
 	 ModelCurces = Backbone.Model.extend({
      initialize: function() {
@@ -55,10 +69,9 @@ function InitElementBackbone(){
   	  name_tache: 'undefined'
      }
     });
-     
     CollectionCurces = Backbone.Collection.extend({
      initialize: function() {
-      console.log("Se inicio la colecccion de los cursos");
+      //console.log("Se inicio la colecccion de los cursos");
      },
      model: ModelCurces
     });
@@ -109,7 +122,7 @@ function SaveCurse(e){
 				}
 			});
 			mode_save_to_update = 'save';
-			Curses = undefined;
+			Curses = {};
 		}
 	}else{
 		document.getElementById("btn-validatecurse").click();
@@ -197,6 +210,7 @@ function OpenWindowCurse(){
 }
 function DeleteCurso(e){
 	$('#message-delte-curse').modal('toggle');
+	console.log(id_delete);
 	$.ajax({
 		type: 'POST',
 		dataType: 'JSON',
@@ -205,6 +219,7 @@ function DeleteCurso(e){
 		success: function(response){
 			if(response.col_afetada>0){
 				$('#row_'+id_delete).hide('slow', function(){ $('#row_'+id_delete).remove(); });
+				LoadViewCursos();
 			}else{
 				alert('Se presento un error durante la eliminación');
 				console.log(response);
