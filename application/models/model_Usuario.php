@@ -136,7 +136,7 @@ class model_usuario extends CI_Model {
     */
     public function getAllUser(){
         $query = $this->db->query('SELECT u.*, prf.nombre perfil_name, p.descripcion profesion_name FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
-                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion');
+                           INNER JOIN Profesion2 p ON p.id_profesion = u.id_profesion');
         return $query->result_array();
     }
 

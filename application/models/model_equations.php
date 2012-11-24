@@ -7,7 +7,8 @@ class Model_equations extends CI_Model {
 	}
 
 	public function getAllEquations(){
-		$query = $this->db->query('SELECT * FROM ');
+		$query = $this->db->query('SELECT * FROM Ecuaciones');
+		return $query->result_array();
 	}
     
 

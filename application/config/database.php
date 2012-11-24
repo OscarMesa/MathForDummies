@@ -53,6 +53,7 @@ $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'math';
 
+
 // $mysql_host = "mysql7.000webhost.com";
 // $mysql_database = "a5011613_math";
 // $mysql_user = "a5011613_marh";

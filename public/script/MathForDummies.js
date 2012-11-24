@@ -1,13 +1,29 @@
+var Curses = {};
+var id_delete,mode_save_to_update = 'save';
+
+/**
+*	Variables backbound
+*/
+
+var ModelCurces;
+
+var CollectionCurces;
+
+var ccurses;
 
 $(document).live('ready',start);
 
 function start(){
 
+	$('#btn-deletecurse').live('click',DeleteCurso)
+
 	$('#cursos').live('click',LoadViewCursos);
 
-	$('.delete_curso').live('click',DeleteCurso);
+	$('.delete_curso').live('click',OpenWindowDeleteCurse);
 
-	$('#nuevo_curso').live('click',NewCurso);
+	$('.edit_curso').live('click',OpenWindowCurse);
+
+	$('#serach-curse').live('click',SearchFilterCurse);
 
 	$('#usuarios').live('click', LoadViewUsuarios);
 
@@ -18,12 +34,136 @@ function start(){
 	$('#tipo_cursos').live('click',LoadViewTypeCourse);
 
 	$('#tipo_contenidos').live('click',LoadViewTypeContenten);
-	
-	//Diego
-	$('#content-img img').live('click', abrir);
-	StartFieldEdit();
-}
 
+	$('#content-img img').live('click', abrir);//login
+
+	$('#ejercicios').live('click',LoadViewExcercices);
+
+	$('#ecuaciones').live('click',LoadViewEquations);
+
+	$('#btn-savecurse').live('click',SaveCurse);
+
+	InitElementBackbone();
+}
+function SearchFilterCurse(e){
+	field = 'value-search:' + $("#input-search-curse").val();
+	if($('#input-search-curse').val()!=''){
+		$('#sec-table-search').html('');
+		$('#sec-table-search').html(CapaLoadImages());
+		$.post(base_url + 'curses/SearchCurse', { valuesearch:$("#input-search-curse").val() },
+	 		function(data) {
+	   			$('#sec-table-search').html(data);
+	 		}
+		);
+	}
+	e.preventDefault();
+}
+function InitElementBackbone(){
+	 ModelCurces = Backbone.Model.extend({
+     initialize: function() {
+      console.log('Se inicio el modelo de los cursos');
+     },
+     defaults: {
+      Id: 'undefined',
+      id_type: 'undefined',
+  	  name_type: 'undefined',
+  	  id_tacher: 'undefined',
+  	  name_tache: 'undefined'
+     }
+    });
+    CollectionCurces = Backbone.Collection.extend({
+     initialize: function() {
+      //console.log("Se inicio la colecccion de los cursos");
+     },
+     model: ModelCurces
+    });
+     
+}
+function SaveCurse(e){
+	if(document.querySelector("#frm-newcurse").checkValidity()){ 
+		if(mode_save_to_update == 'save'){
+			$.ajax({
+				type:"POST",
+				dataType: "JSON",
+				url: base_url + "curses/NewCurse",
+				data: Curses,
+				success: function(data){
+					if(!data.rpt){
+								for(x in data.step_msg){
+									$('#error_' + x).html(data.step_msg[x]);
+								}
+					}else{
+						$('#mcurces').modal('hide');
+						OpenMessagesModal('Guardado exitoso','El curso se almaceno correctamente');
+						LoadViewCursos();
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}else{
+			$.ajax({
+				type:"POST",
+				dataType: "JSON",
+				url: base_url + "curses/EditCurse",
+				data: Curses,
+				success: function(data){
+					if(!data.rpt){
+								for(x in data.step_msg){
+									$('#error_' + x).html(data.step_msg[x]);
+								}
+					}else{
+						$('#mcurces').modal('hide');
+						OpenMessagesModal('Edición exitoso','El curso se edito correctamente');
+						LoadViewCursos();
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+			mode_save_to_update = 'save';
+			Curses = {};
+		}
+	}else{
+		document.getElementById("btn-validatecurse").click();
+	}
+	e.preventDefault();
+}
+function OpenMessagesModal(title,body){
+	$('#message .modal-header h3').html(title);
+	$('#message .modal-body p').html(body);
+	$('#message').modal('show');
+}
+function LoadDataTypeCurce(e){
+	if(e.keyCode!=8 && $(this).val()!='' && $(this).val().length>2)
+	{
+		$.ajax({
+			type:'POST',
+			dataType: 'JSON',
+			url: base_url + 'curses/LoadDataTypeCurce',
+			data: 'filter=' + $(this).val(),
+			success: function(data){
+				$('#LayerTypeCurces').html('');
+				$.each(data,function(key,value){
+					$('#LayerTypeCurces').html($('#LayerTypeCurces').html()+'<option value="'+value.nombre+'">');
+					console.log($('#LayerTypeCurces').html());
+				});
+				
+			},
+			error: function(data){
+				conosle.log(data);
+			} 
+		});
+	}	
+}
+function LoadViewEquations(){
+	$("#homemain").html(CapaLoadImages()).load('equations/getAllEcuations');
+}
+function LoadViewExcercices(){
+	$("#homemain").html(CapaLoadImages()).load('ejercicios/getAllExcrcies');
+}
 function LoadViewTypeContenten(){
 	$("#homemain").html(CapaLoadImages()).load('contents/LoadViewTypeContents');
 }
@@ -49,21 +189,39 @@ function LoadViewTypeCourse(){
 	$("#homemain").html(CapaLoadImages()).load('curses/LoadViewTypeCourse')
 }
 function CapaLoadImages(){
-	imageLoad = document.createElement('img');
-	$(imageLoad).attr('src', base_url + 'public/images/loading.gif');
+	imageLoad = document.createElement('div');
+	$(imageLoad).attr('id','content-loading');
+	$(imageLoad).html('<div class="circle"></div><div class="circle1"></div>');
 	return $(imageLoad);
 }
-
+function OpenWindowDeleteCurse(){
+	id_delete = $(this).attr('id');
+	$('#message-delte-curse').modal('show');
+}
+function OpenWindowCurse(){
+	if($(this).attr('class') == 'edit_curso'){
+		mode_save_to_update = 'edit';
+		element = eval(jQuery.parseJSON(JSON.stringify(ccurses.where({Id:$(this).attr('id')}))))[0];
+		$('#Techer').val(element.name_tache);
+		$('#TypeCurcesLoad').val(element.name_type);
+		Curses['id'] = element.Id;
+		Curses['id_teacher'] = element.id_tacher;
+		Curses['id_typecurse'] = element.id_type;
+		$('#mcurces').modal('show');
+	}
+}
 function DeleteCurso(e){
-	id = $(this).attr('id');
+	$('#message-delte-curse').modal('toggle');
+	console.log(id_delete);
 	$.ajax({
 		type: 'POST',
 		dataType: 'JSON',
-		url: 'cursos/DeleteCurso',
-		data: 'id=' + id,
+		url: 'curses/DeleteCurse',
+		data: 'id=' + id_delete,
 		success: function(response){
 			if(response.col_afetada>0){
-				$('#row_'+id).hide('slow', function(){ $('#row_'+id).remove(); });
+				$('#row_'+id_delete).hide('slow', function(){ $('#row_'+id_delete).remove(); });
+				LoadViewCursos();
 			}else{
 				alert('Se presento un error durante la eliminación');
 				console.log(response);
@@ -74,7 +232,24 @@ function DeleteCurso(e){
 		}
 	});
 }
+function clear_form_elements(ele) {
 
+	$(ele).find(':input').each(function() {
+        switch(this.type) {
+            case 'password':
+			case 'select-multiple':
+			case 'select-one':
+            case 'text':
+			case 'textarea':
+                $(this).val('');
+                break;
+            case 'checkbox':
+            case 'radio':
+                this.checked = false;
+        }
+	});
+
+}
 function NewCurso(){
 	$.ajax({
 		type:'POST',
@@ -99,35 +274,6 @@ function NewCurso(){
 			console.log(response);
 		}
 	});
-}
-
-function StartFieldEdit(){
-
-	LoadJQueryAutoSave();
-	$('.edit').editable('edit/Update', {
-	 textarea_rows: "15",
-	 textarea_cols: "35",
-     type     : 'text',
-     submit   : 'OK',
-     saving   : null,
-     callback : function(value, response) {
-          if(!response.rpt){
-          	//console.log(response.error);
-          	document.getElementById('error_'+this.extraParams.table).innerHTML = response.error.value;
-          	// document.getElementById(this.extraParams.table).style.border = '2px dotted #F00';
-          	// document.getElementById(this.extraParams.table).style.float = 'left:5px';
-          	// document.getElementById(this.extraParams.table).style.height= '30px';
-          	//document.getElementById(this.extraParams.table).innerHTML = '';
-          }
-          if(response.message == '')
-          	document.getElementById(this.extraParams.table).innerHTML = 'Inválido';
-          else
-          	document.getElementById(this.extraParams.table).innerHTML = response.message;
-      	  	
-     }
-	});
-
-
 }
 
 //Diego
