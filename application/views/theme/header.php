@@ -37,6 +37,22 @@
 <div id="wrap">
 <section id="left">
   <header id="mainheader">
+		<div id='content-img'>
+			<div id='content-login'>
+				<div class='login'>
+					<form action='#' method='POST'>
+						<table>
+							<tr>
+								<td>Usuario: </td><td><input type='text' id='nombre' required /></td>
+								<td>Contraseña: </td><td><input type='password' id='clave' required /></td>
+								<td><input type='submit' value='Ingresar' /></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<img src='<?php echo base_url();?>public/images/iconos/abrir.png' />
+		</div>
   <a href="index.html"><article id="logo" width="250" height="120" alt="Math For Dummies"><p>Math For Dummies</p></article> </a>
     <h1 id="sitename">Math For Dummies, aprende las matemáticas de una forma rapida</h1>
     </header>

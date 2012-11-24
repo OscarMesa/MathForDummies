@@ -18,6 +18,9 @@ function start(){
 	$('#tipo_cursos').live('click',LoadViewTypeCourse);
 
 	$('#tipo_contenidos').live('click',LoadViewTypeContenten);
+	
+	//Diego
+	$('#content-img img').live('click', abrir);
 	StartFieldEdit();
 }
 
@@ -125,4 +128,18 @@ function StartFieldEdit(){
 	});
 
 
+}
+
+//Diego
+function abrir(){
+	var alto=50;
+	if($("#content-img #content-login").height() == 50){
+		alto=0; 
+		$(this).css("background","url("+base_url+"public/images/iconos/abrir.png) no-repeat center");
+	}else{
+		$(this).css("background","url("+base_url+"public/images/iconos/abajo.png) no-repeat center");
+	}
+	$("#content-img #content-login").animate({
+		height:alto+"px"
+	});
 }

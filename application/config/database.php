@@ -51,7 +51,7 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
-$db['default']['database'] = 'math1';
+$db['default']['database'] = 'math';
 
 // $mysql_host = "mysql7.000webhost.com";
 // $mysql_database = "a5011613_math";
