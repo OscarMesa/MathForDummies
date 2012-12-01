@@ -7,7 +7,7 @@ class Model_professions extends CI_Model {
     }
 
     public function getAllProfessions(){
-    	$query = $this->db->query('SELECT * FROM Profesion LIMIT 10');
+    	$query = $this->db->query('SELECT * FROM Profesion');
     	return $query->result_array();
     }
 

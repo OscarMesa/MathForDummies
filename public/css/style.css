@@ -145,7 +145,7 @@ img.alignleft, img.alignright {display:block; padding:5px; border:solid 1px #ddd
     -moz-animation:spinPulse 1s infinite ease-in-out;
     -webkit-animation:spinPulse 1s infinite linear;
 }
-#frm-search-curse{
+.frm-search-math{
     margin-top: 3em;
 }
 .search-query{
@@ -287,8 +287,10 @@ img.alignleft, img.alignright {display:block; padding:5px; border:solid 1px #ddd
 	width: 35px;
 }
 
-#ContentListUser{
-	overflow:scroll;
+#ContentList{
+	height: 35em;
+    overflow: scroll;
+    width: 78em;
 }
 
  input[type='password']{

@@ -94,20 +94,9 @@ class usuario extends CI_Controller {
 
 
     public function NewUser(){
-        $this->load->library('form_validation');
-        $this->load->helper('form');
-        $this->form_validation->set_rules('NameUser', "nombre", 'trim|required');
-        $this->form_validation->set_rules('LastName1', "Apellido", 'trim|required');
-        $this->form_validation->set_rules('TephoneUser', "teléfono", 'trim|required|numeric');
-        $this->form_validation->set_rules('CellUser', "celular", 'trim|required|numeric');
-        $this->form_validation->set_rules('EmailUser', "correo", 'trim|required|valid_email');
-        $this->form_validation->set_rules('id_profesion', "profesión", 'trim|required|numeric');
-        $this->form_validation->set_rules('id_perfil', "perfil", 'trim|required|numeric');
-        $this->form_validation->set_rules('password', "contraseña", 'trim|required|matches[cpassword]');
-        $this->form_validation->set_rules('cpassword', "confirmar contraseña", 'trim|required');
         $rpt = array();
 
-        if($this->form_validation->run() == false){
+        if($this->ValidateDataUser() == false){
             $rpt['msg'] = validation_errors_array();
             $rpt['rpt'] = false;
         }else{
@@ -121,9 +110,51 @@ class usuario extends CI_Controller {
         echo json_encode($rpt);
     }
 
-    public function EditUser()
+    public function UpdateUser()
     {
+       
+        $rpt = array();
 
+        if($this->ValidateDataUser() == false){
+            $rpt['msg'] = validation_errors_array();
+            $rpt['rpt'] = false;
+        }else{
+            $this->muser->saveUpdateUrse(array($this->input->post('LastName1'),$this->input->post('NameUser'),
+                                      $this->input->post('LastName2'),sha1($this->input->post('password')),
+                                      $this->input->post('TephoneUser'),$this->input->post('CellUser'),
+                                      $this->input->post('EmailUser'),$this->input->post('id_profesion'),
+                                      $this->input->post('id_perfil'),$this->input->post('id_user')));
+            $rpt['rpt'] = true;
+        }
+        echo json_encode($rpt);
+    }
+
+    public function ValidateDataUser()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $this->form_validation->set_rules('NameUser', "nombre", 'trim|required');
+        $this->form_validation->set_rules('LastName1', "Apellido", 'trim|required');
+        $this->form_validation->set_rules('TephoneUser', "teléfono", 'trim|required|numeric');
+        $this->form_validation->set_rules('CellUser', "celular", 'trim|required|numeric');
+        $this->form_validation->set_rules('EmailUser', "correo", 'trim|required|valid_email');
+        $this->form_validation->set_rules('id_profesion', "profesión", 'trim|required|numeric');
+        $this->form_validation->set_rules('id_perfil', "perfil", 'trim|required|numeric');
+        $this->form_validation->set_rules('password', "contraseña", 'trim|required|matches[cpassword]');
+        $this->form_validation->set_rules('cpassword', "confirmar contraseña", 'trim|required');
+        return $this->form_validation->run();
+    }
+
+    public function DeleteUrse()
+    {
+        echo json_encode(array('col_afetada' => $this->muser->delteUrse($this->input->post('id')))); 
+    }
+
+    public function SearchUsers()
+    {
+        $data['users'] = $this->muser->SearchUser($this->input->post('valuesearch'));
+        $data['table'] = 'usuarios';
+        echo $this->load->view('SearchTable',$data);
     }
 }
 

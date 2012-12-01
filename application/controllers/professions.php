@@ -13,13 +13,21 @@ class Professions extends CI_Controller {
     	$this->load->view('view_professions',$data);
     }
 
-    public function LoadAutoComplete(){
+    public function LoadAutoComplete()
+    {
     	$element = $this->mprofessions->LoadProfetionAutocomplete($_POST['filter']['filters'][0]['value']);
     	$arr = array();
     	foreach ($element as $key => $value) {
     		$arr[] = array('id' => $value['id_profesion'], 'nombre' =>$value['descripcion']);
     	}
     	echo json_encode($arr);
+    }
+
+    public function SearchProfession()
+    {
+        $data['cursos'] = $this->cursos->SearchCurse($this->input->post('valuesearch'));
+        $data['table'] = 'profesiones';
+        echo $this->load->view('SearchTable',$data);
     }
 }
 

@@ -122,7 +122,23 @@ class model_usuario extends CI_Model {
      */
     public function saveNewUrse($array_elements) {
        return $this->db->query("INSERT INTO usuarios(nombre,apellido1,apellido2,contrasena,telefono,celular,correo,id_profesion,tipo_perfil) VALUES(?,?,?,?,?,?,?,?,?)",$array_elements); 
-    }    
+    } 
+
+    public function saveUpdateUrse($array_elements){
+        return $this->db->query("UPDATE usuarios SET nombre=?,apellido1=?,apellido2=?,contrasena=?,telefono=?,celular=?,correo=?,id_profesion=?,tipo_perfil=? WHERE id_usuario =?",$array_elements);
+    }  
+
+    public function delteUrse($id){
+        return $this->db->query("DELETE FROM usuarios WHERE id_usuario = ?", array($id));
+    } 
+
+    public function SearchUser($filter)
+    {
+        $query = $this->db->query('SELECT u.*, prf.id_perfil,prf.nombre perfil_name, p.id_profesion, p.descripcion profesion_name FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
+                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion AND
+                           u.nombre LIKE "%'.$filter.'%" OR u.apellido1 LIKE "%'.$filter.'%" OR u.apellido2 LIKE "%'.$filter.'%" OR u.telefono LIKE "%'.$filter.'%" OR u.celular LIKE "%'.$filter.'%" OR u.correo LIKE "%'.$filter.'%" OR prf.nombre LIKE "%'.$filter.'%" OR p.descripcion LIKE "%'.$filter.'%" GROUP BY u.id_usuario');   
+        return $query->result_array();
+    }
 
 }
 

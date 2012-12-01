@@ -5,11 +5,15 @@ var id_delete,mode_save_to_update = 'save';
 *	Variables backbound
 */
 
+var CRUD, MCRUD;
+
 var ModelCurces, ModelUsuarios;
 
 var CollectionCurces,CollectionUsuarios;
 
 var ccurses,cusuarios;
+
+
 
 $(document).live('ready',start);
 
@@ -44,32 +48,87 @@ function start(){
 	$('#btn-savecurse').live('click',SaveCurse);
 
 	$('#nuevo_usuario').live('click',OpenWindowUser);
+
+	$('.edit_user').live('click',OpenWindowUser);
+
+	$('.delete_user').live('click', OpenWindowDeleteUser)
+
 	$('#btn-saveuser').live('click',SaveUser);
-	$('#frm-newcurse').live('submit',StopExecute)
+
+	$('#btn-deleteurse').live('click',DeleteUser);
+
+	$('#frm-newcurse').live('submit',StopExecute);
+
+	$('#serach-usuario').live('click',Search);
 
 	InitElementBackbone();
 }
 function StopExecute(e){
 	e.preventDefault();
 }
+function OpenWindowDeleteUser(){
+	console.log($(this).attr('id'));
+	Usuarios.set({id_usuario:$(this).attr('id')});
+	$('#message-delte-user').modal('show');
+}
 function OpenWindowUser(){
 	if($(this).attr('id') == 'nuevo_usuario'){
 		mode_save_to_update = 'new';
 		$('#musuarios .modal-header h3').html('Nuevo Usuario');
-		// element = eval(jQuery.parseJSON(JSON.stringify(ccurses.where({Id:$(this).attr('id')}))))[0];
-		// $('#Techer').val(element.name_tache);
-		// $('#TypeCurcesLoad').val(element.name_type);
-		// Curses['id'] = element.Id;
-		// Curses['id_teacher'] = element.id_tacher;
-		// Curses['id_typecurse'] = element.id_type;
-		// $('#mcurces').modal('show');
 	}else{
 		mode_save_to_update = 'update';
 		$('#musuarios .modal-header h3').html('Editar Usuario');
-
+		element = eval(jQuery.parseJSON(JSON.stringify(cusuarios.where({id_usuario:$(this).attr('id')}))))[0];
+		$('#NameUser').val(element.nombre);	
+		$('#LastName1').val(element.apellido1);	
+		$('#LastName2').val(element.apellido2);	
+		$('#TephoneUser').val(element.telefono);	
+		$('#CellUser').val(element.celular);	
+		$('#EmailUser').val(element.correo);	
+		$('#Profetion').val(element.name_profesion);	
+		$('#Profile').val(element.name_perfil);
+		Usuarios.set({id_usuario:element.id_usuario});	
+		Usuarios.set({id_perfil:element.id_perfil});
+		$('#EmailUser').attr('disabled', 'disabled');
+		Usuarios.set({id_profesion:element.id_profesion});
 	}
 	$('#musuarios').modal('show');
 }
+function DeleteUser(e){
+	$('#message-delte-user').modal('toggle');
+	$.ajax({
+		type: 'POST',
+		dataType: 'JSON',
+		url: 'usuario/DeleteUrse',
+		data: 'id=' + Usuarios.get('id_usuario'),
+		success: function(response){
+			if(response.col_afetada>0){
+				$('#row_'+Usuarios.get('id_usuario')).hide('slow', function(){ $('#row_'+Usuarios.get('id_usuario')).remove(); });
+				//LoadViewCursos();
+			}else{
+				alert('Se presento un error durante la eliminación');
+				console.log(response);
+			}
+		},
+		error: function(response){
+			console.log(response);
+		}
+	});
+}
+function Search(e)
+{
+	if($('#' + MCRUD.get('search').fieldsearch).val()!=''){
+		$('#' + MCRUD.get('search').area).html('');
+		$('#' + MCRUD.get('search').area).html(CapaLoadImages());
+		$.post(base_url + MCRUD.get('controller') + '/' +MCRUD.get('search').method, { valuesearch:$("#" + MCRUD.get('search').fieldsearch).val() },
+	 		function(data) {
+	   			$('#' + MCRUD.get('search').area).html(data);
+	 		}
+		);
+	}
+	e.preventDefault();	
+}
+
 function SearchFilterCurse(e){
 	field = 'value-search:' + $("#input-search-curse").val();
 	if($('#input-search-curse').val()!=''){
@@ -124,7 +183,9 @@ function InitElementBackbone(){
 			celular: 'undefined',
 			correo: 'undefined',
 			id_profesion: 'undefined',
-			id_perfil: 'undefined'
+			id_perfil: 'undefined',
+			name_profesion: 'undefined',
+			name_perfil:'undefined'
 		}
 	});
 	CollectionUsuarios = Backbone.Collection.extend({
@@ -134,6 +195,19 @@ function InitElementBackbone(){
 		model: ModelUsuarios
 	});
 	Usuarios = new ModelUsuarios;
+
+	/**
+	*	CRUD busqueda
+	*/
+	CRUD = Backbone.Model.extend({
+		initialize: function(){
+		//	console.log("Se inicio el modelo de usuarios");
+		},
+		defaults:{
+			controller: 'undefined',
+			search: {'field-search':'','buttonsearch':'','area':'','method':''}
+		}
+	});
 }
 function SaveCurse(e){
 	if(document.querySelector("#frm-newcurse").checkValidity()){ 
@@ -193,26 +267,49 @@ function SaveUser(e){
 	 else
 	 		document.querySelector('#cpassword').setCustomValidity("");
 	if(document.querySelector("#frm-newurse").checkValidity()){ 
-		if(mode_save_to_update == 'new'){
-			$.ajax({
-				type:"POST",
-				dataType: "JSON",
-				url: base_url + "usuario/NewUser",
-				data: $('#frm-newurse').serialize() + "&id_profesion=" + Usuarios.get('id_profesion') + "&id_perfil=" + Usuarios.get('id_perfil'),
-				success: function(data){
-					if(!data.rpt){
-								for(x in data.step_msg){
-									$('#error_' + x).html(data.step_msg[x]);
-								}
-					}else{
-						$('#musuarios').modal('hide');
-						OpenMessagesModal('Guardado exitoso','El usuario se almaceno correctamente');
-						LoadViewUsuarios();
+		if(mode_save_to_update == 'new')
+		{
+				$.ajax({
+					type:"POST",
+					dataType: "JSON",
+					url: base_url + "usuario/NewUser",
+					data: $('#frm-newurse').serialize() + "&id_profesion=" + Usuarios.get('id_profesion') + "&id_perfil=" + Usuarios.get('id_perfil'),
+					success: function(data){
+						if(!data.rpt){
+									for(x in data.step_msg){
+										$('#error_' + x).html(data.step_msg[x]);
+									}
+						}else{
+							$('#musuarios').modal('hide');
+							OpenMessagesModal('Guardado exitoso','El usuario se almaceno correctamente');
+							LoadViewUsuarios();
+						}
+					},
+					error: function(data){
+						console.log(data);
 					}
-				},
-				error: function(data){
-					console.log(data);
-				}
+				});
+		}else{
+			$('#EmailUser').removeAttr("disabled");
+			$.ajax({
+					type:"POST",
+					dataType: "JSON",
+					url: base_url + "usuario/UpdateUser",
+					data: $('#frm-newurse').serialize() + "&id_profesion=" + Usuarios.get('id_profesion') + "&id_perfil=" + Usuarios.get('id_perfil') + "&id_user=" + Usuarios.get('id_usuario'),
+					success: function(data){
+						if(!data.rpt){
+									for(x in data.step_msg){
+										$('#error_' + x).html(data.step_msg[x]);
+									}
+						}else{
+							$('#musuarios').modal('hide');
+							OpenMessagesModal('Edición exitoso','El usuario se modificado correctamente');
+							LoadViewUsuarios();
+						}
+					},
+					error: function(data){
+						console.log(data);
+					}
 			});
 		}
 	}else{
@@ -323,7 +420,7 @@ function DeleteCurso(e){
 }
 function clear_form_elements(ele) {
 
-	$(ele).find(':input').each(function() {
+	ele.find(':input').each(function() {
         switch(this.type) {
             case 'password':
 			case 'select-multiple':

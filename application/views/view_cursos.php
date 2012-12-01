@@ -10,7 +10,7 @@
 </div>
 
 
-<form class="form-search" id="frm-search-curse">
+<form class="form-search frm-search-math" id="frm-search-curse">
   <div class="input-append">
     <input type="text" class="span2 search-query" id="input-search-curse" placeholder="Buscar curso">
     <button type="submit" id="serach-curse" class="btn">Buscar</button>
