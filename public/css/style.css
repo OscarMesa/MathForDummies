@@ -286,4 +286,12 @@ img.alignleft, img.alignright {display:block; padding:5px; border:solid 1px #ddd
 	cursor:pointer !important;
 	width: 35px;
 }
+
+#ContentListUser{
+	overflow:scroll;
+}
+
+ input[type='password']{
+	width: 19em !important;
+}
 /*login*/

@@ -169,8 +169,6 @@
                     </div>
                     <div class="clear"></div>
                 </article>
-<a data-toggle="modal" href="#curces" class="btn btn-primary btn-large">Abrir ventana modal</a>
-
 
   
            

@@ -81,33 +81,7 @@ class model_usuario extends CI_Model {
         return $array;
     }
 
-    /**
-     * Este metodo se encarga de insertar un usuaro nuevo
-     *
-     * @author Oskar
-     * @param arg_usuario Le llegan todos los argumentos para insertar un usuarion por metodo post
-     * 
-     */
-    public function Insertar_Usuario() {
-        $salt = com_create_guid();
-        $field_values = array(
-            'nombre' => $this->input->post('full_name') . " " . $this->input->post('apellido'),
-            'usuario' => $this->input->post('user_name'),
-            'fecha_registro' => date("Y-m-d:H:i:s"),
-            'fecha_ultacceso' => date("Y-m-d:H:i:s"),
-            'activo' => 1,
-            'password' => sha1(sha1($this->input->post('password')) . sha1($salt)),
-            'salt' => $salt,
-            'identificacion' => 0,
-            'ciudad' => $this->input->post('ciudades'),
-            'Genero' => $this->input->post('gender'),
-            'tipo_id' => 1
-        );
-        $id = $this->db->insert_id();
-        $this->db->insert('mb_usuarios', $field_values);
-        $this->db->insert('mb_mail', array('id_usuario' => $id, 'mail' => $this->input->post('email')));
-        $this->db->insert('mb_usuarios_perfiles', array('id_usuario' => $id, 'id_perfil' => 1));
-    }
+
 
     /**
     * Este metodo elimina a un usuario mediante su ID
@@ -135,10 +109,20 @@ class model_usuario extends CI_Model {
     *   @return array
     */
     public function getAllUser(){
-        $query = $this->db->query('SELECT u.*, prf.nombre perfil_name, p.descripcion profesion_name FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
-                           INNER JOIN Profesion2 p ON p.id_profesion = u.id_profesion');
+        $query = $this->db->query('SELECT u.*, prf.id_perfil,prf.nombre perfil_name, p.id_profesion, p.descripcion profesion_name FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
+                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion');
         return $query->result_array();
     }
+    /**
+     * Este metodo se encarga de insertar un usuaro nuevo
+     *
+     * @author Oskar
+     * @param arg_usuario Le llegan todos los argumentos para insertar un usuarion por metodo post
+     * 
+     */
+    public function saveNewUrse($array_elements) {
+       return $this->db->query("INSERT INTO usuarios(nombre,apellido1,apellido2,contrasena,telefono,celular,correo,id_profesion,tipo_perfil) VALUES(?,?,?,?,?,?,?,?,?)",$array_elements); 
+    }    
 
 }
 

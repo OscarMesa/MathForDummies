@@ -1454,6 +1454,9 @@ class CI_Form_validation {
             
             return (strlen($str1)==strlen($str))?TRUE:FALSE;
         }
+        public function get_error_array(){
+			return $this->_error_array;
+		}
 
 }
 // END Form Validation Class

@@ -11,6 +11,11 @@ class Model_professions extends CI_Model {
     	return $query->result_array();
     }
 
+    public function LoadProfetionAutocomplete($filter){
+    	$query = $this->db->query("SELECT * FROM Profesion WHERE descripcion LIKE '%".$filter."%'");
+    	return $query->result_array();
+    }
+
 }
 
 /* End of file model_professions.php */

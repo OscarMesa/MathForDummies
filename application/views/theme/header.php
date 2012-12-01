@@ -25,7 +25,7 @@
  <script src="<?php echo base_url(); ?>public/script/modernizr.js"></script> 
 <link href="<?php echo base_url();?>public/css/style.css" rel="stylesheet" type="text/css">
 
-    <script src="http://cdn.kendostatic.com/2012.2.710/js/kendo.web.min.js"></script>
+    <script src="<?php echo base_url();?>public/script/kendo.web.min.js"></script>
 
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

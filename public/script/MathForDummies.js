@@ -1,15 +1,15 @@
-var Curses = {};
+var Curses = {}, Usuarios;
 var id_delete,mode_save_to_update = 'save';
 
 /**
 *	Variables backbound
 */
 
-var ModelCurces;
+var ModelCurces, ModelUsuarios;
 
-var CollectionCurces;
+var CollectionCurces,CollectionUsuarios;
 
-var ccurses;
+var ccurses,cusuarios;
 
 $(document).live('ready',start);
 
@@ -43,7 +43,32 @@ function start(){
 
 	$('#btn-savecurse').live('click',SaveCurse);
 
+	$('#nuevo_usuario').live('click',OpenWindowUser);
+	$('#btn-saveuser').live('click',SaveUser);
+	$('#frm-newcurse').live('submit',StopExecute)
+
 	InitElementBackbone();
+}
+function StopExecute(e){
+	e.preventDefault();
+}
+function OpenWindowUser(){
+	if($(this).attr('id') == 'nuevo_usuario'){
+		mode_save_to_update = 'new';
+		$('#musuarios .modal-header h3').html('Nuevo Usuario');
+		// element = eval(jQuery.parseJSON(JSON.stringify(ccurses.where({Id:$(this).attr('id')}))))[0];
+		// $('#Techer').val(element.name_tache);
+		// $('#TypeCurcesLoad').val(element.name_type);
+		// Curses['id'] = element.Id;
+		// Curses['id_teacher'] = element.id_tacher;
+		// Curses['id_typecurse'] = element.id_type;
+		// $('#mcurces').modal('show');
+	}else{
+		mode_save_to_update = 'update';
+		$('#musuarios .modal-header h3').html('Editar Usuario');
+
+	}
+	$('#musuarios').modal('show');
 }
 function SearchFilterCurse(e){
 	field = 'value-search:' + $("#input-search-curse").val();
@@ -59,6 +84,10 @@ function SearchFilterCurse(e){
 	e.preventDefault();
 }
 function InitElementBackbone(){
+
+	/**
+	*	Cursos
+	*/
 	 ModelCurces = Backbone.Model.extend({
      initialize: function() {
       console.log('Se inicio el modelo de los cursos');
@@ -77,7 +106,34 @@ function InitElementBackbone(){
      },
      model: ModelCurces
     });
-     
+ 
+	/**
+	*	Usuarios
+	*/     
+
+	ModelUsuarios = Backbone.Model.extend({
+		initialize: function(){
+			console.log("Se inicio el modelo de usuarios");
+		},
+		defaults:{
+			id_usuario: 'undefined',
+			nombre: 'undefined',
+			apellido1: 'undefined',
+			apellido2: 'undefined',
+			telefono: 'undefined',
+			celular: 'undefined',
+			correo: 'undefined',
+			id_profesion: 'undefined',
+			id_perfil: 'undefined'
+		}
+	});
+	CollectionUsuarios = Backbone.Collection.extend({
+		initialize: function(){
+
+		},
+		model: ModelUsuarios
+	});
+	Usuarios = new ModelUsuarios;
 }
 function SaveCurse(e){
 	if(document.querySelector("#frm-newcurse").checkValidity()){ 
@@ -128,6 +184,39 @@ function SaveCurse(e){
 		}
 	}else{
 		document.getElementById("btn-validatecurse").click();
+	}
+	e.preventDefault();
+}
+function SaveUser(e){
+	if(document.querySelector('#password').value != document.querySelector('#cpassword').value)
+	 		document.querySelector('#cpassword').setCustomValidity("Las contraseñas no coinciden");
+	 else
+	 		document.querySelector('#cpassword').setCustomValidity("");
+	if(document.querySelector("#frm-newurse").checkValidity()){ 
+		if(mode_save_to_update == 'new'){
+			$.ajax({
+				type:"POST",
+				dataType: "JSON",
+				url: base_url + "usuario/NewUser",
+				data: $('#frm-newurse').serialize() + "&id_profesion=" + Usuarios.get('id_profesion') + "&id_perfil=" + Usuarios.get('id_perfil'),
+				success: function(data){
+					if(!data.rpt){
+								for(x in data.step_msg){
+									$('#error_' + x).html(data.step_msg[x]);
+								}
+					}else{
+						$('#musuarios').modal('hide');
+						OpenMessagesModal('Guardado exitoso','El usuario se almaceno correctamente');
+						LoadViewUsuarios();
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+	}else{
+		document.getElementById("btn-validateuser").click();
 	}
 	e.preventDefault();
 }
@@ -244,7 +333,7 @@ function clear_form_elements(ele) {
                 $(this).val('');
                 break;
             case 'checkbox':
-            case 'radio':
+            case 'radio':	
                 this.checked = false;
         }
 	});

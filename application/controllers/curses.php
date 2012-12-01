@@ -32,6 +32,7 @@ class Curses extends CI_Controller {
     {
         $rpt = array();
         $this->load->library('form_validation');
+        $this->load->helper(array('form', 'url'));
         $this->form_validation->set_rules('id_teacher', '"profesor"', 'trim|required|numeric');
         $this->form_validation->set_rules('id_typecurse', '"tipo de curso"', 'trim|required|numeric');
 

@@ -40,15 +40,15 @@
   	</tbody>
   </table>
 </article>
+               
+
 <div id="mcurces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <a data-dismiss="modal" class="close">×</a>
         <h3>Nuevo Curso</h3>
      </div>
      <form id="frm-newcurse">
-        <div class="modal-body">
-
-  
+        <div class="modal-body">  
 
              <!--Docenete-->
           <div class="control-group">
