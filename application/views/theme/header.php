@@ -5,6 +5,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/kendo-css/kendo.common.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/kendo-css/kendo.default.min.css">
 
@@ -12,20 +15,23 @@
 <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-
-
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="<?php echo base_url('public/script/MathForDummies.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/edit.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/sha1.js'); ?>"></script>
+
+<script src="<?php echo base_url('public/script/json2.js'); ?>"></script>
+<script src="<?php echo base_url('public/script/underscore-1.3.1.js'); ?>"></script>
+<script src="<?php echo base_url('public/script/backbone.js'); ?>"></script>
+
+<script src="<?php echo base_url();?>public/script/kendo.web.min.js"></script>
+
 
 <title>Math For Dummies</title>
  <script src="http://code.jquery.com/jquery-latest.js"></script>
  <script src="<?php echo base_url(); ?>public/script/prefixfree.min.js"></script> 
  <script src="<?php echo base_url(); ?>public/script/modernizr.js"></script> 
-<link href="<?php echo base_url();?>public/css/style.css" rel="stylesheet" type="text/css">
 
-    <script src="<?php echo base_url();?>public/script/kendo.web.min.js"></script>
+<link href="<?php echo base_url();?>public/css/style.css" rel="stylesheet" type="text/css">
 
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

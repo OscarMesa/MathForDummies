@@ -15,51 +15,51 @@ var ccurses,cusuarios;
 
 
 
-$(document).live('ready',start);
+$(document).on('ready',start);
 
 function start(){
 
-	$('#btn-deletecurse').live('click',DeleteCurso)
+	$('#btn-deletecurse').on('click',DeleteCurso)
 
-	$('#cursos').live('click',LoadViewCursos);
+	$('#cursos').on('click',LoadViewCursos);
 
-	$('.delete_curso').live('click',OpenWindowDeleteCurse);
+	$('.delete_curso').on('click',OpenWindowDeleteCurse);
 
-	$('.edit_curso').live('click',OpenWindowCurse);
+	$('.edit_curso').on('click',OpenWindowCurse);
 
-	$('#serach-curse').live('click',SearchFilterCurse);
+	$('#serach-curse').on('click',SearchFilterCurse);
 
-	$('#usuarios').live('click', LoadViewUsuarios);
+	$('#usuarios').on('click', LoadViewUsuarios);
 
-	$('#profesiones').live('click',LoadViewProfessions);
+	$('#profesiones').on('click',LoadViewProfessions);
 
-	$('#universidades').live('click',LoadViewUniversities);
+	$('#universidades').on('click',LoadViewUniversities);
 
-	$('#tipo_cursos').live('click',LoadViewTypeCourse);
+	$('#tipo_cursos').on('click',LoadViewTypeCourse);
 
-	$('#tipo_contenidos').live('click',LoadViewTypeContenten);
+	$('#tipo_contenidos').on('click',LoadViewTypeContenten);
 
-	$('#content-img img').live('click', abrir);//login
+	$('#content-img img').on('click', abrir);//login
 
-	$('#ejercicios').live('click',LoadViewExcercices);
+	$('#ejercicios').on('click',LoadViewExcercices);
 
-	$('#ecuaciones').live('click',LoadViewEquations);
+	$('#ecuaciones').on('click',LoadViewEquations);
 
-	$('#btn-savecurse').live('click',SaveCurse);
+	$('#btn-savecurse').on('click',SaveCurse);
 
-	$('#nuevo_usuario').live('click',OpenWindowUser);
+	$('#nuevo_usuario').on('click',OpenWindowUser);
 
-	$('.edit_user').live('click',OpenWindowUser);
+	$('.edit_user').on('click',OpenWindowUser);
 
-	$('.delete_user').live('click', OpenWindowDeleteUser)
+	$('.delete_user').on('click', OpenWindowDeleteUser)
 
-	$('#btn-saveuser').live('click',SaveUser);
+	$('#btn-saveuser').on('click',SaveUser);
 
-	$('#btn-deleteurse').live('click',DeleteUser);
+	$('#btn-deleteurse').on('click',DeleteUser);
 
-	$('#frm-newcurse').live('submit',StopExecute);
+	$('#frm-newcurse').on('submit',StopExecute);
 
-	$('#serach-usuario').live('click',Search);
+	$('#serach-usuario').on('click',Search);
 
 	InitElementBackbone();
 }
