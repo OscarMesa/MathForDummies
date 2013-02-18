@@ -5,8 +5,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/kendo-css/kendo.common.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/kendo-css/kendo.default.min.css">
@@ -22,9 +22,6 @@
 <script src="<?php echo base_url('public/script/json2.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/underscore-1.3.1.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/backbone.js'); ?>"></script>
-
-<script src="<?php echo base_url();?>public/script/kendo.web.min.js"></script>
-
 
 <title>Math For Dummies</title>
  <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -46,7 +43,7 @@
     base_url = "<?php echo base_url();?>";
     server = "http://<?php echo $_SERVER['SERVER_NAME'];?>/";  
   </script>
-
+  <script src="<?php echo base_url('public/script/kendo.web.min.js'); ?>"></script>
 </head>
 
 <body>
@@ -92,9 +89,3 @@
       <div class="sb-block" id="sb-photoProfile">
         <img src="<?php echo base_url();?>public/images/perfil/default.png"/>
       </div>
-
-
-
-
-
-

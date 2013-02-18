@@ -91,6 +91,7 @@
       </div>
 </div>
 
+
 <script type="text/javascript">
  auto = $("#TypeCurcesLoad").kendoAutoComplete({
     minLength: 3,
