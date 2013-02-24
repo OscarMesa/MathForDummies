@@ -136,7 +136,7 @@
         pageSize: 10,
         transport: {
             read: {
-                url: server + "MathForDummiesModel/MethodAutocomplete.php?method=AllTechers",
+                url: base_url + "MathForDummiesModel/MethodAutocomplete.php?method=AllTechers",
                 dataType: "json",
                 type: "POST"
             },
