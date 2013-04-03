@@ -39,11 +39,11 @@
   DD_belatedPNG.fix('*');
 </script>
 <![endif]-->
+  <script src="<?php echo base_url('public/script/kendo.web.min.js'); ?>"></script>
   <script type="text/javascript">
     base_url = "<?php echo base_url();?>";
     server = "http://<?php echo $_SERVER['SERVER_NAME'];?>/";  
   </script>
-  <script src="<?php echo base_url('public/script/kendo.web.min.js'); ?>"></script>
 </head>
 
 <body>

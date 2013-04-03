@@ -27,6 +27,15 @@ class Cursos extends CI_Controller {
         echo json_encode(array("col_afetada"=>$this->cursos->DeleteCurso($this->input->post('id'))));
     }
 
+    public function LoadAllCursesFilter()
+    {
+        $name_curse = $this->input->post('filter');
+        $name_curse = $name_curse[0]['value'];
+        $this->load->model('Model_type_curse','mtypecurse');
+        $curses = $this->mtypecurse->mtypecurse->getCurses($name_curse);
+        $p = array('Id'=>'1','nombre'=>'propiedades');
+        echo json_encode($p);
+    }
 }
 
 /* End of file cursos.php */

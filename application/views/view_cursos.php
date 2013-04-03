@@ -108,7 +108,7 @@
         //Limits result set
         transport: {
             read: {
-                url: server + "MathForDummiesModel/MethodAutocomplete.php?method=AllCurses",
+                url: base_url + "cursos/LoadAllCursesFilter",
                 dataType: "json",
                 type: "POST"
             },
@@ -136,7 +136,7 @@
         pageSize: 10,
         transport: {
             read: {
-                url: base_url + "MathForDummiesModel/MethodAutocomplete.php?method=AllTechers",
+                url: server + "MathForDummiesModel/MethodAutocomplete.php?method=AllTechers",
                 dataType: "json",
                 type: "POST"
             },
