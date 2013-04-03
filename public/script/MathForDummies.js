@@ -27,39 +27,39 @@ function start(){
 
 	$('.edit_curso').on('click',OpenWindowCurse);
 
-	$('#serach-curse').on('click',SearchFilterCurse);
+	$('#serach-curse').click(SearchFilterCurse);
 
-	$('#usuarios').on('click', LoadViewUsuarios);
+	$('#usuarios').click(LoadViewUsuarios);
 
-	$('#profesiones').on('click',LoadViewProfessions);
+	$('#profesiones').click(LoadViewProfessions);
 
-	$('#universidades').on('click',LoadViewUniversities);
+	$('#universidades').click(LoadViewUniversities);
 
-	$('#tipo_cursos').on('click',LoadViewTypeCourse);
+	$('#tipo_cursos').click(LoadViewTypeCourse);
 
-	$('#tipo_contenidos').on('click',LoadViewTypeContenten);
+	$('#tipo_contenidos').click(LoadViewTypeContenten);
 
-	$('#content-img img').on('click', abrir);//login
+	$('#content-img img').click(abrir);//login
 
-	$('#ejercicios').on('click',LoadViewExcercices);
+	$('#ejercicios').click(LoadViewExcercices);
 
-	$('#ecuaciones').on('click',LoadViewEquations);
+	$('#ecuaciones').click(LoadViewEquations);
 
-	$('#btn-savecurse').on('click',SaveCurse);
+	//$('#btn-savecurse').delegate('click',SaveCurse);
 
-	$('#nuevo_usuario').on('click',OpenWindowUser);
+	$('#nuevo_usuario').click(OpenWindowUser);
 
-	$('.edit_user').on('click',OpenWindowUser);
+	$('.edit_user').click(OpenWindowUser);
 
-	$('.delete_user').on('click', OpenWindowDeleteUser)
+	$('.delete_user').click(OpenWindowDeleteUser)
 
-	$('#btn-saveuser').on('click',SaveUser);
+	$('#btn-saveuser').click(SaveUser);
 
-	$('#btn-deleteurse').on('click',DeleteUser);
+	$('#btn-deleteurse').click(DeleteUser);
 
-	$('#frm-newcurse').on('submit',StopExecute);
+	$('#frm-newcurse').click(StopExecute);
 
-	$('#serach-usuario').on('click',Search);
+	$('#serach-usuario').click(Search);
 
 	InitElementBackbone();
 }
@@ -210,28 +210,35 @@ function InitElementBackbone(){
 	});
 }
 function SaveCurse(e){
+	console.log(Curses)
 	if(document.querySelector("#frm-newcurse").checkValidity()){ 
 		if(mode_save_to_update == 'save'){
-			$.ajax({
-				type:"POST",
-				dataType: "JSON",
-				url: base_url + "curses/NewCurse",
-				data: Curses,
-				success: function(data){
-					if(!data.rpt){
-								for(x in data.step_msg){
-									$('#error_' + x).html(data.step_msg[x]);
-								}
-					}else{
-						$('#mcurces').modal('hide');
-						OpenMessagesModal('Guardado exitoso','El curso se almaceno correctamente');
-						LoadViewCursos();
+			if($.map(Curses, function(n, i) { return i; }).length==2)
+			{
+				$.ajax({
+					type:"POST",
+					dataType: "JSON",
+					url: base_url + "curses/NewCurse",
+					data: Curses,
+					success: function(data){
+						if(!data.rpt){
+									for(x in data.step_msg){
+										$('#error_' + x).html(data.step_msg[x]);
+									}
+						}else{
+							$('#mcurces').modal('hide');
+							OpenMessagesModal('Guardado exitoso','El curso se almaceno correctamente');
+							LoadViewCursos();
+							Curses = {};
+						}
+					},
+					error: function(data){
+						console.log(data);
 					}
-				},
-				error: function(data){
-					console.log(data);
-				}
-			});
+				});
+			}else{
+				alert('Se deben seleccionar datos creados.');
+			}	
 		}else{
 			$.ajax({
 				type:"POST",
@@ -313,9 +320,11 @@ function SaveUser(e){
 			});
 		}
 	}else{
+		console.log('paso');
 		document.getElementById("btn-validateuser").click();
 	}
-	e.preventDefault();
+	console.log('oe');
+	//e.preventDefault();
 }
 function OpenMessagesModal(title,body){
 	$('#message .modal-header h3').html(title);

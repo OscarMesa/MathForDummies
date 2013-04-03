@@ -29,12 +29,10 @@ class Cursos extends CI_Controller {
 
     public function LoadAllCursesFilter()
     {
-        $name_curse = $this->input->post('filter');
-        $name_curse = $name_curse[0]['value'];
+        $name_curse = $this->input->post('value');
         $this->load->model('Model_type_curse','mtypecurse');
         $curses = $this->mtypecurse->mtypecurse->getCurses($name_curse);
-        $p = array('Id'=>'1','nombre'=>'propiedades');
-        echo json_encode($p);
+        echo json_encode($curses);
     }
 }
 

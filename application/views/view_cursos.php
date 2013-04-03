@@ -1,5 +1,11 @@
 <script type="text/javascript">
+ var swTecher = false;
+ var TypeCurcesLoad = false;
   ccurses = new CollectionCurces();
+ $('#btn-savecurse').click(SaveCurse);
+ $('#Techer').focusout(function(){if($('#Techer').val()=='')return;if(!swTecher)alert('Este docente no existe.');else swTecher=false;});
+ $('#TypeCurcesLoad').focusout(function(){if($('#TypeCurcesLoad').val()=='')return;if(!TypeCurcesLoad)alert('Este curso no existe.');else TypeCurcesLoad=false;});
+ $('.edit_curso').click(function(){$('#modal').modal('show');});
 </script>
 <div class="btn-group">
   <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Usuarios</a>
@@ -18,26 +24,26 @@
 </form>
 <article id="sec-table-search">
   <table class="table table-hover" id="tbl-curses">
-  	<thead> 
-  	  	<tr>
-  	  		<th>#</th>
-  	  		<th>Docente</th>
-  	  		<th>Nombre</th>
-  	  		<th>Eliminar</th>
+    <thead> 
+        <tr>
+          <th>#</th>
+          <th>Docente</th>
+          <th>Nombre</th>
+          <th>Eliminar</th>
           <th>Editar</th>
-  	  	</tr>
-  	</thead>
-  	<tbody>
-  		<?php foreach ($cursos as $value) {    
+        </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($cursos as $value) {    
         echo "<script>
           ccurses.add([{Id:'".$value['id']."',id_type:'".$value['id_tipo_curso'].
                                                 "',name_type:'".$value['curso']."',id_tacher:'".$value['id_docente'].
                                                 "',name_tache:'".$value['docente']."'}]);
         </script>";
-  			echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['docente']."</td><td>".$value['curso']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td>   <td><a href='javascript:void(0);' class='edit_curso' id=".$value['id']."><i class='icon-edit'></i></a></td>  </tr>";
-  		}
-  		?>
-  	</tbody>
+        echo "<tr id='row_".$value['id']."'><td>".$value['id']."</td><td>".$value['docente']."</td><td>".$value['curso']."</td><td><a href='javascript:void(0);' class='delete_curso' id=".$value['id']."><i class='icon-trash'></i></a></td>   <td><a href='javascript:void(0);' class='edit_curso' id=".$value['id']."><i class='icon-edit'></i></a></td>  </tr>";
+      }
+      ?>
+    </tbody>
   </table>
 </article>
                
@@ -91,60 +97,54 @@
       </div>
 </div>
 
-
 <script type="text/javascript">
- auto = $("#TypeCurcesLoad").kendoAutoComplete({
-    minLength: 3,
-    dataTextField: "nombre",
-    dataValueField: "Id",
-  template:       '<article class="auto-TypeCurce" id="${ data.Id }">${ data.nombre }</article>',
-  select: function(e) {
-      var DataItem = this.dataItem(e.item.index());
-      Curses['id_typecurse'] = DataItem.Id;
-  },
-    dataSource: {
-        serverPaging: true,
-        pageSize: 10,
-        //Limits result set
-        transport: {
-            read: {
-                url: base_url + "cursos/LoadAllCursesFilter",
-                dataType: "json",
-                type: "POST"
-            },
-            parameterMap: function(options) {
-              console.log(options);
-                return $.extend(options, {
-                    
-                });
+var dataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: base_url + "cursos/LoadAllCursesFilter",
+            type: 'POST',
+            dataType: "JSON",
+            data: {
+                value: $("#TypeCurcesLoad").val() // sends the value of the input as the orderId
             }
         }
     }
 });
 
+ auto = $("#TypeCurcesLoad").kendoAutoComplete({
+    minLength: 3,
+    dataTextField: "nombre",
+    dataValueField: "id_tipo_curso",
+    template:       '<article class="auto-TypeCurce" id="${ data.id_tipo_curso }">${ data.nombre }</article>',
+    select: function(e) {
+        var DataItem = this.dataItem(e.item.index());
+        Curses['id_typecurse'] = DataItem.id_tipo_curso;
+        TypeCurcesLoad=true;
+    },
+    dataSource:dataSource
+});
+
  autoM = $("#Techer").kendoAutoComplete({
     minLength: 3,
     dataTextField: "nombre",
-    dataValueField: "Id",
-  template:       '<article class="auto-TypeCurce" id="${ data.Id }">${ data.nombre } &nbsp;${ data.apellido1 } &nbsp;${ data.apellido2 } </article>',
+    dataValueField: "id_usuario",
+  template:       '<article class="auto-TypeCurce" id="${ data.id_usuario }">${ data.nombre } &nbsp;${ data.apellido1 } &nbsp;${ data.apellido2 } </article>',
   select: function(e) {
       var DataItem = this.dataItem(e.item.index());
-      Curses['id_teacher'] = DataItem.Id;
+      Curses['id_teacher'] = DataItem.id_usuario;
+      swTecher=true;
   },
     dataSource: {
         serverPaging: true,
         pageSize: 10,
         transport: {
             read: {
-                url: server + "MathForDummiesModel/MethodAutocomplete.php?method=AllTechers",
+                url: base_url + "profesores/getAllTeacher",
                 dataType: "json",
                 type: "POST"
             },
             parameterMap: function(options) {
-              console.log(options);
-                return $.extend(options, {
-                    
-                });
+                return $.extend(options, {'value':$("#Techer").val()});
             }
         }
     }
