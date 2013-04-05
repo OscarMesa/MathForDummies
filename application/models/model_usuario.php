@@ -33,6 +33,16 @@ class model_usuario extends CI_Model {
             return null;
     }
 
+    /**
+    *
+    *
+    */
+    public function getUserForEmail($email)
+    {
+       $query = $this->db->query('SELECT id_usuario FROM mb_usuarios WHERE usuario=? LIMIT 1', array($email));
+       return $query;
+    }
+
     //Obtiene toda la info de usuario con
     public function obtenerInfoUsuario($idUsuario) {
         $query = $this->db->query('select * from mb_usuarios where id_usuario=? limit 1', array($idUsuario));

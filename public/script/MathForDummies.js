@@ -1,6 +1,6 @@
 var Curses = {}, Usuarios;
 var id_delete,mode_save_to_update = 'save';
-
+var Win_User;
 /**
 *	Variables backbound
 */
@@ -13,21 +13,14 @@ var CollectionCurces,CollectionUsuarios;
 
 var ccurses,cusuarios;
 
-
-
 $(document).on('ready',start);
 
 function start(){
 
-	$('#btn-deletecurse').on('click',DeleteCurso)
 
 	$('#cursos').on('click',LoadViewCursos);
 
-	$('.delete_curso').on('click',OpenWindowDeleteCurse);
-
-	$('.edit_curso').on('click',OpenWindowCurse);
-
-	$('#serach-curse').click(SearchFilterCurse);
+	$('#close-message-error').on('click',closeMessagError)
 
 	$('#usuarios').click(LoadViewUsuarios);
 
@@ -49,19 +42,34 @@ function start(){
 
 	$('#nuevo_usuario').click(OpenWindowUser);
 
-	$('.edit_user').click(OpenWindowUser);
-
-	$('.delete_user').click(OpenWindowDeleteUser)
-
-	$('#btn-saveuser').click(SaveUser);
-
 	$('#btn-deleteurse').click(DeleteUser);
 
 	$('#frm-newcurse').click(StopExecute);
 
-	$('#serach-usuario').click(Search);
-
 	InitElementBackbone();
+
+	InitElementPages();
+
+	InitFunctionNatives();
+}
+
+function InitElementPages()
+{
+	Win_Error = $("#message-error").kendoWindow({
+        actions: [ "Minimize", "Close"],
+        width: "450px",
+        modal: true,
+        draggable : false,
+        resizable: false,
+        title: "Error",
+        visible: false
+    }).data("kendoWindow");
+}
+function InitFunctionNatives()
+{
+	jQuery.fn.reset = function () {
+  		$(this).each (function() { this.reset(); });
+	}
 }
 function StopExecute(e){
 	e.preventDefault();
@@ -72,8 +80,10 @@ function OpenWindowDeleteUser(){
 	$('#message-delte-user').modal('show');
 }
 function OpenWindowUser(){
+	Usuarios = new ModelUsuarios;
+	$('.modal-body').scrollTop(0);
 	if($(this).attr('id') == 'nuevo_usuario'){
-		mode_save_to_update = 'new';
+		mode_save_to_update = 'save';
 		$('#musuarios .modal-header h3').html('Nuevo Usuario');
 	}else{
 		mode_save_to_update = 'update';
@@ -91,8 +101,8 @@ function OpenWindowUser(){
 		Usuarios.set({id_perfil:element.id_perfil});
 		$('#EmailUser').attr('disabled', 'disabled');
 		Usuarios.set({id_profesion:element.id_profesion});
+		$('#musuarios').modal('show');
 	}
-	$('#musuarios').modal('show');
 }
 function DeleteUser(e){
 	$('#message-delte-user').modal('toggle');
@@ -106,7 +116,7 @@ function DeleteUser(e){
 				$('#row_'+Usuarios.get('id_usuario')).hide('slow', function(){ $('#row_'+Usuarios.get('id_usuario')).remove(); });
 				//LoadViewCursos();
 			}else{
-				alert('Se presento un error durante la eliminación');
+				OpenMessagesErrorModal('Error','Se presento un error durante la eliminación');
 				console.log(response);
 			}
 		},
@@ -131,7 +141,7 @@ function Search(e)
 
 function SearchFilterCurse(e){
 	field = 'value-search:' + $("#input-search-curse").val();
-	if($('#input-search-curse').val()!=''){
+	//if($('#input-search-curse').val()!=''){
 		$('#sec-table-search').html('');
 		$('#sec-table-search').html(CapaLoadImages());
 		$.post(base_url + 'curses/SearchCurse', { valuesearch:$("#input-search-curse").val() },
@@ -139,7 +149,7 @@ function SearchFilterCurse(e){
 	   			$('#sec-table-search').html(data);
 	 		}
 		);
-	}
+	//}
 	e.preventDefault();
 }
 function InitElementBackbone(){
@@ -237,7 +247,7 @@ function SaveCurse(e){
 					}
 				});
 			}else{
-				alert('Se deben seleccionar datos creados.');
+				OpenMessagesErrorModal('Error','Se deben seleccionar datos creados.');
 			}	
 		}else{
 			$.ajax({
@@ -274,7 +284,7 @@ function SaveUser(e){
 	 else
 	 		document.querySelector('#cpassword').setCustomValidity("");
 	if(document.querySelector("#frm-newurse").checkValidity()){ 
-		if(mode_save_to_update == 'new')
+		if(mode_save_to_update == 'save')
 		{
 				$.ajax({
 					type:"POST",
@@ -288,7 +298,7 @@ function SaveUser(e){
 									}
 						}else{
 							$('#musuarios').modal('hide');
-							OpenMessagesModal('Guardado exitoso','El usuario se almaceno correctamente');
+ 							OpenMessagesModal('Guardado exitoso','El usuario se almaceno correctamente');
 							LoadViewUsuarios();
 						}
 					},
@@ -320,16 +330,26 @@ function SaveUser(e){
 			});
 		}
 	}else{
-		console.log('paso');
 		document.getElementById("btn-validateuser").click();
 	}
-	console.log('oe');
 	//e.preventDefault();
 }
 function OpenMessagesModal(title,body){
 	$('#message .modal-header h3').html(title);
 	$('#message .modal-body p').html(body);
 	$('#message').modal('show');
+}
+function OpenMessagesErrorModal(title,body)
+{
+	$('#message-error .modal-header h3').html(title);
+	$('#message-error .modal-body span').html(body);
+	Win_Error.center().open();
+	Win_Error.wrapper.css({position: 'fixed'});
+}
+
+function closeMessagError()
+{
+	Win_Error.close();
 }
 function LoadDataTypeCurce(e){
 	if(e.keyCode!=8 && $(this).val()!='' && $(this).val().length>2)
@@ -418,7 +438,7 @@ function DeleteCurso(e){
 				$('#row_'+id_delete).hide('slow', function(){ $('#row_'+id_delete).remove(); });
 				LoadViewCursos();
 			}else{
-				alert('Se presento un error durante la eliminación');
+				OpenMessagesErrorModal('Error','Se presento un error durante la eliminación');
 				console.log(response);
 			}
 		},
@@ -465,7 +485,7 @@ function NewCurso(){
 
 		},
 		error: function function_name (response) {
-			alert('Ocurrio un error durante la creación');
+			OpenMessagesErrorModal('Error','Ocurrio un error durante la creación');
 			console.log(response);
 		}
 	});

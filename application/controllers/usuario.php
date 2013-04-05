@@ -99,13 +99,20 @@ class usuario extends CI_Controller {
         if($this->ValidateDataUser() == false){
             $rpt['msg'] = validation_errors_array();
             $rpt['rpt'] = false;
-        }else{
-            $this->muser->saveNewUrse(array($this->input->post('NameUser'),$this->input->post('LastName1'),
-                                      $this->input->post('LastName2'),sha1($this->input->post('password')),
-                                      $this->input->post('TephoneUser'),$this->input->post('CellUser'),
-                                      $this->input->post('EmailUser'),$this->input->post('id_profesion'),
-                                      $this->input->post('id_perfil')));
-            $rpt['rpt'] = true;
+        }else{  
+            $result = $this->muser->getUserForEmail($this->input->post('EmailUser'));
+            if($result->num_rows()>0)
+            {
+                $this->muser->saveNewUrse(array($this->input->post('NameUser'),$this->input->post('LastName1'),
+                                          $this->input->post('LastName2'),sha1($this->input->post('password')),
+                                          $this->input->post('TephoneUser'),$this->input->post('CellUser'),
+                                          $this->input->post('EmailUser'),$this->input->post('id_profesion'),
+                                          $this->input->post('id_perfil')));
+                $rpt['rpt'] = true;
+            }else{
+                $rpt['msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
+                $rpt['rpt'] = false;
+            }
         }
         echo json_encode($rpt);
     }
@@ -119,11 +126,12 @@ class usuario extends CI_Controller {
             $rpt['msg'] = validation_errors_array();
             $rpt['rpt'] = false;
         }else{
-            $this->muser->saveUpdateUrse(array($this->input->post('LastName1'),$this->input->post('NameUser'),
+            $this->muser->saveUpdateUrse(array($this->input->post('NameUser'),$this->input->post('LastName1'),
                                       $this->input->post('LastName2'),sha1($this->input->post('password')),
                                       $this->input->post('TephoneUser'),$this->input->post('CellUser'),
                                       $this->input->post('EmailUser'),$this->input->post('id_profesion'),
                                       $this->input->post('id_perfil'),$this->input->post('id_user')));
+            //echo $this->db->last_query();
             $rpt['rpt'] = true;
         }
         echo json_encode($rpt);

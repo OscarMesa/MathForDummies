@@ -77,7 +77,10 @@ class Curses extends CI_Controller {
     }
     public function SearchCurse()
     {
-        $data['cursos'] = $this->cursos->SearchCurse($this->input->post('valuesearch'));
+        if($this->input->post('valuesearch') != '')
+            $data['cursos'] = $this->cursos->SearchCurse($this->input->post('valuesearch'));
+        else
+            $data['cursos'] = $this->cursos->getAllcursos();
         $data['table'] = 'cursos';
         echo $this->load->view('SearchTable',$data);
     }

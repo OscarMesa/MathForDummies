@@ -2,17 +2,17 @@
         <h2>Opciones</h2>
         <ul>
           <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
-          <li><a href="#" id="usuarios" href="javascript:void(0)">Usuarios</a></li>
-          <li><a href="#" id="profesiones">Profesiones</a></li>
-          <li><a href="#" id="universidades">Universidades</a></li>
-          <li><a href="#" id="tipo_cursos">Tipo de cursos</a></li>
-          <li><a href="#" id="tipo_contenidos">Tipo de contenidos</a></li>
-          <li><a href="#" id="ejercicios">Ejercicios</a></li>
-           <li><a href="#" id="ecuaciones">Ecuaciones</a></li>
-          <li><a href="#">Videos</a></li>
-          <li><a href="#">Video conferencia</a></li>
-          <li><a href="#">Foros</a></li>
-          <li><a href="#">Exámenes</a></li>
+          <li><a id="usuarios" href="javascript:void(0)">Usuarios</a></li>
+          <li><a href="javascript:void(0)" id="profesiones">Profesiones</a></li>
+          <li><a href="javascript:void(0)" id="universidades">Universidades</a></li>
+          <li><a href="javascript:void(0)" id="tipo_cursos">Tipo de cursos</a></li>
+          <li><a href="javascript:void(0)" id="tipo_contenidos">Tipo de contenidos</a></li>
+          <li><a href="javascript:void(0)" id="ejercicios">Ejercicios</a></li>
+          <li><a href="javascript:void(0)" id="ecuaciones">Ecuaciones</a></li>
+          <li><a href="javascript:void(0)">Videos</a></li>
+          <li><a href="javascript:void(0)">Video conferencia</a></li>
+          <li><a href="javascript:void(0)">Foros</a></li>
+          <li><a href="javascript:void(0)">Exámenes</a></li>
       </ul>
   </div>
 

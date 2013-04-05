@@ -12,8 +12,8 @@ class Model_professions extends CI_Model {
     }
 
     public function LoadProfetionAutocomplete($filter){
-    	$query = $this->db->query("SELECT * FROM Profesion WHERE descripcion LIKE '%".$filter."%'");
-    	return $query->result_array();
+    	$query = $this->db->query("SELECT id_profesion id, descripcion nombre FROM Profesion WHERE descripcion LIKE '%".$filter."%'");
+        return $query->result_array();
     }
 
 }

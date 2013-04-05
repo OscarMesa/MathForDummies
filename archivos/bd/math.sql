@@ -22,7 +22,9 @@
 
 # Dump of table contenidos
 # ------------------------------------------------------------
-
+DROP DATABASE IF EXISTS math;
+CREATE DATABASE math;
+USE math;
 DROP TABLE IF EXISTS `contenidos`;
 
 CREATE TABLE `contenidos` (
@@ -74,6 +76,7 @@ DROP TABLE IF EXISTS `cursos`;
 
 CREATE TABLE `cursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_tipo_curso` ENUM('active','inactive') NOT NULL
   `id_tipo_curso` varchar(45) DEFAULT NULL,
   `id_docente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -278,6 +281,7 @@ DROP TABLE IF EXISTS `permisos`;
 
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_permisos` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -291,6 +295,7 @@ DROP TABLE IF EXISTS `permisos_perfil`;
 
 CREATE TABLE `permisos_perfil` (
   `perfiles_id` int(11) NOT NULL,
+  `state_permisos_perfil` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `permisos_id` int(11) NOT NULL,
   PRIMARY KEY (`perfiles_id`,`permisos_id`),
   KEY `fk_perfiles_has_permisos_permisos1` (`permisos_id`),
@@ -306,6 +311,7 @@ DROP TABLE IF EXISTS `Profesion`;
 
 CREATE TABLE `Profesion` (
   `id_profesion` int(5) NOT NULL AUTO_INCREMENT,
+  `state_profesion` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `descripcion` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id_profesion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -363,6 +369,7 @@ DROP TABLE IF EXISTS `tipo_contenido`;
 
 CREATE TABLE `tipo_contenido` (
   `id_tipo_contenido` int(11) NOT NULL AUTO_INCREMENT,
+  `state_tc` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `nombre` varchar(50) DEFAULT NULL,
   `descripcion` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id_tipo_contenido`)
@@ -389,6 +396,7 @@ DROP TABLE IF EXISTS `tipo_curso`;
 
 CREATE TABLE `tipo_curso` (
   `id_tipo_curso` int(5) NOT NULL AUTO_INCREMENT,
+  `state_tp` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_tipo_curso`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -421,6 +429,7 @@ DROP TABLE IF EXISTS `universidad`;
 
 CREATE TABLE `universidad` (
   `id_universidad` int(5) NOT NULL AUTO_INCREMENT,
+  `state_universidad` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `nombre_universidad` varchar(80) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_universidad`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -454,6 +463,7 @@ DROP TABLE IF EXISTS `usuario_universidades`;
 
 CREATE TABLE `usuario_universidades` (
   `id_usuario` int(11) NOT NULL,
+  `state_uu` ENUM('active','inactive') NOT NULL DEFAULT 'active'
   `universidades_id` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`,`universidades_id`),
   KEY `fk_docentes_has_universidades_docentes1` (`id_usuario`),
@@ -469,12 +479,13 @@ DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `state_usuario` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `nombre` varchar(30) NOT NULL,
   `apellido1` varchar(30) NOT NULL,
   `apellido2` varchar(30) DEFAULT NULL,
   `contrasena` varchar(40) DEFAULT NULL,
   `telefono` int(15) NOT NULL,
-  `celular` int(15) NOT NULL,
+  `celular` varchar(20) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `id_profesion` int(11) DEFAULT NULL,
   `tipo_perfil` int(6) DEFAULT NULL,
@@ -486,11 +497,11 @@ CREATE TABLE `usuarios` (
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido1`, `apellido2`, `contrasena`, `telefono`, `celular`, `correo`, `id_profesion`, `tipo_perfil`)
+INSERT INTO `usuarios` (`id_usuario`, `state_usuario`, `nombre`, `apellido1`, `apellido2`, `contrasena`, `telefono`, `celular`, `correo`, `id_profesion`, `tipo_perfil`)
 VALUES
-  (12,'oscar1','mesa1','dadsf','40bd001563085fc35165329ea1ff5c5ecbdbbeef',2344827,2147483647,'oscarmesa.elpoli@gmail.com',1,1),
-  (13,'perez','juanito','garcia','972a76407ce2b5fbab8dc3c1bc17e60abb2cd57a',123,234,'pepito@gmail.com',30,2),
-  (15,'diana','bedoya','','40bd001563085fc35165329ea1ff5c5ecbdbbeef',234448270,2147483647,'diana123@gmail.com',36,2);
+  (12,'oscar1','active','mesa1','dadsf','40bd001563085fc35165329ea1ff5c5ecbdbbeef',2344827,2147483647,'oscarmesa.elpoli@gmail.com',1,1),
+  (13,'perez','active','juanito','garcia','972a76407ce2b5fbab8dc3c1bc17e60abb2cd57a',123,234,'pepito@gmail.com',30,2),
+  (15,'diana','active','bedoya','','40bd001563085fc35165329ea1ff5c5ecbdbbeef',234448270,2147483647,'diana123@gmail.com',36,2);
 
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;

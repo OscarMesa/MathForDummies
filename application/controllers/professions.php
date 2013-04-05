@@ -15,12 +15,8 @@ class Professions extends CI_Controller {
 
     public function LoadAutoComplete()
     {
-    	$element = $this->mprofessions->LoadProfetionAutocomplete($_POST['filter']['filters'][0]['value']);
-    	$arr = array();
-    	foreach ($element as $key => $value) {
-    		$arr[] = array('id' => $value['id_profesion'], 'nombre' =>$value['descripcion']);
-    	}
-    	echo json_encode($arr);
+    	$element = $this->mprofessions->LoadProfetionAutocomplete($this->input->post('value'));
+    	echo json_encode($element);
     }
 
     public function SearchProfession()

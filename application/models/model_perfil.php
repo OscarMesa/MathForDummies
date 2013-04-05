@@ -13,7 +13,7 @@ class Model_perfil extends CI_Model {
 
 	public function getProfileFilter($filter)
 	{
-		$query = $this->db->query('SELECT * FROM perfiles WHERE nombre LIKE "%'.$filter.'%"');
+		$query = $this->db->query('SELECT id_perfil id, nombre FROM perfiles WHERE nombre LIKE "%'.$filter.'%"');
 		return $query->result_array();
 	}
 

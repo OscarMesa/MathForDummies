@@ -3,9 +3,12 @@
  var TypeCurcesLoad = false;
   ccurses = new CollectionCurces();
  $('#btn-savecurse').click(SaveCurse);
- $('#Techer').focusout(function(){if($('#Techer').val()=='')return;if(!swTecher)alert('Este docente no existe.');else swTecher=false;});
- $('#TypeCurcesLoad').focusout(function(){if($('#TypeCurcesLoad').val()=='')return;if(!TypeCurcesLoad)alert('Este curso no existe.');else TypeCurcesLoad=false;});
- $('.edit_curso').click(function(){$('#modal').modal('show');});
+ $('#Techer').focusout(function(){if($('#Techer').val()=='' || mode_save_to_update == 'edit')return;if(!swTecher)OpenMessagesErrorModal('Error','Este docente no existe.');else swTecher=false;});
+ $('#TypeCurcesLoad').focusout(function(){if($('#TypeCurcesLoad').val()=='')return;if(!TypeCurcesLoad)OpenMessagesErrorModal('Error','Este curso no existe.');else TypeCurcesLoad=false;});
+ $('.edit_curso').click(OpenWindowCurse);
+ $('.delete_curso').click(OpenWindowDeleteCurse);
+ $('#btn-deletecurse').click(DeleteCurso);
+ $('#serach-curse').click(SearchFilterCurse);
 </script>
 <div class="btn-group">
   <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Usuarios</a>
@@ -92,8 +95,8 @@
         <p>¿Realmente desea eliminar este curso?</p>
       </div>
       <div class="modal-footer">
-        <a href="#" id="btn-deletecurse" class="btn btn-success">Aceptar</a>
-         <a href="#" data-dismiss="modal" class="btn">Cancelar</a>
+        <a href="javascript:void(0)" id="btn-deletecurse" class="btn btn-success">Aceptar</a>
+        <a href="javascript:void(0)" data-dismiss="modal" class="btn">Cancelar</a>
       </div>
 </div>
 

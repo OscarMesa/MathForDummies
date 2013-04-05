@@ -27,13 +27,8 @@ class Perfil extends CI_Controller {
         
     public function LoadAutoComplete()
 	{
-		$query = $this->mperfil->getProfileFilter($_POST['filter']['filters'][0]['value']);
-		$result = array();
-
-		foreach ($query as $value) {
-			$result[] = array('id' => $value['id_perfil'], 'nombre' => $value['nombre']);
-		}
-		echo json_encode($result);
+		$query = $this->mperfil->getProfileFilter($this->input->post('value'));
+		echo json_encode($query);
 	}
         
         

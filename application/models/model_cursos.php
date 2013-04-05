@@ -22,7 +22,7 @@ class Model_cursos extends CI_Model {
 	}
 	public function SearchCurse($SearchValue){
 		$query = $this->db->query('SELECT cu.*,u.nombre docente,tp.nombre curso FROM cursos cu INNER JOIN tipo_curso tp ON tp.id_tipo_curso = cu.id_tipo_curso
-							INNER JOIN usuarios u ON cu.id_docente = u.id_usuario AND u.tipo_perfil = "2" AND (tp.nombre LIKE "%'.$SearchValue.'%" OR u.nombre LIKE "%'.$SearchValue.'%")');
+							INNER JOIN usuarios u ON cu.id_docente = u.id_usuario AND u.tipo_perfil = "2" AND (cu.id LIKE "%'.$SearchValue.'%" OR tp.nombre LIKE "%'.$SearchValue.'%" OR u.nombre LIKE "%'.$SearchValue.'%")');
 		return $query->result_array();
 	}
 

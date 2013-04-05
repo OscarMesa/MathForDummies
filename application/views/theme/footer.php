@@ -1,6 +1,19 @@
 </section>
 <div class="clear"></div>
 </div>
+
+<div id="message-error">
+        <div class="modal-header">
+          <h3 class="text-error" >Error</h3>
+        </div>
+        <div class="modal-body">
+          <span class="label label-important">Este es el puto error.</span>
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-large" id="close-message-error" type="button">Aceptar</button>
+        </div>
+</div>  
+
 <footer id="pagefooter">
 
 <div id="footerwrap">

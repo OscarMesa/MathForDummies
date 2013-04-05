@@ -3,12 +3,21 @@
   MCRUD = new CRUD;
   MCRUD.set({controller:'usuario'});
   MCRUD.set({search:{'fieldsearch':'input-search-user','button-search':'serach-usuario','area':'ContentList','method':'SearchUsers'}});
+  $('#btn-saveuser').click(SaveUser);
+  $('.edit_user').click(OpenWindowUser);
+  $('#nuevo_usuario').click(OpenWindowUser);
+  $('.delete_user').click(OpenWindowDeleteUser);
+  $('#btn-deleteurse').click(DeleteUser);
+  $('#serach-usuario').click(Search);
+  $('#nuevo_usuario').click(function(){$('#frm-newurse').reset(); $('#frm-newurse').scrollTop();$('#EmailUser').removeAttr('disabled');});
+  $('#Profile').focusout(function(){if($('#Profile').val()=='')return;if(Usuarios.get('id_perfil') == 'undefined')OpenMessagesErrorModal('Error','Este perfil no existe.');});
+  $('#Profetion').focusout(function(){if($('#Profetion').val()=='')return;if(Usuarios.get('id_profesion') == 'undefined')OpenMessagesErrorModal('Error','Este profesion no existe.');}); 
 </script>
 <div class="btn-group">
   <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Cursos</a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
   <ul class="dropdown-menu">
-    <li><a data-toggle="modal" id="nuevo_usuario" ><i class="icon-pencil"></i> Nuevo</a></li>
+    <li><a data-toggle="modal" href="#musuarios" id="nuevo_usuario" ><i class="icon-pencil"></i> Nuevo</a></li>
   </ul>
 </div>
 <form class="form-search frm-search-math" id="frm-search-usuarios">
@@ -63,7 +72,7 @@
     </div>
     <div class="modal-body">
     <div class="row-fluid">
-        <form id="frm-newurse" style=" margin-left: 10em !important">
+  <form id="frm-newurse" style=" margin-left: 10em !important">
       <!--nombre usuario-->
       <div class="control-group">
           <label class="control-label" for="inputIcon">Nombre</label>
@@ -136,17 +145,21 @@
         <input type="submit" id="btn-validateuser" style="display:none"/>
          <!--Fin Tipo de usuario -->
     </form>
+
     </div>
     </div>
-      <div class="modal-footer">
+    <div class="modal-footer">
          <a href="#" id="btn-saveuser" class="btn btn-success">Guardar</a>
          <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
     </div>
+    </div>
   </div>
+
 <script type="text/javascript">
 
 auto = $("#Profetion").kendoAutoComplete({
-    minLength: 3,
+    minLength: 0,
+     filter: "contains",
     dataTextField: "nombre",
     dataValueField: "id",
   template:       '<article class="auto-TypeCurce" id="${ data.id }">${ data.nombre }</article>',
@@ -165,17 +178,15 @@ auto = $("#Profetion").kendoAutoComplete({
                 type: "POST"
             },
             parameterMap: function(options) {
-              console.log(options);
-                return $.extend(options, {
-                    
-                });
+                return $.extend(options, {'value':$("#Profetion").val()});
             }
         }
     }
 });
 
 auto1 = $("#Profile").kendoAutoComplete({
-    minLength: 3,
+    minLength: 0,
+    filter: "contains",
     dataTextField: "nombre",
     dataValueField: "id",
   template:       '<article class="auto-TypeCurce" id="${ data.id }">${ data.nombre }</article>',
@@ -194,10 +205,7 @@ auto1 = $("#Profile").kendoAutoComplete({
                 type: "POST"
             },
             parameterMap: function(options) {
-              console.log(options);
-                return $.extend(options, {
-                    
-                });
+                return $.extend(options, { 'value':$("#Profile").val() });
             }
         }
     }
