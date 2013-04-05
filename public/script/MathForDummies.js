@@ -7,7 +7,7 @@ var Win_User;
 
 var CRUD, MCRUD;
 
-var ModelCurces, ModelUsuarios;
+var ModelCurces, ModelUsuarios,SWindowModal=true;
 
 var CollectionCurces,CollectionUsuarios;
 
@@ -23,6 +23,26 @@ function start(){
 	$('#close-message-error').on('click',closeMessagError)
 
 	$('#usuarios').click(LoadViewUsuarios);
+
+	$(document).on('click','.edit_user',OpenWindowUser);
+
+	$(document).on('click','#btn-saveuser',SaveUser);
+    
+    $(document).on('click','#nuevo_usuario',OpenWindowUser);
+    
+    $(document).on('click','.delete_user',OpenWindowDeleteUser);
+    
+    $(document).on('click','#btn-deleteurse',DeleteUser);
+   
+    $(document).on('click','#serach-usuario',Search);
+
+    $(document).on('click','.edit_curso',OpenWindowCurse);
+
+    $(document).on('click','.delete_curso',OpenWindowDeleteCurse);
+
+    $(document).on('click','#nuevo_curso',function(){Curses={}});
+
+	$(document).on('click','#btn-deletecurse',DeleteCurso);
 
 	$('#profesiones').click(LoadViewProfessions);
 
@@ -42,8 +62,6 @@ function start(){
 
 	$('#nuevo_usuario').click(OpenWindowUser);
 
-	$('#btn-deleteurse').click(DeleteUser);
-
 	$('#frm-newcurse').click(StopExecute);
 
 	InitElementBackbone();
@@ -62,7 +80,14 @@ function InitElementPages()
         draggable : false,
         resizable: false,
         title: "Error",
-        visible: false
+        visible: false,
+        open:function(e){
+        	SWindowModal = false;
+        },
+        close: function(e)
+        {
+        	SWindowModal = true;
+        }
     }).data("kendoWindow");
 }
 function InitFunctionNatives()
@@ -80,6 +105,7 @@ function OpenWindowDeleteUser(){
 	$('#message-delte-user').modal('show');
 }
 function OpenWindowUser(){
+	console.log('hola!!');
 	Usuarios = new ModelUsuarios;
 	$('.modal-body').scrollTop(0);
 	if($(this).attr('id') == 'nuevo_usuario'){
@@ -127,7 +153,7 @@ function DeleteUser(e){
 }
 function Search(e)
 {
-	if($('#' + MCRUD.get('search').fieldsearch).val()!=''){
+	//if($('#' + MCRUD.get('search').fieldsearch).val()!=''){
 		$('#' + MCRUD.get('search').area).html('');
 		$('#' + MCRUD.get('search').area).html(CapaLoadImages());
 		$.post(base_url + MCRUD.get('controller') + '/' +MCRUD.get('search').method, { valuesearch:$("#" + MCRUD.get('search').fieldsearch).val() },
@@ -135,7 +161,7 @@ function Search(e)
 	   			$('#' + MCRUD.get('search').area).html(data);
 	 		}
 		);
-	}
+	//}
 	e.preventDefault();	
 }
 
@@ -295,6 +321,7 @@ function SaveUser(e){
 						if(!data.rpt){
 									for(x in data.step_msg){
 										$('#error_' + x).html(data.step_msg[x]);
+										$('#error_' + x).css('display','inline-block');
 									}
 						}else{
 							$('#musuarios').modal('hide');

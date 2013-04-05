@@ -3,11 +3,9 @@
  var TypeCurcesLoad = false;
   ccurses = new CollectionCurces();
  $('#btn-savecurse').click(SaveCurse);
- $('#Techer').focusout(function(){if($('#Techer').val()=='' || mode_save_to_update == 'edit')return;if(!swTecher)OpenMessagesErrorModal('Error','Este docente no existe.');else swTecher=false;});
- $('#TypeCurcesLoad').focusout(function(){if($('#TypeCurcesLoad').val()=='')return;if(!TypeCurcesLoad)OpenMessagesErrorModal('Error','Este curso no existe.');else TypeCurcesLoad=false;});
- $('.edit_curso').click(OpenWindowCurse);
- $('.delete_curso').click(OpenWindowDeleteCurse);
- $('#btn-deletecurse').click(DeleteCurso);
+ $('#Techer').focusout(function(){
+    if($('#Techer').val()=='' || mode_save_to_update == 'edit' || !SWindowModal)return;if(Curses['id_teacher'] == undefined)OpenMessagesErrorModal('Error','Este docente no existe.');});
+ $('#TypeCurcesLoad').focusout(function(){if($('#TypeCurcesLoad').val()=='' || !SWindowModal)return;console.log(Curses);if(Curses['id_typecurse'] == undefined)OpenMessagesErrorModal('Error','Este curso no existe.');});
  $('#serach-curse').click(SearchFilterCurse);
 </script>
 <div class="btn-group">
@@ -115,7 +113,8 @@ var dataSource = new kendo.data.DataSource({
 });
 
  auto = $("#TypeCurcesLoad").kendoAutoComplete({
-    minLength: 3,
+    minLength: 0,
+    filter: "contains",
     dataTextField: "nombre",
     dataValueField: "id_tipo_curso",
     template:       '<article class="auto-TypeCurce" id="${ data.id_tipo_curso }">${ data.nombre }</article>',
@@ -128,7 +127,8 @@ var dataSource = new kendo.data.DataSource({
 });
 
  autoM = $("#Techer").kendoAutoComplete({
-    minLength: 3,
+    minLength: 0,
+    filter: "contains",
     dataTextField: "nombre",
     dataValueField: "id_usuario",
   template:       '<article class="auto-TypeCurce" id="${ data.id_usuario }">${ data.nombre } &nbsp;${ data.apellido1 } &nbsp;${ data.apellido2 } </article>',

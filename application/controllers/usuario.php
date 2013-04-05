@@ -101,7 +101,7 @@ class usuario extends CI_Controller {
             $rpt['rpt'] = false;
         }else{  
             $result = $this->muser->getUserForEmail($this->input->post('EmailUser'));
-            if($result->num_rows()>0)
+            if($result->num_rows==0)
             {
                 $this->muser->saveNewUrse(array($this->input->post('NameUser'),$this->input->post('LastName1'),
                                           $this->input->post('LastName2'),sha1($this->input->post('password')),
@@ -110,7 +110,7 @@ class usuario extends CI_Controller {
                                           $this->input->post('id_perfil')));
                 $rpt['rpt'] = true;
             }else{
-                $rpt['msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
+                $rpt['step_msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
                 $rpt['rpt'] = false;
             }
         }
@@ -160,7 +160,11 @@ class usuario extends CI_Controller {
 
     public function SearchUsers()
     {
-        $data['users'] = $this->muser->SearchUser($this->input->post('valuesearch'));
+        if($this->input->post('valuesearch') != '')
+           $data['users'] = $this->muser->SearchUser($this->input->post('valuesearch'));
+        else
+            $data['users'] = $this->muser->getAllUser();
+       // echo $this->db->last_query();
         $data['table'] = 'usuarios';
         echo $this->load->view('SearchTable',$data);
     }

@@ -39,7 +39,7 @@ class model_usuario extends CI_Model {
     */
     public function getUserForEmail($email)
     {
-       $query = $this->db->query('SELECT id_usuario FROM mb_usuarios WHERE usuario=? LIMIT 1', array($email));
+       $query = $this->db->query('SELECT id_usuario FROM usuarios WHERE correo=? LIMIT 1', array($email));
        return $query;
     }
 
@@ -119,8 +119,10 @@ class model_usuario extends CI_Model {
     *   @return array
     */
     public function getAllUser(){
-        $query = $this->db->query('SELECT u.*, prf.id_perfil,prf.nombre perfil_name, p.id_profesion, p.descripcion profesion_name FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
-                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion');
+        $query = $this->db->query('SELECT u.*, prf.id_perfil,prf.nombre perfil_name, p.id_profesion, p.descripcion profesion_name FROM usuarios u 
+                            INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
+                            INNER JOIN Profesion p ON p.id_profesion = u.id_profesion
+                            WHERE u.state_usuario = "active"');
         return $query->result_array();
     }
     /**
@@ -139,14 +141,14 @@ class model_usuario extends CI_Model {
     }  
 
     public function delteUrse($id){
-        return $this->db->query("DELETE FROM usuarios WHERE id_usuario = ?", array($id));
+        return $this->db->query("UPDATE usuarios SET state_usuario = 'inactive' WHERE id_usuario = ?", array($id));
     } 
 
     public function SearchUser($filter)
     {
         $query = $this->db->query('SELECT u.*, prf.id_perfil,prf.nombre perfil_name, p.id_profesion, p.descripcion profesion_name FROM usuarios u INNER JOIN perfiles prf ON prf.id_perfil = u.tipo_perfil
-                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion AND
-                           u.nombre LIKE "%'.$filter.'%" OR u.apellido1 LIKE "%'.$filter.'%" OR u.apellido2 LIKE "%'.$filter.'%" OR u.telefono LIKE "%'.$filter.'%" OR u.celular LIKE "%'.$filter.'%" OR u.correo LIKE "%'.$filter.'%" OR prf.nombre LIKE "%'.$filter.'%" OR p.descripcion LIKE "%'.$filter.'%" GROUP BY u.id_usuario');   
+                           INNER JOIN Profesion p ON p.id_profesion = u.id_profesion 
+                           WHERE u.state_usuario = "active" AND u.nombre LIKE "%'.$filter.'%" OR u.apellido1 LIKE "%'.$filter.'%" OR u.apellido2 LIKE "%'.$filter.'%" OR u.telefono LIKE "%'.$filter.'%" OR u.celular LIKE "%'.$filter.'%" OR u.correo LIKE "%'.$filter.'%" OR prf.nombre LIKE "%'.$filter.'%" OR p.descripcion LIKE "%'.$filter.'%" GROUP BY u.id_usuario');   
         return $query->result_array();
     }
 

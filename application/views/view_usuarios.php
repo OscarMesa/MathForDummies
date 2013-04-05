@@ -3,18 +3,13 @@
   MCRUD = new CRUD;
   MCRUD.set({controller:'usuario'});
   MCRUD.set({search:{'fieldsearch':'input-search-user','button-search':'serach-usuario','area':'ContentList','method':'SearchUsers'}});
-  $('#btn-saveuser').click(SaveUser);
-  $('.edit_user').click(OpenWindowUser);
-  $('#nuevo_usuario').click(OpenWindowUser);
-  $('.delete_user').click(OpenWindowDeleteUser);
-  $('#btn-deleteurse').click(DeleteUser);
-  $('#serach-usuario').click(Search);
+
   $('#nuevo_usuario').click(function(){$('#frm-newurse').reset(); $('#frm-newurse').scrollTop();$('#EmailUser').removeAttr('disabled');});
   $('#Profile').focusout(function(){if($('#Profile').val()=='')return;if(Usuarios.get('id_perfil') == 'undefined')OpenMessagesErrorModal('Error','Este perfil no existe.');});
   $('#Profetion').focusout(function(){if($('#Profetion').val()=='')return;if(Usuarios.get('id_profesion') == 'undefined')OpenMessagesErrorModal('Error','Este profesion no existe.');}); 
 </script>
 <div class="btn-group">
-  <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Cursos</a>
+  <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Usuarios</a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
   <ul class="dropdown-menu">
     <li><a data-toggle="modal" href="#musuarios" id="nuevo_usuario" ><i class="icon-pencil"></i> Nuevo</a></li>
@@ -113,6 +108,7 @@
           <label class="control-label" for="inputIcon">Correo</label>
               <span class="add-on"><i class="icon-pencil"></i></span>
               <input type="email" class="input-xlarge" id="EmailUser" name="EmailUser" list="EmailUser" placeholder="Correo" required="required"/>
+              <span class="label label-important" id="error_EmailUser" style='display:none;margin-left:18px'></span>
         </div>
 
          <!--Profesion-->

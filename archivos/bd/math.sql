@@ -29,6 +29,7 @@ DROP TABLE IF EXISTS `contenidos`;
 
 CREATE TABLE `contenidos` (
   `id` int(11) NOT NULL,
+  `state_contenido` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `titulo` varchar(45) DEFAULT NULL,
   `texto` text,
   `observacion` text,
@@ -46,6 +47,7 @@ DROP TABLE IF EXISTS `contenidos_curso`;
 
 CREATE TABLE `contenidos_curso` (
   `cursos_id` int(11) NOT NULL,
+  `state_cu` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `contenidos_id` int(11) NOT NULL,
   PRIMARY KEY (`cursos_id`,`contenidos_id`),
   KEY `fk_cursos_has_contenidos_contenidos1` (`contenidos_id`),
@@ -61,6 +63,7 @@ DROP TABLE IF EXISTS `contenidos_ejercicio`;
 
 CREATE TABLE `contenidos_ejercicio` (
   `contenidos_id` int(11) NOT NULL,
+  `state_ce` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `ejercicios_id` int(11) NOT NULL,
   PRIMARY KEY (`contenidos_id`,`ejercicios_id`),
   KEY `fk_contenidos_has_ejercicios_ejercicios1` (`ejercicios_id`),
@@ -76,7 +79,7 @@ DROP TABLE IF EXISTS `cursos`;
 
 CREATE TABLE `cursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `state_tipo_curso` ENUM('active','inactive') NOT NULL
+  `state_curso` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `id_tipo_curso` varchar(45) DEFAULT NULL,
   `id_docente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -108,6 +111,7 @@ DROP TABLE IF EXISTS `Ecuaciones`;
 
 CREATE TABLE `Ecuaciones` (
   `id_ecuacion` int(11) NOT NULL AUTO_INCREMENT,
+  `state_ecuaciones` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `formula_matematica` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_ecuacion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -133,6 +137,7 @@ DROP TABLE IF EXISTS `ejercicios`;
 
 CREATE TABLE `ejercicios` (
   `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT,
+  `state_ejercicios` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `ejercicio` varchar(45) NOT NULL,
   `solucion` varchar(45) NOT NULL,
   `dificultada` int(3) NOT NULL COMMENT 'Esta tabla permite ingresase a una ecuación su grado de dificultad ',
@@ -160,6 +165,7 @@ DROP TABLE IF EXISTS `Ejercicios_Ecuaciones`;
 
 CREATE TABLE `Ejercicios_Ecuaciones` (
   `ejercicios_id` int(11) NOT NULL,
+  `state_ee` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `Ecuaciones_id_ecuacion` int(11) NOT NULL,
   PRIMARY KEY (`ejercicios_id`,`Ecuaciones_id_ecuacion`),
   KEY `fk_ejercicios_has_Ecuaciones_Ecuaciones1` (`Ecuaciones_id_ecuacion`),
@@ -175,6 +181,7 @@ DROP TABLE IF EXISTS `evaluaciones`;
 
 CREATE TABLE `evaluaciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_evalucaciones` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `porcentaje` float NOT NULL,
   `tiempo_limite` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -189,6 +196,7 @@ DROP TABLE IF EXISTS `evalucacion_integrante`;
 
 CREATE TABLE `evalucacion_integrante` (
   `id_evaluacion` int(11) NOT NULL,
+  `state_evalucacion_integrante` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `id_ejercicio` varchar(45) NOT NULL,
   `id_integrante_curso` varchar(45) NOT NULL,
   `tiempo_duracion` int(11) DEFAULT NULL,
@@ -208,6 +216,7 @@ DROP TABLE IF EXISTS `img_videos`;
 
 CREATE TABLE `img_videos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_img_videos` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `url` varchar(45) DEFAULT NULL,
   `nombre` text,
   `descripcion` text,
@@ -224,6 +233,7 @@ DROP TABLE IF EXISTS `img_videos_has_contenidos`;
 CREATE TABLE `img_videos_has_contenidos` (
   `img_videos_id` int(11) NOT NULL,
   `contenidos_id` int(11) NOT NULL,
+  `state_video_has_contenidos` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `contenidos_tipo_contenido_id` int(11) NOT NULL,
   PRIMARY KEY (`img_videos_id`,`contenidos_id`,`contenidos_tipo_contenido_id`),
   KEY `fk_img_videos_has_contenidos_contenidos1_idx` (`contenidos_id`,`contenidos_tipo_contenido_id`),
@@ -239,6 +249,7 @@ DROP TABLE IF EXISTS `integrantes_curso`;
 
 CREATE TABLE `integrantes_curso` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_integrantes_curso` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `cursos_id` int(11) NOT NULL,
   `id_integrante` int(11) NOT NULL,
   `fecha_registro` date NOT NULL,
@@ -257,6 +268,7 @@ DROP TABLE IF EXISTS `perfiles`;
 
 CREATE TABLE `perfiles` (
   `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
+  `state_perfiles` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `nombre` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id_perfil`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -463,7 +475,7 @@ DROP TABLE IF EXISTS `usuario_universidades`;
 
 CREATE TABLE `usuario_universidades` (
   `id_usuario` int(11) NOT NULL,
-  `state_uu` ENUM('active','inactive') NOT NULL DEFAULT 'active'
+  `state_uu` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `universidades_id` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`,`universidades_id`),
   KEY `fk_docentes_has_universidades_docentes1` (`id_usuario`),
@@ -497,11 +509,11 @@ CREATE TABLE `usuarios` (
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 
-INSERT INTO `usuarios` (`id_usuario`, `state_usuario`, `nombre`, `apellido1`, `apellido2`, `contrasena`, `telefono`, `celular`, `correo`, `id_profesion`, `tipo_perfil`)
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido1`, `apellido2`, `contrasena`, `telefono`, `celular`, `correo`, `id_profesion`, `tipo_perfil`)
 VALUES
-  (12,'oscar1','active','mesa1','dadsf','40bd001563085fc35165329ea1ff5c5ecbdbbeef',2344827,2147483647,'oscarmesa.elpoli@gmail.com',1,1),
-  (13,'perez','active','juanito','garcia','972a76407ce2b5fbab8dc3c1bc17e60abb2cd57a',123,234,'pepito@gmail.com',30,2),
-  (15,'diana','active','bedoya','','40bd001563085fc35165329ea1ff5c5ecbdbbeef',234448270,2147483647,'diana123@gmail.com',36,2);
+  (12,'oscar1','mesa1','dadsf','40bd001563085fc35165329ea1ff5c5ecbdbbeef',2344827,2147483647,'oscarmesa.elpoli@gmail.com',1,1),
+  (13,'perez','juanito','garcia','972a76407ce2b5fbab8dc3c1bc17e60abb2cd57a',123,234,'pepito@gmail.com',30,2),
+  (15,'diana','bedoya','','40bd001563085fc35165329ea1ff5c5ecbdbbeef',234448270,2147483647,'diana123@gmail.com',36,2);
 
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
