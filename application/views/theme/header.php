@@ -14,6 +14,9 @@
 
 <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-fileupload.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-fileupload.css">
 
 <script src="<?php echo base_url('public/script/MathForDummies.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/edit.js'); ?>"></script>
@@ -53,15 +56,16 @@
 		<div id='content-img'>
 			<div id='content-login'>
 				<div class='login'>
-					<form action='#' method='POST'>
-						<table>
-							<tr>
-								<td>Usuario: </td><td><input type='text' id='nombre' required /></td>
-								<td>Contraseña: </td><td><input type='password' id='clave' required /></td>
-								<td><input type='submit' value='Ingresar' /></td>
-							</tr>
-						</table>
-					</form>
+					<?php if(!$this->session->userdata('correo')):?>
+            <form class="form-inline" action='' id="frmlogin" method='POST'>
+              <input type='email' id='name' class="input-small" name='name' placeholder="Correo" required />
+              <input type='password' id='password' class="input-small" id='password' name='password' placeholder="Contraseña" required />
+              <input type='submit' value='Entrar' class="btn" id='btn-login'>
+  					  <input type='submit' id="btn-validatesession" style="display:none">
+            </form>
+          <?php else:?>
+              <button class="btn btn-large btn-block btn-primary" type="button" id='logout'>Salir</button>
+          <?php endif;?>
 				</div>
 			</div>
 			<img src='<?php echo base_url();?>public/images/iconos/abrir.png' />

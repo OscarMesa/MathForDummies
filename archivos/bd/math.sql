@@ -219,6 +219,7 @@ CREATE TABLE `img_videos` (
   `state_img_videos` ENUM('active','inactive') NOT NULL DEFAULT 'active',
   `url` varchar(45) DEFAULT NULL,
   `nombre` text,
+  `type` ENUM('img','video') NOT NULL,
   `descripcion` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

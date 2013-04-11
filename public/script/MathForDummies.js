@@ -17,7 +17,6 @@ $(document).on('ready',start);
 
 function start(){
 
-
 	$('#cursos').on('click',LoadViewCursos);
 
 	$('#close-message-error').on('click',closeMessagError)
@@ -43,6 +42,14 @@ function start(){
     $(document).on('click','#nuevo_curso',function(){Curses={}});
 
 	$(document).on('click','#btn-deletecurse',DeleteCurso);
+
+	$(document).on('click','#btn-login',ValidateLogin);
+
+	$(document).on('click','#logout',Closelogin);
+
+	$(document).on('click','#videos',LoadViewVideos);
+	
+	$(document).on('click','#btn-saveinfovideo',SaveVideo);
 
 	$('#profesiones').click(LoadViewProfessions);
 
@@ -89,12 +96,41 @@ function InitElementPages()
         	SWindowModal = true;
         }
     }).data("kendoWindow");
+
+	var cl = new CanvasLoader('loader-view-canvas');
+	cl.setColor('#332433'); // default is '#000000'
+	cl.setShape('spiral'); // default is 'oval'
+	cl.setDiameter(75); // default is 40
+	cl.show(); // Hidden by default
+	
+	// This bit is only for positioning - not necessary
+	  var loaderObj = document.getElementById("canvasLoader");
+		loaderObj.style.position = "absolute";
+		loaderObj.style["top"] = cl.getDiameter() * -0.5 + "px";
+		loaderObj.style["left"] = cl.getDiameter() * -0.5 + "px";
 }
 function InitFunctionNatives()
 {
 	jQuery.fn.reset = function () {
   		$(this).each (function() { this.reset(); });
 	}
+
+	$.fn.serializeObject = function()
+	{
+	    var o = {};
+	    var a = this.serializeArray();
+	    $.each(a, function() {
+	        if (o[this.name] !== undefined) {
+	            if (!o[this.name].push) {
+	                o[this.name] = [o[this.name]];
+	            }
+	            o[this.name].push(this.value || '');
+	        } else {
+	            o[this.name] = this.value || '';
+	        }
+	    });
+	    return o;
+	};
 }
 function StopExecute(e){
 	e.preventDefault();
@@ -178,6 +214,49 @@ function SearchFilterCurse(e){
 	//}
 	e.preventDefault();
 }
+function ValidateLogin(e)
+{
+	if(document.querySelector("#frmlogin").checkValidity())
+	{
+		console.log($('#frmlogin').serialize());
+		$.ajax({
+			type: 'POST',
+			dataType: 'JSON',
+			url: base_url + 'usuario/ValidateUser',
+			data: $('#frmlogin').serialize(),
+			success: function(data){
+				console.log(data);
+				if(data.rpt == false)
+				{	
+					OpenMessagesErrorModal('Error','Este usuario no se encuentra registrado');_
+				}else{
+					window.location.href = base_url;
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+	}else{
+		document.getElementById("btn-validatesession").click();
+	}
+	e.preventDefault();	
+}
+function Closelogin()
+{
+	$.ajax({
+		type: 'POST',
+		dataType: 'JSON',
+		url: base_url + 'usuario/logout',
+		data: 'd=undefined',
+		success: function(e)
+		{
+			console.log('ASDFSADF');
+			window.location.href = base_url;
+		},
+		error: function(e){}
+	});
+}
 function InitElementBackbone(){
 
 	/**
@@ -229,6 +308,30 @@ function InitElementBackbone(){
 
 		},
 		model: ModelUsuarios
+	});
+
+	/**
+	*	Videos
+	*/
+
+	ModelVideos = Backbone.Model.extend({
+		initialize: function(){
+			console.log("Se inicio el modelo de Videos");
+		},
+		defaults:{
+			id: 'undefined',
+			state_img_videos: 'undefined',
+			url: 'undefined',
+			nombre: 'undefined',
+			descripcion: 'undefined',
+			type: 'undefined'
+		}
+	});
+	CollectionVideos = Backbone.Collection.extend({
+		initialize: function(){
+
+		},
+		model: ModelVideos
 	});
 	Usuarios = new ModelUsuarios;
 
@@ -303,6 +406,52 @@ function SaveCurse(e){
 		document.getElementById("btn-validatecurse").click();
 	}
 	e.preventDefault();
+}
+function ResetFormVideo()
+{
+	$("#frm-video").trigger('reset');
+	$('#droparea').css('display','block');
+	$('#video-acepted').css('display','none');
+	$("#frm-video div").scrollTop(0);
+}
+function SaveVideo (e) {
+	if(document.querySelector("#frm-video").checkValidity()){ 
+		console.log(files[0]);
+		if(files != undefined){
+			oldFile = files[0];
+			format = files[0].type.split('/');
+			data = $('#frm-video').serializeObject();
+			data['server'] = select_server.val();
+			data['format'] = format[1];
+			var formData = new FormData();  
+			//we still have to use back old file
+			//since new file doesn't contains original file data
+			formData.append('filename', oldFile.name);
+			formData.append('filetype', oldFile.type);
+			formData.append('file', oldFile); 
+			formData.append('data', JSON.stringify(data)); 
+
+			
+			//submit formData using $.ajax			
+			$('#loader-view').css('display','block');
+			$.ajax({
+				url: base_url + 'videos/upload',
+				type: 'POST',
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					console.log(data);
+					$('#loader-view').css('display','none');
+					ResetFormVideo();
+				}
+			});
+		}else{
+			OpenMessagesErrorModal("Error","Debe seleccionar un video.");			
+		}
+	}else{
+		document.getElementById("btn-validateinfovideo").click();
+	}
 }
 function SaveUser(e){
 	if(document.querySelector('#password').value != document.querySelector('#cpassword').value)
@@ -413,6 +562,11 @@ function LoadViewCursos(){
 	$("#homemain").html(CapaLoadImages()).load('cursos/LoadViewCursos',null,function(data){
 		$(this).html(data);
 	});
+}
+function LoadViewVideos(){
+	$("#homemain").html(CapaLoadImages()).load('videos/LoadViewVideos',null,function(data){
+		$(this).html(data);
+	});	
 }
 function LoadViewUniversities(){
 	$("#homemain").html(CapaLoadImages()).load('university/LoadViewUniversity',null,function(data){

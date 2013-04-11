@@ -32,12 +32,35 @@ class usuario extends CI_Controller {
         echo json_encode($array);
     }
 
-    public function ValidarUsuario() {
-        $user = trim($this->input->post('user'));
-        $password = trim($this->input->post('pass'));
-        $this->load->model('model_usuario', 'usr');
+    /**
+    *   Este metodo se encarga de validar un usuario.
+    *   @author Oskar
+    *   @return Boolean
+    */
+    public function ValidateUser() {
+        $this->load->library('form_validation');
+        $this->load->helper(array('form'));
+        $this->form_validation->set_rules('name', '"correo"', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', '"contraseña"', 'trim|required');
+        if($this->form_validation->run() == false){
+            $rpt['rpt'] = false;
+        }else{
+            $query = $this->muser->ValidarSesionUsuario($this->input->post('name'),$this->input->post('password'));
+            if($query->num_rows()>0){
+                $rpt['rpt'] = true;
+                $this->session->set_userdata($query->result_array()[0]);
+            }else{
+                $rpt['rpt'] = false;
+            }
+        }
+       echo json_encode($rpt);
     }
 
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        echo json_encode(array('rpt'=>true));
+    }
     public function Existencia_Mail_User() {
         $table = trim($this->input->post('table'));
         $field = trim($this->input->post('field'));

@@ -111,7 +111,8 @@ class model_usuario extends CI_Model {
      * @return true|false si el correo es valido devolvera true, en caso contraio retorna flase 
      */
     public function ValidarSesionUsuario($mail_user, $password) {
-   
+        $query = $this->db->query('SELECT * FROM usuarios WHERE correo=? AND contrasena=SHA1(?) LIMIT 1', array($mail_user,$password));
+        return $query;
     }
     /**
     *   Este metodo retorna a todos los usuarios con su perfil y su profesion

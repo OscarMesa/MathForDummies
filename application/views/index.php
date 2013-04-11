@@ -1,6 +1,7 @@
   <div class="sb-block">
         <h2>Opciones</h2>
         <ul>
+        <?php if($this->session->userdata('correo')):?>
           <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
           <li><a id="usuarios" href="javascript:void(0)">Usuarios</a></li>
           <li><a href="javascript:void(0)" id="profesiones">Profesiones</a></li>
@@ -9,10 +10,11 @@
           <li><a href="javascript:void(0)" id="tipo_contenidos">Tipo de contenidos</a></li>
           <li><a href="javascript:void(0)" id="ejercicios">Ejercicios</a></li>
           <li><a href="javascript:void(0)" id="ecuaciones">Ecuaciones</a></li>
-          <li><a href="javascript:void(0)">Videos</a></li>
-          <li><a href="javascript:void(0)">Video conferencia</a></li>
-          <li><a href="javascript:void(0)">Foros</a></li>
           <li><a href="javascript:void(0)">Exámenes</a></li>
+        <?php endif; ?>
+          <li><a href="javascript:void(0)" id="videos">Videos</a></li>
+          <li><a href="javascript:void(0)" id="">Video conferencia</a></li>
+          <li><a href="javascript:void(0)">Foros</a></li>
       </ul>
   </div>
 
@@ -24,9 +26,6 @@
 </div>
 </section>
 </section>
-
-
-
 
 
 

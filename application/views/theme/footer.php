@@ -72,16 +72,28 @@ crecimiento y demanda en la industria delInternet y desarrollo de sistemas compu
       </div>
 </div>
 
+<div id="loader-view">
+  <article id='loader-view-canvas'>
+  
+  </article>
+</div>
+
     <script src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js'); ?>"></script>
+
+    <script src="<?php echo base_url('public/script/bootstrap-select.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/script/bootstrap-select.js'); ?>"></script>
+
     <script src="<?php echo base_url('public/script/underscore-1.3.1.js'); ?>"></script>
     <script src="<?php echo base_url('public/script/json2.js'); ?>"></script>
     <script src="<?php echo base_url('public/script/backbone.js'); ?>"></script>
 
-    <script type="text/javascript">
-         
 
-  
-    </script>
+    <script src="<?php echo base_url('public/script/bootstrap-select.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/script/bootstrap-select.js'); ?>"></script>
 
+    <script src="<?php echo base_url('public/bootstrap/js/file/bootstrap-fileupload.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/bootstrap/js/file/bootstrap-fileupload.js'); ?>"></script>
+
+    <script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
 </body>
 </html>
