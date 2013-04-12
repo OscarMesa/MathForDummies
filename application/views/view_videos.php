@@ -14,7 +14,19 @@
   </div>
 </form>
 <section id='sec-videos'>
-	<article class='art-video'>
+	<video id="youtube1" width="640" height="360">
+    	<source src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" >
+	</video>
+	<?php
+	print_r($videos);
+		foreach ($videos->result_array() as $row) {
+			if(strpos('youtube',$row['url']))
+			{
+				echo '<iframe type="text/html" width="640" height="385" src="'.$row['url'].'" frameborder="0"></iframe>'  
+			}
+		}
+	?>
+	<!--<article class='art-video'>
 		<p><b>Titulo: </b></p>
 		<article>
 			<a href='javascript:void(0)'><img src="<?php echo base_url(); ?>public/images/reproductor2.png" /></a>
@@ -28,7 +40,7 @@
 			<a href='javascript:void(0)'><img src="<?php echo base_url(); ?>public/images/reproductor3.png" /></a>
 		</article>
 		<p><b>Descripcion: </b></p>
-	</article>
+	</article> -->
 </section>
 
 <div id="mvideos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

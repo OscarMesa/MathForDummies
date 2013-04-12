@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Model_video extends CI_Model
+class Model_videos extends CI_Model
 {
 	public function __construct()
 	{
@@ -19,5 +19,14 @@ class Model_video extends CI_Model
 		return $r;
 	}
 
+	/**
+	*	Este metodo se encarga de cargar todos los videos almacenados en la base de datos.
+	*	@author oskar
+	*/
+	public function getAllVideos()
+	{
+		$result = $this->db->query("SELECT * FROM img_videos WHERE type = 'video'");
+		return $result;
+	}
 
 }

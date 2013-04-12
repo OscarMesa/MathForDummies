@@ -217,7 +217,7 @@ DROP TABLE IF EXISTS `img_videos`;
 CREATE TABLE `img_videos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_img_videos` ENUM('active','inactive') NOT NULL DEFAULT 'active',
-  `url` varchar(45) DEFAULT NULL,
+  `url` varchar(100) DEFAULT NULL,
   `nombre` text,
   `type` ENUM('img','video') NOT NULL,
   `descripcion` text,

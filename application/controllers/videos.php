@@ -16,7 +16,7 @@
 
 		public function LoadViewVideos()
 		{
-			$data=  array();
+			$data['videos'] = $this->mvideos->getAllVideos();
 			$this->load->view('view_videos', $data);
 		}
 		
@@ -24,7 +24,7 @@
 		public function upload()
 		{
 			$data = json_decode($this->input->post('data'));
-			$rpt = array('rpt'=>true,'msg'=>array());
+			$rpt = array('rpt'=>true,'msg'=>array('El video subio correctamente.'));
 			$filename = $this->com_create_guid1().'.'.$data->format;
 			if($data->server == 'youtube')
 			{
@@ -42,18 +42,19 @@
 				else
 				  {
 					  flush();
-					  $filename = $_FILES["file"]["name"];
+					  $filename = $filename;
 					  $fullFilePath = $_FILES['file']['tmp_name'];
-					  $title =$_FILES["file"]["name"];
-					  $description = $_FILES["file"]["name"];
+					  $title =$data->title;
+					  $description = $data->description;
 					  $result = $obj->uploadVideo($filename,$fullFilePath,$title,$description);
-				  	  print_r($result);	
+					  $this->mvideos->insert_video(array($result['webSite'].'watch?v='.$result['videoId'],$data->title,'video',$data->description));
 				  }
 			}else {
 				move_uploaded_file($_FILES["file"]["tmp_name"], "upload/".$filename);
 				chmod("upload/".$filename, 0777);
-				$this->mvideos->insert_video(array(base_url()."upload/".$filename,$data->title,'video',descripcion
-			}			
+				$this->mvideos->insert_video(array(base_url()."upload/".$filename,$data->title,'video',$data->description));
+			}	
+			echo json_encode($rpt);
 		}
 
 		public function com_create_guid1() 
