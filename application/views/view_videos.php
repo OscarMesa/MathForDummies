@@ -1,3 +1,11 @@
+<script type="text/javascript">
+  cusuarios = new CollectionUsuarios;
+  MCRUD = new CRUD;
+  MCRUD.set({controller:'videos'});
+  MCRUD.set({search:{'fieldsearch':'input-search-video','button-search':'serach-video','area':'sec-videos','method':'SearchVideo'}});
+
+</script>
+
 <div class="btn-group">
   <a class="btn btn-primary" href="#"><i class="icon-folder-open icon-white"></i> Videos</a>
   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
@@ -9,38 +17,61 @@
 
 <form class="form-search frm-search-math" id="frm-search-video">
   <div class="input-append">
-    <input type="text" class="span2 search-query" id="input-search-curse" placeholder="Buscar video">
-    <button type="submit" id="serach-curse" class="btn">Buscar</button>
+    <input type="text" class="span2 search-query" id="input-search-video" placeholder="Buscar video">
+    <button type="submit" id="serach-video" class="btn">Buscar</button>
   </div>
 </form>
 <section id='sec-videos'>
-	<video id="youtube1" width="640" height="360">
-    	<source src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" >
-	</video>
-	<?php
-	print_r($videos);
-		foreach ($videos->result_array() as $row) {
-			if(strpos('youtube',$row['url']))
-			{
-				echo '<iframe type="text/html" width="640" height="385" src="'.$row['url'].'" frameborder="0"></iframe>'  
-			}
-		}
-	?>
-	<!--<article class='art-video'>
-		<p><b>Titulo: </b></p>
-		<article>
-			<a href='javascript:void(0)'><img src="<?php echo base_url(); ?>public/images/reproductor2.png" /></a>
-		</article>
-		<p><b>Descripcion: </b></p>
-	</article>
 
-	<article class='art-video'>
-		<p><b>Titulo: </b></p>
-		<article>
-			<a href='javascript:void(0)'><img src="<?php echo base_url(); ?>public/images/reproductor3.png" /></a>
-		</article>
-		<p><b>Descripcion: </b></p>
-	</article> -->
+	<?php
+	//print_r($videos->result_array());
+	$videos = $videos->result_array();
+		foreach ($videos as $row) {
+			echo "<article class='art-video'>
+					<p><b>Titulo: ".$row['nombre']." </b></p>
+					<article>
+						<a href='javascript:void(0)'><img src='".base_url()."public/images/".(strpos($row['url'],'youtube')?"reproductor2.png":"reproductor3.png")."'/></a>
+					</article>
+					<p><b>Descripcion: ".$row['descripcion']."</b></p>";
+			if(strpos($row['url'],'youtube'))
+			{
+				echo '<article class="videor" style="display:none"><iframe width="500" height="320" src="'.$row['url'].'" frameborder="0"></iframe></article>';  
+			}else{
+				echo '<article class="videor" style="display:none"><video controls width="500" height="320" controls>
+							<source src="'.$row['url'].'.mp4" type="video/mp4" />
+							<source src="'.$row['url'].'.ogv" type="video/ogg" />
+							<source src="'.$row['url'].'.webm" type="video/webm"/>
+							Este video no es soportado por el navegado. Descargalo <a href="'.$row['url'].'.webm">aqui</a>.
+						</video></article>';
+			}
+			echo "</article>";
+		}
+	?> 
+	<article id="win-view-video"><div id='win-view-video-content'></div></article>
+<script>
+  	$(".art-video article").hover(ChangeHover,RestartHover);
+    windowVideo = $("#win-view-video").kendoWindow({
+        actions: [ "Minimize", "Close"],
+        width: "500",
+        height: "320",
+        modal: true,
+        draggable : false,
+        resizable: false,
+        title: "Video",
+        visible: false,
+        open:function(e){
+        	//this.wrapper.css({ top: 100 });
+        },
+        close: function(e){
+        	$("video").each(function () { this.pause() });
+        	$("iframe").each(function() { 
+			    src = $(this).attr('src');
+			    $(this).attr('src','');
+			    $(this).attr('src',src);
+			});
+        }
+    });
+</script>
 </section>
 
 <div id="mvideos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -17,7 +17,8 @@ class index extends CI_Controller {
     }
 
     public function index() {  
-    		$data['prueba'] = 'hola diego';
+    		$this->load->model('model_videos','mvideos');
+    		$data['videos'] = $this->mvideos->getAllVideos();
             $this->plantilla->Render('index',$data);  
     }
 

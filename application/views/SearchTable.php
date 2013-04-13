@@ -103,3 +103,31 @@
         </tbody>
     </table>    
 <?php endif; ?>
+<?php if($table == 'videos'):?>
+
+    <?php
+        foreach ($videos as $row) {
+            echo "<article class='art-video'>
+                    <p><b>Titulo: ".$row['nombre']." </b></p>
+                    <article>
+                        <a href='javascript:void(0)'><img src='".base_url()."public/images/".(strpos($row['url'],'youtube')?"reproductor2.png":"reproductor3.png")."'/></a>
+                    </article>
+                    <p><b>Descripcion: ".$row['descripcion']."</b></p>";
+            if(strpos($row['url'],'youtube'))
+            {
+                echo '<article class="videor" style="display:none"><iframe width="500" height="320" src="'.$row['url'].'" frameborder="0"></iframe></article>';  
+            }else{
+                echo '<article class="videor" style="display:none"><video controls width="500" height="320" controls>
+                            <source src="'.$row['url'].'.mp4" type="video/mp4" />
+                            <source src="'.$row['url'].'.ogv" type="video/ogg" />
+                            <source src="'.$row['url'].'.webm" type="video/webm"/>
+                            Este video no es soportado por el navegado. Descargalo <a href="'.$row['url'].'.webm">aqui</a>.
+                        </video></article>';
+            }
+            echo "</article>";
+        }
+    ?>
+    <script>
+        $(".art-video article").hover(ChangeHover,RestartHover);
+    </script>
+<?php endif; ?>

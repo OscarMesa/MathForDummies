@@ -31,7 +31,11 @@
  <script src="<?php echo base_url(); ?>public/script/prefixfree.min.js"></script> 
  <script src="<?php echo base_url(); ?>public/script/modernizr.js"></script> 
 
+<script type="text/javascript" src="<?php echo base_url(); ?>public/script/slider/jquery.roundabout.js"></script>
+
+
 <link href="<?php echo base_url();?>public/css/style.css" rel="stylesheet" type="text/css">
+
 
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -53,19 +57,9 @@
 <div id="wrap">
 <section id="left">
   <header id="mainheader">
-		<div id='content-img'>
+    <div id='<?php echo $this->session->userdata('correo')?'content-img-logut':'content-img'; ?>'>
 			<div id='content-login'>
 				<div class='login'>
-					<?php if(!$this->session->userdata('correo')):?>
-            <form class="form-inline" action='' id="frmlogin" method='POST'>
-              <input type='email' id='name' class="input-small" name='name' placeholder="Correo" required />
-              <input type='password' id='password' class="input-small" id='password' name='password' placeholder="Contraseña" required />
-              <input type='submit' value='Entrar' class="btn" id='btn-login'>
-  					  <input type='submit' id="btn-validatesession" style="display:none">
-            </form>
-          <?php else:?>
-              <button class="btn btn-large btn-block btn-primary" type="button" id='logout'>Salir</button>
-          <?php endif;?>
 				</div>
 			</div>
 			<img src='<?php echo base_url();?>public/images/iconos/abrir.png' />

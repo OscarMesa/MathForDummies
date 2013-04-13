@@ -28,6 +28,26 @@ class Model_cursos extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getCursesAvailableToTechear($data_array)
+	{
+		$query = $this->db->query('SELECT cu.*,tp.nombre nombre_curso FROM cursos cu 
+									INNER JOIN tipo_curso tp ON tp.id_tipo_curso = cu.id_tipo_curso
+									INNER JOIN usuarios u ON cu.id_docente = u.id_usuario 
+									AND cu.state_curso="active" AND u.correo=? AND u.tipo_perfil="2"',$data_array);
+		return $query->result_array();
+			
+	}
+
+	public function getCursesAvailableToStudent($data_array)
+	{
+		$query = $this->db->query('SELECT c.*,tp.nombre nombre_curso FROM integrantes_curso ic 
+									INNER JOIN usuarios u ON ic.id_integrante = u.id_usuario
+									INNER JOIN curso c ON c.id = ic.cursos_id
+									INNER JOIN tipo_curso tp ON c.id_tipo_curso = tp.id_tipo_curso
+									WHERE AND c.state_curso="active" AND u.correo=? AND u.tipo_perfil="1"',$data_array);
+		return $query->result_array();
+	}
+
 }
 
 /* End of file model_cursos.php */

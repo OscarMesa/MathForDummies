@@ -14,6 +14,13 @@
 			
 		}
 
+		public function SearchVideo()
+		{
+			$data['videos'] = $this->mvideos->SearchVideo($this->input->post('valuesearch'));
+			$data['table'] = 'videos';
+			echo $this->load->view('SearchTable',$data);
+		}
+
 		public function LoadViewVideos()
 		{
 			$data['videos'] = $this->mvideos->getAllVideos();
@@ -25,7 +32,8 @@
 		{
 			$data = json_decode($this->input->post('data'));
 			$rpt = array('rpt'=>true,'msg'=>array('El video subio correctamente.'));
-			$filename = $this->com_create_guid1().'.'.$data->format;
+			$name = $this->com_create_guid1();
+			$filename = $name.'.'.$data->format;
 			if($data->server == 'youtube')
 			{
 				$this->load->library('ClassYouTubeAPI');
@@ -47,12 +55,13 @@
 					  $title =$data->title;
 					  $description = $data->description;
 					  $result = $obj->uploadVideo($filename,$fullFilePath,$title,$description);
-					  $this->mvideos->insert_video(array($result['webSite'].'watch?v='.$result['videoId'],$data->title,'video',$data->description));
+					  $this->mvideos->insert_video(array($result['webSite'].'embed/'.$result['videoId'],$data->title,'video',$data->description));
 				  }
 			}else {
 				move_uploaded_file($_FILES["file"]["tmp_name"], "upload/".$filename);
 				chmod("upload/".$filename, 0777);
-				$this->mvideos->insert_video(array(base_url()."upload/".$filename,$data->title,'video',$data->description));
+				$this->mvideos->insert_video(array(base_url()."upload/".$name,$data->title,'video',$data->description));
+				shell_exec('nohup php /opt/lampp/htdocs/MathForDummies/upload/CloneVideo.php '.$data->format.' '.$filename.' '.$name.' > /dev/null &');
 			}	
 			echo json_encode($rpt);
 		}

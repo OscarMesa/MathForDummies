@@ -8,6 +8,22 @@ class Curses extends CI_Controller {
         $this->load->model('Model_type_curse','tcurses');
         $this->load->model('Model_cursos', 'cursos');
     }
+
+    /**
+    *   Este metodo se encarga de cargar los curosos que tiene disponibles un alumno o docente.
+    *   @author oskar
+    */
+    public function InitCurseAvailable()
+    {
+        //Si el id del perfil es de un docente
+        if($this->session->userdata('tipo_perfil') == 2)
+        {
+            $data['cursos'] = $this->cursos->getCursesAvailableToTechear(array($this->session->userdata('correo')));
+        }else{
+            $data['cursos'] = $this->cursos->getCursesAvailableToStudent(array($this->session->userdata('correo'))); 
+        }
+        echo $this->load->view('view_CurseAvailable',$data);
+    }
     /**
     *	Este metodo retorna todos tipos de cuersos con los cuales cuenta la plataforma
     *	@author Oskar

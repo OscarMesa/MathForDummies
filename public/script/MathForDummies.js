@@ -1,13 +1,13 @@
 var Curses = {}, Usuarios;
 var id_delete,mode_save_to_update = 'save';
-var Win_User;
+var Win_User,win_login;
 /**
 *	Variables backbound
 */
 
 var CRUD, MCRUD;
 
-var ModelCurces, ModelUsuarios,SWindowModal=true;
+var ModelCurces, ModelUsuarios,ModelVideos,SWindowModal=true;
 
 var CollectionCurces,CollectionUsuarios;
 
@@ -23,6 +23,7 @@ function start(){
 
 	$('#usuarios').click(LoadViewUsuarios);
 
+
 	$(document).on('click','.edit_user',OpenWindowUser);
 
 	$(document).on('click','#btn-saveuser',SaveUser);
@@ -34,6 +35,8 @@ function start(){
     $(document).on('click','#btn-deleteurse',DeleteUser);
    
     $(document).on('click','#serach-usuario',Search);
+    
+    $(document).on('click','#serach-video',Search);
 
     $(document).on('click','.edit_curso',OpenWindowCurse);
 
@@ -45,11 +48,15 @@ function start(){
 
 	$(document).on('click','#btn-login',ValidateLogin);
 
-	$(document).on('click','#logout',Closelogin);
+	$(document).on('click','#content-img-logut',Closelogin);
 
 	$(document).on('click','#videos',LoadViewVideos);
 	
 	$(document).on('click','#btn-saveinfovideo',SaveVideo);
+	
+	$(document).on('click','#init-curse',LoadInitCurse);
+
+	$(document).on('click','#islt-curso',LoadInitCurse);
 
 	$('#profesiones').click(LoadViewProfessions);
 
@@ -77,9 +84,28 @@ function start(){
 
 	InitFunctionNatives();
 }
+function ChangeHover(e){$(this).css('padding','5px');}
+
+function RestartHover(e){$(this).css('padding','0px');}
+
+$(document).on('click','.art-video article',OpenWindowWindowVideo);
+function OpenWindowWindowVideo(){windowVideo.data("kendoWindow").content($(this).parent().children('.videor').html());windowVideo.data("kendoWindow").center().open();}
 
 function InitElementPages()
 {
+	win_login = $("#view-login").kendoWindow({
+        actions: [ "Minimize", "Close"],
+        modal: true,
+        draggable : false,
+        resizable: false,
+        title: "Iniciar Sesion",
+        visible: false,
+        open:function(e){
+        },
+        close: function(e)
+        {
+        }
+    }).data("kendoWindow");
 	Win_Error = $("#message-error").kendoWindow({
         actions: [ "Minimize", "Close"],
         width: "450px",
@@ -108,6 +134,9 @@ function InitElementPages()
 		loaderObj.style.position = "absolute";
 		loaderObj.style["top"] = cl.getDiameter() * -0.5 + "px";
 		loaderObj.style["left"] = cl.getDiameter() * -0.5 + "px";
+
+		$('#slide-videos').roundabout();
+		$('#slide-videos').css('display','inline-block');
 }
 function InitFunctionNatives()
 {
@@ -216,6 +245,7 @@ function SearchFilterCurse(e){
 }
 function ValidateLogin(e)
 {
+	console.log('llego');
 	if(document.querySelector("#frmlogin").checkValidity())
 	{
 		console.log($('#frmlogin').serialize());
@@ -230,6 +260,7 @@ function ValidateLogin(e)
 				{	
 					OpenMessagesErrorModal('Error','Este usuario no se encuentra registrado');_
 				}else{
+					win_login.close();
 					window.location.href = base_url;
 				}
 			},
@@ -430,20 +461,28 @@ function SaveVideo (e) {
 			formData.append('filetype', oldFile.type);
 			formData.append('file', oldFile); 
 			formData.append('data', JSON.stringify(data)); 
-
 			
 			//submit formData using $.ajax			
+			$('#mvideos').modal('hide');
 			$('#loader-view').css('display','block');
 			$.ajax({
 				url: base_url + 'videos/upload',
+				dataType: 'JSON',
 				type: 'POST',
 				data: formData,
 				processData: false,
 				contentType: false,
 				success: function(data) {
 					console.log(data);
+					if(data.rpt){
+						$('#loader-view').css('display','none');
+						ResetFormVideo();
+						LoadViewVideos();
+					}else{
+						$('#mvideos').modal('show');
+						OpenMessagesErrorModal('Error',data.msg);
+					}	
 					$('#loader-view').css('display','none');
-					ResetFormVideo();
 				}
 			});
 		}else{
@@ -520,7 +559,7 @@ function OpenMessagesErrorModal(title,body)
 	$('#message-error .modal-header h3').html(title);
 	$('#message-error .modal-body span').html(body);
 	Win_Error.center().open();
-	Win_Error.wrapper.css({position: 'fixed'});
+	Win_Error.wrapper.css({position: 'fixed',top:'25%',left:'30%'});
 }
 
 function closeMessagError()
@@ -548,6 +587,9 @@ function LoadDataTypeCurce(e){
 			} 
 		});
 	}	
+}
+function LoadInitCurse(){
+	$("#homemain").html(CapaLoadImages()).load('curses/InitCurseAvailable');
 }
 function LoadViewEquations(){
 	$("#homemain").html(CapaLoadImages()).load('equations/getAllEcuations');
@@ -674,14 +716,5 @@ function NewCurso(){
 
 //Diego
 function abrir(){
-	var alto=50;
-	if($("#content-img #content-login").height() == 50){
-		alto=0; 
-		$(this).css("background","url("+base_url+"public/images/iconos/abrir.png) no-repeat center");
-	}else{
-		$(this).css("background","url("+base_url+"public/images/iconos/abajo.png) no-repeat center");
-	}
-	$("#content-img #content-login").animate({
-		height:alto+"px"
-	});
+	win_login.center().open();
 }
