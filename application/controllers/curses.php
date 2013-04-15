@@ -9,6 +9,11 @@ class Curses extends CI_Controller {
         $this->load->model('Model_cursos', 'cursos');
     }
 
+    public function InitCurse()
+    {
+        $data = $_POST;
+        echo $this->load->view('view_StartCurso',$data);
+    }
     /**
     *   Este metodo se encarga de cargar los curosos que tiene disponibles un alumno o docente.
     *   @author oskar

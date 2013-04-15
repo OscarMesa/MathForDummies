@@ -480,5 +480,11 @@ input[type=checkbox]:checked + label {
     color:#72985a;
     text-decoration:none;
 }
-
+#chat{
+    border: medium solid;
+    display: inline-block;
+    height: 75%;
+    padding: 36em 0 0 6em;
+    width: 20%;
+}
 

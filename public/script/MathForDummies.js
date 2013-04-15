@@ -56,7 +56,7 @@ function start(){
 	
 	$(document).on('click','#init-curse',LoadInitCurse);
 
-	$(document).on('click','#islt-curso',LoadInitCurse);
+	$(document).on('click','.slt-curso',LoadCurse);
 
 	$('#profesiones').click(LoadViewProfessions);
 
@@ -587,6 +587,9 @@ function LoadDataTypeCurce(e){
 			} 
 		});
 	}	
+}
+function LoadCurse(e) {
+	$("#homemain").html(CapaLoadImages()).load('curses/InitCurse',{id_tp_curso:($(this).children('a').attr('id_tp_curso')),id_curso:$(this).children('a').attr('id_curso'),name: $(this).children('a').html()});
 }
 function LoadInitCurse(){
 	$("#homemain").html(CapaLoadImages()).load('curses/InitCurseAvailable');

@@ -2,7 +2,7 @@
   cusuarios = new CollectionUsuarios;
   MCRUD = new CRUD;
   MCRUD.set({controller:'usuario'});
-  MCRUD.set({search:{'fieldsearch':'input-search-user','button-search':'serach-usuario','area':'ContentList','method':'SearchVideo'}});
+  MCRUD.set({search:{'fieldsearch':'input-search-user','button-search':'serach-usuario','area':'ContentList','method':'SearchUsers'}});
 
   $('#nuevo_usuario').click(function(){$('#frm-newurse').reset(); $('#frm-newurse').scrollTop();$('#EmailUser').removeAttr('disabled');});
   $('#Profile').focusout(function(){if($('#Profile').val()=='')return;if(Usuarios.get('id_perfil') == 'undefined')OpenMessagesErrorModal('Error','Este perfil no existe.');});
