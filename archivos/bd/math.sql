@@ -23,7 +23,7 @@
 # Dump of table contenidos
 # ------------------------------------------------------------
 DROP DATABASE IF EXISTS math;
-CREATE DATABASE math;
+-- CREATE DATABASE math;
 USE math;
 DROP TABLE IF EXISTS `contenidos`;
 
