@@ -4,28 +4,31 @@
 
         <?php if($this->session->userdata('correo')):?>
         <?php if($this->session->userdata('tipo_perfil') == 3):?>
-          <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
+          
           <li><a id="usuarios" href="javascript:void(0)">Usuarios</a></li>
           <li><a href="javascript:void(0)" id="profesiones">Profesiones</a></li>
-          <li><a href="javascript:void(0)" id="universidades">Universidades</a></li>
+         <li><a href="javascript:void(0)" id="universidades">Universidades</a></li>
+
+        <?php endif; ?>
+            <?php if($this->session->userdata('tipo_perfil') == 2 || $this->session->userdata('tipo_perfil') == 1)  :?>
+              
+ 
+          
           <li><a href="javascript:void(0)" id="tipo_cursos">Tipo de cursos</a></li>
           <li><a href="javascript:void(0)" id="tipo_contenidos">Tipo de contenidos</a></li>
           <li><a href="javascript:void(0)" id="videos">Videos</a></li>
-          <li><a href="javascript:void(0)" id="ejercicios">Ejercicios</a></li>
-          <li><a href="javascript:void(0)" id="ecuaciones">Ecuaciones</a></li>
-          <li><a href="javascript:void(0)">Exámenes</a></li>
-          <li><a href="javascript:void(0)" id="">Video conferencia</a></li>
-          <li><a href="javascript:void(0)">Foros</a></li>
-        <?php endif; ?>
-            <?php if($this->session->userdata('tipo_perfil') == 2 || $this->session->userdata('tipo_perfil') == 1)  :?>
+          
+  
               <li><a href="javascript:void(0)" id="ejercicios">Ejercicios</a></li>
               <li><a href="javascript:void(0)" id="ecuaciones">Ecuaciones</a></li>
-              <li><a href="javascript:void(0)">Exámenes</a></li>
+              
               <li><a href="javascript:void(0)" id="">Video conferencia</a></li>
               <li><a href="javascript:void(0)">Foros</a></li>
               <li><a href="javascript:void(0)" id="init-curse">Entrar a curso</a></li>
             <?php endif; ?>
             <?php if($this->session->userdata('tipo_perfil') == 2):?>
+              <li><a id="cursos" href="javascript:void(0)">Cursos</a></li>
+              <li><a href="javascript:void(0)">Exámenes</a></li>
               <li><a href="javascript:void(0)">Califica Examenes</a></li>
             <?php endif; ?>
         <?php endif; ?>
@@ -217,11 +220,11 @@ los numeradores y se deja el denominador común.<a href="#">Leer mas</a></p>
 <div class="clear"></div>
 </section> -->
 
-<article class="pfitem">
+<!-- <article class="pfitem">
 <div class="pfthumb"></div>
 <div class="pfdetails">
-<h3><span class="sitename">Videos</span>
-Fracciones, suma, multiplicación, Division, Sistemas Numericos
+<h3><span class="sitename">Videos</span> 
+Fracciones, suma, multiplicación, Division, Sistemas Numericos-->
 
 </h3>
 </div>

@@ -26,8 +26,12 @@
 	<?php
 	//print_r($videos->result_array());
 	$videos = $videos->result_array();
+	$i=0;
+	$useragent = $_SERVER['HTTP_USER_AGENT'];
+	$isFirefox = false;
+	if(preg_match('|Firefox/([0-9\.]+)|',$useragent,$matched))$isFirefox = true;
 		foreach ($videos as $row) {
-			echo "<article class='art-video'>
+			echo "<article ".(!$isFirefox?"class='art-video'":"class='art-video-b'")." video='mvideos".$i."'>
 					<p><b>Titulo: ".$row['nombre']." </b></p>
 					<article>
 						<a href='javascript:void(0)'><img src='".base_url()."public/images/".(strpos($row['url'],'youtube')?"reproductor2.png":"reproductor3.png")."'/></a>
@@ -35,7 +39,19 @@
 					<p><b>Descripcion: ".$row['descripcion']."</b></p>";
 			if(strpos($row['url'],'youtube'))
 			{
-				echo '<article class="videor" style="display:none"><iframe width="500" height="320" src="'.$row['url'].'" frameborder="0"></iframe></article>';  
+				if(!$isFirefox){
+					echo '<article class="videor" style="display:none"><iframe width="500" height="320" src="'.$row['url'].'" frameborder="0"></iframe></article>';  
+				}else {
+					echo ' 
+						<div id="mvideos'.$i.'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+					        <a data-dismiss="modal" class="close">×</a>
+					        <h3>'.$row['nombre'].'</h3>
+					     </div><div style="text-align:center"><iframe  width="500" height="320" src="'.$row['url'].'" frameborder="0"></iframe></div>
+					  	<p><b>Descripcion: '.$row["descripcion"].'</b></p>
+					  </div><script>$("#mvideos'.$i.'").modal({show:false})</script>';	
+					  
+				}
 			}else{
 				echo '<article class="videor" style="display:none"><video controls width="500" height="320" controls>
 							<source src="'.$row['url'].'.mp4" type="video/mp4" />
@@ -45,6 +61,7 @@
 						</video></article>';
 			}
 			echo "</article>";
+			$i++;
 		}
 	?> 
 	<article id="win-view-video"><div id='win-view-video-content'></div></article>
@@ -87,29 +104,43 @@
 	                  <span class="add-on"><i class="icon-pencil"></i></span>
 	                  <input type="text" id="Techer" class="input-xlarge" name="title" placeholder="Titulo" required="required" />
 	          </div>
-			<div class="control-group">
-	              <label class="control-label" for="inputIcon">Seleccione video</label>
-					<div class="fileupload fileupload-new" data-provides="fileupload"><span class="add-on"><i class="icon-pencil"></i></span>
-						<div class="input-append" style="display:inline-block">
-						<div class="uneditable-input span3"><i class="icon-file fileupload-exists">
-						</i> <span class="fileupload-preview" id="title-video"></span>
-					</div><span class="btn btn-file"><span class="fileupload-new">Select file</span>
-					<span class="fileupload-exists">Change</span>
-					<input type="file" name="fileselect[]" id="upload" /></span><a href="#" id='remove-video' class="btn fileupload-exists" data-dismiss="fileupload">Remover</a>
+	          <label class="radio">
+				<input type="radio" class="opt-video" name="optionsRadios" id="yesVideo" value="Video" checked>Video
+			  </label>
+				<label class="radio">
+				<input type="radio" class="opt-video" name="optionsRadios" id="NoVideo" value="Link">Link
+			  </label>
+			<div id="SubirVideo">  
+				<div class="control-group">
+		              <label class="control-label" for="inputIcon">Seleccione video</label>
+						<div class="fileupload fileupload-new" data-provides="fileupload"><span class="add-on"><i class="icon-pencil"></i></span>
+							<div class="input-append" style="display:inline-block">
+							<div class="uneditable-input span3"><i class="icon-file fileupload-exists">
+							</i> <span class="fileupload-preview" id="title-video"></span>
+						</div><span class="btn btn-file"><span class="fileupload-new">Select file</span>
+						<span class="fileupload-exists">Change</span>
+						<input type="file" name="fileselect[]" id="upload" /></span><a href="#" id='remove-video' class="btn fileupload-exists" data-dismiss="fileupload">Remover</a>
+							</div>
 						</div>
-					</div>
-			</div>		
-		    <div class="control-group">
-		    	<label class="control-label" for="inputIcon">Servidor</label>
-		    	<span class="add-on"><i class="icon-pencil"></i></span>
-		         <select id='server-video' class="selectpicker" dropup>
-					<option value="math">MathForDummies</option>
-					<option value="youtube">Youtube</option>
-				</select>
+				</div>		
+			    <div class="control-group">
+			    	<label class="control-label" for="inputIcon">Servidor</label>
+			    	<span class="add-on"><i class="icon-pencil"></i></span>
+			         <select id='server-video' class="selectpicker" dropup>
+						<!--<option value="math">MathForDummies</option>-->
+						<option value="youtube">Youtube</option>
+					</select>
+				</div>
+				<div id="droparea" style=""><p class="text-success">Arrastra video</p></div>
+				<div id="video-acepted"><img src="<?php echo base_url();?>public/images/reproductor1.png"></div>
 			</div>
-			<div id="droparea" style=""><p class="text-success">Arrastra video</p></div>
-			<div id="video-acepted"><img src="<?php echo base_url();?>public/images/reproductor1.png"></div>
-
+			<div id="TextLink" style="display:none">
+				<div class="control-group">
+	              <label class="control-label" for="inputIcon">Link youtube</label>
+	                  <span class="add-on"><i class="icon-pencil"></i></span>
+	                  <input type="text" id="linkVideo" class="input-xlarge" name="titlevideo" placeholder="www.youtube.com" />
+	          	</div>
+			</div>
 		    <div class="control-group">
 		    	<label class="control-label" for="inputIcon">Descripcion</label>
 		    	<span class="add-on"><i class="icon-pencil"></i></span>

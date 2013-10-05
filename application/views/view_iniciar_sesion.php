@@ -50,40 +50,49 @@
   <script type="text/javascript">
     base_url = "<?php echo base_url();?>";
     server = "http://<?php echo $_SERVER['SERVER_NAME'];?>/";  
+    url_relativo = "<?php echo uri_string();?>";
   </script>
 </head>
 
 <body>
-<div id="wrap">
-<section id="left">
-  <header id="mainheader">
-    <div id='<?php echo $this->session->userdata('correo')?'content-img-logut':'content-img'; ?>'>
-			<div id='content-login'>
-				<div class='login'>
-				</div>
-			</div>
-			<img src='<?php echo base_url();?>public/images/iconos/abrir.png' />
-		</div>
-  <a href="index"><article id="logo" width="250" height="120" alt="PoliAuLink"><p>PoliAuLink</p></article> </a>
-    <h1 id="sitename">PoliAuLink, tendrás la oportunidad de reforzar tus conocimientos</h1>
-    </header>
-    <nav id="mainnav">
-    <ul>
-        <li class="current"><a href="#">Inicio</a></li>
-        <li><a href="#">Mensajes</a></li>
-        <li><a href="#">Editar</a></li>
-        <li><a href="#">Configuracion</a></li>
-    </ul>
-  </nav>
 
-  <div id="search">
-      <form action="#">
-        <div id="searchfield"><input type="text" name="search" id="s"></div>
-        <div id="searchbtn"><input type="image" src="<?php echo base_url();?>public/images/searchgobtn.png" alt="search"></div>
-        </form>
-  </div>
-    
-    <section id="sidebar">
-      <div class="sb-block" id="sb-photoProfile">
-        <img src="<?php echo base_url();?>public/images/perfil/default.png"/>
-      </div>
+<article style="display:none" id='view-login'>
+
+    <div id="box">
+        <div class="elements">
+            <div class="avatar"></div>
+                <form action="" method="post" id="frmlogin">
+                    <input type="email" id='name' name="name" class="input-small" placeholder="Correo" required/>
+                    <input type="password" id='password' name='password' class="input-small" placeholder="•••••••••" required/>
+                    <div class="forget"><a href="#">Registrar</a></div>
+                    <div class="checkbox">
+                    <input id="check" name="checkbox" type="checkbox" value="1" />
+                    <label for="check">Recuperar</label>
+                    </div>
+                    <div class="remember">Recordar?</div><br/>
+                    <input type='submit' value='Entrar' class="btn" id='btn-login'>
+                    <input type='submit' id="btn-validatesession" style="display:none">
+                </form>
+            </div>
+        </div>
+</article>
+
+<div id="loader-view">
+  <article id='loader-view-canvas'>
+  
+  </article>
+
+  <div id="message-error">
+        <div class="modal-header">
+          <h3 class="text-error" ></h3>
+        </div>
+        <div class="modal-body">
+          <span class="label label-important"></span>
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-large" id="close-message-error" type="button">Aceptar</button>
+        </div>
+</div>  
+</div>
+</body>
+</html>

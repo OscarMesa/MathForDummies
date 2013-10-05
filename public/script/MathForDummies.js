@@ -89,23 +89,66 @@ function ChangeHover(e){$(this).css('padding','5px');}
 function RestartHover(e){$(this).css('padding','0px');}
 
 $(document).on('click','.art-video article',OpenWindowWindowVideo);
+
+$(document).on('click','.art-video-b article',OpenWindowWindowVideoBoostrap);
+
+$(document).on('change','.opt-video',CambiarSeleccionVideo);
+
 function OpenWindowWindowVideo(){windowVideo.data("kendoWindow").content($(this).parent().children('.videor').html());windowVideo.data("kendoWindow").center().open();}
+
+function OpenWindowWindowVideoBoostrap(a) {
+	$("#"+$(a.currentTarget).parent().attr('video')).modal('show');
+	//console.log("'#"+$(a.currentTarget).parent().attr('video'));
+}
+
+function CambiarSeleccionVideo (a) {
+	if($(a.currentTarget).attr("id")=="NoVideo")
+	{
+		$("#SubirVideo").css("display","none");
+		$("#TextLink").css("display","block");
+	}else{
+		$("#SubirVideo").css("display","block");
+		$("#TextLink").css("display","none");
+	}
+}
 
 function InitElementPages()
 {
-	win_login = $("#view-login").kendoWindow({
-        actions: [ "Minimize", "Close"],
-        modal: true,
-        draggable : false,
-        resizable: false,
-        title: "Iniciar Sesion",
-        visible: false,
-        open:function(e){
-        },
-        close: function(e)
-        {
-        }
-    }).data("kendoWindow");
+	
+    if (typeof url_relativo != 'undefined') 
+    {
+    	win_login = $("#view-login").kendoWindow({
+	        actions: [ "Minimize"],
+	        modal: true,
+	        draggable : false,
+	        resizable: false,
+	        title: "Iniciar Sesion",
+	        visible: false,
+	        open:function(e){
+	        },
+	        close: function(e)
+	        {
+	        }
+	    }).data("kendoWindow");
+
+    	if(url_relativo == "/SeguridadAcceso/iniciar_sesion")
+    	win_login.center().open();	
+    }else{
+	    	win_login = $("#view-login").kendoWindow({
+	        actions: [ "Minimize", "Close"],
+	        modal: true,
+	        draggable : false,
+	        resizable: false,
+	        title: "Iniciar Sesion",
+	        visible: false,
+	        open:function(e){
+	        },
+	        close: function(e)
+	        {
+	        }
+	    }).data("kendoWindow");
+    }
+    
 	Win_Error = $("#message-error").kendoWindow({
         actions: [ "Minimize", "Close"],
         width: "450px",
@@ -446,20 +489,33 @@ function ResetFormVideo()
 	$("#frm-video div").scrollTop(0);
 }
 function SaveVideo (e) {
-	if(document.querySelector("#frm-video").checkValidity()){ 
-		console.log(files[0]);
-		if(files != undefined){
-			oldFile = files[0];
-			format = files[0].type.split('/');
+	if(document.querySelector("#frm-video").checkValidity() ){ 
+		//console.log(files[0]);
+		if(files != undefined || $('input[name="optionsRadios"]:checked').val() == 'Link'){
+			if($('input[name="optionsRadios"]:checked').val() == 'Link')
+			{
+				if($('#linkVideo').val().toLowerCase().search("youtube") == -1)
+				{
+					OpenMessagesErrorModal("Error","El link debe ser de youtube");	
+					return false;	
+				}
+			}
+			if(files!=undefined){
+				oldFile = files[0];
+				format = files[0].type.split('/');
+			}
 			data = $('#frm-video').serializeObject();
 			data['server'] = select_server.val();
+			if(files!=undefined)
 			data['format'] = format[1];
 			var formData = new FormData();  
 			//we still have to use back old file
 			//since new file doesn't contains original file data
-			formData.append('filename', oldFile.name);
-			formData.append('filetype', oldFile.type);
-			formData.append('file', oldFile); 
+			if(files!=undefined){
+				formData.append('filename', oldFile.name);
+				formData.append('filetype', oldFile.type);
+			}
+			if(files!=undefined)formData.append('file', oldFile); 
 			formData.append('data', JSON.stringify(data)); 
 			
 			//submit formData using $.ajax			
@@ -476,7 +532,7 @@ function SaveVideo (e) {
 					console.log(data);
 					if(data.rpt){
 						$('#loader-view').css('display','none');
-						ResetFormVideo();
+						//ResetFSaveVideoormVideo();
 						LoadViewVideos();
 					}else{
 						$('#mvideos').modal('show');

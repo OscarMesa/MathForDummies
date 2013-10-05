@@ -57,7 +57,7 @@ crecimiento y demanda en la industria delInternet y desarrollo de sistemas compu
 <div class="clear"></div>
 </div>
 <div id="credits">
-2012 &copy; MathForDummies.com | Kimera |  By Quimera.kf </div>
+2012 &copy; PoliAulaLink.com | Kimera |  By Quimera.kf </div>
 </footer>
 <div id="message" class="modal hide fade in" style="display: none;" >
     <div class="modal-header">

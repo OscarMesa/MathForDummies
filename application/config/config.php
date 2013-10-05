@@ -247,7 +247,7 @@ $config['encryption_key'] = 'session_dummies';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'md_mathfordummies';
+$config['sess_cookie_name']		= 'md_poliaulink';
 $config['sess_expiration']		= 2000;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
