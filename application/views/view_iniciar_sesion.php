@@ -26,6 +26,7 @@
 <script src="<?php echo base_url('public/script/underscore-1.3.1.js'); ?>"></script>
 <script src="<?php echo base_url('public/script/backbone.js'); ?>"></script>
 
+
 <title>PoliAuLink</title>
  <script src="http://code.jquery.com/jquery-latest.js"></script>
  <script src="<?php echo base_url(); ?>public/script/prefixfree.min.js"></script> 
@@ -56,15 +57,19 @@
 
 <body>
 
-<article style="display:none" id='view-login'>
-
-    <div id="box">
+<section style="display:inline-block; overflow:hidden; height:250px; width:360px;" id='view-login'>
+    <div id='contenedor_ventanas' style='height:250px; width:720px;'>
+    <article id="box" style="float:left;">
         <div class="elements">
             <div class="avatar"></div>
                 <form action="" method="post" id="frmlogin">
                     <input type="email" id='name' name="name" class="input-small" placeholder="Correo" required/>
                     <input type="password" id='password' name='password' class="input-small" placeholder="•••••••••" required/>
-                    <div class="forget"><a href="#">Registrar</a></div>
+                    <div class="forget">
+                          <a href="javascript:void(0);">Registrar</a>
+                          <a href="javascript:void(0);" id="btn-recuperar" style="margin-left:9px">Recuperar</a>                          
+                    </div>
+         
                     <div class="checkbox">
                     <input id="check" name="checkbox" type="checkbox" value="1" />
                     <label for="check">Recuperar</label>
@@ -74,14 +79,50 @@
                     <input type='submit' id="btn-validatesession" style="display:none">
                 </form>
             </div>
+    </article>
+
+        <article id='view-recuperar' style="float:left;">
+          <div id="box">
+                <div class="elements">
+                  <div id='img_recuperar'></div>
+                  <form action="" method="post" id="frmlogin">
+                      <label>Ingresar el correo con el que realizo el registros.</label>
+                      <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
+                      <a href="javascript:void(0);" id="volver">Volver</a>
+                      <input type='submit' value='Enviar' class="btn" id='btn-recuperar'>
+                  </form>
+                </div>
         </div>
-</article>
+        </article>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+ //$("#view-recuperar").toggle( "slide" );
+  $('#btn-recuperar').click(function() {
+       $("#view-login").animate({
+            scrollLeft:400
+       });
+  });
+
+  $('#volver').click(function() {
+       $("#view-login").animate({
+            scrollLeft:0
+       });
+  });
+
+  $(document).on("click","#",function(){});
+
+
+
+
+</script>
 
 <div id="loader-view">
   <article id='loader-view-canvas'>
   
   </article>
-
   <div id="message-error">
         <div class="modal-header">
           <h3 class="text-error" ></h3>

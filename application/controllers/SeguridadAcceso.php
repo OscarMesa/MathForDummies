@@ -29,6 +29,10 @@ class SeguridadAcceso extends CI_Controller {
         }
     }
 
+
+    public function recuperar(){
+        $this->input->post("txt-recuperar");
+    }
 }
 
 ?>
