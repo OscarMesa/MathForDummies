@@ -118,8 +118,8 @@ function InitElementPages()
     if (typeof url_relativo != 'undefined') 
     {
     	win_login = $("#view-login").kendoWindow({
-	        actions: [ "Minimize"],
-	        modal: true,
+			 actions:false,	
+		   modal: true,
 	        draggable : false,
 	        resizable: false,
 	        title: "Iniciar Sesion",
@@ -135,7 +135,8 @@ function InitElementPages()
     	win_login.center().open();	
     }else{
 	    	win_login = $("#view-login").kendoWindow({
-	        actions: [ "Minimize", "Close"],
+	       // actions: [ "Minimize", "Close"],
+		   actions:false,
 	        modal: true,
 	        draggable : false,
 	        resizable: false,
@@ -301,7 +302,7 @@ function ValidateLogin(e)
 				console.log(data);
 				if(data.rpt == false)
 				{	
-					OpenMessagesErrorModal('Error','Este usuario no se encuentra registrado');_
+					OpenMessagesErrorModal('Error','Este usuario no se encuentra registrado');
 				}else{
 					win_login.close();
 					window.location.href = base_url;
@@ -312,7 +313,7 @@ function ValidateLogin(e)
 			}
 		});
 	}else{
-		document.getElementById("btn-validatesession").click();
+		$("#btn-login").click();
 	}
 	e.preventDefault();	
 }

@@ -498,3 +498,7 @@ input[type=checkbox]:checked + label {
     width: 128px;
     background:url(../images/recuperar.png) center no-repeat;
 }
+
+#btn-guardar{
+	float:right;
+}

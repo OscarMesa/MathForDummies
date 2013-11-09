@@ -68,7 +68,7 @@
 <script>
   	$(".art-video article").hover(ChangeHover,RestartHover);
     windowVideo = $("#win-view-video").kendoWindow({
-        actions: [ "Minimize", "Close"],
+        actions: ["Close"],
         width: "500",
         height: "320",
         modal: true,

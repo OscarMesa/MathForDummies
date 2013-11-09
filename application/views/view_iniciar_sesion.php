@@ -58,7 +58,7 @@
 <body>
 
 <section style="display:inline-block; overflow:hidden; height:250px; width:360px;" id='view-login'>
-    <div id='contenedor_ventanas' style='height:250px; width:720px;'>
+    <div id='contenedor_ventanas' style='height:250px; width:1080px;'>
     <article id="box" style="float:left;">
         <div class="elements">
             <div class="avatar"></div>
@@ -66,7 +66,7 @@
                     <input type="email" id='name' name="name" class="input-small" placeholder="Correo" required/>
                     <input type="password" id='password' name='password' class="input-small" placeholder="•••••••••" required/>
                     <div class="forget">
-                          <a href="javascript:void(0);">Registrar</a>
+                          <a href="javascript:void(0);" id='btn-registrar'>Registrar</a>
                           <a href="javascript:void(0);" id="btn-recuperar" style="margin-left:9px">Recuperar</a>                          
                     </div>
          
@@ -76,24 +76,37 @@
                     </div>
                     <div class="remember">Recordar?</div><br/>
                     <input type='submit' value='Entrar' class="btn" id='btn-login'>
-                    <input type='submit' id="btn-validatesession" style="display:none">
                 </form>
             </div>
     </article>
 
-        <article id='view-recuperar' style="float:left;">
-          <div id="box">
-                <div class="elements">
-                  <div id='img_recuperar'></div>
-                  <form action="" method="post" id="frmlogin">
-                      <label>Ingresar el correo con el que realizo el registros.</label>
-                      <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
-                      <a href="javascript:void(0);" id="volver">Volver</a>
-                      <input type='submit' value='Enviar' class="btn" id='btn-recuperar'>
-                  </form>
-                </div>
-        </div>
-        </article>
+	<article id='view-recuperar' style="float:left;">
+		  <div id="box">
+				<div class="elements">
+				  <div id='img_recuperar'></div>
+				  <form action="" method="post" id="frmlogin">
+					  <label>Ingresar el correo con el que realizo el registros.</label>
+					  <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
+					  <a href="javascript:void(0);" id="volver">Volver</a>
+					  <input type='submit' value='Enviar' class="btn" id='btn-recuperar-envio'>
+				  </form>
+				</div>
+		</div>
+	</article>
+    <article id="box" style="float:left;">
+        <div class="elements">
+            <div class="avatar"></div>
+                <form action="" method="post" id="frmregistro">
+                    <input type="text" id='nombre' name="nombre" class="input-large" placeholder="Nombre" required/>
+                    <input type="email" id='correo' name='correo' class="input-large" placeholder="Correo" required/>
+                    <select name='perfil' id='perfil'  required>
+						<option value='1'>Estudiante</option>
+						<option value='2'>Docente</option>
+					</select>
+                    <input type='submit' value='Guardar' class="btn"  id='btn-guardar'>
+                </form>
+            </div>
+    </article>
     </div>
 </section>
 
@@ -104,6 +117,11 @@
        $("#view-login").animate({
             scrollLeft:400
        });
+  }); 
+  $('#btn-registrar').click(function() {
+       $("#view-login").animate({
+            scrollLeft:800
+       });
   });
 
   $('#volver').click(function() {
@@ -111,11 +129,23 @@
             scrollLeft:0
        });
   });
-
-  $(document).on("click","#",function(){});
-
-
-
+  
+  $("#btn-recuperar-envio").click(function(e){
+		e.prependDefault();
+		 $.post(base_url+"/SeguridadAcceso/recuperar", {recuperar:$("txt-recuperar").val()}, function(r){
+				alert("hola");
+		 });
+  
+  });
+					
+ $("#perfil").kendoDropDownList();
+ 
+ $("#frmregistro").submit(function(){
+			$.post(base_url+"/SeguridadAcceso/registrar", $(this).serialize(), function(){
+				console.log("excelente");
+			});
+			return false;
+ });
 
 </script>
 
