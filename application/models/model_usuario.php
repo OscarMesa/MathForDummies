@@ -43,6 +43,17 @@ class model_usuario extends CI_Model {
        return $query;
     }
 
+    /**
+    *   Este metodo me retorna todos los datos de un usuario
+    */
+
+    public function getUsuario($email)
+    {
+        $this->db->select('p.nombre AS nombre_perfil, u.*');
+        $this->db->join('perfiles AS p', 'p.id_perfil = u.tipo_perfil', 'inner');
+        return $this->db->get_where('usuarios AS u',array('u.correo'=>$email))->result_object();
+    }
+
     //Obtiene toda la info de usuario con
     public function obtenerInfoUsuario($idUsuario) {
         $query = $this->db->query('select * from mb_usuarios where id_usuario=? limit 1', array($idUsuario));
@@ -115,7 +126,7 @@ class model_usuario extends CI_Model {
         return $query;
     }
     public function ValidarRegistro($nombre, $correo, $perfil) {
-		$r = $this->db->insert("usuarios",array("correo"=>$correo,"contrasena"=>SHA1($contrasena),""))
+		$r = $this->db->insert("usuarios",array("correo"=>$correo,"contrasena"=>SHA1($contrasena),""));
        // $query = $this->db->query('SELECT * FROM usuarios WHERE correo=? AND contrasena=SHA1(?) LIMIT 1', array($mail_user,$password));
         return $query;
     }
