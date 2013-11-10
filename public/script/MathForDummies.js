@@ -78,6 +78,8 @@ function start(){
 
 	$('#frm-newcurse').click(StopExecute);
 
+	
+
 	InitElementBackbone();
 
 	InitElementPages();
@@ -114,7 +116,6 @@ function CambiarSeleccionVideo (a) {
 
 function InitElementPages()
 {
-	
     if (typeof url_relativo != 'undefined') 
     {
     	win_login = $("#view-login").kendoWindow({

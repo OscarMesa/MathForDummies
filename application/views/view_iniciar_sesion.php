@@ -84,12 +84,13 @@
         <article id='view-recuperar' style="float:left;">
           <div id="box">
                 <div class="elements">
-                  <div id='img_recuperar'></div>
+                  <div id='img_recuperar' style="height: 95px;"></div>
+                  <p class="message_error_client" id="error-recuperar"></p>
                   <form action="" method="post" id="frmlogin">
                       <label>Ingresar el correo con el que realizo el registros.</label>
-                      <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
+                      <input type="text" style="width:93%" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
                       <a href="javascript:void(0);" id="volver">Volver</a>
-                      <input type='submit' value='Enviar' class="btn" id='btn-recuperar'>
+                      <input type='submit' value='Enviar' class="btn" id='btn-recuperar-mail'>
                   </form>
                 </div>
         </div>
@@ -111,8 +112,25 @@
             scrollLeft:0
        });
   });
+$(document).on('focus','#txt-recuperar',function(e){
+  $("#error-recuperar").css('display','none');
+});
 
-  $(document).on("click","#",function(){});
+$(document).on("click","#btn-recuperar-mail",function(e){
+      $.post(base_url + "SeguridadAcceso/recuperar","email="+$('#txt-recuperar').val(),function(data){
+        if(data.rpt)
+        {
+          $("#error-recuperar").html(data.mensaje);
+          $("#error-recuperar").css('display','inline-block');
+        }else{
+          $("#error-recuperar").css('display','inline-block');
+          $("#error-recuperar").html(data.mensaje);
+        }
+      },"JSON");
+
+      e.preventDefault();
+  //    return;
+});
 
 
 

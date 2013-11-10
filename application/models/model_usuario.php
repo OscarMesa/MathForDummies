@@ -43,6 +43,17 @@ class model_usuario extends CI_Model {
        return $query;
     }
 
+    /**
+    *   Este metodo me retorna todos los datos de un usuario
+    */
+
+    public function getUsuario($email)
+    {
+        $this->db->select('p.nombre AS nombre_perfil, u.*');
+        $this->db->join('perfiles AS p', 'p.id_perfil = u.tipo_perfil', 'inner');
+        return $this->db->get_where('usuarios AS u',array('u.correo'=>$email))->result_object();
+    }
+
     //Obtiene toda la info de usuario con
     public function obtenerInfoUsuario($idUsuario) {
         $query = $this->db->query('select * from mb_usuarios where id_usuario=? limit 1', array($idUsuario));
