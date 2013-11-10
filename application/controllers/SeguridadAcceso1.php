@@ -9,7 +9,7 @@
  *
  * @author Oskar
  */
-class SeguridadAcceso extends CI_Controller {
+class SeguridadAcceso1 extends CI_Controller {
 
     public function __construct() {
         parent::__construct();

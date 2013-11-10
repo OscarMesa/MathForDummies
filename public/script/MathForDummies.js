@@ -167,13 +167,13 @@ function InitElementPages()
         	SWindowModal = true;
         }
     }).data("kendoWindow");
-
-	var cl = new CanvasLoader('loader-view-canvas');
-	cl.setColor('#332433'); // default is '#000000'
-	cl.setShape('spiral'); // default is 'oval'
-	cl.setDiameter(75); // default is 40
-	cl.show(); // Hidden by default
-	
+    
+            var cl = new CanvasLoader('loader-view-canvas');
+            cl.setColor('#332433'); // default is '#000000'
+            cl.setShape('spiral'); // default is 'oval'
+            cl.setDiameter(75); // default is 40
+            cl.show(); // Hidden by default
+    
 	// This bit is only for positioning - not necessary
 	  var loaderObj = document.getElementById("canvasLoader");
 		loaderObj.style.position = "absolute";
@@ -182,6 +182,7 @@ function InitElementPages()
 
 		$('#slide-videos').roundabout();
 		$('#slide-videos').css('display','inline-block');
+    
 }
 function InitFunctionNatives()
 {
