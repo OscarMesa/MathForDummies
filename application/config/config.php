@@ -374,3 +374,11 @@ $config['proxy_ips'] = '';
 |
 */
 $config['session'] = FALSE;
+
+
+
+/* configuracion de sendmail*/
+
+
+
+/* configuracion de sendmail*/

@@ -31,7 +31,6 @@ class SeguridadAcceso extends CI_Controller {
 
 
     public function recuperar(){
-       
         $respuesta = array('rpt'=>false,'mensaje'=>'Error');
         $this->load->library('email','','correo');
         $this->load->model('model_usuario','musuarios');
@@ -69,6 +68,29 @@ class SeguridadAcceso extends CI_Controller {
     public function recuperarCntr($anteMD5,$mail)
     {
 
+			echo $this->input->post("recuperar");
+			
+    }
+    public function registrar(){
+			$this->load->library('form_validation');
+			$this->load->helper(array('form'));
+			$this->form_validation->set_rules('nombre', '"correo"', 'trim|required');
+			$this->form_validation->set_rules('correo', '"correo"', 'trim|required|valid_email');
+			$this->form_validation->set_rules('perfil', '"perfil"', 'trim|required');
+			if($this->form_validation->run() == false){
+				$rpt['rpt'] = false;
+			}else{
+				$query = $this->muser->ValidarRegistro( $this->input->post("nombre"), 
+																						$this->input->post("correo"),
+																						$this->input->post("perfil"));
+				if($query->num_rows()>0){
+					$rpt['rpt'] = true;
+					$this->session->set_userdata($query->result_array()[0]);
+				}else{
+					$rpt['rpt'] = false;
+				}
+			}
+		   echo json_encode($rpt);
     }
 }
 
