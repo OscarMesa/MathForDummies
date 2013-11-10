@@ -17,8 +17,13 @@ class index extends CI_Controller {
     }
 
     public function index() {  
-    		$data['prueba'] = true;
-            $this->plantilla->Render('index',$data);   
+    		$this->load->model('model_videos','mvideos');
+    		$data['videos'] = $this->mvideos->getAllVideos();
+    		if($this->session->userdata('correo') != "")
+    			$this->plantilla->Render('index',$data); 
+            else
+                redirect('/SeguridadAcceso/iniciar_sesion');
+           
     }
 
 }

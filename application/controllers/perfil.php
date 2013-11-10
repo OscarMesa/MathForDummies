@@ -17,34 +17,18 @@ class Perfil extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function __construct()
 	{
-			$this->load->helper('timesocial');
-			$this->load->model('model_Publicaciones');
-			$data['publicaciones']=$this->model_Publicaciones->obtenerPublicaciones(2);
-			$this->plantilla->Render('perfil/perfil',$data,true);
+		parent::__construct();
+		$this->load->model('Model_perfil','mperfil');
 	}
 	
-	public function user($nameUser)
-	{
-			$this->load->helper('timesocial');
-			$this->load->model('model_Publicaciones');
-			$this->load->model('model_Usuario');
-			$idUsuario=$this->model_Usuario->idUsuario($nameUser);
-			if(!is_null($idUsuario)){
-				$data['usuario']=$this->model_Usuario->obtenerInfoUsuario($idUsuario);
-				$data['universidades']=$this->model_Usuario->obtenerUniversidades($idUsuario);
-				$data['empleos']=$this->model_Usuario->obtenerEmpleos($idUsuario);
-				$data['publicaciones']=$this->model_Publicaciones->obtenerPublicaciones($idUsuario);
-				$this->plantilla->Render('perfil/perfil',$data,true);
-			}else{
-				$this->plantilla->Render('perfil/not-found',NULL,true);
-			}
-	}
+
         
-    public function feed()
+    public function LoadAutoComplete()
 	{
-		
+		$query = $this->mperfil->getProfileFilter($this->input->post('value'));
+		echo json_encode($query);
 	}
         
         

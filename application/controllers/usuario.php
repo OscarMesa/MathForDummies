@@ -19,9 +19,7 @@ class usuario extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->mensajes_error = array(
-            'sesion_error' => 'El nombre de usuario o la contraseña introducidos no son correctos.'
-        );
+        $this->load->model('model_usuario','muser');
     }
 
     public function index() {
@@ -34,12 +32,35 @@ class usuario extends CI_Controller {
         echo json_encode($array);
     }
 
-    public function ValidarUsuario() {
-        $user = trim($this->input->post('user'));
-        $password = trim($this->input->post('pass'));
-        $this->load->model('model_usuario', 'usr');
+    /**
+    *   Este metodo se encarga de validar un usuario.
+    *   @author Oskar
+    *   @return Boolean
+    */
+    public function ValidateUser() {
+        $this->load->library('form_validation');
+        $this->load->helper(array('form'));
+        $this->form_validation->set_rules('name', '"correo"', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', '"contraseña"', 'trim|required');
+        if($this->form_validation->run() == false){
+            $rpt['rpt'] = false;
+        }else{
+            $query = $this->muser->ValidarSesionUsuario($this->input->post('name'),$this->input->post('password'));
+            if($query->num_rows()>0){
+                $rpt['rpt'] = true;
+                $this->session->set_userdata($query->result_array()[0]);
+            }else{
+                $rpt['rpt'] = false;
+            }
+        }
+       echo json_encode($rpt);
     }
 
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        echo json_encode(array('rpt'=>true));
+    }
     public function Existencia_Mail_User() {
         $table = trim($this->input->post('table'));
         $field = trim($this->input->post('field'));
@@ -47,71 +68,6 @@ class usuario extends CI_Controller {
         $tbl = array('mail', 'usuarios', 'usuario');
         $this->load->model('model_usuario', 'usr');
         echo json_encode($this->usr->mod_ExistenciaData("SELECT $tbl[$field] FROM mb_$tbl[$table] WHERE $tbl[$field]=? limit 1", $dato));
-    }
-
-    public function Insertar_Usuario() {
-        $this->load->library('form_validation');
-        $this->load->helper('recaptchalib');
-
-        $error = array();
-        $error['respuesta'] = 'false';
-
-        $this->form_validation->set_rules('full_name', 'Password', 'required(' . $this->input->post('full_name') . ')');
-        $this->form_validation->set_rules('user_name', 'Nombre', 'is_trim(' . $this->input->post('user_name') . ')|required(' . $this->input->post('user_name') . ')|alpha_numeric(' . $this->input->post('user_name') . ')|min_length(' . $this->input->post('user_name') . ',5)|max_length(' . $this->input->post('user_name') . ',15)');
-        $this->form_validation->set_rules('apellido', 'Password', 'required(' . $this->input->post('apellido') . ')');
-        $this->form_validation->set_rules('email', 'Email address', 'is_trim(' . $this->input->post('email') . ')|valid_email(' . $this->input->post('email') . ')|required(' . $this->input->post('email') . ')');
-        $this->form_validation->set_rules('password', 'Month', 'required(' . $this->input->post('password') . ')|is_trim(' . $this->input->post('password') . ')');
-        $this->form_validation->set_rules('month', 'Month', 'required(' . $this->input->post('month') . ')');
-        $this->form_validation->set_rules('day', 'Month', 'required(' . $this->input->post('day') . ')');
-        $this->form_validation->set_rules('gender', 'Gender', 'required(' . $this->input->post('gender') . ')');
-        $this->form_validation->set_rules('year', 'Year', 'required(' . $this->input->post('year') . ')');
-        $this->form_validation->set_rules('ciudades', 'Ciudad', 'required(' . $this->input->post('ciudades') . ')');
-
-        $error['recaptcha']['response'] = 'true';
-
-        $publickey = "6LfOv9ISAAAAAGm6FvkybaeYf2VzGJtrHfKjSkc6";
-        recaptcha_get_html($publickey);
-
-        $privatekey = "6LfOv9ISAAAAADibPaYhqX63VIsj774wv_J1rp6v";
-
-        $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $this->input->post('recaptcha_challenge_field'), $this->input->post('recaptcha_response_field'));
-
-        $arg = $this->form_validation->get_field_data();
-
-        //Este for, me permite recorrer todos los metdos de validacion que se le definieron, e ir ejecutandolos uno a uno, cada metodo es marcado en un vector, con el fin de saber su valor de retorno.
-        foreach ($arg as $key) {
-            $function = explode('|', $key['rules']);
-            foreach ($function as $val) {
-
-                $f = explode('(', $val);
-                $g = explode(')', $f[1]);
-                //aca se ejecuta el metodo
-                if (!$this->form_validation->{$f[0]}($g[0])) {
-
-                    $error[$key['field']][$f[0]] = $this->form_validation->_messges_method_error[$f[0]];
-                    continue;
-                }
-            }
-            $vars = $this->input->post($key['field']);
-
-            //echo $key['field'].':'.$this->form_validation->validate_tags_xss_clean($vars).'<br/>';
-            if (!$this->form_validation->validate_tags_xss_clean($vars)) {
-                $error[$key['field']]['validate_tags_xss_clean'] = $this->form_validation->_messges_method_error['validate_tags_xss_clean'];
-            }
-        }
-
-        if (!$resp->is_valid) {
-            $error['recaptcha']['recaptcha'] = "Los caracteres escritos no coinciden con la palabra de verificación. Inténtalo de nuevo.";
-            $error['recaptcha']['response'] = 'false';
-        }
-
-
-        if (count($error) == 1) {
-            $error['respuesta'] = 'true';
-            $this->load->model('model_Usuario', 'usr');
-            $this->usr->Insertar_Usuario();
-        }
-        echo json_encode($error);
     }
 
     public function EliminarUsuario($key) {
@@ -136,23 +92,7 @@ class usuario extends CI_Controller {
     * @return TRUE | FALSE si el usuario es verdedero y corresponde su password retorna TRUE, en caso contrario devuelve FALSE 
     */
     public function IniciarSesionUsuario() {
-  
-        $this->load->model('model_Usuario', 'usr');
-        $resp = $this->usr->ValidarSesionUsuario($this->input->post('login-field'), $this->input->post('password-field'));
-        if ($resp['validate']) {
-             $newdata = array(
-              'session_id' => date('Y-m-d:H:i:s').  $this->com_create_guid1(),
-              'ip_address' => $_SERVER['REMOTE_ADDR'],
-              'user_agent' => $resp['elements'][0]['usuario'],
-              'username' => $resp['elements'][0]['nombre'],
-              'email' => $resp['elements'][0]['mail'],
-              'logged_in' => TRUE
-              );
-            $this->session->set_userdata($newdata);
-            echo json_encode(array('res' => 'true'));
-        } else {
-            echo json_encode(array('res' => $this->mensajes_error));
-        }
+
     }
     
     /**
@@ -164,6 +104,93 @@ class usuario extends CI_Controller {
         $this->session->sess_destroy();
     }
 
+    /**
+    *   Este metodo llama la vista que se encarga de listar todos los usaurios
+    *   @author Oskar
+    *   @return View La vista con todos los usuarios en el sistema.
+    */
+    public function LoadViewUsers(){
+        $data['users'] = $this->muser->getAllUser();
+        $this->load->view('view_usuarios',$data);
+    }
+
+
+
+    public function NewUser(){
+        $rpt = array();
+
+        if($this->ValidateDataUser() == false){
+            $rpt['msg'] = validation_errors_array();
+            $rpt['rpt'] = false;
+        }else{  
+            $result = $this->muser->getUserForEmail($this->input->post('EmailUser'));
+            if($result->num_rows==0)
+            {
+                $this->muser->saveNewUrse(array($this->input->post('NameUser'),$this->input->post('LastName1'),
+                                          $this->input->post('LastName2'),sha1($this->input->post('password')),
+                                          $this->input->post('TephoneUser'),$this->input->post('CellUser'),
+                                          $this->input->post('EmailUser'),$this->input->post('id_profesion'),
+                                          $this->input->post('id_perfil')));
+                $rpt['rpt'] = true;
+            }else{
+                $rpt['step_msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
+                $rpt['rpt'] = false;
+            }
+        }
+        echo json_encode($rpt);
+    }
+
+    public function UpdateUser()
+    {
+       
+        $rpt = array();
+
+        if($this->ValidateDataUser() == false){
+            $rpt['msg'] = validation_errors_array();
+            $rpt['rpt'] = false;
+        }else{
+            $this->muser->saveUpdateUrse(array($this->input->post('NameUser'),$this->input->post('LastName1'),
+                                      $this->input->post('LastName2'),sha1($this->input->post('password')),
+                                      $this->input->post('TephoneUser'),$this->input->post('CellUser'),
+                                      $this->input->post('EmailUser'),$this->input->post('id_profesion'),
+                                      $this->input->post('id_perfil'),$this->input->post('id_user')));
+            //echo $this->db->last_query();
+            $rpt['rpt'] = true;
+        }
+        echo json_encode($rpt);
+    }
+
+    public function ValidateDataUser()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $this->form_validation->set_rules('NameUser', "nombre", 'trim|required');
+        $this->form_validation->set_rules('LastName1', "Apellido", 'trim|required');
+        $this->form_validation->set_rules('TephoneUser', "teléfono", 'trim|required|numeric');
+        $this->form_validation->set_rules('CellUser', "celular", 'trim|required|numeric');
+        $this->form_validation->set_rules('EmailUser', "correo", 'trim|required|valid_email');
+        $this->form_validation->set_rules('id_profesion', "profesión", 'trim|required|numeric');
+        $this->form_validation->set_rules('id_perfil', "perfil", 'trim|required|numeric');
+        $this->form_validation->set_rules('password', "contraseña", 'trim|required|matches[cpassword]');
+        $this->form_validation->set_rules('cpassword', "confirmar contraseña", 'trim|required');
+        return $this->form_validation->run();
+    }
+
+    public function DeleteUrse()
+    {
+        echo json_encode(array('col_afetada' => $this->muser->delteUrse($this->input->post('id')))); 
+    }
+
+    public function SearchUsers()
+    {
+        if($this->input->post('valuesearch') != '')
+           $data['users'] = $this->muser->SearchUser($this->input->post('valuesearch'));
+        else
+            $data['users'] = $this->muser->getAllUser();
+       // echo $this->db->last_query();
+        $data['table'] = 'usuarios';
+        echo $this->load->view('SearchTable',$data);
+    }
 }
 
 ?>

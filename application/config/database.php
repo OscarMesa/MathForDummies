@@ -48,15 +48,22 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-// $db['default']['hostname'] = 'localhost';
-// $db['default']['username'] = 'user';
-// $db['default']['password'] = 'pass';
-// $db['default']['database'] = 'bd';
-
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = '127.0.0.1';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'math';
+
+
+// $mysql_host = "mysql7.000webhost.com";
+// $mysql_database = "a5011613_math";
+// $mysql_user = "a5011613_marh";
+// $mysql_password = "mathpoli2012";
+
+
+// $db['default']['hostname'] = 'mysql7.000webhost.com';
+// $db['default']['username'] = 'a5011613_marh';
+// $db['default']['password'] = 'mathpoli2012';
+// $db['default']['database'] = 'a5011613_math';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

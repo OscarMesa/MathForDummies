@@ -14,7 +14,10 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/MathForDummies';
+//SSH
+// correo:  enviosfr@host351.hostmoster.com
+// pass: 159263
+$config['base_url']	= 'http://'. $_SERVER['HTTP_HOST'] . '/PoliAuLink';
 
 /*
 |--------------------------------------------------------------------------
@@ -244,7 +247,7 @@ $config['encryption_key'] = 'session_dummies';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'md_session';
+$config['sess_cookie_name']		= 'md_poliaulink';
 $config['sess_expiration']		= 2000;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
@@ -371,3 +374,11 @@ $config['proxy_ips'] = '';
 |
 */
 $config['session'] = FALSE;
+
+
+
+/* configuracion de sendmail*/
+
+
+
+/* configuracion de sendmail*/
