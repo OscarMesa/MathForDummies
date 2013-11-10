@@ -85,7 +85,8 @@ class SeguridadAcceso1 extends CI_Controller {
 																						$this->input->post("perfil"));
 				if($query->num_rows()>0){
 					$rpt['rpt'] = true;
-					$this->session->set_userdata($query->result_array()[0]);
+$p = $query->result_array();
+					$this->session->set_userdata($p[0]);
 				}else{
 					$rpt['rpt'] = false;
 				}
@@ -93,5 +94,4 @@ class SeguridadAcceso1 extends CI_Controller {
 		   echo json_encode($rpt);
     }
 }
-
 ?>
