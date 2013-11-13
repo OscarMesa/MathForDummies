@@ -57,7 +57,7 @@
 
     <body>
 
-        <section style="display:inline-block; overflow:hidden; height:250px; width:360px;" id='view-login'>
+        <section style="display:inline-block; overflow:hidden; display:none; height:250px; width:360px;" id='view-login'>
             <div id='contenedor_ventanas' style='height:250px; width:1080px;'>
                 <article id="box" style="float:left;">
                     <div class="elements">
