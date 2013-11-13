@@ -488,17 +488,17 @@ input[type=checkbox]:checked + label {
     width: 20%;
 }
 
-#view-registro{
-  
-}
-
 #img_recuperar{
-    height: 128px;
+    height: 90px;
     margin: 5px auto;
-    width: 128px;
+    width: 100px;
     background:url(../images/recuperar.png) center no-repeat;
 }
 
 #btn-guardar{
+	float:right;
+}
+
+#btn-recuperar-envio{
 	float:right;
 }

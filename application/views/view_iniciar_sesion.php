@@ -57,7 +57,7 @@
 
     <body>
 
-        <section style="display:inline-block; overflow:hidden; height:250px; width:360px;" id='view-login'>
+        <section style="display:inline-block; overflow:hidden; display:none; height:250px; width:360px;" id='view-login'>
             <div id='contenedor_ventanas' style='height:250px; width:1080px;'>
                 <article id="box" style="float:left;">
                     <div class="elements">
@@ -82,25 +82,11 @@
                 <article id='view-recuperar' style="float:left;">
                     <div id="box">
                         <div class="elements">
-                            <div id='img_recuperar' style="height: 95px;"></div>
-                            <p class="message_error_client" id="error-recuperar"></p>
-                            <form action="" method="post" id="frmlogin">
-                                <label>Ingresar el correo con el que realizo el registros.</label>
-                                <input type="text" style="width:93%" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
-                                <a href="javascript:void(0);" id="volver">Volver</a>
-                                <input type='submit' value='Enviar' class="btn" id='btn-recuperar-mail'>
-                            </form>
-                        </div>
-                    </div>
-                </article>
-                <article id='view-recuperar' style="float:left;">
-                    <div id="box">
-                        <div class="elements">
                             <div id='img_recuperar'></div>
                             <form action="" method="post" id="frmlogin">
                                 <label>Ingresar el correo con el que realizo el registros.</label>
-                                <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-small" placeholder="" required/>
-                                <a href="javascript:void(0);" id="volver">Volver</a>
+                                <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-large" placeholder="" required/>
+                                <a href="javascript:void(0);" id="volver-recuperar">Volver</a>
                                 <input type='submit' value='Enviar' class="btn" id='btn-recuperar-envio'>
                             </form>
                         </div>
@@ -116,6 +102,7 @@
                                 <option value='1'>Estudiante</option>
                                 <option value='2'>Docente</option>
                             </select>
+                            <a href='javascript:void(0);' id='volver-registro'>Volver</a>
                             <input type='submit' value='Guardar' class="btn"  id='btn-guardar'>
                         </form>
                     </div>
@@ -128,19 +115,26 @@
             //$("#view-recuperar").toggle( "slide" );
             $('#btn-recuperar').click(function() {
                 $("#view-login").animate({
-                    scrollLeft: 400
-                });
+                    scrollLeft: 360
+                },900);
             });
-            $('#btn-registrar').click(function() {
+            
+            $('#btn-registrar').click(function(){
                 $("#view-login").animate({
                     scrollLeft: 800
-                });
+                },900);
             });
 
-            $('#volver').click(function() {
+            $('#volver-recuperar').click(function(){
                 $("#view-login").animate({
                     scrollLeft: 0
-                });
+                },900);
+            });
+
+            $('#volver-registro').click(function(){
+                $("#view-login").animate({
+                    scrollLeft: 0
+                },900);
             });
 
             $(document).on('focus', '#txt-recuperar', function(e) {
