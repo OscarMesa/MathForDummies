@@ -161,7 +161,7 @@
 
             $("#btn-recuperar-envio").click(function(e) {
                 e.prependDefault();
-                $.post(base_url + "/seguridadacceso/recuperar", {recuperar: $("txt-recuperar").val()}, function(r) {
+                $.post(base_url + "seguridadacceso/recuperar", {recuperar: $("txt-recuperar").val()}, function(r) {
                     alert("hola");
                 });
 
@@ -170,7 +170,7 @@
             $("#perfil").kendoDropDownList();
 
             $("#frmregistro").submit(function() {
-                $.post(base_url + "/SeguridadAcceso/registrar", $(this).serialize(), function() {
+                $.post(base_url + "seguridadacceso/registrar", $(this).serialize(), function() {
                     console.log("excelente");
                 });
                 return false;
