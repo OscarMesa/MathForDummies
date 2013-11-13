@@ -127,7 +127,7 @@ class model_usuario extends CI_Model {
     }
     public function ValidarRegistro($nombre, $correo, $perfil) {
 	$r = $this->db->insert("usuarios",array("nombre"=>$nombre,"correo"=>$correo,"tipo_perfil"=>$perfil));
-       // $query = $this->db->query('SELECT * FROM usuarios WHERE correo=? AND contrasena=SHA1(?) LIMIT 1', array($mail_user,$password));
+// $query = $this->db->query('SELECT * FROM usuarios WHERE correo=? AND contrasena=SHA1(?) LIMIT 1', array($mail_user,$password));
         return $r;
     }
     /**

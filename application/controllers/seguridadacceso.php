@@ -79,7 +79,7 @@ class seguridadacceso extends CI_Controller {
             $rpt['rpt'] = false;
         } else {
             $query = $this->musuarios->ValidarRegistro($this->input->post("nombre"), $this->input->post("correo"), $this->input->post("perfil"));
-            if ($query->num_rows() > 0) {
+            if ($query > 0) {
                 $rpt['rpt'] = true;
             } else {
                 $rpt['rpt'] = false;
