@@ -71,17 +71,16 @@ class seguridadacceso extends CI_Controller {
 
     public function registrar() {
         $this->load->helper(array('form'));
+        $this->load->model('model_usuario', 'musuarios');
         $this->form_validation->set_rules('nombre', '"correo"', 'trim|required');
         $this->form_validation->set_rules('correo', '"correo"', 'trim|required|valid_email');
         $this->form_validation->set_rules('perfil', '"perfil"', 'trim|required');
         if ($this->form_validation->run() == false) {
             $rpt['rpt'] = false;
         } else {
-            $query = $this->muser->ValidarRegistro($this->input->post("nombre"), $this->input->post("correo"), $this->input->post("perfil"));
+            $query = $this->musuarios->ValidarRegistro($this->input->post("nombre"), $this->input->post("correo"), $this->input->post("perfil"));
             if ($query->num_rows() > 0) {
                 $rpt['rpt'] = true;
-                $p = $query->result_array();
-                $this->session->set_userdata($p[0]);
             } else {
                 $rpt['rpt'] = false;
             }
