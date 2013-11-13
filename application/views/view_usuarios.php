@@ -155,9 +155,10 @@
 
 auto = $("#Profetion").kendoAutoComplete({
     minLength: 0,
-     filter: "contains",
+     filter: "startswith",
     dataTextField: "nombre",
     dataValueField: "id",
+    separator: ", ",
   template:       '<article class="auto-TypeCurce" id="${ data.id }">${ data.nombre }</article>',
   select: function(e) {
       var DataItem = this.dataItem(e.item.index());

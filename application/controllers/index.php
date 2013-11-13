@@ -22,7 +22,7 @@ class index extends CI_Controller {
     		if($this->session->userdata('correo') != "")
     			$this->plantilla->Render('index',$data); 
             else
-                redirect('/seguridadAcceso/iniciar_sesion');
+                redirect('/seguridadacceso/iniciar_sesion');
            
     }
 
