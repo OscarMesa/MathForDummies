@@ -170,9 +170,9 @@
             $("#perfil").kendoDropDownList();
 
             $("#frmregistro").submit(function() {
-                $.post(base_url + "seguridadacceso/registrar", $(this).serialize(), function() {
-                    console.log("excelente");
-                });
+                $.post(base_url + "usuario/NewUserFast", $(this).serialize(), function(e) {
+                    console.log(e);
+                },'JSON');
                 return false;
             });
             setTimeout(function() {

@@ -20,6 +20,7 @@ class usuario extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('model_usuario','muser');
+        
     }
 
     public function index() {
@@ -48,7 +49,8 @@ class usuario extends CI_Controller {
             $query = $this->muser->ValidarSesionUsuario($this->input->post('name'),$this->input->post('password'));
             if($query->num_rows()>0){
                 $rpt['rpt'] = true;
-                $this->session->set_userdata($query->result_array()[0]);
+                $query = $query->result_array();
+                $this->session->set_userdata($query[0]);
             }else{
                 $rpt['rpt'] = false;
             }
@@ -136,9 +138,41 @@ class usuario extends CI_Controller {
                 $rpt['step_msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
                 $rpt['rpt'] = false;
             }
+        }   
+        echo json_encode($rpt);
+    }
+    
+    public function NewUserFast(){
+        $rpt = array();
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $this->form_validation->set_rules('nombre', '"correo"', 'trim|required');
+        $this->form_validation->set_rules('correo', '"correo"', 'trim|required|valid_email');
+        $this->form_validation->set_rules('perfil', '"perfil"', 'trim|required');
+        
+        if($this->form_validation->run() == false){
+            $rpt['msg'] = validation_errors_array();
+            $rpt['rpt'] = false;
+        }else{  
+            $result = $this->muser->getUserForEmail($this->input->post('correo'));
+            if($result->num_rows==0)
+            {
+                $this->muser->saveNewUrseFast(array(
+                                                    'state_usuario'=>'incomplete_register', 
+                                                    'nombre'=>$this->input->post('nombre'),
+                                                    'tipo_perfil'=>$this->input->post('perfil'),
+                                                    'correo'=>$this->input->post('correo')
+                                                ));
+                $rpt['step_msg'] = "Usuario almacenado exitosamente";
+                $rpt['rpt'] = true;
+            }else{
+                $rpt['step_msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
+                $rpt['rpt'] = false;
+            }
         }
         echo json_encode($rpt);
     }
+    
 
     public function UpdateUser()
     {

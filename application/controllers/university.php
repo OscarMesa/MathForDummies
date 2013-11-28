@@ -1,11 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class University extends CI_Controller {
+class university extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('model_university','muniversity');
+    }
+    
+    public function index()
+    {
     }
 
     public function LoadViewUniversity(){

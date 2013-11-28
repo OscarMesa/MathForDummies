@@ -122,7 +122,7 @@ function InitElementPages()
 		   modal: true,
 	        draggable : false,
 	        resizable: false,
-	        title: "Iniciar Sesion",
+	        title: "Iniciar sesión",
 	        visible: false,
 	        open:function(e){
 	        },

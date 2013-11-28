@@ -470,7 +470,7 @@ INSERT INTO `universidad` (`id_universidad`, `state_universidad`, `nombre_univer
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `state_usuario` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `state_usuario` enum('active','inactive','incomplete_register') NOT NULL DEFAULT 'active',
   `nombre` varchar(30) NOT NULL,
   `apellido1` varchar(30) NOT NULL,
   `apellido2` varchar(30) DEFAULT NULL,
@@ -509,12 +509,14 @@ INSERT INTO `usuarios` (`id_usuario`, `state_usuario`, `nombre`, `apellido1`, `a
 DROP TABLE IF EXISTS `usuario_universidades`;
 CREATE TABLE IF NOT EXISTS `usuario_universidades` (
   `id_usuario` int(11) NOT NULL,
-  `state_uu` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `state_uu` enum('active','inactive','complete_fields') NOT NULL DEFAULT 'active',
   `universidades_id` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`,`universidades_id`),
   KEY `fk_docentes_has_universidades_docentes1` (`id_usuario`),
   KEY `fk_usuario_universidades_universidad1` (`universidades_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

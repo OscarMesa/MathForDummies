@@ -168,6 +168,19 @@ class model_usuario extends CI_Model {
                            WHERE u.state_usuario = "active" AND u.nombre LIKE "%'.$filter.'%" OR u.apellido1 LIKE "%'.$filter.'%" OR u.apellido2 LIKE "%'.$filter.'%" OR u.telefono LIKE "%'.$filter.'%" OR u.celular LIKE "%'.$filter.'%" OR u.correo LIKE "%'.$filter.'%" OR prf.nombre LIKE "%'.$filter.'%" OR p.descripcion LIKE "%'.$filter.'%" GROUP BY u.id_usuario');   
         return $query->result_array();
     }
+    
+    /**
+     * Este metodo se encarga de insertar un usuario de forma rapida 
+     *
+     * @author Oskar
+     * @param $data Le llegan todos los argumentos para insertar un usuarion por metodo post
+     * 
+     */
+    public function saveNewUrseFast($data) {
+      return $this->db->insert_string('usuarios', $data);
+    } 
+    
+    
 
 }
 
