@@ -83,11 +83,11 @@
                     <div id="box">
                         <div class="elements">
                             <div id='img_recuperar'></div>
-                            <form action="" method="post" id="frmlogin">
+                            <form action="" method="post" id="frmrecuperar">
                                 <label>Ingresar el correo con el que realizo el registros.</label>
                                 <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-large" placeholder="" required/>
                                 <a href="javascript:void(0);" id="volver-recuperar">Volver</a>
-                                <input type='submit' value='Enviar' class="btn" id='btn-recuperar-envio'>
+                                <input type='button' value='Enviar' class="btn" id='btn-recuperar-envio'/>
                             </form>
                         </div>
                     </div>
@@ -96,15 +96,16 @@
                     <div class="elements">
                         <div class="avatar"></div>
                         <form action="" method="post" id="frmregistro">
-                            <input type="text" id='nombre' name="nombre" class="input-large" placeholder="Nombre" required/>
-                            <input type="email" id='correo' name='correo' class="input-large" placeholder="Correo" required/>
+                            <input type="text" id='nombre' name="nombre" class="input-large" placeholder="Nombre" required data-message="El nombre es necesario"/>
+                            <input type="email" id='correo' name='correo' class="input-large" placeholder="Correo" required data-message="El correo es necesario"/>
                             <select name='perfil' id='perfil'  required>
                                 <option value='1'>Estudiante</option>
                                 <option value='2'>Docente</option>
                             </select>
                             <a href='javascript:void(0);' id='volver-registro'>Volver</a>
-                            <input type='submit' value='Guardar' class="btn"  id='btn-guardar'>
-                        </form>
+                            <!--<button class="btn" id="bnt-save-infouser">Guardar</button>-->
+                            <input type='button' value='Guardar' class="btn"  id='btn-guardar'>
+                        </form> 
                     </div>
                 </article>
             </div>
@@ -112,72 +113,104 @@
 
 
         <script type="text/javascript">
-            //$("#view-recuperar").toggle( "slide" );
-            $('#btn-recuperar').click(function() {
-                $("#view-login").animate({
-                    scrollLeft: 360
-                },900);
-            });
-            
-            $('#btn-registrar').click(function(){
-                $("#view-login").animate({
-                    scrollLeft: 800
-                },900);
-            });
+            $(document).on('ready', iniciar);
 
-            $('#volver-recuperar').click(function(){
-                $("#view-login").animate({
-                    scrollLeft: 0
-                },900);
-            });
+            function iniciar()
+            {
 
-            $('#volver-registro').click(function(){
-                $("#view-login").animate({
-                    scrollLeft: 0
-                },900);
-            });
 
-            $(document).on('focus', '#txt-recuperar', function(e) {
-                $("#error-recuperar").css('display', 'none');
-            });
-
-            $(document).on("click", "#btn-recuperar-mail", function(e) {
-                $.post(base_url + "seguridadacceso/recuperar", "email=" + $('#txt-recuperar').val(), function(data) {
-                    if (data.rpt)
-                    {
-                        $("#error-recuperar").html(data.mensaje);
-                        $("#error-recuperar").css('display', 'inline-block');
-                    } else {
-                        $("#error-recuperar").css('display', 'inline-block');
-                        $("#error-recuperar").html(data.mensaje);
+                var validatable = $("#frmregistro").kendoValidator({
+                    errorTemplate: "<span class='k-widget k-tooltip k-tooltip-validation k-invalid-msg' role='alert'><span class='k-icon k-warning'> </span>#=message#</span>",
+                    messages: {
+                        custom: "Please enter valid value for my custom rule",
+                        required: "Campo requerido",
+                        email: "Correo invalido"
                     }
-                }, "JSON");
-
-                e.preventDefault();
-                //    return;
-            });
+                }).data();
 
 
+                //$("#view-recuperar").toggle( "slide" );
+                $('#btn-recuperar').click(function() {
+                    $("#view-login").animate({
+                        scrollLeft: 360
+                    }, 900);
+                });
 
-            $("#btn-recuperar-envio").click(function(e) {
-                e.prependDefault();
+                $('#btn-registrar').click(function() {
+                    $("#view-login").animate({
+                        scrollLeft: 800
+                    }, 900);
+                });
+
+                $('#volver-recuperar').click(function() {
+                    $("#view-login").animate({
+                        scrollLeft: 0
+                    }, 900);
+                });
+
+                $('#volver-registro').click(function() {
+                    $("#view-login").animate({
+                        scrollLeft: 0
+                    }, 900);
+                });
+
+                $(document).on('focus', '#txt-recuperar', function(e) {
+                    $("#error-recuperar").css('display', 'none');
+                });
+
+                $(document).on("click", "#btn-recuperar-mail", function(e) {
+                    $.post(base_url + "seguridadacceso/recuperar", "email=" + $('#txt-recuperar').val(), function(data) {
+                        if (data.rpt)
+                        {
+                            $("#error-recuperar").html(data.mensaje);
+                            $("#error-recuperar").css('display', 'inline-block');
+                        } else {
+                            $("#error-recuperar").css('display', 'inline-block');
+                            $("#error-recuperar").html(data.mensaje);
+                        }
+                    }, "JSON");
+                    e.preventDefault();
+                    return false;
+                    //    return;
+                });
+                
+                $(document).on("click","#bnt-save-infouser",function(e) {
+                    if (validatable.validate() === true) {
+                        $.post(base_url + "usuario/NewUserFast", $(this).serialize(), function(e) {
+                            console.log(e);
+                        }, 'JSON');
+                    } else {
+                        console.log(validatable.errors())
+                    }
+                    e.preventDefault();
+                    return false;
+                });
+
+
+
+
+
+                $("#perfil").kendoDropDownList();
+
+
+                setTimeout(function() {
+                    abrir();
+                }, 250);
+            }
+
+            $(document).on('click', "#btn-recuperar-envio", function(e) {
+                
                 $.post(base_url + "seguridadacceso/recuperar", {recuperar: $("txt-recuperar").val()}, function(r) {
                     alert("hola");
                 });
-
+                e.prependDefault();
+            //    return false;
             });
-
-            $("#perfil").kendoDropDownList();
-
-            $("#frmregistro").submit(function() {
-                $.post(base_url + "usuario/NewUserFast", $(this).serialize(), function(e) {
-                    console.log(e);
-                },'JSON');
-                return false;
-            });
-            setTimeout(function() {
-                abrir();
-            }, 250);
+            
+            btn-guardar
+            function getMessage(input) {
+                return input.data("message");
+            }
         </script>
 
         <div id="loader-view">

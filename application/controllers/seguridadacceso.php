@@ -38,10 +38,10 @@ class seguridadacceso extends CI_Controller {
         if (isset($usuario[0]->nombre)) {
             $respuesta['rpt'] = true;
             $respuesta['mensaje'] = 'Se ha enviado un mensaje a el correo ' . $usuario[0]->correo . ', en este encontrara un link para realizar el cambió.';
-            $this->correo->from('oscarmesa.elpoli@gmail.com', 'PoliAuLink');
+            $this->correo->from('poliauliink@gmail.com', 'PoliAuLink');
+            $this->correo->cc('oscarmesa.elpoli@gmail.com');
             $this->correo->to($this->input->post("email"));
             $this->correo->set_mailtype("html");
-
             $message = '<html><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /></head><body>';
             $message .= '<img src="http://www.freeimagehosting.net/newuploads/5lgtl.png" alt="PoliAuLink" />';
             $message .= '<table rules="all" style="border-color: #666;" cellpadding="10" border="0">';
