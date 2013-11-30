@@ -302,7 +302,7 @@ function ValidateLogin(e)
 				console.log(data);
 				if(data.rpt == false)
 				{	
-					OpenMessagesErrorModal('Error','Este usuario no se encuentra registrado');
+					OpenMessagesErrorModal('Error','Estos datos no coinciden, verifiquelos');
 				}else{
 					win_login.close();
 					window.location.href = base_url;

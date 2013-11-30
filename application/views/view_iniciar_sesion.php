@@ -219,9 +219,17 @@
 
             $(document).on('click', "#btn-recuperar-envio", function(e) {
 
-                $.post(base_url + "seguridadacceso/recuperar", $("#frmrecuperar").serialize(), function(r) {
-                  
-                });
+                $.post(base_url + "seguridadacceso/recuperar", $("#frmrecuperar").serialize(), function(e) {
+                  $('#txt-recuperar').after('<span id="msg-error-correo-existente" role="alert" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg"><span class="k-icon k-warning"> </span>' + e.mensaje + '</span>');
+                            setTimeout(function() {
+                                $("#msg-error-correo-existente").remove();
+                            }, 5000);
+                            if (e.rpt) {
+                                $('#frmrecuperar').each(function() {
+                                    this.reset();
+                                });
+                            }
+                },'JSON');
                 e.preventDefault();
             });
 

@@ -40,7 +40,7 @@ class seguridadacceso extends CI_Controller {
             $respuesta['mensaje'] = 'Se ha enviado un mensaje a el correo ' . $usuario[0]->correo . ', en este encontrara un link para realizar el cambió.';
             $this->correo->from('poliauliink@gmail.com', 'PoliAuLink');
             $this->correo->cc('poliauliink@gmail.com');
-            $this->correo->to($this->input->post("email"));
+            $this->correo->to($this->input->post("recuperar"));
             $this->correo->set_mailtype("html");
             $message = '<html><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /></head><body>';
             $message .= '<img src="http://www.freeimagehosting.net/newuploads/5lgtl.png" alt="PoliAuLink" />';
