@@ -40,7 +40,7 @@
 			if(strpos($row['url'],'youtube'))
 			{
 				if(!$isFirefox){
-					echo '<article class="videor" style="display:none"><iframe width="500" height="320" src="'.$row['url'].'" frameborder="0"></iframe></article>';  
+					echo '<article class="videor" style="display:none"><iframe width="420" height="315" src='.$row['url'].' frameborder="0" allowfullscreen></iframe></article>';  
 				}else {
 					echo ' 
 						<div id="mvideos'.$i.'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -94,7 +94,7 @@
 <div id="mvideos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
         <a data-dismiss="modal" class="close">×</a>
-        <h3>Nuevo Curso</h3>
+        <h3>Nuevo Video</h3>
      </div>
 
      <form id="frm-video" action="<?php base_url();?>videos/upload" method="POST" enctype="multipart/form-data">

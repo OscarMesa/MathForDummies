@@ -379,7 +379,7 @@ img.alignleft, img.alignright {display:block; padding:5px; border:solid 1px #ddd
 #box{
     background:url(../images/shape.png) no-repeat center;
     width:360px;
-    height:264px;
+    height:383px;
 }
 .elements{
     width:222px;
@@ -501,4 +501,14 @@ input[type=checkbox]:checked + label {
 
 #btn-recuperar-envio{
 	float:right;
+}
+
+#contenedor_ventanas{
+    height:300px; 
+    width:1080px;
+}
+
+#view-login{
+    display:inline-block; overflow:hidden; display:none; height:320px; width:360px;
+    
 }

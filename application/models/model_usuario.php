@@ -51,7 +51,8 @@ class model_usuario extends CI_Model {
     {
         $this->db->select('p.nombre AS nombre_perfil, u.*');
         $this->db->join('perfiles AS p', 'p.id_perfil = u.tipo_perfil', 'inner');
-        return $this->db->get_where('usuarios AS u',array('u.correo'=>$email))->result_object();
+        $t = $this->db->get_where('usuarios AS u',array('u.correo'=>$email))->result_object();
+        return $t;
     }
 
     //Obtiene toda la info de usuario con
@@ -177,7 +178,7 @@ class model_usuario extends CI_Model {
      * 
      */
     public function saveNewUrseFast($data) {
-      return $this->db->insert_string('usuarios', $data);
+      return $this->db->insert('usuarios', $data);
     } 
     
     

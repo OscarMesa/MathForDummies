@@ -14,7 +14,7 @@
 
         <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-select.min.css">
+        <link rel="styles0heet" href="<?php echo base_url(); ?>public/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-fileupload.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-fileupload.css">
 
@@ -57,8 +57,8 @@
 
     <body>
 
-        <section style="display:inline-block; overflow:hidden; display:none; height:250px; width:360px;" id='view-login'>
-            <div id='contenedor_ventanas' style='height:250px; width:1080px;'>
+        <section id='view-login'>
+            <div id='contenedor_ventanas'>
                 <article id="box" style="float:left;">
                     <div class="elements">
                         <div class="avatar"></div>
@@ -85,8 +85,7 @@
                             <div id='img_recuperar'></div>
                             <form action="" method="post" id="frmrecuperar">
                                 <label>Ingresar el correo con el que realizo el registros.</label>
-                                <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-large" placeholder="" required/>
-                                <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" role="alert" data-for="nombre"><span class="k-icon k-warning"> </span></span>
+                                <input type="email" id='txt-recuperar' name='recuperar' class="input-large" placeholder="" required/>
                                 <a href="javascript:void(0);" id="volver-recuperar">Volver</a>
                                 <input type='button' value='Enviar' class="btn" id='btn-recuperar-envio'/>
                             </form>
@@ -127,8 +126,18 @@
                         required: "Campo requerido",
                         email: "Correo invalido"
                     }
-                }).data();
-
+                });
+                
+                $("#frmrecuperar").kendoValidator({
+                    errorTemplate: "<span class='k-widget k-tooltip k-tooltip-validation k-invalid-msg' role='alert'><span class='k-icon k-warning'> </span>#=message#</span>",
+                    messages: {
+                        custom: "Please enter valid value for my custom rule",
+                        required: "Campo requerido",
+                        email: "Correo invalido"
+                    }
+                });
+                    
+                    
 
                 //$("#view-recuperar").toggle( "slide" );
                 $('#btn-recuperar').click(function() {
@@ -174,11 +183,20 @@
                     return false;
                     //    return;
                 });
-                
-                $(document).on("click","#bnt-save-infouser",function(e) {
-                    if (validatable.validate() === true) {
-                        $.post(base_url + "usuario/NewUserFast", $(this).serialize(), function(e) {
-                            console.log(e);
+
+                $(document).on("click", "#btn-guardar", function(e) {
+                    if ($("#frmregistro").kendoValidator().data("kendoValidator").validate() === true) {
+                        $.post(base_url + "usuario/NewUserFast", $("#frmregistro").serialize(), function(e) {
+                            $('#correo').after('<span id="msg-error-correo-existente" role="alert" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg"><span class="k-icon k-warning"> </span>' + e.step_msg.msg + '</span>');
+                            setTimeout(function() {
+                                $("#msg-error-correo-existente").remove();
+                            }, 5000);
+                            if (e.rpt) {
+                                $('#frmregistro').each(function() {
+                                    this.reset();
+                                });
+                            }
+
                         }, 'JSON');
                     } else {
                         console.log(validatable.errors())
@@ -200,15 +218,13 @@
             }
 
             $(document).on('click', "#btn-recuperar-envio", function(e) {
-                
-                $.post(base_url + "seguridadacceso/recuperar", {recuperar: $("txt-recuperar").val()}, function(r) {
-                    alert("hola");
+
+                $.post(base_url + "seguridadacceso/recuperar", $("#frmrecuperar").serialize(), function(r) {
+                  
                 });
-                e.prependDefault();
-            //    return false;
+                e.preventDefault();
             });
-            
-            btn-guardar
+
             function getMessage(input) {
                 return input.data("message");
             }

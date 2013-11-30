@@ -33,8 +33,8 @@ class seguridadacceso extends CI_Controller {
         $respuesta = array('rpt' => false, 'mensaje' => 'Error');
         $this->load->library('email', '', 'correo');
         $this->load->model('model_usuario', 'musuarios');
-        $usuario = $this->musuarios->getUsuario($this->input->post("email"));
-
+        $usuario = $this->musuarios->getUsuario($this->input->post("recuperar"));
+  
         if (isset($usuario[0]->nombre)) {
             $respuesta['rpt'] = true;
             $respuesta['mensaje'] = 'Se ha enviado un mensaje a el correo ' . $usuario[0]->correo . ', en este encontrara un link para realizar el cambió.';

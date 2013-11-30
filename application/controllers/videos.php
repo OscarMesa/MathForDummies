@@ -33,7 +33,10 @@
 			$data = json_decode($this->input->post('data'));
 			$rpt = array('rpt'=>true,'msg'=>array('El video subio correctamente.'));
 			if($data->optionsRadios == 'Link'){
-				$this->mvideos->insert_video(array($data->titlevideo,$data->title,'video',$data->description));
+//                                echo strpos($data->titlevideo,'youtube');
+//                               Tenemos que arreglar ese link de youtube ya que el formato del link no nos sirve. 
+//				exit();
+                                $this->mvideos->insert_video(array($data->titlevideo,$data->title,'video',$data->description));
 			}else{
 				$name = $this->com_create_guid1();
 				$filename = $name.'.'.$data->format;

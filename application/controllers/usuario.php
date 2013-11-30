@@ -161,18 +161,37 @@ class usuario extends CI_Controller {
                                                     'state_usuario'=>'incomplete_register', 
                                                     'nombre'=>$this->input->post('nombre'),
                                                     'tipo_perfil'=>$this->input->post('perfil'),
-                                                    'correo'=>$this->input->post('correo')
-                                                ));
-                $rpt['step_msg'] = "Usuario almacenado exitosamente";
+                                                    'correo'=>$this->input->post('correo'),
+                                                    'contrasena' => sha1('KOp4$5%'),
+                                                    'state_usuario' => 'active'
+                    ));
+               // echo $this->db->last_query();
+                $this->sendEmailPasswordToEmail($this->input->post('correo'));
+                $rpt['step_msg'] = array('msg'=>"Usuario almacenado exitosamente, se a enviado la contraseña a su correo");
                 $rpt['rpt'] = true;
             }else{
-                $rpt['step_msg'] = array('EmailUser'=>'Este usuario ya se encuentra registrado');
+                $rpt['step_msg'] = array('msg'=>'Este correo ya se encuentra registrado');
                 $rpt['rpt'] = false;
             }
         }
         echo json_encode($rpt);
     }
     
+    public function sendEmailPasswordToEmail($email)
+    {   $this->load->library('email', '', 'correo');
+        $this->correo->from('poliauliink@gmail.com', 'PoliAuLink');
+            $this->correo->to($email);
+            $this->correo->set_mailtype("html");
+            $message = '<html><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /></head><body>';
+            $message .= '<img src="http://www.freeimagehosting.net/newuploads/5lgtl.png" alt="PoliAuLink" />';
+            $message .= '<p>Gracias por su registro</p><p>Su contraseña es: KOp4$5%</p>';
+            $message .= "</body></html>";
+
+            $this->correo->subject('Registro exitoso');
+            $this->correo->message($message);
+
+            $this->correo->send();
+    }
 
     public function UpdateUser()
     {
