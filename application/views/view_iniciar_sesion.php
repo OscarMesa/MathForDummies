@@ -86,6 +86,7 @@
                             <form action="" method="post" id="frmrecuperar">
                                 <label>Ingresar el correo con el que realizo el registros.</label>
                                 <input type="text" id='txt-recuperar' name='txt-recuperar' class="input-large" placeholder="" required/>
+                                <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" role="alert" data-for="nombre"><span class="k-icon k-warning"> </span></span>
                                 <a href="javascript:void(0);" id="volver-recuperar">Volver</a>
                                 <input type='button' value='Enviar' class="btn" id='btn-recuperar-envio'/>
                             </form>
