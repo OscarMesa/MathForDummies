@@ -7,10 +7,10 @@
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'aerovision',    
+    'name' => 'PoliAuLink',    
     'language' => "es",
     'defaultController' => 'usuario/inicio',
-    'theme' => 'aerovision',
+    'theme' => 'PoliAuLink',
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes
