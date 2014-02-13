@@ -19,6 +19,31 @@ class SiteController extends Controller {
             ),
         );
     }
+    
+       /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules() {
+        return array(
+            array('deny', // deny all users
+                'actions' => array(),
+                'users' => array('?'),
+            ),
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions' => array(),
+                'roles' => array('admin'),
+            ),
+            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions' => array('AjaxRecuperar','AjaxRegistro', 'AjaxInicioSesion','login'),
+                'users' => array('*'),
+            ),
+            array('deny', // deny all users
+                'users' => array('*'),
+            ),
+        );
+    }
 
     /**
      * This is the default 'index' action that is invoked
@@ -85,15 +110,40 @@ class SiteController extends Controller {
             if ($model->validate() && $model->login())
                 $this->redirect(Yii::app()->baseUrl.'/'.Yii::app()->defaultController);   
         }
-        // display the login form
-        //$this->redirect(Yii::app()->user->returnUrl);
-        
-//        print_r($model->getErrors());
-//                exit();
-        $this->render('application.views.usuario.login', array('model' => $model,
+
+        $this->render('application.views.usuarios.login', array(
+            'model' => $model,
+            'perfiles' => Perfiles::model()->findAll()
                                              ));
     }
+    
+    public function actionAjaxInicioSesion()
+    {
+        $model = new LoginForm;
+        $this->renderPartial('application.views.usuarios._formInicio', array(
+            'model' => $model,
+            'perfiles' => Perfiles::model()->findAll()
+                                             ));
+        exit();
+    }
+    
+    public function actionAjaxRegistro()
+    {
+        $this->renderPartial('application.views.usuarios._formRegistro', array(
+            'modelPerfil' => Perfiles::model()->findAll(),
+                                             ));
+        exit();
+    }    
 
+    public function actionAjaxRecuperar()
+    {
+        $model = new LoginForm;
+        $this->renderPartial('application.views.usuarios._formRecuperar', array(
+            'model' => $model,
+            'perfiles' => Perfiles::model()->findAll()
+                                             ));
+        exit();
+    }
     /**
      * Logs out the current user and redirect to homepage.
      */

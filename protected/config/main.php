@@ -7,9 +7,9 @@
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'PoliAuLink',    
+    'name' => 'PoliAuLink',
     'language' => "es",
-    'defaultController' => 'usuario/inicio',
+    'defaultController' => 'usuarios/inicio',
     'theme' => 'PoliAuLink',
     // preloading 'log' component
     'preload' => array('log'),
@@ -36,17 +36,20 @@ return array(
     // application components
     'components' => array(
         'log' => array(
+            'session' => array(
+                'timeout' => 60,
+            ),
             'class' => 'CLogRouter',
             'routes' => array(
-               /* array(
-                    'class' => 'CWebLogRoute',
-                    'categories' => 'system.db.CDbCommand',
-                    'showInFireBug' => true,
-                ),*/
+                /* array(
+                  'class' => 'CWebLogRoute',
+                  'categories' => 'system.db.CDbCommand',
+                  'showInFireBug' => true,
+                  ), */
                 array(
-                    'class'=>'CEmailLogRoute',
-                    'levels'=>'error, warning',
-                    'emails'=>'oscarmesa.elpoli@gmail.com',
+                    'class' => 'CEmailLogRoute',
+                    'levels' => 'error, warning',
+                    'emails' => 'oscarmesa.elpoli@gmail.com',
                 ),
             ),
         ),
@@ -58,31 +61,20 @@ return array(
             'allowAutoLogin' => true,
         ),
         // uncomment the following to enable URLs in path-format
-        
-          'urlManager'=>array(
-          'urlFormat'=>'path',
-          'rules'=>array(
+        'urlManager' => array(
+            'urlFormat' => 'path',
+            //    'urlSuffix'=>'oscargay',
+            'rules' => array(
 //          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
 //          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 //          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-              'programa/subirArchivo/<id>' => 'programa/subirArchivo',
-              'programa/ActualizaEstado/<programa>/<estado>' => 'programa/ActualizaEstado'
-          ),
-          ),
-         
-        'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=appaerovision;unix_socket:/path/to/socket/mysql.sock',
-            'emulatePrepare' => true,
-            'username' => 'wwwdisco_disco',
-            'password' => 'vihuarar',
-            'charset' => 'utf8',
-            'tablePrefix' => '',
-            'enableProfiling' => true,
+                'programa/subirArchivo/<id>' => 'programa/subirArchivo',
+                'programa/ActualizaEstado/<programa>/<estado>' => 'programa/ActualizaEstado'
+            ),
         ),
-        'db2' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=wwwaerov_joomla;unix_socket:/path/to/socket/mysql.sock',
+        'db' => array(
+            'connectionString' => 'mysql:host=localhost;dbname=math;unix_socket:/path/to/socket/mysql.sock',
             'emulatePrepare' => true,
-            'class' => 'CDbConnection',
             'username' => 'oscar',
             'password' => 'oscarmesa',
             'charset' => 'utf8',
@@ -109,8 +101,8 @@ return array(
                 array(
                     'class' => 'CFileLogRoute',
                     //'levels' => 'error, warning',
-                    'categories'=>'system.db.*',
-                    'logFile'=>'sql.log',
+                    'categories' => 'system.db.*',
+                    'logFile' => 'sql.log',
                 ),
             // uncomment the following to show log messages on web pages
             /*
@@ -121,15 +113,15 @@ return array(
             ),
         ),
         'mail' => array(
-                'class' => 'ext.yii-mail.YiiMail',
-                'transportType'=>'smtp',
-                'transportOptions'=>array(
-                        'host'=>'aerovision.com.co',
-                        'username'=>'info@aerovision.com.co',
-                        'password'=>'aerovision',
-                        'port'=>'25',                       
-                ),
-                'viewPath' => 'application.views.mail',             
+            'class' => 'ext.yii-mail.YiiMail',
+            'transportType' => 'smtp',
+            'transportOptions' => array(
+                'host' => 'aerovision.com.co',
+                'username' => 'info@aerovision.com.co',
+                'password' => 'aerovision',
+                'port' => '25',
+            ),
+            'viewPath' => 'application.views.mail',
         ),
     ),
     // application-level parameters that can be accessed
