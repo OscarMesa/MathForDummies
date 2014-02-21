@@ -14,32 +14,21 @@ class UserIdentity extends CUserIdentity
     public function authenticate()
     {
         $username=strtolower($this->username);
-        Yii::import("application.models.appjoomla.*", true);
         $criteria = new CDbCriteria();
         $criteria->alias = 'users';
-        $criteria->with = array(
-            'grupos' => array(
-                'alias' => 'gr',
-                'condition' => 'gr.id IN (8,7)' // Solo traee los que son administradores y supre administradores
-            ));
-        $criteria->addCondition('users.username = ?');
+        $criteria->addCondition('users.correo = ?');
         $criteria->params = array($username);
-        $user = V7guiUsers::model()->find($criteria);
+        $user = Usuarios::model()->find($criteria);
         if($user===null){
            return $this->errorCode=self::ERROR_USERNAME_INVALID;
         }else{
-            $password=$user->password;
             $mypassword=$this->password;
-            $part = explode(":",$password);
-            $salt = $part[1];
-            $encrypted_password = md5($mypassword . $salt).":".$salt;
-            if($user->password!=$encrypted_password){
+            $encrypted_password = sha1($mypassword);
+            if($user->contrasena!=$encrypted_password){
                 $this->errorCode=self::ERROR_PASSWORD_INVALID;
-            }else if(count($user->grupos)<=0){
-                $this->errorCode=self::ERROR_TYPEUSER_INVALID;
             }
             else{
-                $this->_id=$user->id;
+                $this->_id=$user->id_usuario;
                // $this->setState('role', $user->rol);
                //  $this->setState('admin', 1);
 
