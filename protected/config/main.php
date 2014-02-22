@@ -16,6 +16,7 @@ return array(
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
+        'application.extensions.*',
         'application.models.appjoomla.*',
         'application.components.*',
         'ext.yii-mail.YiiMailMessage',
@@ -63,11 +64,10 @@ return array(
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(
             'urlFormat' => 'path',
-            //    'urlSuffix'=>'oscargay',
             'rules' => array(
-//          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-//          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-//          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
                 'programa/subirArchivo/<id>' => 'programa/subirArchivo',
                 'programa/ActualizaEstado/<programa>/<estado>' => 'programa/ActualizaEstado'
             ),
