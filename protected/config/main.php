@@ -73,10 +73,10 @@ return array(
             ),
         ),
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=math;unix_socket:/path/to/socket/mysql.sock',
+            'connectionString' => 'mysql:host=localhost;dbname=math',
             'emulatePrepare' => true,
-            'username' => 'oscar',
-            'password' => 'oscarmesa',
+            'username' => 'poliaulink',
+            'password' => 'math',
             'charset' => 'utf8',
             'tablePrefix' => '',
             'enableProfiling' => true,
