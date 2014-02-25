@@ -2,7 +2,7 @@
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id'=>'FormRegistroUsuario',
-    'action'=>$this->createUrl('usuarios/create'),
+    'action'=>$this->createUrl('usuarios/createAnonimo'),
     'enableClientValidation'=>true,
     'clientOptions'=>array(
 		'validateOnSubmit'=>true,

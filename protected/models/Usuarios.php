@@ -28,29 +28,7 @@ class Usuarios extends CActiveRecord {
     public function tableName() {
         return 'usuarios';
     }
-
-<<<<<<< HEAD
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('nombre, apellido1, telefono, celular, correo, contrasena', 'required'),
-			array('telefono', 'numerical', 'integerOnly'=>true),
-			array('state_usuario', 'length', 'max'=>8),
-			array('nombre, apellido1, apellido2', 'length', 'max'=>30),
-			array('contrasena', 'length', 'max'=>40),
-			array('celular', 'length', 'max'=>20),
-			array('correo', 'length', 'max'=>50),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id_usuario, state_usuario, nombre, apellido1, apellido2, contrasena, telefono, celular, correo', 'safe', 'on'=>'search'),
-		);
-	}
-=======
+    
     /**
      * @return array validation rules for model attributes.
      */
@@ -59,7 +37,6 @@ class Usuarios extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('contrasena,passConfirm,nombre,correo','required','except'=>array('create'),),
-            array('contrasena,passConfirm','required','except'=>array('create'),),
             array('contrasena', 'compare', 'compareAttribute' => 'passConfirm', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'except'=>array('create')),
             array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.'),
             array('telefono', 'numerical', 'integerOnly' => true),
@@ -75,7 +52,6 @@ class Usuarios extends CActiveRecord {
            
         );
     }
->>>>>>> e2536441c3c6aca53fb1636c1faac1327c467599
 
     /**
      * @return array relational rules.
