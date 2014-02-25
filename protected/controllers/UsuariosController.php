@@ -25,11 +25,11 @@ class UsuariosController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view','inicio'),
+                'actions' => array('index', 'view', 'inicio'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'active', 'inactive', 'ajaxFiltroUsuarios'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -45,7 +45,7 @@ class UsuariosController extends Controller {
     public function actionInicio() {
         //print_r(Yii::app()->user);exit();
         if (!Yii::app()->user->isGuest) {
-            $this->render('inicio');
+            $this->render('application.views.site.inicio');
         } else {
             $this->redirect('site/login');
         }
@@ -69,7 +69,7 @@ class UsuariosController extends Controller {
         $model = new Usuarios;
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+         $this->performAjaxValidation($model);
 
         if (isset($_POST['Usuarios'])) {
             $model->attributes = $_POST['Usuarios'];
@@ -89,7 +89,6 @@ class UsuariosController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -167,6 +166,50 @@ class UsuariosController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+    public function actionActive($id) {
+        Usuarios::model()->updateByPk($id, array('state_usuario' => 'active'));
+        $this->render('application.views.site.inicio');
+    }
+
+    public function actionInactive($id) {
+        Usuarios::model()->updateByPk($id, array('state_usuario' => 'inactive'));
+        $this->render('application.views.site.inicio');
+    }
+
+    /**
+     * Este metodo se encarga de enviar el grid por ajax, filtrando por cualquier campo
+     * @author Oskar <oscarmesa.elpoli@gmail.com>
+     * 
+     */
+    public function actionAjaxFiltroUsuarios() {
+        
+        $criteria = new CDbCriteria();
+        $criteria->alias = 'usuario';
+        $criteria->with = array(
+            'perfiles' => array(
+                'alias' => 'perfil',
+            ),
+        );
+        $criteria->addCondition('usuario.nombre=?', 'OR');
+        $criteria->addCondition('usuario.apellido1=?', 'OR');
+        $criteria->addCondition('usuario.apellido2=?', 'OR');
+        $criteria->addCondition('usuario.telefon=?', 'OR');
+        $criteria->addCondition('usuario.celular=?', 'OR');
+        $criteria->addCondition('usuario.correo=?', 'OR');
+        $criteria->addCondition('perfiles.nombre=?', 'OR');
+        
+        $criteria->params = array($_POST['data']);
+        
+        $dataProvider = new CActiveDataProvider('Usuarios', array(
+            'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 20,
+            )
+                )
+        );
+        echo $this->renderPartial('_gridUsuarios', array('dataProvider'=>$dataProvider), true);
     }
 
 }

@@ -130,6 +130,7 @@ class SiteController extends Controller {
     {
         $this->renderPartial('application.views.usuarios._formRegistro', array(
             'modelPerfil' => Perfiles::model()->findAll(),
+            'modelRegistro' => new Usuarios()
                                              ));
         exit();
     }    

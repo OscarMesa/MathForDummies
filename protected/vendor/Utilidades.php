@@ -77,6 +77,24 @@ class Utilidades {
         return $perfil;
     }
     
+    public static function generarLinkActInactUsuario($estado,$id)
+    {
+        return ($estado=='active'?'<a href="' . Yii::app()->createUrl('usuarios/inactive/' . $id) . '" class="btn btn-small"><i class="icon-hand-down"></i>Innactivar</a>':'<a href="' . Yii::app()->createUrl('usuarios/active/' . $id) . '" class="btn btn-small"><i class="icon-hand-up"></i>Activar</a>');
+    }
+    
+    public static function generarLinkEditarUsuario($id)
+    {
+        return '<a href="' . Yii::app()->createUrl('usuarios/update/' .$id) . '" class="btn btn-small"><i class="icon-edit "></i></a>';
+    }
+    
+    public static function generarLiPerfiles($perfiles)
+    {
+        foreach ($perfiles as $perfil) {
+            echo '<p><i class="icon-user"></i>'.$perfil->nombre.'</p>';
+        }
+    }
+    
+    
 }
 
 ?>
