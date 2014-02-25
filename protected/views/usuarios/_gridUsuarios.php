@@ -1,8 +1,5 @@
 <?php
 
-$this->widget('application.extensions.multiSelectBootstrap.MultiSelect');
-
-
 Yii::import('application.vendor.*');
 
 $this->widget('bootstrap.widgets.TbGridView', array(
@@ -47,6 +44,4 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     ),
         )
 );
-            
-echo 'por que no sale';
 ?>

@@ -237,8 +237,8 @@ class UsuarioController extends Controller {
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if (isset($_POST['Usuario'])) {
+           
             $model->attributes = $_POST['Usuario'];
             if ($model->contrasena == "") {
                 $model->addError('contrasena', 'La contrase&ntilde;a no puede estar vacia');

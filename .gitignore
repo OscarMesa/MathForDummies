@@ -4,4 +4,7 @@
 /nbproject
 /application/config/database.php
 /assets
+<<<<<<< HEAD
 /protected/config/main.php
+=======
+>>>>>>> e2536441c3c6aca53fb1636c1faac1327c467599

@@ -270,8 +270,14 @@ class TbActiveForm extends CActiveForm
 	 */
 	protected function inputsList($checkbox, $model, $attribute, $data, $htmlOptions = array())
 	{
+           
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
-		$select = CHtml::resolveValue($model, $attribute);
+                if($checkbox){
+                    $select = CHtml::listData($htmlOptions['select'], $model->tableSchema->primaryKey,  $model->tableSchema->primaryKey);    
+                    unset($htmlOptions['select']);
+                }else{    
+                    $select = CHtml::resolveValue($model, $attribute);
+                }
 
 		if ($model->hasErrors($attribute))
 		{
@@ -321,8 +327,7 @@ class TbActiveForm extends CActiveForm
 			$labelCssClass .= ' inline';
 			unset($htmlOptions['inline']);
 		}
-
-		foreach ($data as $value => $label)
+               foreach ($data as $value => $label)
 		{
 			$checked = !is_array($select) && !strcmp($value, $select) || is_array($select) && in_array($value, $select);
 			$htmlOptions['value'] = $value;
