@@ -25,7 +25,7 @@ class UsuariosController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'inicio'),
+                'actions' => array('index', 'view', 'inicio','createAnonimo'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -60,21 +60,63 @@ class UsuariosController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
-
-    /**
-     * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     */
-    public function actionCreate() {
+    
+    
+    public function actionCreateAnonimo()
+    {
         $model = new Usuarios;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Usuarios'])) {
+//             echo '<pre>';
+//            print_r($_POST);exit();
             $model->attributes = $_POST['Usuarios'];
-            if ($model->save())
+//            
+//            exit();
+            $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
+            $model->passConfirm = sha1($_POST['Usuarios']['passConfirm']);
+            if ($model->save()){
+                $model->setUniversidad($_POST['Universidad']);
+                $model->setPerfiles($_POST['Perfiles']);
                 $this->redirect(array('view', 'id' => $model->id_usuario));
+            }else{
+                $model->contrasena = '';
+                $model->passConfirm  = '';
+            }
+        }
+
+        $this->render('create', array(
+            'model' => $model,
+        ));
+    }        
+    /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actioncreate() {
+        $model = new Usuarios;
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['Usuarios'])) {
+//             echo '<pre>';
+//            print_r($_POST);exit();
+            $model->attributes = $_POST['Usuarios'];
+//            
+//            exit();
+            $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
+            $model->passConfirm = sha1($_POST['Usuarios']['passConfirm']);
+            if ($model->save()){
+                $model->setUniversidad($_POST['Universidad']);
+                $model->setPerfiles($_POST['Perfiles']);
+                $this->redirect(array('view', 'id' => $model->id_usuario));
+            }else{
+                $model->contrasena = '';
+                $model->passConfirm  = '';
+            }
         }
 
         $this->render('create', array(
@@ -184,24 +226,36 @@ class UsuariosController extends Controller {
      * 
      */
     public function actionAjaxFiltroUsuarios() {
-        
+        $columnas = json_decode($_POST['columnas']);
         $criteria = new CDbCriteria();
         $criteria->alias = 'usuario';
-        $criteria->with = array(
-            'perfiles' => array(
-                'alias' => 'perfil',
-            ),
-        );
-        $criteria->addCondition('usuario.nombre=?', 'OR');
-        $criteria->addCondition('usuario.apellido1=?', 'OR');
-        $criteria->addCondition('usuario.apellido2=?', 'OR');
-        $criteria->addCondition('usuario.telefon=?', 'OR');
-        $criteria->addCondition('usuario.celular=?', 'OR');
-        $criteria->addCondition('usuario.correo=?', 'OR');
-        $criteria->addCondition('perfiles.nombre=?', 'OR');
-        
-        $criteria->params = array($_POST['data']);
-        
+       // $criteria->join = ' INNER JOIN perfiles perfil'
+        $criteria->join = ' INNER JOIN usuarios_perfiles up ON up.usuarios_id_usuario= usuario.id_usuario'; 
+        $criteria->join .= ' INNER JOIN perfiles perfil ON perfil.id_perfil= up.perfiles_id_perfil'; 
+        $params = array();
+        if (count($columnas) > 0) {
+            foreach ($columnas as $columna) {
+                if($columna->id != 'perfil')
+                    $criteria->addCondition('usuario.' . $columna->id . '=?', 'OR');
+                else
+                    $criteria->addCondition('perfil.nombre=?', 'OR');
+                $params[] = $_POST['data'];
+            }
+        } else {
+            $criteria->addCondition('usuario.nombre=?', 'OR');
+            $criteria->addCondition('usuario.apellido1=?', 'OR');
+            $criteria->addCondition('usuario.apellido2=?', 'OR');
+            $criteria->addCondition('usuario.telefono=?', 'OR');
+            $criteria->addCondition('usuario.celular=?', 'OR');
+            $criteria->addCondition('usuario.correo=?', 'OR');
+            $criteria->addCondition('perfil.nombre=?', 'OR');
+            for ($i = 0; $i < 7; $i++) {
+                $params[] = $_POST['data'];
+            }
+        }
+        $criteria->group = 'usuario.id_usuario';
+         $criteria->select = 'usuario.*,perfil.nombre nombre_perfil'; 
+        $criteria->params = $params;
         $dataProvider = new CActiveDataProvider('Usuarios', array(
             'criteria' => $criteria,
             'pagination' => array(
@@ -209,7 +263,7 @@ class UsuariosController extends Controller {
             )
                 )
         );
-        echo $this->renderPartial('_gridUsuarios', array('dataProvider'=>$dataProvider), true);
+        echo $this->renderPartial('_gridUsuarios', array('dataProvider' => $dataProvider), true);
     }
 
 }
