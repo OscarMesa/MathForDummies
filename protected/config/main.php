@@ -20,6 +20,7 @@ return array(
         'application.models.appjoomla.*',
         'application.components.*',
         'ext.yii-mail.YiiMailMessage',
+      //  'application.controllers.*',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool

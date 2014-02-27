@@ -36,9 +36,9 @@ class Usuarios extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('contrasena,passConfirm,nombre,correo','required','except'=>array('create'),),
             array('contrasena', 'compare', 'compareAttribute' => 'passConfirm', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'except'=>array('create')),
             array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.'),
+            array('contrasena,passConfirm,nombre,correo','required', 'message'=>'Este campo es requerido.' , 'except'=>array('createAnonimo')),
             array('telefono', 'numerical', 'integerOnly' => true),
             array('state_usuario', 'length', 'max' => 8),
             array('nombre, apellido1, apellido2', 'length', 'max' => 30),

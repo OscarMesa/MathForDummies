@@ -77,8 +77,12 @@ class UsuariosController extends Controller {
 //            exit();
             $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
             $model->passConfirm = sha1($_POST['Usuarios']['passConfirm']);
+            $model->apellido1 = "apellido1";
+            $model->telefono = 0;
+            $model->celular = 0;
+            $req = CValidator::createValidator('required', $model, array('nombre','correo') );
+
             if ($model->save()){
-                $model->setUniversidad($_POST['Universidad']);
                 $model->setPerfiles($_POST['Perfiles']);
                 $this->redirect(array('view', 'id' => $model->id_usuario));
             }else{
@@ -86,10 +90,14 @@ class UsuariosController extends Controller {
                 $model->passConfirm  = '';
             }
         }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        print_r($model->errors);
+//        Yii::import('application.controllers.SiteController');
+//        $site = new SiteController(1);
+//        $site->actionLogin();
+        //YourController::yourMethod();
+        
+        
+       
     }        
     /**
      * Creates a new model.
