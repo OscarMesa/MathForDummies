@@ -45,7 +45,9 @@ class UsuariosController extends Controller {
     public function actionInicio() {
         //print_r(Yii::app()->user);exit();
         if (!Yii::app()->user->isGuest) {
-            $this->render('application.views.site.inicio');
+           // $this->render('application.views.site.inicio');
+        
+            $this->redirect('cursos/curso');
         } else {
             $this->redirect('site/login');
         }
