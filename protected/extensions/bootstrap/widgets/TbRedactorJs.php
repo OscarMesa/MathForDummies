@@ -1,80 +1,106 @@
 <?php
 /**
- * TbRedactorJs class
+ *## TbRedactorJs class file
  *
  * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 9/2/12
- * Time: 9:10 PM
+ * @copyright Copyright &copy; Clevertech 2012-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
+ *## TbRedactorJs class
+ *
+ * WYSIWYG editor based on Redactor library.
+ * @see <http://imperavi.com/redactor/docs/>
+ *
+ * For updates of Redactor library see <https://github.com/yiiext/imperavi-redactor-widget> by Sam Dark.
+ *
+ * @package booster.widgets.forms.inputs.wysiwyg
  */
 class TbRedactorJS extends CInputWidget
 {
 	/**
-	 * Editor language
-	 * Supports: de, en, fr, lv, pl, pt_br, ru, ua
-	 */
-	public $lang = 'en';
-	/**
-	 * Html options that will be assigned to the text area
-	 */
-	public $htmlOptions = array();
-	/**
-	 * Editor options that will be passed to the editor
+	 * @var array {@link http://imperavi.com/redactor/docs/ redactor options}.
 	 */
 	public $editorOptions = array();
+
 	/**
-	 * Debug mode
-	 * Used to publish full js file instead of min version
+	 * @var string|null Selector pointing to textarea to initialize redactor for.
+	 * Defaults to null meaning that textarea does not exist yet and will be
+	 * rendered by this widget.
 	 */
-	public $debugMode = false;
+	public $selector;
+
 	/**
-	 * Editor width
+	 * @var string Editor width
 	 */
 	public $width = '100%';
+
 	/**
-	 * Editor height
+	 * @var string Editor height
 	 */
 	public $height = '400px';
 
-	/**
-	 * Display editor
-	 */
-	public function run()
+	public function init()
 	{
+		parent::init();
 
-		list($name, $id) = $this->resolveNameID();
-
-		$this->registerClientScript($id);
-
-		$this->htmlOptions['id'] = $id;
-
-		if (!array_key_exists('style', $this->htmlOptions))
-		{
-			$this->htmlOptions['style'] = "width:{$this->width};height:{$this->height};";
+		if (!isset($this->editorOptions['lang'])) {
+			$this->editorOptions['lang'] = substr(Yii::app()->getLanguage(), 0, 2);
 		}
-		// Do we have a model?
-		if ($this->hasModel())
-		{
-			$html = CHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
-		} else
-		{
-			$html = CHtml::textArea($name, $this->value, $this->htmlOptions);
+
+		if ($this->selector === null) {
+			list($this->name, $this->id) = $this->resolveNameID();
+			$this->htmlOptions['id'] = $this->id;
+			$this->selector = '#' . $this->id;
+			if (!array_key_exists('style', $this->htmlOptions)) {
+				$this->htmlOptions['style'] = "width:{$this->width};height:{$this->height};";
+			}
+			if ($this->hasModel()) {
+				echo CHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
+			} else {
+				echo CHtml::textArea($this->name, $this->value, $this->htmlOptions);
+			}
 		}
-		echo $html;
+		$this->registerClientScript($this->id);
 	}
 
 	/**
 	 * Register required script files
-	 * @param $id
 	 */
-	public function registerClientScript($id)
+	public function registerClientScript()
 	{
-		Yii::app()->bootstrap->registerAssetCss('redactor.css');
-		Yii::app()->bootstrap->registerAssetJs('redactor.min.js');
+		$assets = Bootstrap::getBooster()->assetsRegistry;
 
-		$options = CJSON::encode(CMap::mergeArray($this->editorOptions, array('lang' => $this->lang)));
+		$assets->registerPackage('redactor');
 
-		Yii::app()->bootstrap->registerPlugin('redactor', $id, $options);
+		$baseUrl = $assets->packages['redactor']['baseUrl'];
+
+		// Prepend language file to scripts package.
+		if ($this->editorOptions['lang'] != 'en') {
+			$assets->registerScriptFile($baseUrl . '/lang/' . $this->editorOptions['lang'] . '.js');
+		}
+
+		if (isset($this->editorOptions['plugins'])) {
+			foreach ($this->editorOptions['plugins'] as $name) {
+				$filepath = Yii::getPathOfAlias('bootstrap.assets.redactor.plugins') . '/' . $name . '/' . $name;
+				$url = $baseUrl . '/plugins/' . $name . '/' . $name;
+
+				if (file_exists($filepath . '.css'))
+					$assets->registerCssFile($url.'.css');
+
+				if (file_exists($filepath . '.js'))
+					$assets->registerScriptFile($url.'.js');
+			}
+		}
+
+		$options = $this->editorOptions
+			? CJavaScript::encode($this->editorOptions)
+			: '';
+
+		$assets->registerScript(
+			uniqid(__CLASS__ . '#', true),
+			"jQuery('{$this->selector}').redactor({$options});"
+		);
 	}
 }
-
-?>

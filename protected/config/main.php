@@ -12,7 +12,10 @@ return array(
     'defaultController' => 'usuarios/inicio',
     'theme' => 'PoliAuLink',
     // preloading 'log' component
-    'preload' => array('log'),
+    	'preload'=>array(
+            'bootstrap',
+            'log',
+        ),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
@@ -79,10 +82,10 @@ return array(
             ),
         ),
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=math',
+            'connectionString' => 'mysql:host=localhost;dbname=math;unix_socket:/path/to/socket/mysql.sock',
             'emulatePrepare' => true,
-            'username' => 'poliaulink',
-            'password' => 'math',
+            'username' => 'root',
+            'password' => '',
             'charset' => 'utf8',
             'tablePrefix' => '',
             'enableProfiling' => true,

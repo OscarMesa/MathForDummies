@@ -1,13 +1,19 @@
 <?php
 /**
- * TbImageColumn
+ *## TbImageColumn class file
  *
  * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 8/30/12
- * Time: 12:46 AM
+ * @copyright Copyright &copy; Clevertech 2012-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
+
 Yii::import('zii.widgets.grid.CGridColumn');
 
+/**
+ * TbImageColumn widget class
+ *
+ * @package booster.widgets.grids.columns
+ */
 class TbImageColumn extends CGridColumn
 {
 	/**
@@ -31,9 +37,16 @@ class TbImageColumn extends CGridColumn
 
 	/**
 	 * @var bool $userPlaceHoldIt whether to use a bogus image from placehold.it or not. If true, will render an image
-	 * from placehold.it according to the size set at $placeHoldItSize
+	 * from placehold.it according to the size set at $placeHoldItSize. Defaults to false, now placehold.it only grants
+	 * access for certain amount of time. You need to ask for permission :(
 	 */
-	public $usePlaceHoldIt = true;
+	public $usePlaceHoldIt = false;
+
+	/**
+	 * @var bool $userPlaceKitten whether to use bogus image from placekitten.com or not. If true, will render an image
+	 * from placekitten.com according to the size set at $placeKittenSize. Defaults to true (what can I say? I love kitten)
+	 */
+	public $usePlaceKitten = true;
 
 	/**
 	 * @var string $placeHoldItSize the size of the image to render if $imagePathExpression is null and $userPlaceHoldIt
@@ -42,20 +55,34 @@ class TbImageColumn extends CGridColumn
 	public $placeHoldItSize = '48x48';
 
 	/**
+	 * @var string $placeKittenSize the size of the image to render if $imagePathExpression is null and $usePlaceKitten
+	 * is set to true
+	 */
+	public $placeKittenSize = '48/48';
+
+	/**
 	 * Renders the data cell content
+	 *
 	 * @param int $row the row number (zero based)
 	 * @param mixed $data teh data associated with the row
 	 */
 	protected function renderDataCellContent($row, $data)
 	{
 		$content = $this->emptyText;
-		if ($this->imagePathExpression && $imagePath = $this->evaluateExpression($this->imagePathExpression, array('row' => $row, 'data' => $data)))
-		{
+		if ($this->imagePathExpression && $imagePath = $this->evaluateExpression(
+			$this->imagePathExpression,
+			array('row' => $row, 'data' => $data)
+		)
+		) {
 			$this->imageOptions['src'] = $imagePath;
 			$content = CHtml::tag('img', $this->imageOptions);
-		} elseif ($this->usePlaceHoldIt)
-		{
-			$content = CHtml::tag('img', array('src'=>'http://placehold.it/' . $this->placeHoldItSize));
+		} elseif ($this->usePlaceHoldIt && !empty($this->placeHoldItSize)) {
+			$content = CHtml::tag(
+				'img',
+				array('src' => 'http://placehold.it/' . $this->placeHoldItSize)
+			);
+		} elseif ($this->usePlaceKitten && !empty($this->placeKittenSize)) {
+			$content = CHtml::tag('img', array('src' => 'http://placekitten.com/' . $this->placeKittenSize));
 		}
 		echo $content;
 	}

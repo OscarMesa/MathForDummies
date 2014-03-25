@@ -5,7 +5,6 @@
         <meta name="language" content="es" />
 
         <!-- blueprint CSS framework -->
-       
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>
@@ -13,10 +12,20 @@
     </head>
 
     <body>
+
+        <div id="menu_superior" class="grid_16 alpha omega"> <?php
+            $this->widget('zii.widgets.CMenu', array(
+                'items' => array(
+                    array('label' => 'Ingresar', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => 'Salir (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+                ),
+            ));
+            ?>
+        </div>
         <div id="curso">
             <div id="panel_izq">
                 <div id="avatar">
-                    <img src="<?php echo Yii::app()->getBaseUrl(true)?>/themes/PoliAuLink/images/profe.png">
+                    <img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/profe.png">
                 </div>
                 <div id="informacion_personal">
                     <div class='acordion'>
@@ -40,16 +49,16 @@
                                 <td>Materia</td><td>Estado</td>
                             </tr>						
                             <tr>
-                                <td>Matematica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true)?>/themes/PoliAuLink/images/activo.png'></td>
+                                <td>Matematica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
                             </tr>	
                             <tr>
-                                <td>Fisica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true)?>/themes/PoliAuLink/images/activo.png'></td>
+                                <td>Fisica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
                             </tr>	
                             <tr>
-                                <td>Quimica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true)?>/themes/PoliAuLink/images/inactivo.png'></td>
+                                <td>Quimica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/inactivo.png'></td>
                             </tr>	
                             <tr>
-                                <td>Español</td><td><img src='<?php echo Yii::app()->getBaseUrl(true)?>/themes/PoliAuLink/images/activo.png'></td>
+                                <td>Español</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
                             </tr>				
                         </table>
                     </div>
@@ -57,10 +66,10 @@
                         <div class="titulo"> Nuevo Curso </div>
                     </div>								
                 </div>
-                
+
                 <div id="pie">
-                   <img src="<?php echo Yii::app()->getBaseUrl(true)?>/themes/PoliAuLink/images/iefo.png" aling="left"><b>INSTITUCION EDUCATIVA FEDERICO OZANAM <br/> &copy; 2014</b>
-               </div>               
+                    <img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/iefo.png" aling="left"><b>INSTITUCION EDUCATIVA FEDERICO OZANAM <br/> &copy; 2014</b>
+                </div>               
             </div>
             <div id="panel_central">
                 <div id="menu">
@@ -78,6 +87,10 @@
             </div>
 
         </div>
+        <div id="footer">
+            <p style="text-align: center;">
+            </p>
+        </div><!-- footer -->
 
     </body>
 </html>
