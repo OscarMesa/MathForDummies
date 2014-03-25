@@ -59,7 +59,7 @@ class Perfiles extends CActiveRecord
 		return array(
 			'id_perfil' => 'Id Perfil',
 			'state_perfiles' => 'State Perfiles',
-			'nombre' => 'Nombre',
+			'nombre' => 'Perfil',
 		);
 	}
 

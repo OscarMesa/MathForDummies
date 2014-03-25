@@ -6,113 +6,91 @@
 
         <!-- blueprint CSS framework -->
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>
         <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.tools.min.js"></script>
     </head>
 
     <body>
 
-        <div class="container_16" id="page">
+        <div id="menu_superior" class="grid_16 alpha omega"> <?php
+            $this->widget('zii.widgets.CMenu', array(
+                'items' => array(
+                    array('label' => 'Ingresar', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => 'Salir (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+                ),
+            ));
+            ?>
+        </div>
+        <div id="curso">
+            <div id="panel_izq">
+                <div id="avatar">
+                    <img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/profe.png">
+                </div>
+                <div id="informacion_personal">
+                    <div class='acordion'>
+                        <div class="titulo"> Datos Personales</div>
+                        <table>
+                            <tr>
+                                <td colspan="2">Diego Alberto Ochoa Ortiz</td>
+                            </tr>
+                            <tr>
+                                <td>Perfil</td><td>Docente</td>
+                            </tr>
+                            <tr>
 
-            <div id="header" class="grid_16">
-                <div id="banner" class="grid_16 alpha omega">
-                    <div align="center">
-                        <h1>PoliAulaLink</h1>
+                            </tr>				
+                        </table>
+                    </div>
+                    <div class='acordion'>
+                        <div class="titulo"> Cursos Actuales </div>
+                        <table>
+                            <tr>
+                                <td>Materia</td><td>Estado</td>
+                            </tr>						
+                            <tr>
+                                <td>Matematica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
+                            </tr>	
+                            <tr>
+                                <td>Fisica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
+                            </tr>	
+                            <tr>
+                                <td>Quimica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/inactivo.png'></td>
+                            </tr>	
+                            <tr>
+                                <td>Español</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
+                            </tr>				
+                        </table>
+                    </div>
+                    <div class='acordion'>
+                        <div class="titulo"> Nuevo Curso </div>
+                    </div>								
+                </div>
+
+                <div id="pie">
+                    <img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/iefo.png" aling="left"><b>INSTITUCION EDUCATIVA FEDERICO OZANAM <br/> &copy; 2014</b>
+                </div>               
+            </div>
+            <div id="panel_central">
+                <div id="menu">
+                    <div id="op" class='activo'>Curso</div>
+                    <div id="op">Talleres</div>
+                    <div id="op">Ejercicios</div>
+                    <div id="op">Multimedia</div>
+                    <div id="op">Evaluaciones</div>
+                </div>
+                <div id="form">
+                    <div  class="grid_16">
+                        <?php echo $content; ?>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div id="menu_superior" class="grid_16 alpha omega"> <?php
-                    $this->widget('zii.widgets.CMenu', array(
-                        'items' => array(
-                            array('label' => 'Ingresar', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                            array('label' => 'Salir (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-                        ),
-                    ));
-                    ?>
-                </div>
-            </div><!-- header -->
-            <div class="clear"></div>
-            <div class="clear"></div>
-            <div class="grid_3">  
-                <div >
-                    &nbsp;
-
-
-                </div><!-- mainmenu -->
             </div>
-            <div  class="grid_16">
-                <?php echo $content; ?>
-            </div>
-            <div class="clear"></div>
-            <div id="footer">
-                <p style="text-align: center;">
-                    oscar mesa
-         
 
-
-
-
-
-
-
-
-                    <?php /** @var TbActiveForm $form */
-                    $form = $this->beginWidget(
-                            'bootstrap.widgets.TbActiveForm', array(
-                        'id' => 'horizontalForm',
-                        'type' => 'horizontal',
-                            )
-                    );
-                    ?>
-
-                    <fieldset>
-
-                        <legend>Legend</legend>
-
-                    
-                        <?php
-                        $model = new Usuarios();
-                        echo $form->datepickerRow(
-                                $model, 'correo', array(
-                            'options' => array('language' => 'es'),
-                            //'hint' => 'Click inside! This is a super cool date field.',
-                            //'prepend' => '<i class="icon-calendar"></i>'
-                                )
-                        );
-                        ?>
-            
-                   
-                      
-                        
-                     
-                    
-                       
-                    </fieldset>
-
-                    <div class="form-actions">
-<?php
-$this->widget(
-        'bootstrap.widgets.TbButton', array(
-    'buttonType' => 'submit',
-    'type' => 'primary',
-    'label' => 'Submit'
-        )
-);
-?>
-                        <?php
-                        $this->widget(
-                                'bootstrap.widgets.TbButton', array('buttonType' => 'reset', 'label' => 'Reset')
-                        );
-                        ?>
-                    </div>
-                    <?php
-                    $this->endWidget();
-                    unset($form);
-                    ?>
-                </p>
-            </div><!-- footer -->
-
-        </div><!-- page -->
+        </div>
+        <div id="footer">
+            <p style="text-align: center;">
+            </p>
+        </div><!-- footer -->
 
     </body>
 </html>

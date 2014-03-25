@@ -28,7 +28,7 @@ class Usuarios extends CActiveRecord {
     public function tableName() {
         return 'usuarios';
     }
-
+    
     /**
      * @return array validation rules for model attributes.
      */
@@ -36,11 +36,9 @@ class Usuarios extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('contrasena,passConfirm,nombre,correo','required','except'=>array('create'),),
-            array('contrasena,passConfirm','required','except'=>array('CreateAnonimo'),),
-            array('contrasena,passConfirm','required','except'=>array('create'),),
             array('contrasena', 'compare', 'compareAttribute' => 'passConfirm', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'except'=>array('create')),
             array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.'),
+            array('contrasena,passConfirm,nombre,correo','required', 'message'=>'Este campo es requerido.' , 'except'=>array('createAnonimo')),
             array('telefono', 'numerical', 'integerOnly' => true),
             array('state_usuario', 'length', 'max' => 8),
             array('nombre, apellido1, apellido2', 'length', 'max' => 30),
@@ -102,7 +100,7 @@ class Usuarios extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-        
+
         $criteria->compare('id_usuario', $this->id_usuario);
         $criteria->compare('state_usuario', $this->state_usuario, true);
         $criteria->compare('nombre', $this->nombre, true);

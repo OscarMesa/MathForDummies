@@ -96,7 +96,6 @@ class SiteController extends Controller {
      */
     public function actionLogin() {
         $model = new LoginForm;
-
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
@@ -131,6 +130,7 @@ class SiteController extends Controller {
     {
         $this->renderPartial('application.views.usuarios._formRegistro', array(
             'modelPerfil' => Perfiles::model()->findAll(),
+            'modelRegistro' => new Usuarios()
                                              ));
         exit();
     }    
