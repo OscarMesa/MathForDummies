@@ -15,7 +15,7 @@
 
 	<?php echo $form->textAreaRow($model,'descripcion_curso',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<?php echo $form->textFieldRow($model,'fecha_registro',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'fecha_inicio',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'fecha_cierre',array('class'=>'span5')); ?>
 

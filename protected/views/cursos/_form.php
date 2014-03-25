@@ -1,33 +1,54 @@
-<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
-	'id'=>'cursos-form',
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<?php
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id' => 'cursos-form',
+    'enableAjaxValidation' => false,
+        ));
+?>
 
 <div id="form_curso">
-	<?php echo $form->errorSummary($model); ?>
+    <p class="help-block">Los campos identificados con <span class="required">*</span> son queridos.</p>
 
-	<?php echo $form->textFieldRow($model,'state_curso',array('class'=>'span5','maxlength'=>8)); ?>
+    <?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->textFieldRow($model,'id_docente',array('class'=>'span5')); ?>
+    <?php
+    echo $form->dropDownListRow($model, 'state_curso', array('true' => 'active', 'false' => 'inactive'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
+    ?>
 
-	<?php echo $form->textFieldRow($model,'idmateria',array('class'=>'span5')); ?>
+    <?php echo $form->textFieldRow($model, 'idmateria', array('class' => 'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'nombre_curso',array('class'=>'span5','maxlength'=>45)); ?>
+    <?php echo $form->textFieldRow($model, 'nombre_curso', array('class' => 'span5', 'maxlength' => 45)); ?>
 
-	<?php echo $form->textAreaRow($model,'descripcion_curso',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+    <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 
-	<?php echo $form->textFieldRow($model,'fecha_registro',array('class'=>'span5')); ?>
+    <?php
+    $this->widget(
+            'bootstrap.widgets.TbDatePicker', array(
+        'name' => 'fecha_inicio',
+        'options' => array(
+            'language' => 'es'
+        )
+            )
+    );
 
-	<?php echo $form->textFieldRow($model,'fecha_cierre',array('class'=>'span5')); ?>
 
-	<div class="form-actions">
-		<?php $this->widget('bootstrap.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
-		)); ?>
-	</div>
+    $this->widget(
+            'bootstrap.widgets.TbDatePicker', array(
+        'name' => 'fecha_cierre',
+        'options' => array(
+            'language' => 'es'
+        )
+            )
+    );
+    ?>
+
+    <div class="form-actions">
+<?php
+$this->widget('bootstrap.widgets.TbButton', array(
+    'buttonType' => 'submit',
+    'type' => 'primary',
+    'label' => $model->isNewRecord ? 'Create' : 'Save',
+));
+?>
+    </div>
 </div>
 <?php $this->endWidget(); ?>

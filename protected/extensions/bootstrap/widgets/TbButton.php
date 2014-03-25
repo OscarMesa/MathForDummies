@@ -23,17 +23,15 @@ class TbButton extends CWidget
 	const BUTTON_AJAXLINK = 'ajaxLink';
 	const BUTTON_AJAXBUTTON = 'ajaxButton';
 	const BUTTON_AJAXSUBMIT = 'ajaxSubmit';
-	const BUTTON_INPUTBUTTON = 'inputButton';
-	const BUTTON_INPUTSUBMIT = 'inputSubmit';
 
 	// Button types.
+	const TYPE_LINK = 'link';
 	const TYPE_PRIMARY = 'primary';
 	const TYPE_INFO = 'info';
 	const TYPE_SUCCESS = 'success';
 	const TYPE_WARNING = 'warning';
 	const TYPE_DANGER = 'danger';
 	const TYPE_INVERSE = 'inverse';
-	const TYPE_LINK = 'link';
 
 	// Button sizes.
 	const SIZE_MINI = 'mini';
@@ -52,7 +50,7 @@ class TbButton extends CWidget
 	public $type;
 	/**
 	 * @var string the button size.
-	 * Valid values are 'large', 'small' and 'mini'.
+	 * Valid values are 'small' and 'large'.
 	 */
 	public $size;
 	/**
@@ -68,21 +66,13 @@ class TbButton extends CWidget
 	 */
 	public $url;
 	/**
-	 * @var boolean indicates whether the button should span the full width of the a parent.
-	 */
-	public $block = false;
-	/**
 	 * @var boolean indicates whether the button is active.
 	 */
 	public $active = false;
 	/**
-	 * @var boolean indicates whether the button is disabled.
+	 * @var array the dropdown button items.
 	 */
-	public $disabled = false;
-	/**
-	 * @var boolean indicates whether to encode the label.
-	 */
-	public $encodeLabel = true;
+	public $items;
 	/**
 	 * @var boolean indicates whether to enable toggle.
 	 */
@@ -96,9 +86,9 @@ class TbButton extends CWidget
 	 */
 	public $completeText;
 	/**
-	* @var array the dropdown button items.
-	*/
-	public $items;
+	 * @var boolean indicates whether to encode the label.
+	 */
+	public $encodeLabel = true;
 	/**
 	 * @var array the HTML attributes for the widget container.
 	 */
@@ -108,7 +98,7 @@ class TbButton extends CWidget
 	 */
 	public $ajaxOptions = array();
 	/**
-	 * @var array the HTML attributes for the dropdown menu.
+	 * @var array the HTML options for the dropdown menu.
 	 * @since 0.9.11
 	 */
 	public $dropdownOptions = array();
@@ -131,28 +121,8 @@ class TbButton extends CWidget
 		if (isset($this->size) && in_array($this->size, $validSizes))
 			$classes[] = 'btn-'.$this->size;
 
-		if ($this->block)
-			$classes[] = 'btn-block';
-
 		if ($this->active)
 			$classes[] = 'active';
-
-		if ($this->disabled)
-		{
-			$disableTypes = array(self::BUTTON_BUTTON, self::BUTTON_SUBMIT, self::BUTTON_RESET,
-				self::BUTTON_AJAXBUTTON, self::BUTTON_AJAXSUBMIT, self::BUTTON_INPUTBUTTON, self::BUTTON_INPUTSUBMIT);
-
-			if (in_array($this->buttonType, $disableTypes))
-				$this->htmlOptions['disabled'] = 'disabled';
-
-			$classes[] = 'disabled';
-		}
-
-        if (!isset($this->url) && isset($this->htmlOptions['href']))
-        {
-            $this->url = $this->htmlOptions['href'];
-            unset($this->htmlOptions['href']);
-        }
 
 		if ($this->encodeLabel)
 			$this->label = CHtml::encode($this->label);
@@ -242,18 +212,11 @@ class TbButton extends CWidget
 				return CHtml::htmlButton($this->label, $this->htmlOptions);
 
 			case self::BUTTON_AJAXSUBMIT:
-				$this->ajaxOptions['type'] = isset($this->ajaxOptions['type']) ? $this->ajaxOptions['type'] : 'POST';
+				$this->ajaxOptions['type'] = 'POST';
 				$this->ajaxOptions['url'] = $this->url;
 				$this->htmlOptions['type'] = 'submit';
 				$this->htmlOptions['ajax'] = $this->ajaxOptions;
 				return CHtml::htmlButton($this->label, $this->htmlOptions);
-
-			case self::BUTTON_INPUTBUTTON:
-				return CHtml::button($this->label, $this->htmlOptions);
-
-			case self::BUTTON_INPUTSUBMIT:
-				$this->htmlOptions['type'] = 'submit';
-				return CHtml::button($this->label, $this->htmlOptions);
 
 			default:
 			case self::BUTTON_LINK:

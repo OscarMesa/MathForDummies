@@ -4,7 +4,7 @@
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version 2.0.3
+ * @version 1.0.0
  */
 
 /**
@@ -13,20 +13,41 @@
 class Bootstrap extends CApplicationComponent
 {
 	// Bootstrap plugins.
-	const PLUGIN_AFFIX = 'affix';
 	const PLUGIN_ALERT = 'alert';
-    const PLUGIN_BUTTON = 'button';
-    const PLUGIN_CAROUSEL = 'carousel';
-    const PLUGIN_COLLAPSE = 'collapse';
-    const PLUGIN_DROPDOWN = 'dropdown';
-    const PLUGIN_MODAL = 'modal';
-    const PLUGIN_POPOVER = 'popover';
-    const PLUGIN_SCROLLSPY = 'scrollspy';
-    const PLUGIN_TAB = 'tab';
-    const PLUGIN_TOOLTIP = 'tooltip';
-    const PLUGIN_TRANSITION = 'transition';
-    const PLUGIN_TYPEAHEAD = 'typeahead';
+	const PLUGIN_BUTTON = 'button';
+	const PLUGIN_CAROUSEL = 'carousel';
+	const PLUGIN_COLLAPSE = 'collapse';
+	const PLUGIN_DROPDOWN = 'dropdown';
+	const PLUGIN_MODAL = 'modal';
+	const PLUGIN_POPOVER = 'popover';
+	const PLUGIN_SCROLLSPY = 'scrollspy';
+	const PLUGIN_TAB = 'tab';
+	const PLUGIN_TOOLTIP = 'tooltip';
+	const PLUGIN_TRANSITION = 'transition';
+	const PLUGIN_TYPEAHEAD = 'typeahead';
+	const PLUGIN_DATEPICKER = 'datepicker';
+	// todo: add the affix plugin in version 2.1.0
 
+	/**
+	 * @var boolean whether to register the Bootstrap core CSS (bootstrap.min.css).
+	 * Defaults to true.
+	 */
+	public $coreCss = true;
+	/**
+	 * @var boolean whether to register the Bootstrap responsive CSS (bootstrap-responsive.min.css).
+	 * Defaults to false.
+	 */
+	public $responsiveCss = false;
+	/**
+	 * @var boolean whether to register the Yii-specific CSS missing from Bootstrap.
+	 * @since 0.9.12
+	 */
+	public $yiiCss = true;
+	/**
+	 * @var boolean whether to register jQuery and the Bootstrap JavaScript.
+	 * @since 0.9.10
+	 */
+	public $enableJS = true;
 	/**
 	 * @var array plugin initial options (name=>options).
 	 * Each array key-value pair represents the initial options for a single plugin class,
@@ -35,19 +56,52 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public $plugins = array();
 	/**
-	 * @var boolean indicates whether assets should be republished on every request.
+	 * @var string default popover CSS selector.
+	 * @since 0.10.0
 	 */
-	public $forceCopyAssets = false;
+	public $popoverSelector = 'a[rel="popover"]';
+	/**
+	 * @var string default tooltip CSS selector.
+	 * @since 0.10.0
+	 */
+	public $tooltipSelector = 'a[rel="tooltip"]';
 
 	protected $_assetsUrl;
+
+	/**
+	 * Initializes the component.
+	 */
+	public function init()
+	{
+		// Register the bootstrap path alias.
+		if (Yii::getPathOfAlias('bootstrap') === false)
+			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__) . '/..'));
+
+		// Prevents the extension from registering scripts and publishing assets when ran from the command line.
+		if (Yii::app() instanceof CConsoleApplication)
+			return;
+
+		if ($this->coreCss !== false)
+			$this->registerCoreCss();
+
+		if ($this->responsiveCss !== false)
+			$this->registerResponsiveCss();
+
+		if ($this->yiiCss !== false)
+			$this->registerYiiCss();
+
+		if ($this->enableJS !== false)
+			$this->registerCoreScripts();
+
+		parent::init();
+	}
 
 	/**
 	 * Registers the Bootstrap CSS.
 	 */
 	public function registerCoreCss()
 	{
-		$filename = YII_DEBUG ? 'bootstrap.css' : 'bootstrap.min.css';
-		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl().'/css/'.$filename);
+		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/bootstrap.css');
 	}
 
 	/**
@@ -59,8 +113,7 @@ class Bootstrap extends CApplicationComponent
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
 		$cs->registerMetaTag('width=device-width, initial-scale=1.0', 'viewport');
-		$filename = YII_DEBUG ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css';
-		$cs->registerCssFile($this->getAssetsUrl().'/css/'.$filename);
+		$cs->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-responsive.css');
 	}
 
 	/**
@@ -69,18 +122,17 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerYiiCss()
 	{
-		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl().'/css/yii.css');
+		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-yii.css');
 	}
 
 	/**
-	 * Registers all Bootstrap CSS.
-	 * @since 2.0.0
+	 * Registers a specific css in the asset's css folder
+	 * @param string $cssFile the css file name to register
+	 * @param string $media the media that the CSS file should be applied to. If empty, it means all media types.
 	 */
-	public function registerAllCss()
+	public function registerAssetCss($cssFile, $media = '')
 	{
-		$this->registerCoreCss();
-		$this->registerResponsiveCss();
-		$this->registerYiiCss();
+		Yii::app()->getClientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
 	}
 
 	/**
@@ -90,42 +142,33 @@ class Bootstrap extends CApplicationComponent
 	public function registerCoreScripts()
 	{
 		$this->registerJS(Yii::app()->clientScript->coreScriptPosition);
-		$this->registerPopover(); // popover also registers tooltip
+		$this->registerTooltip();
+		$this->registerPopover();
 	}
 
 	/**
 	 * Registers the Bootstrap JavaScript.
 	 * @param int $position the position of the JavaScript code.
+	 * @see CClientScript::registerScriptFile
 	 */
-	protected function registerJS($position = CClientScript::POS_HEAD)
+	public function registerJS($position = CClientScript::POS_HEAD)
 	{
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCoreScript('jquery');
-		$filename = YII_DEBUG ? 'bootstrap.js' : 'bootstrap.min.js';
-		$cs->registerScriptFile($this->getAssetsUrl().'/js/'.$filename, $position);
+		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap.bootbox.min.js', $position);
+		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap.js', $position);
 	}
 
 	/**
-	 * Registers all Bootstrap CSS and JavaScript.
-	 * @since 2.1.0
+	 * Register a specific js file in the asset's js folder
+	 * @param string $jsFile
+	 * @param int $position the position of the JavaScript code.
+	 * @see CClientScript::registerScriptFile
 	 */
-	public function register()
+	public function registerAssetJs($jsFile, $position = CClientScript::POS_END)
 	{
-		$this->registerAllCss();
-		$this->registerCoreScripts();
-	}
-
-	/**
-	 * Registers the Bootstrap affix plugin.
-	 * @param string $selector the CSS selector
-	 * @param array $options the plugin options
-	 * @see http://twitter.github.com/bootstrap/javascript.html#affix
-	 * @since 2.0.0
-	 */
-	public function registerAffix($selector = null, $options = array())
-	{
-		$this->registerPlugin(self::PLUGIN_AFFIX, $selector, $options);
+		Yii::app()->getClientScript()->registerScriptFile($this->getAssetsUrl() . "/js/{$jsFile}", $position);
 	}
 
 	/**
@@ -173,7 +216,7 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerCollapse($selector = null, $options = array())
 	{
-		$this->registerPlugin(self::PLUGIN_COLLAPSE, $selector, $options);
+		$this->registerPlugin(self::PLUGIN_COLLAPSE, $selector, $options, '.collapse');
 	}
 
 	/**
@@ -185,7 +228,7 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerDropdown($selector = null, $options = array())
 	{
-		$this->registerPlugin(self::PLUGIN_DROPDOWN, $selector, $options);
+		$this->registerPlugin(self::PLUGIN_DROPDOWN, $selector, $options, '.dropdown-toggle[data-dropdown="dropdown"]');
 	}
 
 	/**
@@ -222,9 +265,7 @@ class Bootstrap extends CApplicationComponent
 	public function registerPopover($selector = null, $options = array())
 	{
 		$this->registerTooltip(); // Popover requires the tooltip plugin
-		if (!isset($options['selector']))
-			$options['selector'] = $selector !== null ? $selector : 'a[rel=popover]';
-		$this->registerPlugin(self::PLUGIN_POPOVER, 'body', $options);
+		$this->registerPlugin(self::PLUGIN_POPOVER, $selector, $options, $this->popoverSelector);
 	}
 
 	/**
@@ -248,9 +289,7 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerTooltip($selector = null, $options = array())
 	{
-		if (!isset($options['selector']))
-			$options['selector'] = $selector !== null ? $selector : 'a[rel=tooltip]';
-		$this->registerPlugin(self::PLUGIN_TOOLTIP, 'body', $options);
+		$this->registerPlugin(self::PLUGIN_TOOLTIP, $selector, $options, $this->tooltipSelector);
 	}
 
 	/**
@@ -266,6 +305,19 @@ class Bootstrap extends CApplicationComponent
 	}
 
 	/**
+	 * Register the Bootstrap datepicker plugin.
+	 * IMPORTANT: if you register a selector via this method you wont be able to attach events to the plugin.
+	 * @param string $selector the CSS selector
+	 * @param array $options the plugin options
+	 * @see http://www.eyecon.ro/bootstrap-datepicker/
+	 *
+	 */
+	public function registerDatePicker($selector = null, $options = array())
+	{
+		$this->registerPlugin(self::PLUGIN_DATEPICKER, $selector, $options);
+	}
+
+	/**
 	 * Registers a Bootstrap JavaScript plugin.
 	 * @param string $name the name of the plugin
 	 * @param string $selector the CSS selector
@@ -273,29 +325,35 @@ class Bootstrap extends CApplicationComponent
 	 * @param string $defaultSelector the default CSS selector
 	 * @since 0.9.8
 	 */
-	protected function registerPlugin($name, $selector = null, $options = array())
+	protected function registerPlugin($name, $selector = null, $options = array(), $defaultSelector = null)
 	{
-		// Initialization from extension configuration.
-		$config = isset($this->plugins[$name]) ? $this->plugins[$name] : array();
-
-		if ($selector === null && isset($config['selector']))
-			$selector = $config['selector'];
-
-		if (isset($config['options']))
-			$options = !empty($options) ? CMap::mergeArray($options, $config['options']) : $config['options'];
-
-		if ($selector !== null)
+		if (!isset($selector) && empty($options))
 		{
-			$key = __CLASS__.'.'.md5($name.$selector.serialize($options));
+			// Initialization from extension configuration.
+			$config = isset($this->plugins[$name]) ? $this->plugins[$name] : array();
+
+			if (isset($config['selector']))
+				$selector = $config['selector'];
+
+			if (isset($config['options']))
+				$options = $config['options'];
+
+			if (!isset($selector))
+				$selector = $defaultSelector;
+		}
+
+		if (isset($selector))
+		{
+			$key = __CLASS__ . '.' . md5($name . $selector . serialize($options) . $defaultSelector);
 			$options = !empty($options) ? CJavaScript::encode($options) : '';
 			Yii::app()->clientScript->registerScript($key, "jQuery('{$selector}').{$name}({$options});");
 		}
 	}
 
 	/**
-	* Returns the URL to the published assets folder.
-	* @return string the URL
-	*/
+	 * Returns the URL to the published assets folder.
+	 * @return string the URL
+	 */
 	protected function getAssetsUrl()
 	{
 		if (isset($this->_assetsUrl))
@@ -303,17 +361,17 @@ class Bootstrap extends CApplicationComponent
 		else
 		{
 			$assetsPath = Yii::getPathOfAlias('bootstrap.assets');
-			$assetsUrl = Yii::app()->assetManager->publish($assetsPath, true, -1, $this->forceCopyAssets);
+			$assetsUrl = Yii::app()->assetManager->publish($assetsPath, false, -1, YII_DEBUG);
 			return $this->_assetsUrl = $assetsUrl;
 		}
 	}
 
-    /**
-     * Returns the extension version number.
-     * @return string the version
-     */
-    public function getVersion()
-    {
-        return '2.0.3';
-    }
+	/**
+	 * Returns the extension version number.
+	 * @return string the version
+	 */
+	public function getVersion()
+	{
+		return '1.0.0';
+	}
 }

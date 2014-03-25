@@ -5,7 +5,7 @@
         <meta name="language" content="es" />
 
         <!-- blueprint CSS framework -->
-        <?php Yii::app()->bootstrap->register(); ?>
+       
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>

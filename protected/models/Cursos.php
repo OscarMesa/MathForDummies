@@ -10,7 +10,7 @@
  * @property integer $idmateria
  * @property string $nombre_curso
  * @property string $descripcion_curso
- * @property string $fecha_registro
+ * @property string $fecha_inicio
  * @property string $fecha_cierre
  */
 class Cursos extends CActiveRecord
@@ -31,14 +31,15 @@ class Cursos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idmateria, descripcion_curso', 'required'),
-			array('id_docente, idmateria', 'numerical', 'integerOnly'=>true),
+			array('idmateria, descripcion_curso, state_curso, nombre_curso', 'required'),
+			array('idmateria', 'numerical', 'integerOnly'=>true),
 			array('state_curso', 'length', 'max'=>8),
 			array('nombre_curso', 'length', 'max'=>45),
-			array('fecha_registro, fecha_cierre', 'safe'),
+			array('fecha_inicio', 'safe'),
+			array('fecha_cierre', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, state_curso, id_docente, idmateria, nombre_curso, descripcion_curso, fecha_registro, fecha_cierre', 'safe', 'on'=>'search'),
+			array('id, state_curso, idmateria, nombre_curso, descripcion_curso,fecha_inicio, fecha_cierre', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,13 +61,13 @@ class Cursos extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'state_curso' => 'State Curso',
-			'id_docente' => 'Id Docente',
-			'idmateria' => 'Idmateria',
+			'state_curso' => 'Estado Curso',
+			//'id_docente' => 'Id Docente',
+			'idmateria' => 'Area del Curso',
 			'nombre_curso' => 'Nombre Curso',
 			'descripcion_curso' => 'Descripcion Curso',
-			'fecha_registro' => 'Fecha Registro',
-			'fecha_cierre' => 'Fecha Cierre',
+			'fecha_inicio' => 'Fecha Inicio Curso',
+			'fecha_cierre' => 'Fecha Cierre Curso',
 		);
 	}
 
@@ -88,13 +89,13 @@ class Cursos extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('state_curso',$this->state_curso,true);
-		$criteria->compare('id_docente',$this->id_docente);
+		//$criteria->compare('id',$this->id);
+		//$criteria->compare('state_curso',$this->state_curso,true);
+		//$criteria->compare('id_docente',$this->id_docente);
 		$criteria->compare('idmateria',$this->idmateria);
 		$criteria->compare('nombre_curso',$this->nombre_curso,true);
 		$criteria->compare('descripcion_curso',$this->descripcion_curso,true);
-		$criteria->compare('fecha_registro',$this->fecha_registro,true);
+		$criteria->compare('fecha_inicio',$this->fecha_inicio,true);
 		$criteria->compare('fecha_cierre',$this->fecha_cierre,true);
 
 		return new CActiveDataProvider($this, array(

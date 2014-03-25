@@ -24,9 +24,11 @@ abstract class TbInput extends CInputWidget
 	const TYPE_RADIOLIST = 'radiobuttonlist';
 	const TYPE_RADIOLIST_INLINE = 'radiobuttonlist_inline';
 	const TYPE_TEXTAREA = 'textarea';
-	const TYPE_TEXT = 'text';
+	const TYPE_TEXT = 'textfield';
 	const TYPE_CAPTCHA = 'captcha';
 	const TYPE_UNEDITABLE = 'uneditable';
+	const TYPE_DATEPICKER = 'datepicker';
+	const TYPE_REDACTOR = 'redactor';
 
 	/**
 	 * @var TbActiveForm the associated form widget.
@@ -98,7 +100,6 @@ abstract class TbInput extends CInputWidget
 		if (!isset($this->type))
 			throw new CException(__CLASS__.': Failed to initialize widget! Input type is not set.');
 
-		// todo: move this logic elsewhere, it doesn't belong here ...
 		if ($this->type === self::TYPE_UNEDITABLE)
 		{
 			if (isset($this->htmlOptions['class']))
@@ -115,12 +116,6 @@ abstract class TbInput extends CInputWidget
 	 */
 	protected function processHtmlOptions()
 	{
-		if (isset($this->htmlOptions['label']))
-		{
-			$this->label = $this->htmlOptions['label'];
-			unset($this->htmlOptions['label']);
-		}
-
 		if (isset($this->htmlOptions['prepend']))
 		{
 			$this->prependText = $this->htmlOptions['prepend'];
@@ -225,7 +220,6 @@ abstract class TbInput extends CInputWidget
 				$this->textArea();
 				break;
 
-			case 'textfield': // backwards compatibility
 			case self::TYPE_TEXT:
 				$this->textField();
 				break;
@@ -237,7 +231,12 @@ abstract class TbInput extends CInputWidget
 			case self::TYPE_UNEDITABLE:
 				$this->uneditableField();
 				break;
-
+			case self::TYPE_DATEPICKER:
+				$this->datepickerField();
+				break;
+			case self::TYPE_REDACTOR:
+				$this->redactorJs();
+				break;
 			default:
 				throw new CException(__CLASS__.': Failed to run widget! Type is invalid.');
 		}
@@ -475,4 +474,18 @@ abstract class TbInput extends CInputWidget
 	 * @abstract
 	 */
 	abstract protected function uneditableField();
+
+	/**
+	 * Renders a datepicker field.
+	 * @return string the rendered content
+	 * @abstract
+	 */
+	abstract protected function datepickerField();
+
+	/**
+	 * Renders a redactorJS wysiwyg field.
+	 * @abstract
+	 * @return mixed
+	 */
+	abstract protected function redactorJs();
 }

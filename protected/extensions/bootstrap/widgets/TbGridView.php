@@ -19,11 +19,10 @@ class TbGridView extends CGridView
 	const TYPE_STRIPED = 'striped';
 	const TYPE_BORDERED = 'bordered';
 	const TYPE_CONDENSED = 'condensed';
-	const TYPE_HOVER = 'hover';
 
 	/**
 	 * @var string|array the table type.
-	 * Valid values are 'striped', 'bordered' and/or 'condensed'.
+	 * Valid values are 'striped', 'bordered' and/or ' condensed'.
 	 */
 	public $type;
 	/**
@@ -55,10 +54,10 @@ class TbGridView extends CGridView
 			if (is_string($this->type))
 				$this->type = explode(' ', $this->type);
 
+			$validTypes = array(self::TYPE_STRIPED, self::TYPE_BORDERED, self::TYPE_CONDENSED);
+
 			if (!empty($this->type))
 			{
-				$validTypes = array(self::TYPE_STRIPED, self::TYPE_BORDERED, self::TYPE_CONDENSED, self::TYPE_HOVER);
-
 				foreach ($this->type as $type)
 				{
 					if (in_array($type, $validTypes))
@@ -75,6 +74,19 @@ class TbGridView extends CGridView
 			else
 				$this->itemsCssClass = $classes;
 		}
+
+		$popover = Yii::app()->bootstrap->popoverSelector;
+		$tooltip = Yii::app()->bootstrap->tooltipSelector;
+		
+		$afterAjaxUpdate = "js:function() {
+			jQuery('.popover').remove();
+			jQuery('{$popover}').popover();
+			jQuery('.tooltip').remove();
+			jQuery('{$tooltip}').tooltip();
+		}";
+
+		if (!isset($this->afterAjaxUpdate))
+			$this->afterAjaxUpdate = $afterAjaxUpdate;
 	}
 
 	/**

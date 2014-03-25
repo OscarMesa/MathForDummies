@@ -10137,3 +10137,1032 @@ in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
 in C:\xampp\htdocs\PoliAuLink\index.php (13)
 2014/03/23 00:38:09 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
 2014/03/23 00:38:09 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 14:47:43 [trace] [system.db.ar.CActiveRecord] Perfiles.findAll()
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `perfiles`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `perfiles`)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `perfiles`)
+2014/03/24 14:47:43 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `perfiles`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `perfiles`)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `perfiles`)
+2014/03/24 14:47:43 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `perfiles` `t`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/24 14:47:43 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (18)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/24 14:47:43 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (18)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/24 14:47:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/24 14:47:44 [trace] [system.db.ar.CActiveRecord] Perfiles.findAll()
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:44 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `perfiles` `t`
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:47:44 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/24 14:47:44 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/24 14:47:44 [trace] [system.db.ar.CActiveRecord] Perfiles.findAll()
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\_formRegistro.php (23)
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+2014/03/24 14:47:44 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `perfiles` `t` WHERE id_perfil IN(4,5)
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\_formRegistro.php (23)
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+2014/03/24 14:47:44 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t` WHERE id_perfil IN(4,5))
+2014/03/24 14:47:44 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t` WHERE id_perfil IN(4,5))
+2014/03/24 14:47:52 [trace] [system.db.ar.CActiveRecord] Usuarios.find()
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/24 14:47:52 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/24 14:47:52 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/24 14:47:52 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/24 14:47:52 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/24 14:47:52 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/24 14:47:52 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/24 14:47:52 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/24 14:47:52 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `usuarios` `users` WHERE users.correo = ? LIMIT 1
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/24 14:47:52 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `usuarios` `users` WHERE users.correo = ? LIMIT 1)
+2014/03/24 14:47:52 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `usuarios` `users` WHERE users.correo = ? LIMIT 1)
+2014/03/24 14:48:12 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:48:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:48:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 14:48:12 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 14:48:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:48:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 14:48:12 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 14:48:37 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:48:37 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:48:37 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 14:48:37 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 14:48:37 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 14:48:37 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 14:48:37 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:13:31 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:13:31 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:13:31 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:13:31 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:13:31 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:13:31 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:13:31 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:23:34 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:23:34 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:23:34 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:23:35 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:23:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:23:35 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:23:35 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:31:12 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:31:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:31:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:31:12 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:31:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:31:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:31:12 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:32:23 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:32:23 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:32:23 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:32:23 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:32:23 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:32:23 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:32:23 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:33:06 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:33:07 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:33:07 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:33:07 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 15:33:07 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 15:33:07 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 15:33:07 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:46:12 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:46:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:46:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:46:13 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:46:13 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:46:13 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:46:13 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:47:50 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:47:50 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:47:50 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:47:50 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:47:50 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:47:50 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:47:50 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:57:17 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:57:17 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:57:17 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:57:17 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:57:17 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:57:17 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:57:17 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:58:01 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:58:01 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:58:01 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:58:01 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 21:58:01 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 21:58:01 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 21:58:01 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:00:53 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:00:53 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:00:53 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:00:53 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:00:53 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:00:53 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:00:53 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:04:16 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:04:16 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:04:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:04:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:04:16 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:04:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:04:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:09:08 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:09:08 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:09:08 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:09:08 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:09:08 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:09:08 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:09:08 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:12:20 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:12:20 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:12:20 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:12:20 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:12:20 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:12:20 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:12:20 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:12:35 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:12:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:12:35 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:12:35 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:12:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:12:35 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:12:35 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:13:04 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:13:04 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:13:04 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:13:04 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:13:04 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:13:04 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:13:04 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:13:33 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:13:33 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:13:33 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:13:33 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:13:33 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:13:33 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:13:33 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:15:01 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:01 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:01 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:15:01 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:15:01 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:01 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:15:01 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:15:28 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:28 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:28 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:15:28 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:15:28 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:28 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:15:28 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:15:43 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:43 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:15:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:15:43 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:15:43 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:15:43 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:44:40 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:44:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:44:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:44:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:44:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:44:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:44:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:46:55 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:46:55 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:46:55 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:46:55 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:46:55 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:46:55 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:46:55 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:47:01 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:01 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:01 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:47:01 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:47:01 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:01 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:47:01 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:47:30 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:30 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:30 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:47:30 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:47:30 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:30 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:47:30 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:47:34 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:34 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:34 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:47:34 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:47:34 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:47:34 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:47:34 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:56:15 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:56:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:56:15 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:56:15 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 22:56:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 22:56:15 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 22:56:15 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:00:18 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:00:18 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:00:18 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:00:18 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:00:18 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:00:18 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:00:18 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:03:55 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:03:55 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:03:55 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:03:55 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:03:55 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:03:55 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:03:55 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:05:24 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:05:24 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:05:24 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:05:24 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:05:24 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:05:24 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:05:24 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:09:04 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:09:04 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:09:04 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:09:04 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:09:04 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:09:04 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:09:04 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:09:26 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:09:26 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:09:26 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:09:26 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:09:26 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:09:26 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:09:26 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:11:48 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:11:48 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:11:48 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:11:48 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:11:48 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:11:48 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:11:48 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:12:11 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:12:11 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:12:11 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:12:11 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:12:11 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:12:11 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:12:11 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:13:31 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:13:31 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:13:31 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:13:31 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:13:31 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:13:31 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:13:31 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:34:49 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:34:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:34:49 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:34:49 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:34:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:34:49 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:34:49 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:38:21 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:38:21 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:38:21 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:38:21 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/24 23:38:21 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/24 23:38:21 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/24 23:38:21 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:06:29 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:06:29 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:06:29 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:06:29 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:06:29 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:06:29 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:06:29 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:08:02 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:08:02 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:08:02 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:08:02 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:08:02 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:08:02 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:08:02 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:08:39 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:08:39 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:08:39 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:08:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:08:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:08:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:08:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:09:11 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:09:11 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:09:11 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:09:11 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:09:11 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:09:11 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:09:11 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:12 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:12 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:12 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:12 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:12 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:13 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:13 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:13 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:13 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:13 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:13 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:13 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:19 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:19 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:19 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:19 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:19 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:19 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:19 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:40 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:15:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:15:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:15:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:18:32 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:18:32 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:18:32 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:18:32 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:18:32 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:18:32 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:18:32 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:19:37 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:19:37 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:19:37 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:19:37 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:19:37 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:19:37 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:19:37 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:22:05 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:22:05 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:22:05 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:22:05 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:22:05 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:22:05 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:22:05 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:24:15 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:24:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:24:15 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:24:15 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:24:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:24:15 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:24:15 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:31:59 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:31:59 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:31:59 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:31:59 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:31:59 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:31:59 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:31:59 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:35:50 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:35:51 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:35:51 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:35:51 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:35:51 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:35:51 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:35:51 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:36:07 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:36:07 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:36:07 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:36:07 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:36:07 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:36:07 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:36:07 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:37:29 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:37:29 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:37:29 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:37:29 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:37:29 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:37:29 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:37:29 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:38:16 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:38:16 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:38:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:38:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:38:16 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:38:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:38:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:38:45 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:38:45 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:38:45 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:38:45 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:38:45 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:38:45 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:38:45 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:40:35 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:40:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:40:35 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:40:35 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:40:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:40:35 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:40:35 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:41:54 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:41:54 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:41:54 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:41:54 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:41:54 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:41:54 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:41:54 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:41:55 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:41:55 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:41:55 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:41:55 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:41:55 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:41:55 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:41:55 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:42:48 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:42:48 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:42:48 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:42:48 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:42:48 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:42:48 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:42:48 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:51:06 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:51:06 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:51:06 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:51:06 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:51:06 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:51:06 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:51:06 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:53:49 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:53:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:53:49 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:53:49 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:53:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:53:49 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:53:49 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:54:22 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:54:22 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:54:22 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:54:22 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:54:22 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:54:22 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:54:22 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:55:32 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:55:32 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:55:32 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:55:32 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:55:32 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:55:32 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:55:32 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:55:47 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:55:47 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:55:47 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:55:47 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:55:47 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:55:47 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:55:47 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:56:40 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:56:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:56:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:56:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 00:56:40 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 00:56:40 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 00:56:40 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 01:02:58 [trace] [system.db.ar.CActiveRecord] Perfiles.findAll()
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `perfiles`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `perfiles`)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `perfiles`)
+2014/03/25 01:02:58 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `perfiles`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `perfiles`)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `perfiles`)
+2014/03/25 01:02:58 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `perfiles` `t`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (115)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/25 01:02:58 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (18)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/25 01:02:58 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (18)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/25 01:02:58 [trace] [system.db.ar.CActiveRecord] Perfiles.findAll()
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `perfiles` `t`
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/25 01:02:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t`)
+2014/03/25 01:02:59 [trace] [system.db.ar.CActiveRecord] Perfiles.findAll()
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\_formRegistro.php (23)
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+2014/03/25 01:02:59 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `perfiles` `t` WHERE id_perfil IN(4,5)
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\_formRegistro.php (23)
+in C:\xampp\htdocs\PoliAuLink\protected\views\usuarios\login.php (25)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (116)
+2014/03/25 01:02:59 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t` WHERE id_perfil IN(4,5))
+2014/03/25 01:02:59 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `perfiles` `t` WHERE id_perfil IN(4,5))
+2014/03/25 01:03:16 [trace] [system.db.ar.CActiveRecord] Usuarios.find()
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/25 01:03:16 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/25 01:03:16 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/25 01:03:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/25 01:03:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `usuarios`)
+2014/03/25 01:03:16 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `usuarios`
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/25 01:03:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/25 01:03:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `usuarios`)
+2014/03/25 01:03:16 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `usuarios` `users` WHERE users.correo = ? LIMIT 1
+in C:\xampp\htdocs\PoliAuLink\protected\components\UserIdentity.php (21)
+in C:\xampp\htdocs\PoliAuLink\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\SiteController.php (109)
+2014/03/25 01:03:16 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `usuarios` `users` WHERE users.correo = ? LIMIT 1)
+2014/03/25 01:03:16 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `usuarios` `users` WHERE users.correo = ? LIMIT 1)
+2014/03/25 01:03:27 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:03:27 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:03:27 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 01:03:27 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 01:03:27 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:03:27 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 01:03:27 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 01:05:39 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:05:39 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:05:39 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 01:05:39 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `cursos`)
+2014/03/25 01:05:39 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `cursos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\CursosController.php (83)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/25 01:05:39 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)
+2014/03/25 01:05:39 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `cursos`)

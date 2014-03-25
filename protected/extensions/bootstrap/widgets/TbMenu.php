@@ -26,13 +26,13 @@ class TbMenu extends TbBaseMenu
 	 */
 	public $type;
 	/**
-	 * @var string|array the scrollspy target or configuration.
+	 * @var boolean indicates whether to stack navigation items.
+	 */
+	public $stacked = false;
+	/**
+	 * @var string|array the scrollspy configuration.
 	 */
 	public $scrollspy;
-	/**
-	* @var boolean indicates whether the menu should appear vertically stacked.
-	*/
-	public $stacked = false;
 	/**
 	 * @var boolean indicates whether dropdowns should be dropups instead.
 	 */

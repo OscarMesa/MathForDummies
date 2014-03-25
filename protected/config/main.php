@@ -20,7 +20,11 @@ return array(
         'application.models.appjoomla.*',
         'application.components.*',
         'ext.yii-mail.YiiMailMessage',
-      //  'application.controllers.*',
+    //  'application.controllers.*',
+    ),
+    'preload' => array(
+        'bootstrap',
+        'log',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
@@ -57,6 +61,7 @@ return array(
         ),
         'bootstrap' => array(
             'class' => 'bootstrap.components.Bootstrap',
+            'responsiveCss'=>true,
         ),
         'user' => array(
             // enable cookie-based authentication
@@ -66,9 +71,9 @@ return array(
         'urlManager' => array(
             'urlFormat' => 'path',
             'rules' => array(
-          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 'programa/subirArchivo/<id>' => 'programa/subirArchivo',
                 'programa/ActualizaEstado/<programa>/<estado>' => 'programa/ActualizaEstado'
             ),
