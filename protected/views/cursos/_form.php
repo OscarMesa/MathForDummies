@@ -29,8 +29,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         )
             )
     );
-
-
     $this->widget(
             'bootstrap.widgets.TbDatePicker', array(
         'name' => 'fecha_cierre',
