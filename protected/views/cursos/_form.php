@@ -20,26 +20,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 
-    <?php
-    $this->widget(
-            'bootstrap.widgets.TbDatePicker', array(
-        'name' => 'fecha_inicio',
-        'options' => array(
-            'language' => 'es'
-        )
-            )
-    );
 
-
-    $this->widget(
-            'bootstrap.widgets.TbDatePicker', array(
-        'name' => 'fecha_cierre',
-        'options' => array(
-            'language' => 'es'
-        )
-            )
-    );
-    ?>
 
     <div class="form-actions">
 <?php
