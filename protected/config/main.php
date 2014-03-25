@@ -12,7 +12,10 @@ return array(
     'defaultController' => 'usuarios/inicio',
     'theme' => 'PoliAuLink',
     // preloading 'log' component
-    'preload' => array('log'),
+    	'preload'=>array(
+            'bootstrap',
+            'log',
+        ),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
@@ -56,6 +59,7 @@ return array(
         ),
         'bootstrap' => array(
             'class' => 'bootstrap.components.Bootstrap',
+            'responsiveCss'=>true,
         ),
         'user' => array(
             // enable cookie-based authentication
@@ -73,10 +77,10 @@ return array(
             ),
         ),
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=math;unix_socket:/path/to/socket/mysql.sock',
+            'connectionString' => 'mysql:host=localhost;dbname=PoliAulaLink;unix_socket:/path/to/socket/mysql.sock',
             'emulatePrepare' => true,
-            'username' => 'oscar',
-            'password' => 'oscarmesa',
+            'username' => 'root',
+            'password' => 'root',
             'charset' => 'utf8',
             'tablePrefix' => '',
             'enableProfiling' => true,

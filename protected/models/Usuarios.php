@@ -37,6 +37,7 @@ class Usuarios extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('contrasena,passConfirm,nombre,correo','required','except'=>array('create'),),
+            array('contrasena,passConfirm','required','except'=>array('CreateAnonimo'),),
             array('contrasena,passConfirm','required','except'=>array('create'),),
             array('contrasena', 'compare', 'compareAttribute' => 'passConfirm', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'except'=>array('create')),
             array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.'),
@@ -101,7 +102,7 @@ class Usuarios extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        
         $criteria->compare('id_usuario', $this->id_usuario);
         $criteria->compare('state_usuario', $this->state_usuario, true);
         $criteria->compare('nombre', $this->nombre, true);

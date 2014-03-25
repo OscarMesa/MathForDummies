@@ -93,8 +93,6 @@ class Utilidades {
             echo '<p><i class="icon-user"></i>'.$perfil->nombre.'</p>';
         }
     }
-    
-    
 }
 
 ?>

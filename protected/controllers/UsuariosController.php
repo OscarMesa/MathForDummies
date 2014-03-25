@@ -71,8 +71,6 @@ class UsuariosController extends Controller {
 
         if (isset($_POST['Usuarios'])) {
 //             echo '<pre>';
-//            print_r($_POST);exit();
-            $model->attributes = $_POST['Usuarios'];
 //            
 //            exit();
             $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
