@@ -20,16 +20,38 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 
+    <?php
+        $this->widget('bootstrap.widgets.TbDateRangePicker', array(
+            'name' => 'fecha_inicio',
+            
+            'options' => array(
+                'language' => 'es',
+                'format'=>'DD-MM-YYYY',
+                'startDate'=> "[moment().subtract('days', 1), moment().subtract('days', 1)]",
+                'locale' => array(
+                    'cancelLabel'=> 'Cancelar', 
+                    'applyLabel'=>'Aplicar',
+                    'fromLabel'=>'Desde',
+                    'toLabel'=>'Hasta',
+                 ),
+                'callback' => 'js:function(start, end){console.log(start.toString("MMMM d, yyyy") + " - " + end.toString("MMMM d, yyyy"));}',
+            ),
+            'htmlOptions' => array(
+                    'placeholder' => 'Fecha Inicio - Fecha Cierre',
+                    'style' => 'width:98%;'
+             ),
 
-
+                )
+        );
+    ?>
     <div class="form-actions">
-<?php
-$this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType' => 'submit',
-    'type' => 'primary',
-    'label' => $model->isNewRecord ? 'Create' : 'Save',
-));
-?>
+        <?php
+        $this->widget('bootstrap.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'type' => 'primary',
+            'label' => $model->isNewRecord ? 'Create' : 'Save',
+        ));
+        ?>
     </div>
 </div>
 <?php $this->endWidget(); ?>
