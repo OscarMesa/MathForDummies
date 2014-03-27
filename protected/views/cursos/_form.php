@@ -27,7 +27,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'options' => array(
                 'language' => 'es',
                 'format'=>'DD-MM-YYYY',
-                'startDate'=> "[moment().subtract('days', 1), moment().subtract('days', 1)]",
                 'locale' => array(
                     'cancelLabel'=> 'Cancelar', 
                     'applyLabel'=>'Aplicar',
