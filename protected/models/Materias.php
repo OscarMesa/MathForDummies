@@ -1,26 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "cursos".
+ * This is the model class for table "materias".
  *
- * The followings are the available columns in table 'cursos':
- * @property integer $id
- * @property string $state_curso
- * @property integer $id_docente
- * @property integer $idmateria
- * @property string $nombre_curso
- * @property string $descripcion_curso
- * @property string $fecha_inicio
- * @property string $fecha_cierre
+ * The followings are the available columns in table 'materias':
+ * @property integer $idmaterias
+ * @property string $nombre_materia
+ * @property string $state_materia
  */
-class Cursos extends CActiveRecord
+class Materias extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'cursos';
+		return 'materias';
 	}
 
 	/**
@@ -31,15 +26,11 @@ class Cursos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idmateria, descripcion_curso, state_curso, nombre_curso, fecha_inicio, fecha_cierre', 'required'),
-			array('idmateria', 'numerical', 'integerOnly'=>true),
-			array('state_curso', 'length', 'max'=>8),
-			array('nombre_curso', 'length', 'max'=>45),
-			array('fecha_inicio', 'safe'),
-			array('fecha_cierre', 'safe'),
+			array('nombre_materia', 'length', 'max'=>45),
+			array('state_materia', 'length', 'max'=>8),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, state_curso, idmateria, nombre_curso, descripcion_curso,fecha_inicio, fecha_cierre', 'safe', 'on'=>'search'),
+			array('idmaterias, nombre_materia, state_materia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,8 +42,7 @@ class Cursos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'usuario' => array(self::BELONGS_TO, 'Usuarios', 'id_docente'),
-                    'materia' => array(self::BELONGS_TO, 'Materias', 'idmateria'),
+                    'cursos' => array(self::HAS_MANY, 'Cursos', 'idmateria'),
 		);
 	}
 
@@ -62,14 +52,9 @@ class Cursos extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'state_curso' => 'Estado Curso',
-			//'id_docente' => 'Id Docente',
-			'idmateria' => 'Area del Curso',
-			'nombre_curso' => 'Nombre Curso',
-			'descripcion_curso' => 'Descripcion Curso',
-			'fecha_inicio' => 'Fecha Inicio Curso',
-			'fecha_cierre' => 'Fecha Cierre Curso',
+			'idmaterias' => 'Idmaterias',
+			'nombre_materia' => 'Nombre Materia',
+			'state_materia' => 'State Materia',
 		);
 	}
 
@@ -91,14 +76,9 @@ class Cursos extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		//$criteria->compare('id',$this->id);
-		//$criteria->compare('state_curso',$this->state_curso,true);
-		//$criteria->compare('id_docente',$this->id_docente);
-		$criteria->compare('idmateria',$this->idmateria);
-		$criteria->compare('nombre_curso',$this->nombre_curso,true);
-		$criteria->compare('descripcion_curso',$this->descripcion_curso,true);
-		$criteria->compare('fecha_inicio',$this->fecha_inicio,true);
-		$criteria->compare('fecha_cierre',$this->fecha_cierre,true);
+		$criteria->compare('idmaterias',$this->idmaterias);
+		$criteria->compare('nombre_materia',$this->nombre_materia,true);
+		$criteria->compare('state_materia',$this->state_materia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -109,7 +89,7 @@ class Cursos extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cursos the static model class
+	 * @return Materias the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
