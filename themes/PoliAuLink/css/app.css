@@ -79,5 +79,15 @@ body{
 }
 
 #form_curso #Cursos_descripcion_curso{
+    width:98% !important;
+}
+
+#form_contenidos{
+    background-color: #F5F5F5;
+    margin: 10px auto;
+    padding: 25px;
+    width: 466px;
+}
+#form_contenidos #Contenidos_observacion{
     width:98% !important
 }

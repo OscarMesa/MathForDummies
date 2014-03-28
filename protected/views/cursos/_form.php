@@ -8,10 +8,10 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <div id="form_curso">
     <p class="help-block">Los campos identificados con <span class="required">*</span> son queridos.</p>
 
-    <?php echo $form->errorSummary($model); ?>
+    <?php #echo $form->errorSummary($model); ?>
 
     <?php
-    echo $form->dropDownListRow($model, 'state_curso', array('true' => 'active', 'false' => 'inactive'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
+    echo $form->dropDownListRow($model, 'state_curso', array('true' => 'Activo', 'false' => 'Inactivo'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
     ?>
 
     <?php echo $form->textFieldRow($model, 'idmateria', array('class' => 'span5')); ?>
@@ -21,12 +21,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 
     <?php
+        echo date("dd-mm-yyyy");
         $this->widget('bootstrap.widgets.TbDateRangePicker', array(
             'name' => 'fecha_inicio',
             
             'options' => array(
                 'language' => 'es',
                 'format'=>'DD-MM-YYYY',
+                'minDate'=> date("d-m-Y"),
                 'locale' => array(
                     'cancelLabel'=> 'Cancelar', 
                     'applyLabel'=>'Aplicar',
