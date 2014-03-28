@@ -4707,3 +4707,29 @@ in C:\xampp\htdocs\PoliAuLink\protected\views\contenidos\index.php (17)
 in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (133)
 2014/03/28 03:06:58 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `contenidos` `t` LIMIT 10)
 2014/03/28 03:06:58 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `contenidos` `t` LIMIT 10)
+2014/03/28 03:11:47 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (64)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/28 03:11:47 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `contenidos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (64)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/28 03:11:47 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `contenidos`)
+2014/03/28 03:11:47 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `contenidos`)
+2014/03/28 03:11:47 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `contenidos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (64)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/28 03:11:47 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `contenidos`)
+2014/03/28 03:11:47 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `contenidos`)
+2014/03/28 03:35:36 [trace] [system.db.CDbConnection] Opening DB connection
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (64)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/28 03:35:36 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `contenidos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (64)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/28 03:35:36 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `contenidos`)
+2014/03/28 03:35:36 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW FULL COLUMNS FROM `contenidos`)
+2014/03/28 03:35:36 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `contenidos`
+in C:\xampp\htdocs\PoliAuLink\protected\controllers\ContenidosController.php (64)
+in C:\xampp\htdocs\PoliAuLink\index.php (13)
+2014/03/28 03:35:36 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SHOW CREATE TABLE `contenidos`)
+2014/03/28 03:35:36 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SHOW CREATE TABLE `contenidos`)
