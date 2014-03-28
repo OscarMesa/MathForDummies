@@ -9,7 +9,9 @@ class UserIdentity extends CUserIdentity
 {
     const ERROR_TYPEUSER_INVALID = 13;
     private $_id;
-  // private $_isAdmin;
+    private $_perfiles;
+    private $_username;
+    // private $_isAdmin;
 
     public function authenticate()
     {
@@ -29,6 +31,8 @@ class UserIdentity extends CUserIdentity
             }
             else{
                 $this->_id=$user->id_usuario;
+                $this->_perfiles = $user->perfiles;
+                $this->_username = $user->nombre;
                // $this->setState('role', $user->rol);
                //  $this->setState('admin', 1);
 
@@ -60,6 +64,16 @@ class UserIdentity extends CUserIdentity
     public function getId()
     {
         return $this->_id;
+    }
+    
+    public function  getPerfiles()
+    {
+        return $this->_perfiles;
+    }
+    
+    public function getUser()
+    {
+        return $this->_username ;
     }
 
 }

@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 /archivos/PabloAplication/nbproject/private/
 /archivos/PabloAplication/build/
 /archivos/documentacion/Presentacion/Video/OpenShot/PoliAuLink.mov
 /nbproject
 /application/config/database.php
 /assets
+/protected/config
+/protected/config/main.php
