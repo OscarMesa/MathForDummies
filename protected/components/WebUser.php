@@ -48,7 +48,8 @@ class WebUser extends CWebUser
             }
         }
         return false;
-    }
+  
+      }
     
     public function esProfesor()
     {
