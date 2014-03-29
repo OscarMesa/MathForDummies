@@ -17,6 +17,7 @@ class WebUser extends CWebUser
  
     public function login($identity, $duration) {
         $this->setState('__perfiles', $identity->getPerfiles());
+        $this->setState('idUsuario', $identity->getId());
 //       echo "<pre>";
 //        print_r($this->perfiles);
 //                exit();
@@ -29,7 +30,7 @@ class WebUser extends CWebUser
     */
     public function getId()
     {
-        return $this->id;
+        return $this->idUsuario;
     }
     
     public function getPerfiles_1()

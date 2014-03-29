@@ -61,12 +61,12 @@ class ImgVideosSonido extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'state_img_videos' => 'State Img Videos',
-			'url' => 'Url',
+			'state_img_videos' => 'Estado',
+			'url' => 'Componente Multimedia',
 			'nombre' => 'Nombre',
-			'type' => 'Type',
-			'descripcion' => 'Descripcion',
-			'idUsiario' => 'Id Usiario',
+			'type' => 'Tipo',
+			'descripcion' => 'Descripción',
+			'idUsiario' => 'Usuario',
 		);
 	}
         
