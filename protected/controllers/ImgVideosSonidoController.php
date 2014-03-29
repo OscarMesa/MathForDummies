@@ -1,6 +1,6 @@
 <?php
 
-class ContenidosController extends Controller {
+class ImgVideosSonidoController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -42,11 +42,6 @@ class ContenidosController extends Controller {
         );
     }
 
-    public function obtenerComonentesMultimedia($idTaller,$tipo="") {
-        $multimedia = ImgVideosSonido::model()->with(array('multimedia' => array('alias' => 'multimedia')));
-     
-    }
-
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -62,20 +57,19 @@ class ContenidosController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Contenidos();
+        $model = new ImgVideosSonido;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Contenidos'])) {
-            $model->attributes = $_POST['Contenidos'];
+        if (isset($_POST['ImgVideosSonido'])) {
+            $model->attributes = $_POST['ImgVideosSonido'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
-        
+
         $this->render('create', array(
             'model' => $model,
-            'contenido'=>$this,
         ));
     }
 
@@ -90,15 +84,14 @@ class ContenidosController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Contenidos'])) {
-            $model->attributes = $_POST['Contenidos'];
+        if (isset($_POST['ImgVideosSonido'])) {
+            $model->attributes = $_POST['ImgVideosSonido'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
 
         $this->render('update', array(
             'model' => $model,
-            'contenido'=>$this,
         ));
     }
 
@@ -124,7 +117,7 @@ class ContenidosController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Contenidos');
+        $dataProvider = new CActiveDataProvider('ImgVideosSonido');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -134,10 +127,10 @@ class ContenidosController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new Contenidos('search');
+        $model = new ImgVideosSonido('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Contenidos']))
-            $model->attributes = $_GET['Contenidos'];
+        if (isset($_GET['ImgVideosSonido']))
+            $model->attributes = $_GET['ImgVideosSonido'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -150,7 +143,7 @@ class ContenidosController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = Contenidos::model()->findByPk($id);
+        $model = ImgVideosSonido::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -161,7 +154,7 @@ class ContenidosController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'contenidos-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'img-videos-sonido-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
