@@ -27,4 +27,5 @@ ALTER TABLE  `talleres` ADD FOREIGN KEY (  `id_curso` ) REFERENCES  `math`.`curs
 `id`
 ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
 
+
     
