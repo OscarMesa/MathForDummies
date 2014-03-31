@@ -36,7 +36,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id' => 'contenidos',
             'type' => 'tabs',
             'tabs' => array(
-                array('id' => 'Contenidos Multimedia', 'label' => 'Videos', 'content' => $this->renderPartial('application.views.imgVideosSonido._contenido', array('model' => $contenido->obtenerComonentesMultimedia($model->id)), true), 'active' => true,),
+                array('id' => 'contenidos', 'label' => 'Contenidos Multimedia', 'content' => $this->renderPartial('application.views.imgVideosSonido._contenido', array('model' => new ImgVideosSonido(), 'id_contenido'=>$model->id), true), 'active' => true,),
             ),
             'events' => array('shown' => '')
                 )
@@ -131,8 +131,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             $.each(other_data, function(key, input) {
                 formData.append(input.name, input.value);
             });
+            formData.append('ajaxview', 'content');
             formData.append('dataType', 'JSON');
-            jQuery.ajax({
+            console.log('--------------');
+            console.log(formData);
+            console.log('--------------');
+                jQuery.ajax({
                 'success': function(e) {
                     if (e.respuesta == true) {
                         $(body).load("<?php echo Yii::app()->getBaseUrl(true); ?>/lugar/nuevoSitio", 'id_lugar_new=' + e.id_lugar);
@@ -141,9 +145,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     }
                 },
                 'type': 'POST',
-                'url': '<?php echo Yii::app()->getBaseUrl(true) . '/lugar/saveSession'; ?>',
+                'url': '<?php echo Yii::app()->getBaseUrl(true) . '/contenidos/saveMultimediaContent'; ?>',
                 'cache': false,
-                'data': formData,
+                'data': formData,   
                 'contentType': false,
                 'processData': false,
                 'dataType': 'JSON'

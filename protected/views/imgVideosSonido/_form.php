@@ -14,7 +14,7 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-        <?php echo $form->textFieldRow  ($model,'nombre',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+        <?php echo $form->textFieldRow  ($model,'nombre',array('class'=>'span5')); ?>
 
         <?php echo $form->dropDownListRow($model,'type',array('video'=>'Video','img'=>'Imagen'),array('class'=>'span5','maxlength'=>6)); ?>
 

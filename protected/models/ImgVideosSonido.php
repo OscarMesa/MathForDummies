@@ -50,7 +50,7 @@ class ImgVideosSonido extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'multimedia'=>array(self::MANY_MANY,'ImgVideosSonido','ImgVideosSonidoContenidos(img_videos_id,contenidos_id)'),
+                    'contenidos'=>array(self::MANY_MANY,'Contenidos','ImgVideosSonidoContenidos(img_videos_id,contenidos_id)'),
 		);
 	}
 
@@ -102,6 +102,20 @@ class ImgVideosSonido extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function searchByContenido($id_contenido)
+        {
+            $criteria=new CDbCriteria();
+            $criteria->with = array(
+                'contenidos' => array(
+                     'alias' => 'contenidos'
+                )
+            );
+            
+            return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+        }
 
 	/**
 	 * Returns the static model of the specified AR class.

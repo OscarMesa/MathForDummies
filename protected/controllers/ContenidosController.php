@@ -29,7 +29,7 @@ class ContenidosController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update','saveMultimediaContent'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,6 +56,21 @@ class ContenidosController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
+    
+    public function actionSaveMultimediaContent()
+    {
+        $datos = array();
+        if(Yii::app()->user->hasState("state_name"))
+        {
+            $datos = Yii::app()->user->getState("ValueMultimediaContent");
+        }
+        $datos = array('datos'=>$_POST,'image'=>$_FILES);
+        Yii::app()->user->setState("ValueMultimediaContent",$datos);
+        echo count($datos);
+        print_r($datos);
+    }
+
+    
 
     /**
      * Creates a new model.
