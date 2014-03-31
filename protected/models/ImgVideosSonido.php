@@ -108,7 +108,8 @@ class ImgVideosSonido extends CActiveRecord
             $criteria=new CDbCriteria();
             $criteria->with = array(
                 'contenidos' => array(
-                     'alias' => 'contenidos'
+                     'a
+lias' => 'contenidos'
                 )
             );
             

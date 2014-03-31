@@ -21,7 +21,7 @@
         array(
             'name' => 'type',
             'value' => function($data){
-                return ($data->state_curso == 'vide'?'Video':$data->state_curso == 'img'?'Imagen');
+                return ($data->state_curso == 'vide'?'Video':($data->state_curso == 'img'?'Imagen':''));
             },
         ),
         array(
