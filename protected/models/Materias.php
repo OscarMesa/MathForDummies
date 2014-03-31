@@ -53,7 +53,7 @@ class Materias extends CActiveRecord
 	{
 		return array(
 			'idmaterias' => 'Idmaterias',
-			'nombre_materia' => 'Nombre Materia',
+			'nombre_materia' => 'Materia',
 			'state_materia' => 'State Materia',
 		);
 	}
