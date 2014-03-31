@@ -37,4 +37,24 @@ ALTER TABLE  `cursos` ADD FOREIGN KEY (  `idmateria` ) REFERENCES  `math`.`mater
 ) ON DELETE RESTRICT ON UPDATE RESTRICT ;   
 
 
-    
+
+ALTER TABLE  `img_videos_sonido_contenidos` ADD FOREIGN KEY (  `img_videos_id` ) REFERENCES  `math`.`img_videos_sonido` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE  `img_videos_sonido_contenidos` ADD FOREIGN KEY (  `contenidos_id` ) REFERENCES  `math`.`contenidos` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE  `contenidos` ADD  `almacenado_total` BOOLEAN NOT NULL COMMENT 'este campo permite saber si un contenido se ha almenado en su totalidad o es un registro que puede o no ser tomado en cuenta.' AFTER  `observacion`    
+
+ALTER TABLE  `contenidos` CHANGE  `id`  `id` INT( 11 ) NOT NULL AUTO_INCREMENT
+
+
+ALTER TABLE `img_videos_sonido_contenidos` CHANGE `contenidos_tipo_contenido_id` `contenidos_tipo_contenido_id` INT( 11 ) NULL 
+
+ALTER TABLE `img_videos_sonido_contenidos` DROP FOREIGN KEY `img_videos_sonido_contenidos_ibfk_2` ,
+ADD FOREIGN KEY ( `contenidos_id` ) REFERENCES `math`.`contenidos` (
+`id`
+) ON DELETE CASCADE ON UPDATE RESTRICT ;
+

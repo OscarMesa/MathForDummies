@@ -11,7 +11,8 @@
  */
 class ImgVideosSonidoContenidos extends CActiveRecord
 {
-	/**
+    
+        /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -27,7 +28,7 @@ class ImgVideosSonidoContenidos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('img_videos_id, contenidos_id, contenidos_tipo_contenido_id', 'required'),
+			array('img_videos_id, contenidos_id', 'required'),
 			array('img_videos_id, contenidos_id, contenidos_tipo_contenido_id', 'numerical', 'integerOnly'=>true),
 			array('state_video_has_contenidos', 'length', 'max'=>8),
 			// The following rule is used by search().
@@ -40,7 +41,7 @@ class ImgVideosSonidoContenidos extends CActiveRecord
 	 * @return array relational rules.
 	 */
 	public function relations()
-	{https://mail.google.com/mail/u/0/#inbox
+	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(

@@ -15,7 +15,7 @@ array('label'=>'Manage ImgVideosSonido','url'=>array('admin')),
    <h1>Create contenido multimedia</h1>
 <?php } ?>
 <?php 
-$params = array('model' => $model,);
+$params = array('model' => $model,'Contenidomodel' => $Contenidomodel);
 if(isset($cursoSeccion))
     $params['cursoSeccion'] = $cursoSeccion;
 echo $this->renderPartial('application.views.imgVideosSonido._form', $params);

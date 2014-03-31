@@ -9,6 +9,7 @@
  * @property string $titulo
  * @property string $texto
  * @property string $observacion
+ * @property boolean $almacenado_total
  */
 class Contenidos extends CActiveRecord
 {
@@ -46,7 +47,7 @@ class Contenidos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'multimedia'=>array(self::MANY_MANY,'ImgVideosSonido','ImgVideosSonidoContenidos(img_videos_id,contenidos_id)'),
+                    'multimedia'=>array(self::MANY_MANY,'ImgVideosSonido','img_videos_sonido_contenidos(contenidos_id,img_videos_id)'),
 		);
 	}
 

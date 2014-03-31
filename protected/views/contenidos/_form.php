@@ -16,12 +16,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
     <?php
-    echo $form->dropDownListRow($model, 'state_contenido', array('true' => 'Activo', 'false' => 'Inactivo'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
+    echo $form->dropDownListRow($model, 'state_contenido', array('active' => 'Activo', 'inactive' => 'Inactivo'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
     ?>
     <?php echo $form->textFieldRow($model, 'titulo', array('class' => 'span5', 'maxlength' => 55)); ?>
     <?php
     $this->widget('bootstrap.widgets.TbHtml5Editor', array(
-        'name' => 'texto',
+        'name' => 'Contenidos[texto]',
         'width' => '98%',
             )
     );
@@ -36,19 +36,20 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id' => 'contenidos',
             'type' => 'tabs',
             'tabs' => array(
-                array('id' => 'contenidos', 'label' => 'Contenidos Multimedia', 'content' => $this->renderPartial('application.views.imgVideosSonido._contenido', array('model' => new ImgVideosSonido(), 'id_contenido'=>$model->id), true), 'active' => true,),
+                array('id' => 'contenidos', 'label' => 'Contenidos Multimedia', 'content' => $this->renderPartial('application.views.imgVideosSonido._contenido', array('model' => new ImgVideosSonido(), 'id_contenido' => $model->id), true), 'active' => true,),
             ),
             'events' => array('shown' => '')
                 )
         );
         ?>
+        <?php echo CHtml::hiddenField('Contenidos[id]', $model->id); ?>
     </div>
     <div class="form-actions">
         <?php
         $this->widget('bootstrap.widgets.TbButton', array(
             'buttonType' => 'submit',
             'type' => 'primary',
-            'label' => $model->isNewRecord ? 'Create' : 'Save',
+            'label' => $model->isNewRecord ? 'Crear' : 'Guardar',
         ));
         ?>
     </div>
@@ -61,8 +62,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Nuevo contenido</h3>
     </div>
-    <div class="modal-body">
-        <?php echo $this->renderPartial('application.views.imgVideosSonido.create', array('model' => new ImgVideosSonido(), 'cursoSeccion' => true), true); ?>
+    <div class="modal-body-contenidos">
+        <?php
+        $model2 = new ImgVideosSonido();
+        $model2->type = 'video';
+        echo $this->renderPartial('application.views.imgVideosSonido.create', array('model' => $model2, 'cursoSeccion' => true, 'Contenidomodel' => $model), true);
+        ?>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
@@ -74,13 +79,15 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <script>
     $(document).on('ready', function() {
-        $('#field-imagen').prev().css('display', 'none');
+        // $('#field-imagen').prev().prev().css('display', 'none');
     });
     $(document).on('click', '#agregarContenido', function(e) {
+        change(this);
         $('#contenidos-modal').modal('show');
         e.preventDefault();
     });
     $(document).on('click', '#guargar-contenido', function(e) {
+        console.log('entro');
         $('#img-videos-sonido-form').submit();
         e.preventDefault();
     });
@@ -89,23 +96,21 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         e.preventDefault();
     });
 
-    $(document).on('change', '#ImgVideosSonido_type', function() {
-        console.log()
-                ;
-        if ($('#ImgVideosSonido_type').find(":selected").val() == 'img') {
-            $('#field-video').css('display', 'none');
-            $('#field-video').prev().css('display', 'none');
-            $('#field-imagen').css('display', 'block');
-            $('#field-imagen').prev().css('display', 'block');
-
-        } else if ($('#ImgVideosSonido_type').find(":selected").val() == 'video') {
-            $('#field-video').css('display', 'block');
-            $('#field-video').prev().css('display', 'block');
-            $('#field-imagen').css('display', 'none');
-            $('#field-imagen').prev().css('display', 'none');
+//    $(document).on('change', '#ImgVideosSonido_type', function() {
+//        data = $('#img-videos-sonido-form').serialize();
+//        document.getElementById('img-videos-sonido-form').remove();
+//        $('.modal-body').load('<?php echo Yii::app()->getBaseUrl(true); ?>/ImgVideosSonido/LoadFormulario',data,function(){});
+//    });
+    function change(e)
+    {
+        $('#multimedia').empty();
+        if ($('#ImgVideosSonido_type').val() == 'video') {
+            $('#multimedia').html('<label class="required" for="ImgVideosSonido_url">Componente Multimedia <span class="required">*</span></label><input type="text" id="ImgVideosSonido_url" name="ImgVideosSonido[url]" title="" data-placement="top" data-toggle="tooltip" maxlength="100" class="span5" data-original-title="Debe agregar una ruta unicamente de vimeo."><div style="display:none" id="ImgVideosSonido_url_em_" class="help-block error"></div>');
+        }else if($('#ImgVideosSonido_type').val() == 'img'){
+            $('#multimedia').html('<label class="required" for="ImgVideosSonido_url">Componente Multimedia <span class="required">*</span></label><input type="hidden" name="ImgVideosSonido[url]" value="" id="ytImgVideosSonido_url"><input type="file" id="ImgVideosSonido_url" name="ImgVideosSonido[url]" style="" maxlength="100" class="span5 "><div style="display:none" id="ImgVideosSonido_url_em_" class="help-block error"></div>  ');
         }
-    });
-
+        //console.log(e.parent().serializeArray());  
+    }
     /**
      * Este metodo se encarga de hacer un respaldo del html del formulario que se esta almacenando
      * @param {type} from
@@ -121,33 +126,48 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         //No tiene mas errores.
         if (!hasError)
         {
-
-            var fileInput = document.getElementById('field-imagen');
-            var file = fileInput.files[0];
             var formData = new FormData();
-            formData = new FormData();
-            formData.append('ImgVideosSonido[url]', file);
             var other_data = $('#img-videos-sonido-form').serializeArray();
+            if ($('#ImgVideosSonido_type').val() == 'img') {
+                var fileInput = document.getElementById('ImgVideosSonido_url');
+                var file = fileInput.files[0];
+                formData = new FormData();
+                formData.append('ImgVideosSonido[url]', file);
+            } else {
+                url = 'vimeo.com/';
+                
+                if ($('#ImgVideosSonido_url').val().toLowerCase().search(url) == -1) {
+                console.log('entroasdfasdf');
+                    $('#img-videos-sonido-form_es_').children('ul').append('<ul><li>Componente Multimedia debe ser una url valida de vimeo.</li></ul>')
+                     $('#img-videos-sonido-form_es_').css('display','block');
+                    $('#ImgVideosSonido_url_em_').html('Componente Multimedia debe ser una url valida de vimeo.');
+                    $('#ImgVideosSonido_url_em_').css('display','block');
+                    return;
+                }
+            }
+            
             $.each(other_data, function(key, input) {
                 formData.append(input.name, input.value);
             });
+            console.log('continua');
             formData.append('ajaxview', 'content');
             formData.append('dataType', 'JSON');
-            console.log('--------------');
-            console.log(formData);
-            console.log('--------------');
-                jQuery.ajax({
+            jQuery.ajax({
                 'success': function(e) {
-                    if (e.respuesta == true) {
-                        $(body).load("<?php echo Yii::app()->getBaseUrl(true); ?>/lugar/nuevoSitio", 'id_lugar_new=' + e.id_lugar);
+                    if (e.rpt == true) {
+                        $('#contenidos-modal').modal('hide');
+                        $('#contenidos_cursos').load("<?php echo Yii::app()->getBaseUrl(true); ?>/ImgVideosSonido/LoadMultimediaByContent", 'id_contenido=<?php echo $model->id; ?>');
+                        $('#img-videos-sonido-form').each (function(){
+                            this.reset();
+                          });
                     } else {
-                        $("#contenedor").html(e.content);
+                        console.log(e);
                     }
                 },
                 'type': 'POST',
-                'url': '<?php echo Yii::app()->getBaseUrl(true) . '/contenidos/saveMultimediaContent'; ?>',
+                'url': '<?php echo Yii::app()->getBaseUrl(true) . '/ImgVideosSonido/saveMultimediaContent'; ?>',
                 'cache': false,
-                'data': formData,   
+                'data': formData,
                 'contentType': false,
                 'processData': false,
                 'dataType': 'JSON'
@@ -164,5 +184,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         /* place center */
         margin-left:auto;
         margin-right:auto; 
+    }
+    .modal-body-contenidos {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 15px;
+        position: relative;
     }
 </style>

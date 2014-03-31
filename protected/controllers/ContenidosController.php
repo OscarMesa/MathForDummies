@@ -23,13 +23,19 @@ class ContenidosController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
+         $permisos_profesor = array();
+        if (Yii::app()->user->esProfesor()) {
+            $permisos_profesor = array('create', 'update', 'curso', 'admin','delete');
+        } else {
+            $permisos_profesor = array('create', 'update', 'curso');
+        }
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update','saveMultimediaContent'),
+                'actions' => $permisos_profesor,
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,21 +64,6 @@ class ContenidosController extends Controller {
         ));
     }
     
-    public function actionSaveMultimediaContent()
-    {
-        $datos = array();
-        if(Yii::app()->user->hasState("state_name"))
-        {
-            $datos = Yii::app()->user->getState("ValueMultimediaContent");
-        }
-        $datos = array('datos'=>$_POST,'image'=>$_FILES);
-        Yii::app()->user->setState("ValueMultimediaContent",$datos);
-        echo count($datos);
-        print_r($datos);
-    }
-
-    
-
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -84,16 +75,23 @@ class ContenidosController extends Controller {
 
         if (isset($_POST['Contenidos'])) {
             $model->attributes = $_POST['Contenidos'];
+            $model->almacenado_total = TRUE;
+//            exit();
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                 $this->redirect(array('admin'));
+                // $this->redirect(array('view', 'id' => $model->id));
+        }else{
+            Contenidos::model()->deleteAll('almacenado_total=?',array(FALSE));
+            $model->almacenado_total = FALSE;
+            $model->insert();
         }
-
         
         $this->render('create', array(
             'model' => $model,
             'contenido'=>$this,
         ));
     }
+    
 
     /**
      * Updates a particular model.
@@ -109,7 +107,7 @@ class ContenidosController extends Controller {
         if (isset($_POST['Contenidos'])) {
             $model->attributes = $_POST['Contenidos'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin'));
         }
 
         $this->render('update', array(
