@@ -14,6 +14,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     echo $form->dropDownListRow($model_materia_v, 'nombre_materia', CHtml::listData(Materias::model()->findAll("idmaterias"), 'idmaterias', 'nombre_materia'));
     echo"<br>";
     ?>
+    
+    
     <?php
     $model_curso_v = new Cursos();
     echo $form->dropDownListRow($model_curso_v, 'nombre_curso', CHtml::listData(Cursos::model()->findAll("id"), 'id', 'nombre_curso'));
