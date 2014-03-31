@@ -10,3 +10,24 @@ INSERT DELAYED IGNORE INTO `materias` (`idmaterias`, `nombre_materia`, `state_ma
 (5, 'Bilogia', 'active'),
 (6, 'Inglés', 'active');
 
+----------------------
+
+ALTER TABLE  `talleres` ADD  `id_materia` INT( 5 ) NOT NULL AFTER  `idtalleres` ,
+ADD  `id_curso` INT( 5 ) NOT NULL AFTER  `id_materia`;
+
+ALTER TABLE  `talleres` ADD INDEX (  `id_materia` ) ;
+
+ALTER TABLE  `talleres` ADD INDEX (  `id_curso` ) ;
+
+ALTER TABLE  `talleres` ADD FOREIGN KEY (  `id_materia` ) REFERENCES  `math`.`materias` (
+`idmaterias`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE  `talleres` ADD FOREIGN KEY (  `id_curso` ) REFERENCES  `math`.`cursos` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+
+ALTER TABLE `talleres` CHANGE `idtalleres` `idtalleres` INT( 11 ) NOT NULL AUTO_INCREMENT ;
+
+    

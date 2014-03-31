@@ -1,6 +1,6 @@
 <?php
 if (Yii::app()->controller->action->id == 'update') {
-    $url = "/cursos/update/".$model->id;
+    $url = "/cursos/update/" . $model->id;
 } else {
     $url = "/cursos/create";
 }
@@ -10,9 +10,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'enableAjaxValidation' => false,
     'enableClientValidation' => true,
     'clientOptions' => array(
-            'validateOnSubmit' => true,
-        ),
-    ));
+        'validateOnSubmit' => true,
+        'validateOnChange' => false,
+        'validateOnType' => false
+    ),
+        ));
 ?>
 
 <div id="form_curso">
@@ -20,9 +22,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
     <?php #echo $form->errorSummary($model); ?>
 
-<?php
+    <?php
     echo $form->dropDownListRow($model, 'state_curso', array('active' => 'Activo', 'inactive' => 'Inactivo'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
-
     ?>
 
     <?php echo $form->dropDownListRow($model, 'idmateria', CHtml::listData(Materias::model()->findAll('state_materia=?', array('active')), 'idmaterias', 'nombre_materia'), array('style' => '')) ?>
@@ -32,10 +33,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 
     <?php
-
     $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'name' => 'Cursos[rango_fecha]',
-        'value' => ($model->fecha_inicio != ''?$model->fecha_inicio.' - '.$model->fecha_cierre:''),
+        'value' => ($model->fecha_inicio != '' ? $model->fecha_inicio . ' - ' . $model->fecha_cierre : ''),
         'options' => array(
             'language' => 'es',
             'format' => 'YYYY-MM-DD',
@@ -52,17 +52,17 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'placeholder' => 'Fecha Inicio - Fecha Cierre',
             'style' => 'width:98%;'
         ),
-      )
+            )
     );
     ?>
     <div class="form-actions">
-        <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
-            'buttonType' => 'submit',
-            'type' => 'primary',
-            'label' => $model->isNewRecord ? 'Crear' : 'Guardar',
-        ));
-        ?>
+    <?php
+    $this->widget('bootstrap.widgets.TbButton', array(
+        'buttonType' => 'submit',
+        'type' => 'primary',
+        'label' => $model->isNewRecord ? 'Crear' : 'Guardar',
+    ));
+    ?>
     </div>
 </div>
 <?php $this->endWidget(); ?>

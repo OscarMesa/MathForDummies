@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Contenidoses'=>array('index'),
+	'Talleres'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Contenidos','url'=>array('index')),
-array('label'=>'Create Contenidos','url'=>array('create')),
+array('label'=>'List Talleres','url'=>array('index')),
+array('label'=>'Create Talleres','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('contenidos-grid', {
+$.fn.yiiGridView.update('talleres-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Contenidoses</h1>
+<h1>Manage Talleres</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -39,15 +39,15 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
-'id'=>'contenidos-grid',
+'id'=>'talleres-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
-		'id',
-		'state_contenido',
-		'titulo',
-		'texto',
-		'observacion',
+		'idtalleres',
+		'id_materia',
+		'id_curso',
+		'nombre',
+		'descripcion',
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),

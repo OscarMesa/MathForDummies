@@ -1,23 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "contenidos".
+ * This is the model class for table "img_videos_sonido".
  *
- * The followings are the available columns in table 'contenidos':
+ * The followings are the available columns in table 'img_videos_sonido':
  * @property integer $id
- * @property string $state_contenido
- * @property string $titulo
- * @property string $texto
- * @property string $observacion
+ * @property string $state_img_videos
+ * @property string $url
+ * @property string $nombre
+ * @property string $type
+ * @property string $descripcion
+ * @property integer $idUsiario
  */
-class Contenidos extends CActiveRecord
+class ImgVideosSonido extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'contenidos';
+		return 'img_videos_sonido';
 	}
 
 	/**
@@ -28,13 +30,15 @@ class Contenidos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('state_contenido, titulo, texto, observacion', 'required'),
-			array('state_contenido', 'length', 'max'=>8),
-			array('titulo', 'length', 'max'=>55),
-			array('texto, observacion', 'safe'),
+			array('type', 'required'),
+			array('idUsiario', 'numerical', 'integerOnly'=>true),
+			array('state_img_videos', 'length', 'max'=>8),
+			array('url', 'length', 'max'=>100),
+			array('type', 'length', 'max'=>6),
+			array('nombre, descripcion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('state_contenido, titulo, texto, observacion', 'safe', 'on'=>'search'),
+			array('id, state_img_videos, url, nombre, type, descripcion, idUsiario', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +50,7 @@ class Contenidos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'ivs'=>array(self::MANY_MANY,'ImgVideosSonido','ImgVideosSonidoContenidos(img_videos_id,contenidos_id)'),
+                    'multimedia'=>array(self::MANY_MANY,'ImgVideosSonido','ImgVideosSonidoContenidos(img_videos_id,contenidos_id)'),
 		);
 	}
 
@@ -56,14 +60,19 @@ class Contenidos extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'state_contenido' => 'Estado Contenido',
-			'titulo' => 'Titulo',
-			'texto' => 'Texto',
-			'observacion' => 'Observación',
+			'id' => 'ID',
+			'state_img_videos' => 'Estado',
+			'url' => 'Componente Multimedia',
+			'nombre' => 'Nombre',
+			'type' => 'Tipo',
+			'descripcion' => 'Descripción',
+			'idUsiario' => 'Usuario',
 		);
 	}
+        
+        
 
-	/**
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:
@@ -80,10 +89,14 @@ class Contenidos extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('state_contenido',$this->state_contenido,true);
-		$criteria->compare('titulo',$this->titulo,true);
-		$criteria->compare('texto',$this->texto,true);
-		$criteria->compare('observacion',$this->observacion,true);
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('state_img_videos',$this->state_img_videos,true);
+		$criteria->compare('url',$this->url,true);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('type',$this->type,true);
+		$criteria->compare('descripcion',$this->descripcion,true);
+		$criteria->compare('idUsiario',$this->idUsiario);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -94,7 +107,7 @@ class Contenidos extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Contenidos the static model class
+	 * @return ImgVideosSonido the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "contenidos".
+ * This is the model class for table "talleres".
  *
- * The followings are the available columns in table 'contenidos':
- * @property integer $id
- * @property string $state_contenido
- * @property string $titulo
- * @property string $texto
- * @property string $observacion
+ * The followings are the available columns in table 'talleres':
+ * @property integer $idtalleres
+ * @property integer $id_materia
+ * @property integer $id_curso
+ * @property string $nombre
+ * @property string $descripcion
+ *
+ * The followings are the available model relations:
+ * @property Cursos $idCurso
+ * @property Materias $idMateria
  */
-class Contenidos extends CActiveRecord
+class Talleres extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'contenidos';
+		return 'talleres';
 	}
 
 	/**
@@ -28,13 +32,12 @@ class Contenidos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('state_contenido, titulo, texto, observacion', 'required'),
-			array('state_contenido', 'length', 'max'=>8),
-			array('titulo', 'length', 'max'=>55),
-			array('texto, observacion', 'safe'),
+			array('id_materia, id_curso, nombre, descripcion', 'required'),
+			array('id_materia, id_curso', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('state_contenido, titulo, texto, observacion', 'safe', 'on'=>'search'),
+			array('id_materia, id_curso, nombre, descripcion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +49,8 @@ class Contenidos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'ivs'=>array(self::MANY_MANY,'ImgVideosSonido','ImgVideosSonidoContenidos(img_videos_id,contenidos_id)'),
+			'idCurso' => array(self::BELONGS_TO, 'Cursos', 'id_curso'),
+			'idMateria' => array(self::BELONGS_TO, 'Materias', 'id_materia'),
 		);
 	}
 
@@ -56,10 +60,10 @@ class Contenidos extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'state_contenido' => 'Estado Contenido',
-			'titulo' => 'Titulo',
-			'texto' => 'Texto',
-			'observacion' => 'Observación',
+			'id_materia' => 'Materia',
+			'id_curso' => 'Curso',
+			'nombre' => 'Nombre',
+			'descripcion' => 'Descripcion',
 		);
 	}
 
@@ -80,10 +84,12 @@ class Contenidos extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('state_contenido',$this->state_contenido,true);
-		$criteria->compare('titulo',$this->titulo,true);
-		$criteria->compare('texto',$this->texto,true);
-		$criteria->compare('observacion',$this->observacion,true);
+
+		$criteria->compare('idtalleres',$this->idtalleres);
+		$criteria->compare('id_materia',$this->id_materia);
+		$criteria->compare('id_curso',$this->id_curso);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('descripcion',$this->descripcion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -94,7 +100,7 @@ class Contenidos extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Contenidos the static model class
+	 * @return Talleres the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

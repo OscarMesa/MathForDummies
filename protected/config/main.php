@@ -67,6 +67,7 @@ return array(
             'responsiveCss'=>true,
         ),
         'user' => array(
+            'class'=>'WebUser',
             // enable cookie-based authentication
             'class'=>'WebUser',
             'allowAutoLogin' => true,
