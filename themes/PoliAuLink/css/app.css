@@ -1,3 +1,4 @@
+
 body{
 	background:url(../images/fondo.png);
 	padding:0px;
@@ -90,4 +91,14 @@ body{
 }
 #form_contenidos #Contenidos_observacion{
     width:98% !important
+}
+#form_taller{
+    background-color: #F5F5F5;
+    margin: 10px auto;
+    padding: 25px;
+    width: 674px; 
+}
+
+#form_taller #Talleres_descripcion{
+    width:98% !important;
 }

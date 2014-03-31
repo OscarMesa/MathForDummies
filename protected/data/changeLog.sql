@@ -28,4 +28,13 @@ ALTER TABLE  `talleres` ADD FOREIGN KEY (  `id_curso` ) REFERENCES  `math`.`curs
 ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
 
 
+ALTER TABLE  `cursos` ADD FOREIGN KEY (  `id_docente` ) REFERENCES  `math`.`usuarios` (
+`id_usuario`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE  `cursos` ADD FOREIGN KEY (  `idmateria` ) REFERENCES  `math`.`materias` (
+`idmaterias`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;   
+
+
     
