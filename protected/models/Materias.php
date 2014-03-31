@@ -8,6 +8,7 @@
  * @property string $nombre_materia
  * @property string $state_materia
  */
+
 class Materias extends CActiveRecord
 {
 	/**

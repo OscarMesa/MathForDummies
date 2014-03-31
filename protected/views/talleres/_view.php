@@ -8,6 +8,7 @@
 	<?php echo CHtml::encode($data->id_materia); ?>
 	<br />
 
+        
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_curso')); ?>:</b>
 	<?php echo CHtml::encode($data->id_curso); ?>
 	<br />

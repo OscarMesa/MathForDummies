@@ -13,6 +13,7 @@
  * @property string $fecha_inicio
  * @property string $fecha_cierre
  */
+
 class Cursos extends CActiveRecord
 {
 	/**

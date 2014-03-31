@@ -4,6 +4,7 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
+
 $this->menu=array(
 array('label'=>'List Talleres','url'=>array('index')),
 array('label'=>'Manage Talleres','url'=>array('admin')),

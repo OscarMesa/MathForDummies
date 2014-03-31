@@ -11,6 +11,7 @@
 
 		<?php echo $form->textFieldRow($model,'nombre',array('class'=>'span5','maxlength'=>45)); ?>
 
+
 		<?php echo $form->textFieldRow($model,'descripcion',array('class'=>'span5','maxlength'=>45)); ?>
 
 	<div class="form-actions">
