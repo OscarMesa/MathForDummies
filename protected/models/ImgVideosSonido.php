@@ -29,6 +29,7 @@ class ImgVideosSonido extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('nombre, descripcion, type, state_img_videos,url', 'required'),
+            array('url', 'file', 'types'=>'jpg, gif, png', 'on' => 'img'),
             array('url', 'validatVimeo', 'on' => 'video'),
             array('idUsiario', 'numerical', 'integerOnly' => true),
             array('state_img_videos', 'length', 'max' => 8),

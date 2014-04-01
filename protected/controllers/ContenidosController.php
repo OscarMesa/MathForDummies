@@ -80,11 +80,11 @@ class ContenidosController extends Controller {
             if ($model->save())
                  $this->redirect(array('admin'));
                 // $this->redirect(array('view', 'id' => $model->id));
-        }else{
+        }
             Contenidos::model()->deleteAll('almacenado_total=?',array(FALSE));
             $model->almacenado_total = FALSE;
             $model->insert();
-        }
+        
         
         $this->render('create', array(
             'model' => $model,
