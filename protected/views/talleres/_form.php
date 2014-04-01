@@ -11,14 +11,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     <?php #echo $form->errorSummary($model); ?>
     <?php
     $model_materia_v = new Materias();
-    echo $form->dropDownListRow($model_materia_v, 'nombre_materia', CHtml::listData(Materias::model()->findAll("idmaterias"), 'idmaterias', 'nombre_materia'));
+    echo $form->dropDownListRow($model_materia_v, 'nombre_materia', CHtml::listData(Materias::model()->findAll(), 'idmaterias', 'nombre_materia'));
     echo"<br>";
     ?>
     
     
     <?php
     $model_curso_v = new Cursos();
-    echo $form->dropDownListRow($model_curso_v, 'nombre_curso', CHtml::listData(Cursos::model()->findAll("id"), 'id', 'nombre_curso'));
+    echo $form->dropDownListRow($model_curso_v, 'nombre_curso', CHtml::listData(Cursos::model()->findAll("id_docente=?",array(Yii::app()->user->getId())), 'id', 'nombre_curso'));
     echo"<br>";
     ?>
 
@@ -39,4 +39,5 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php $this->endWidget(); ?>
 </div>
+
 
