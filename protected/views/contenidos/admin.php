@@ -39,7 +39,6 @@ return false;
     ));
     ?>
 </div><!-- search-form -->
-
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'contenidos-grid',
@@ -50,9 +49,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'titulo',
         array(
             'name' => 'state_contenido',
-            'filter' => array('active'=>'Activo','inactive'=>'Inactivo'),
-            'value' => function($data){
-                return ($data->state_contenido == 'active'?'Activo':'Inctivo');
+            'filter' => array('active' => 'Activo', 'inactive' => 'Inactivo'),
+            'value' => function($data) {
+                return ($data->state_contenido == 'active' ? 'Activo' : 'Inctivo');
             },
         ),
         'observacion',
