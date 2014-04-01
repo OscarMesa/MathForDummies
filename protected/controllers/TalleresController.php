@@ -60,21 +60,21 @@ $this->render('view',array(
 */
 public function actionCreate()
 {
-$model=new Talleres;
+    $model=new Talleres;
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+    // Uncomment the following line if AJAX validation is needed
+    // $this->performAjaxValidation($model);
 
-if(isset($_POST['Talleres']))
-{
-$model->attributes=$_POST['Talleres'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->idtalleres));
-}
+    if (isset($_POST['Talleres'])) {
+    $model->attributes=$_POST['Talleres'];
+    if ($model->save())
+        $this->redirect(array('admin'));
 
-$this->render('create',array(
-'model'=>$model,
-));
+    }
+    
+    $this->render('create',array(
+    'model'=>$model,
+    ));
 }
 
 /**
