@@ -8,3 +8,4 @@
 /protected/config/main.php
 /protected/runtime
 /themes/PoliAuLink/images/contenidos
+/protected/runtime/sql.log
