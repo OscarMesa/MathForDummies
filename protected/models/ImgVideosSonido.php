@@ -11,10 +11,11 @@
  * @property string $type
  * @property string $descripcion
  * @property integer $idUsiario
+ * @property string $name_img
  */
 class ImgVideosSonido extends CActiveRecord {
-
-    /**
+    
+     /**
      * @return string the associated database table name
      */
     public function tableName() {
@@ -28,8 +29,10 @@ class ImgVideosSonido extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre, descripcion, type, state_img_videos,url', 'required'),
-            array('url', 'validatVimeo', 'on' => 'video'),
+            array('nombre, descripcion, type, state_img_videos', 'required'),
+            array('url', 'validatVimeo', 'on' => 'video',),
+            array('url', 'required', 'on' => 'video',),
+            array('name_img', 'validateImg', 'on' => 'img',),
             array('idUsiario', 'numerical', 'integerOnly' => true),
             array('state_img_videos', 'length', 'max' => 8),
             array('url', 'length', 'max' => 100),
@@ -45,6 +48,14 @@ class ImgVideosSonido extends CActiveRecord {
         if (!(strpos(strtolower($this->url), 'vimeo.com/') !== false)) {
            $this->addError($attribute, 'La url del video debe ser de vimeo.');
         }
+    }
+    
+    public function validateImg($attribute,$params)
+    {
+        if($this->name_img == "")
+            $this->addError('url', 'El componente multimedia es necesario.');
+        else if(!preg_match('(([^"]+)(.)(jpeg|png|jpg))',$this->name_img))
+                $this->addError('url', 'El componente multimedia solo permite imagenes en formatos jpeg, png o jpg.');
     }
 
     /**
@@ -123,6 +134,14 @@ class ImgVideosSonido extends CActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+    
+    public function getName_img() {
+        return $this->name_img;
+    }
+
+    public function setName_img($name_img) {
+        $this->name_img = $name_img;
     }
 
 }

@@ -102,3 +102,16 @@ body{
 #form_taller #Talleres_descripcion{
     width:98% !important;
 }
+
+.portlet {
+    display: inline-block;
+}
+
+#content{
+    margin: 0px 26px 26px 26px;
+}
+
+#menu-admin{
+    margin-left: 26px;
+    margin-top: 15px;
+}

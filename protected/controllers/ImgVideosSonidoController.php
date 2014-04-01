@@ -223,6 +223,8 @@ class ImgVideosSonidoController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'img-videos-sonido-form') {
             if($model->type=="img"){
                 $_POST['ImgVideosSonido']['url'] = 'url';
+                $model->scenario = 'img';
+                $model->name_img = $_POST['ImgVideosSonido']['name_img'];
             }
             echo CActiveForm::validate($model);
             Yii::app()->end();

@@ -1,27 +1,32 @@
 <?php
-$this->breadcrumbs=array(
-	'Contenidoses'=>array('index'),
-	$model->id,
+$this->breadcrumbs = array(
+    'Contenidoses' => array('index'),
+    $model->id,
 );
 
-$this->menu=array(
-array('label'=>'List Contenidos','url'=>array('index')),
-array('label'=>'Create Contenidos','url'=>array('create')),
-array('label'=>'Update Contenidos','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Contenidos','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Contenidos','url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Listar Contenidos', 'url' => array('index')),
+    array('label' => 'Crear Contenido', 'url' => array('create')),
+    array('label' => 'Modificar Contenido', 'url' => array('update/' . $model->id)),
+    array('label' => 'Administrador de Contenidos', 'url' => array('admin')),
 );
 ?>
 
-<h1>View Contenidos #<?php echo $model->id; ?></h1>
+<h1>Vista contenido #<?php echo $model->id; ?></h1>
 
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
-'data'=>$model,
-'attributes'=>array(
-		'id',
-		'state_contenido',
-		'titulo',
-		'texto',
-		'observacion',
-),
-)); ?>
+<?php
+$this->widget('bootstrap.widgets.TbDetailView', array(
+    'data' => $model,
+    'attributes' => array(
+        'id',
+        array(
+            'name' => 'state_contenido',
+            'value' => function($data) {
+                return ($data->state_contenido == 'active' ? 'Activo' : 'Inactivo');
+            },
+        ),
+        'titulo',
+        'observacion',
+    ),
+));
+?>

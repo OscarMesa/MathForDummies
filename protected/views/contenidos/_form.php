@@ -19,13 +19,16 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     echo $form->dropDownListRow($model, 'state_contenido', array('active' => 'Activo', 'inactive' => 'Inactivo'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
     ?>
     <?php echo $form->textFieldRow($model, 'titulo', array('class' => 'span5', 'maxlength' => 55)); ?>
-    <?php
-    $this->widget('bootstrap.widgets.TbHtml5Editor', array(
-        'name' => 'Contenidos[texto]',
-        'width' => '98%',
-            )
-    );
-    ?>   
+        <?php echo  $form->labelEx($model,'texto');?>
+        <?php
+        $this->widget('bootstrap.widgets.TbHtml5Editor', array(
+            'name' => 'Contenidos[texto]',
+            'width' => '98%',
+            'value' => $model->texto
+                )
+        );
+        ?> 
+        <?php echo $form->error($model, 'texto'); ?>
     <?php #echo $form->textAreaRow($model,'texto',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
     <?php echo $form->textAreaRow($model, 'observacion', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
@@ -105,8 +108,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     {
         $('#multimedia').empty();
         if ($('#ImgVideosSonido_type').val() == 'video') {
-            $('#multimedia').html('<label class="required" for="ImgVideosSonido_url">Componente Multimedia <span class="required">*</span></label><input type="text" id="ImgVideosSonido_url" name="ImgVideosSonido[url]" title="" data-placement="top" data-toggle="tooltip" maxlength="100" class="span5" data-original-title="Debe agregar una ruta unicamente de vimeo."><div style="display:none" id="ImgVideosSonido_url_em_" class="help-block error"></div>');
-        }else if($('#ImgVideosSonido_type').val() == 'img'){
+            $('#multimedia').html('<label  style="display: inline" class="required" for="ImgVideosSonido_url">Componente Multimedia <span class="required">*</span></label><a href="http://player.vimeo.com/video/4116721" target="_blank" style="display: inline">Cómo subir vídeos.</a><input type="text" id="ImgVideosSonido_url" name="ImgVideosSonido[url]" title="" data-placement="top" data-toggle="tooltip" maxlength="100" class="span5" data-original-title="Debe agregar una ruta unicamente de vimeo."><div style="display:none" id="ImgVideosSonido_url_em_" class="help-block error"></div>');
+        } else if ($('#ImgVideosSonido_type').val() == 'img') {
             $('#multimedia').html('<label class="required" for="ImgVideosSonido_url">Componente Multimedia <span class="required">*</span></label><input type="hidden" name="ImgVideosSonido[url]" value="" id="ytImgVideosSonido_url"><input type="file" id="ImgVideosSonido_url" name="ImgVideosSonido[url]" style="" maxlength="100" class="span5 "><div style="display:none" id="ImgVideosSonido_url_em_" class="help-block error"></div>  ');
         }
         //console.log(e.parent().serializeArray());  
@@ -135,17 +138,17 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 formData.append('ImgVideosSonido[url]', file);
             } else {
                 url = 'vimeo.com/';
-                
+
                 if ($('#ImgVideosSonido_url').val().toLowerCase().search(url) == -1) {
-                console.log('entroasdfasdf');
+                    console.log('entroasdfasdf');
                     $('#img-videos-sonido-form_es_').children('ul').append('<ul><li>Componente Multimedia debe ser una url valida de vimeo.</li></ul>')
-                     $('#img-videos-sonido-form_es_').css('display','block');
+                    $('#img-videos-sonido-form_es_').css('display', 'block');
                     $('#ImgVideosSonido_url_em_').html('Componente Multimedia debe ser una url valida de vimeo.');
-                    $('#ImgVideosSonido_url_em_').css('display','block');
+                    $('#ImgVideosSonido_url_em_').css('display', 'block');
                     return;
                 }
             }
-            
+
             $.each(other_data, function(key, input) {
                 formData.append(input.name, input.value);
             });
@@ -157,9 +160,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     if (e.rpt == true) {
                         $('#contenidos-modal').modal('hide');
                         $('#contenidos_cursos').load("<?php echo Yii::app()->getBaseUrl(true); ?>/ImgVideosSonido/LoadMultimediaByContent", 'id_contenido=<?php echo $model->id; ?>');
-                        $('#img-videos-sonido-form').each (function(){
+                        $('#img-videos-sonido-form').each(function() {
                             this.reset();
-                          });
+                        });
                     } else {
                         console.log(e);
                     }
@@ -173,6 +176,15 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 'dataType': 'JSON'
             });
         }
+    }
+
+    function beforeValidate(form)
+    {
+        if (document.getElementById('ImgVideosSonido_type').value == 'img')
+        {
+            document.getElementById('ImgVideosSonido_name_img').value = document.getElementById('ImgVideosSonido_url').value;
+        }
+        return true;
     }
 
 </script>

@@ -1,17 +1,19 @@
 <?php
-$this->breadcrumbs=array(
-	'Contenidoses',
+$this->breadcrumbs = array(
+    'Contenidoses',
 );
 
-$this->menu=array(
-array('label'=>'Create Contenidos','url'=>array('create')),
-array('label'=>'Manage Contenidos','url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Crear Contenido', 'url' => array('create')),
+    array('label' => 'Administrador de contenidos', 'url' => array('admin')),
 );
 ?>
 
-<h1>Contenidoses</h1>
+<h1>Contenidos</h1>
 
-<?php $this->widget('bootstrap.widgets.TbListView',array(
-'dataProvider'=>$dataProvider,
-'itemView'=>'_view',
-)); ?>
+<?php
+$this->widget('bootstrap.widgets.TbListView', array(
+    'dataProvider' => $dataProvider,
+    'itemView' => '_view',
+));
+?>
