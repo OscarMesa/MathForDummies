@@ -70,6 +70,7 @@ return array(
             'class'=>'WebUser',
             // enable cookie-based authentication
             'allowAutoLogin' => true,
+            'autoUpdateFlash' => false,
         ),
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(
