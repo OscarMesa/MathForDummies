@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Aprovación del programa</title>
+<title>Gracias por su registro</title>
 
 <!-- Hotmail ignora cierto código valido, se agrega esto -->
 <style type="text/css">
@@ -59,18 +59,17 @@ html
   </table>
   <table width="580" align="center" height="40" border="0" cellspacing="0" cellpadding="0">
   <tr>
-     <td width="193" height="40"><img src="http://www.aerovision.com.co/images/logo-aerovision.png" width="250" height="86" alt="logo" /></td>
+     <td width="193" height="40"><img src="http://gammarisk.com.co/oscar/iefo.png" alt="logo" /></td>
   </tr>
   </table>
   <table width="580" height="40" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="300"><p style="text-align:left; font-size: 20px; color: #000000; line-height:10px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>Hola, <?php echo $usuario->name; ?></strong><br/>
+    <td width="300"><p style="text-align:left; font-size: 20px; color: #000000; line-height:10px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>Hola, <?php echo $usuario->nombre; ?></strong><br/>
       </p></td>
     <td align="right">
     <table width="280"  align="center" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="147" height="28" bgcolor="#242424" style="text-align:center; font-size: 18px; color: #FFFFFF; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong><?php echo $programa->title; ?></strong></td>
-        <td width="23" height="28"><img src="http://fc08.deviantart.net/fs70/f/2011/160/0/a/gmail_metal_icon_256x256_px_by_agamemmnon-d3igont.png" width="41" height="33" /></td>
+        <td width="280" height="28"><img src="http://fc08.deviantart.net/fs70/f/2011/160/0/a/gmail_metal_icon_256x256_px_by_agamemmnon-d3igont.png" width="41" height="33" /></td>
         </tr>
     </table></td>
   </tr>
@@ -78,25 +77,14 @@ html
   <table width="580" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
-        <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">Un usuario de nettic realizo la revisión y <?php ($aprobacion->aprobado?'aprobo':'desaprobo');?> el programa<b><?php echo $programa->title; ?></b>. Le esetamos confirmando esta acción con el fin de que uste realice la aprobación o correcciones de esta.</span>
+        <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">Su cuenta fue activa exitosamente por un administrador, recuerde ingresar con su correo electronico y la contraseña ingresada en el registro. </span>
     </td>
-  </tr>
-      <?php if($aprobacion->motivos != ''){?>
+  </tr> 
       <tr>
           <td>
-              <b>Algunos comentarios y razones, se exponen a continuacion:</b><br/>
-              <?php echo $aprobacion->motivos;?>
-          </td>
-      </tr>     
-      <?php } ?>
-      <tr>
-          <td>
-            <?php if($aprobacion->aprobado){?>
-              <p><span>Dirijace al siguiente link.</span></p> <br/>
-              <a href="<?php echo Yii::app()->baseUrl .'/programa/ActualizaEstado/'.$programa->id.'/2';?>">Click aqui</a>
-            <?php }else{?>
-              
-            <?php }?>  
+              <p><span>Ya puede ingresar a la plataforma con su usuario y contraseña.</span></p> <br/>
+              <a href="<?php echo Yii::app()->getBaseUrl(true); ?>">Click aqui</a>
+       
           </td>
       </tr>
 </table>
@@ -107,7 +95,7 @@ html
 </table>
     <table width="600" border="0" align="center" bgcolor="#F2F2F2" cellpadding="0" cellspacing="5" id="separador">
       <tr>
-    <td height="25" valign="middle" style="font-size: 16px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>¡Aerovision!</strong></td>
+    <td height="25" valign="middle" style="font-size: 16px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>¡PoliAuLink!</strong></td>
   </tr>
 </table>
 <table width="600" border="0" cellspacing="0" cellpadding="0">

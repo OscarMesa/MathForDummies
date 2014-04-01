@@ -25,7 +25,6 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_inicio')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_registro); ?>
 	<br />
 
 	<?php /*

@@ -81,6 +81,25 @@
                 </div>
                 <div id="form">
                     <div  class="grid_16">
+                        <?php
+                        $this->widget('bootstrap.widgets.TbAlert', array(
+                            'block' => true,
+                            'fade' => true,
+                            'closeText' => '&times;', // false equals no close link
+                            'events' => array(),
+                            'htmlOptions' => array(),
+                            'userComponentId' => 'user',
+                            'alerts' => array(// configurations per alert type
+                                // success, info, warning, error or danger
+                                'success' => array('closeText' => '&times;'),
+                                'info', // you don't need to specify full config
+                                'warning' => array('block' => false, 'closeText' => false),
+                                'error' => array('block' => false, 'closeText' => 'AAARGHH!!')
+                            ),
+                        ));
+                        ?>
+
+
                         <?php echo $content; ?>
                     </div>
                 </div>

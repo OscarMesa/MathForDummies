@@ -5,22 +5,10 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'List Cursos', 'url' => array('index')),
-    array('label' => 'Create Cursos', 'url' => array('create')),
+    array('label' => 'Listar Cursos', 'url' => array('index')),
+    array('label' => 'Crear Cursos', 'url' => array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('cursos-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
 <h1>Administrador de Cursos</h1>
@@ -30,7 +18,7 @@ $('.search-form form').submit(function(){
     or <b>=</b>) al inicio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
 </p>
 
-<?php echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
+<?php //echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(

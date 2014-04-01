@@ -8,7 +8,7 @@ INSERT DELAYED IGNORE INTO `materias` (`idmaterias`, `nombre_materia`, `state_ma
 (3, 'Fisica', 'active'),
 (4, 'Quimica', 'active'),
 (5, 'Bilogia', 'active'),
-(6, 'Inglés', 'active');
+    (6, 'Inglés', 'active');
 
 ----------------------
 
@@ -58,3 +58,6 @@ ADD FOREIGN KEY ( `contenidos_id` ) REFERENCES `math`.`contenidos` (
 `id`
 ) ON DELETE CASCADE ON UPDATE RESTRICT ;
 
+ALTER TABLE `usuarios` CHANGE `state_usuario` `state_usuario` ENUM( 'active', 'inactive', 'not_confirmed', 'not_confirmed_admin' ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'active'
+
+ALTER TABLE `usuarios_perfiles` ADD `state_up` ENUM( 'active', 'inactive' ) NOT NULL AFTER `perfiles_id_perfil` 
