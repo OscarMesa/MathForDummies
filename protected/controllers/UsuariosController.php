@@ -25,7 +25,7 @@ class UsuariosController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('activarDocente', 'activarUsuario', 'index', 'view', 'inicio', 'createAnonimo'),
+                'actions' => array('CambioPassword', 'guardarCambioNuevoPassword', 'recuperarPassword', 'activarDocente', 'activarUsuario', 'index', 'view', 'inicio', 'createAnonimo'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -93,12 +93,75 @@ class UsuariosController extends Controller {
                 );
                 $this->render('application.views.site.error');
             }
-        }  else {
+        } else {
             $user = Yii::app()->getComponent('user');
+            $user->setFlash(
+                    'error', "<strong>Error!</strong> Para realizar esta acción debe iniciar sesión como administrador."
+            );
+            $this->redirect(array('site/login'));
+        }
+    }
+
+    public function actionCambioPassword() {
+        if (isset($_GET['hash']) && isset($_GET['id']) && sha1('PoliAuLinkServer') == $_GET['hash']) {
+            $usuario = Usuarios::model()->findByPk($_GET['id'], 'state_usuario="recover_password"');
+            if (count($usuario) > 0) {
+                $usuario->scenario = 'cambiopassword';
+                $this->render("nuevoPassword", array('model' => $usuario));
+            } else {
+                $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                        'error', "<strong>Error!</strong> Para realizar esta acción debe iniciar sesión como administrador."
+                        'error', "<strong>Error!</strong> Este usuario no tiene solicitudes para cambio de contraseña o posiblemente no exista."
                 );
-                $this->redirect(array('site/login'));
+                $this->render('application.views.site.error');
+            }
+        } else {
+            $user = Yii::app()->getComponent('user');
+            $user->setFlash(
+                    'error', "<strong>Error!</strong> Usted no se encuentra autorizado para realizar esta acción."
+            );
+            $this->render('application.views.site.error');
+        }
+    }
+
+    public function actionGuardarCambioNuevoPassword() {
+        $model = new Usuarios();
+        $model->scenario = 'cambiopassword';
+        if (isset($_POST['Usuarios'])) {
+            $model->attributes = $_POST['Usuarios'];
+            $this->performAjaxValidation($model);
+            $model = $this->loadModel($_POST['Usuarios']['id_usuario']);
+            $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
+            $model->state_usuario = 'active';
+            if ($model->update()) {
+                $user = Yii::app()->getComponent('user');
+                $user->setFlash(
+                        'success', "<strong>Exito!</strong> El cambio se realizo exitosamente."
+                );
+                $this->redirect(Yii::app()->getBaseUrl(true));
+            }
+        }
+        $this->render('nuevoPassword', array('model' => $model));
+    }
+
+    public function actionRecuperarPassword() {
+        $usuario = new Usuarios();
+        $usuario->scenario = 'registerwcaptcha';
+
+        if (isset($_POST['Usuarios'])) {
+            $usuario->attributes = $_POST['Usuarios'];
+            $this->performAjaxValidation($usuario);
+            //print_r($_POST);
+            $u = $usuario->find('correo=?', array($usuario->correo));
+
+            $this->enviarMailRecuperacionUsuario($u);
+            $u->state_usuario = 'recover_password';
+            $u->update();
+            $user = Yii::app()->getComponent('user');
+            $user->setFlash(
+                    'success', "<strong>Exito!</strong> Se ha enviado un correo con la informacón para realizar este cambío."
+            );
+            $this->redirect(Yii::app()->getBaseUrl(true));
         }
     }
 
@@ -168,10 +231,24 @@ class UsuariosController extends Controller {
             }
         }
         print_r($model->errors);
-//        Yii::import('application.controllers.SiteController');
-//        $site = new SiteController(1);
-//        $site->actionLogin();
-        //YourController::yourMethod();
+    }
+
+    /**
+     * 
+     * @param Usuarios $usuario
+     */
+    public function enviarMailRecuperacionUsuario($usuario) {
+        Yii::import('ext.yii-mail.YiiMailMessage');
+        $message = new YiiMailMessage;
+        //this points to the file test.php inside the view path
+        $message->view = "recuperacionPassword";
+        $sid = 1;
+        $params = array('usuario' => $usuario);
+        $message->subject = 'Recuperar contraseña';
+        $message->setBody($params, 'text/html');
+        $message->addTo($usuario->correo);
+        $message->from = 'admin@poliAuLink.edu.co';
+        Yii::app()->mail->send($message);
     }
 
     /**
@@ -344,7 +421,7 @@ class UsuariosController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'usuarios-form') {
+        if (isset($_POST['ajax']) && ($_POST['ajax'] === 'usuarios-form' || $_POST['ajax'] === 'usuarios-form-recuperar')) {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }

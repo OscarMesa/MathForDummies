@@ -77,13 +77,13 @@ html
   <table width="580" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
-        <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">Su cuenta fue activa exitosamente por un administrador, recuerde ingresar con su correo electronico y la contraseña ingresada en el registro. </span>
+        <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">Estamos enviando este correo ya que segun nuestro registro se hizo una solicitud para realizar un cambio de contraseña.</span>
     </td>
-  </tr> 
+  </tr>    
       <tr>
           <td>
-              <p><span>Ya puede ingresar a la plataforma con su usuario y contraseña.</span></p> <br/>
-              <a href="<?php echo Yii::app()->getBaseUrl(true); ?>">Click aqui</a>
+              <p><span>Dirijace al siguiente link para realizar el cambio.</span></p> <br/>
+              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/CambioPassword?id='.$usuario->id_usuario.'&hash='.  sha1('PoliAuLinkServer');?>">Click aqui</a>
        
           </td>
       </tr>

@@ -61,3 +61,5 @@ ADD FOREIGN KEY ( `contenidos_id` ) REFERENCES `math`.`contenidos` (
 ALTER TABLE `usuarios` CHANGE `state_usuario` `state_usuario` ENUM( 'active', 'inactive', 'not_confirmed', 'not_confirmed_admin' ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'active'
 
 ALTER TABLE `usuarios_perfiles` ADD `state_up` ENUM( 'active', 'inactive' ) NOT NULL AFTER `perfiles_id_perfil` 
+
+ALTER TABLE `usuarios` CHANGE `state_usuario` `state_usuario` ENUM( 'active', 'inactive', 'not_confirmed', 'not_confirmed_admin', 'recover_password' ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'active'

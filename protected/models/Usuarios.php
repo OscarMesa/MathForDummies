@@ -21,6 +21,7 @@
 class Usuarios extends CActiveRecord {
     
     public $passConfirm;
+    public $validacion;
     
     /**
      * @return string the associated database table name
@@ -40,7 +41,7 @@ class Usuarios extends CActiveRecord {
             array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.', 'on'=>array('insert')),
             array('nombre, contrasena, correo','required','on'=>'createanonimo'),
             array('correo', 'email', 'message' => "Correo invalido."),
-            array('correo', 'unique', 'message' => "Este correo ya fue registrado."),
+            array('correo', 'unique', 'message' => "Este correo ya fue registrado.",'except'=> 'registerwcaptcha'),
             array('contrasena,passConfirm,nombre,correo','required', 'message'=>'Este campo es requerido.' , 'on'=>array('insert')),
             array('telefono', 'numerical', 'integerOnly' => true),
             array('nombre, apellido1, apellido2', 'length', 'max' => 30),
@@ -50,11 +51,25 @@ class Usuarios extends CActiveRecord {
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id_usuario, state_usuario, nombre, apellido1, apellido2, contrasena, telefono, celular, correo', 'safe', 'on' => 'search'),
-           
-           
+            array('validacion', 
+               'application.extensions.recaptcha.EReCaptchaValidator', 
+               'privateKey'=>'6LfyGPESAAAAABH6_bGhXXQ6vst0atD6wUn5rb_C ',
+                'on' => 'registerwcaptcha'),
+            array('correo', 'required','on' => 'registerwcaptcha'),
+            array('correo', 'checkExist','on' => 'registerwcaptcha'),
+            array('passConfirm', 'compare', 'compareAttribute' => 'contrasena', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'on'=>array('cambiopassword')),
+            array('passConfirm,contrasena','required', 'message'=>'Este campo es requerido.', 'on'=>array('cambiopassword')),
         );
     }
-
+    
+    public function checkExist($attribute,$params)
+    {
+        if(!Usuarios::model()->exists('correo=?',array($this->correo))) 
+        {
+            $this->addError($attribute, 'Este correo no existe');
+        }
+    }
+    
     /**
      * @return array relational rules.
      */
@@ -84,6 +99,7 @@ class Usuarios extends CActiveRecord {
             'telefono' => 'Teléfono',
             'celular' => 'Celular',
             'correo' => 'Correo',
+            'validacion' => Yii::t('demo','Introduce ambas palabras separadas por un espacio: '),
         );
     }
 
