@@ -15,6 +15,7 @@ $this->breadcrumbs = array(
     </div>
 <?php } else { ?>
 
+    
     <?php
 }
 ?>

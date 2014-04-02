@@ -82,6 +82,7 @@
                 <div id="form">
                     <div  class="grid_16">
                         <?php
+                        
                         $this->widget('bootstrap.widgets.TbAlert', array(
                             'block' => true,
                             'fade' => true,
