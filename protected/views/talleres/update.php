@@ -13,6 +13,6 @@ $this->breadcrumbs=array(
     );
     ?>
 
-	<h1>Update Talleres <?php echo $model->idtalleres; ?></h1>
+ <div class='titulos_admin'>Update Talleres <?php echo $model->nombre; ?></div>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

@@ -31,7 +31,6 @@ $this->menu = array(
     ));
     ?>
 </div><!-- search-form -->
-
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'contenidos-grid',
