@@ -74,6 +74,7 @@ class CursosController extends Controller {
              if (count($fecha) == 2) {
                 $model->fecha_inicio = $fecha[0];
                 $model->fecha_cierre = $fecha[1];
+                $model->id_docente = Yii::app()->user->getId();
             }  else {
                 $model->fecha_inicio = '';
                 $model->fecha_cierre = '';

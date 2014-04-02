@@ -11,6 +11,6 @@ array('label'=>'Manage Talleres','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Talleres</h1>
+<div class='titulos_admin'>Crear Talleres</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

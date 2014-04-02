@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Cursos <?php echo $model->id; ?></h1>
+<div class='titulos_admin'>Cursos <b><?php echo $model->nombre_curso; ?></b></div>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
