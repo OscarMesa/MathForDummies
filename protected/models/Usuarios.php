@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'usuarios':
  * @property integer $id_usuario
- * @property string $state_usuario
+ * @property string $state_usuario //'active','inactive','not_confirmed','not_confirmed_admin'
  * @property string $nombre
  * @property string $apellido1
  * @property string $apellido2
@@ -36,11 +36,13 @@ class Usuarios extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('contrasena', 'compare', 'compareAttribute' => 'passConfirm', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'except'=>array('create')),
-            array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.'),
-            array('contrasena,passConfirm,nombre,correo','required', 'message'=>'Este campo es requerido.' , 'except'=>array('createAnonimo')),
+            array('passConfirm', 'compare', 'compareAttribute' => 'contrasena', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir'),
+            array('nombre, apellido1, telefono, celular, correo','required', 'message'=>'Este campo es requerido.', 'on'=>array('insert')),
+            array('nombre, contrasena, correo','required','on'=>'createanonimo'),
+            array('correo', 'email', 'message' => "Correo invalido."),
+            array('correo', 'unique', 'message' => "Este correo ya fue registrado."),
+            array('contrasena,passConfirm,nombre,correo','required', 'message'=>'Este campo es requerido.' , 'on'=>array('insert')),
             array('telefono', 'numerical', 'integerOnly' => true),
-            array('state_usuario', 'length', 'max' => 8),
             array('nombre, apellido1, apellido2', 'length', 'max' => 30),
             array('contrasena', 'length', 'max' => 40),
             array('celular', 'length', 'max' => 20),
@@ -158,6 +160,17 @@ class Usuarios extends CActiveRecord {
             $ids[] = $c->id_perfil;
         }
         return $ids;
+    }
+    
+    /**
+     * @return Perfiles es algun perfil que el usuario tenga asignado.
+     */
+    public function getRandomPerfil()
+    {
+        foreach ($this->perfiles as $c) {
+            return $c;
+        }
+        return null;
     }
     
     public function setPerfiles($perfiles) 

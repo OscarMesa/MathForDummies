@@ -57,9 +57,9 @@ class Perfiles extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_perfil' => 'Id Perfil',
-			'state_perfiles' => 'State Perfiles',
-			'nombre' => 'Perfil',
+			'id_perfil' => 'Perfil',
+			'state_perfiles' => 'Estado',
+			'nombre' => 'Nombre',
 		);
 	}
 

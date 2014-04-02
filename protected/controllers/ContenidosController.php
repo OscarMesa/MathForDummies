@@ -23,9 +23,9 @@ class ContenidosController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-         $permisos_profesor = array();
+        $permisos_profesor = array();
         if (Yii::app()->user->esProfesor()) {
-            $permisos_profesor = array('create', 'update', 'curso', 'admin','delete');
+            $permisos_profesor = array('create', 'update', 'curso', 'admin', 'delete');
         } else {
             $permisos_profesor = array('create', 'update', 'curso');
         }
@@ -48,10 +48,8 @@ class ContenidosController extends Controller {
         );
     }
 
-
-    public function obtenerComonentesMultimedia($idTaller,$tipo="") {
+    public function obtenerComonentesMultimedia($idTaller, $tipo = "") {
         $multimedia = ImgVideosSonido::model()->with(array('multimedia' => array('alias' => 'multimedia')));
-     
     }
 
     /**
@@ -63,7 +61,7 @@ class ContenidosController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
-    
+
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -78,20 +76,19 @@ class ContenidosController extends Controller {
             $model->almacenado_total = TRUE;
 //            exit();
             if ($model->save())
-                 $this->redirect(array('admin'));
-                // $this->redirect(array('view', 'id' => $model->id));
-        }
-            Contenidos::model()->deleteAll('almacenado_total=?',array(FALSE));
+                $this->redirect(array('admin'));
+            // $this->redirect(array('view', 'id' => $model->id));
+        }else {
+            Contenidos::model()->deleteAll('almacenado_total=?', array(FALSE));
             $model->almacenado_total = FALSE;
             $model->insert();
-        
-        
+        }
+
         $this->render('create', array(
             'model' => $model,
-            'contenido'=>$this,
+            'contenido' => $this,
         ));
     }
-    
 
     /**
      * Updates a particular model.
@@ -112,7 +109,7 @@ class ContenidosController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
-            'contenido'=>$this,
+            'contenido' => $this,
         ));
     }
 
@@ -123,10 +120,11 @@ class ContenidosController extends Controller {
      */
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
-// we only allow deletion via POST request
-            $this->loadModel($id)->delete();
-
-// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            // we only allow deletion via POST request
+            $model = $this->loadModel($id);
+            $model->state_contenido = "inactive";
+            $model->save();
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
@@ -138,9 +136,11 @@ class ContenidosController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Contenidos');
+        $model = new Contenidos();
+        $model->almacenado_total = TRUE;
+        $model->state_contenido = "";
         $this->render('index', array(
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $model->search(),
         ));
     }
 
@@ -150,12 +150,16 @@ class ContenidosController extends Controller {
     public function actionAdmin() {
         $model = new Contenidos('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Contenidos']))
+        $model->almacenado_total = TRUE;
+        if (isset($_GET['Contenidos'])){
             $model->attributes = $_GET['Contenidos'];
-
+            $model->id = $_GET['Contenidos']['id'];
+        }
+       // print_r($model->attributes );
         $this->render('admin', array(
             'model' => $model,
         ));
+        
     }
 
     /**

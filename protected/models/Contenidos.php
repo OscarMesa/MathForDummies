@@ -59,7 +59,7 @@ class Contenidos extends CActiveRecord
 		return array(
 			'state_contenido' => 'Estado Contenido',
 			'titulo' => 'Titulo',
-			'texto' => 'Texto',
+			'texto' => 'Area de texto',
 			'observacion' => 'Observación',
 		);
 	}
@@ -79,13 +79,15 @@ class Contenidos extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
-		$criteria->compare('state_contenido',$this->state_contenido,true);
+                //if(isset($_GET['Contenidos']['id']))
+                    
+                $criteria->compare('id',$this->id);
+		$criteria->compare('state_contenido',$this->state_contenido);
 		$criteria->compare('titulo',$this->titulo,true);
 		$criteria->compare('texto',$this->texto,true);
 		$criteria->compare('observacion',$this->observacion,true);
-
+		$criteria->compare('almacenado_total',$this->almacenado_total);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

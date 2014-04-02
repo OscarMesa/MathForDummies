@@ -7,7 +7,9 @@
             'validateOnSubmit'=>true,
             'validateOnChange'=>false,
             'validateOnType'=>false,
-            'afterValidate' => 'js:saveForm'
+            'afterValidate' => 'js:saveForm',
+            'beforeValidate' => 'js:beforeValidate',
+
         ),
 ));
 ?>
@@ -40,7 +42,10 @@
 	<?php $model->idUsiario=  Yii::app()->user->id; echo $form->hiddenField($model,'idUsiario',array('class'=>'span5','value')); ?>
         
         <?php echo CHtml::hiddenField('ImgVideosSonidoContenidos[contenidos_id]', $Contenidomodel->id); ?>
-<?php if (!isset($cursoSeccion)) { ?>
+        
+       <?php echo CHtml::hiddenField('ImgVideosSonido[name_img]', ''); ?>
+
+      <?php if (!isset($cursoSeccion)) { ?>
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',

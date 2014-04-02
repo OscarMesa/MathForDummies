@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cursos','url'=>array('index')),
-	array('label'=>'Create Cursos','url'=>array('create')),
-	array('label'=>'View Cursos','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Listar Cursos','url'=>array('index')),
+	array('label'=>'Crear Cursos','url'=>array('create')),
+	array('label'=>'Visuarlizar Curso','url'=>array('view/'.$model->id)),
 	array('label'=>'Manage Cursos','url'=>array('admin')),
 );
 ?>

@@ -125,7 +125,10 @@ class ImgVideosSonidoController extends Controller {
         
         if (isset($_POST['ImgVideosSonido'])) {
             $model->attributes = $_POST['ImgVideosSonido'];
-           
+            if($model->type=="video")
+            {
+                $model->scenario = 'video';
+            }
             $this->performAjaxValidation($model);
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
@@ -219,11 +222,9 @@ class ImgVideosSonidoController extends Controller {
     protected function performAjaxValidation($model) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'img-videos-sonido-form') {
             if($model->type=="img"){
-                $model->url = $_POST['ImgVideosSonido']['url'] = 'url';
+                $_POST['ImgVideosSonido']['url'] = 'url';
                 $model->scenario = 'img';
-            }else if($model->type=="video")
-            {
-                $model->scenario = 'video';
+                $model->name_img = $_POST['ImgVideosSonido']['name_img'];
             }
             echo CActiveForm::validate($model);
             Yii::app()->end();

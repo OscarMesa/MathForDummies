@@ -24,9 +24,6 @@
             },
         ),
         'url',        
-        array(
-            'class' => 'bootstrap.widgets.TbButtonColumn',
-        ),
     ),
 ));
     

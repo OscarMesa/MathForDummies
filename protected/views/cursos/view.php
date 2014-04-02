@@ -5,15 +5,14 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cursos','url'=>array('index')),
-	array('label'=>'Create Cursos','url'=>array('create')),
-	array('label'=>'Update Cursos','url'=>array('update','id'=>$model->id)),
-	array('label'=>'Delete Cursos','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Cursos','url'=>array('admin')),
+	array('label'=>'Listar Cursos','url'=>array('index')),
+	array('label'=>'Crear Curso','url'=>array('create')),
+	array('label'=>'Modificar Curso','url'=>array('update/'.$model->id)),
+	array('label'=>'Administrador de Cursos','url'=>array('admin')),
 );
 ?>
 
-<h1>View Cursos #<?php echo $model->id; ?></h1>
+<h1>Vista del curso <?php echo $model->nombre_curso; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
@@ -24,13 +23,13 @@ $this->menu=array(
 		'idmateria',
 		'nombre_curso',
 		'descripcion_curso',
-		'fecha_registro',
 		'fecha_cierre',
 	),
 )); ?>
 
 
-<?php 
+<?php
+    if(isset($contenido)){
     Yii::import('application.controllers.ContenidosController');
    // $contenido = new ContenidosController(-1);
          $this->widget('bootstrap.widgets.TbTabs', array(
@@ -44,5 +43,5 @@ $this->menu=array(
         'events'=>array('shown'=>'')
     )    
 );
-    
+   } 
     ?>

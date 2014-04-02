@@ -4,12 +4,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Cursos','url'=>array('create')),
-	array('label'=>'Manage Cursos','url'=>array('admin')),
+	array('label'=>'Crear Curso','url'=>array('create')),
+	array('label'=>'Administrador de Cursos','url'=>array('admin')),
 );
 ?>
 
-<h1>Cursoses</h1>
+<h1>Cursos</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 	'dataProvider'=>$dataProvider,
