@@ -5,8 +5,8 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'List Taller', 'url' => array('index')),
-    array('label' => 'Create Taller', 'url' => array('create')),
+    array('label' => 'Listar Talleres', 'url' => array('index')),
+    array('label' => 'Crear Taller', 'url' => array('create')),
 );
 
 ?>
