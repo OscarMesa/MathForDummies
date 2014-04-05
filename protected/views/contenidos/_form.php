@@ -13,8 +13,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <div id="form_contenidos">
 
     <p class="help-block">Los campos identificados con <span class="required">*</span> son requeridos.</p>
-
-
     <?php
     echo $form->dropDownListRow($model, 'state_contenido', array('active' => 'Activo', 'inactive' => 'Inactivo'), array('class' => 'span5', 'data-placement' => 'right', 'maxlength' => 8));
     ?>
@@ -46,6 +44,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         );
         ?>
         <?php echo CHtml::hiddenField('Contenidos[id]', $model->id); ?>
+        <?php 
+            if(isset($_GET['idTaller']))
+                echo CHtml::hiddenField('idTaller', $_GET['idTaller']); ?>
     </div>
     <div class="form-actions">
         <?php

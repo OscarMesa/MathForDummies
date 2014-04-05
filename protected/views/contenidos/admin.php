@@ -15,7 +15,7 @@ $this->menu = array(
 </div>    
   
 
-<h1>Administrador de Contenidos</h1>
+<h1 class="titulos_admin">Administrador de Contenidos</h1>
 
 <p>
     También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -37,7 +37,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        'id',
+        'titulo',
         'titulo',
         array(
             'name' => 'state_contenido',

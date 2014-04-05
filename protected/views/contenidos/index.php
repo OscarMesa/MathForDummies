@@ -9,7 +9,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Contenidos</h1>
+<h1 class="titulos_admin">Contenidos</h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbListView', array(

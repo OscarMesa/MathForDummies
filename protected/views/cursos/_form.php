@@ -11,7 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'enableClientValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true,
-        'validateOnChange' => false,
+        'validateOnChange' => true,
         'validateOnType' => false
     ),
         ));
@@ -31,10 +31,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     <?php echo $form->textFieldRow($model, 'nombre_curso', array('class' => 'span5', 'maxlength' => 45)); ?>
 
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
     <?php
     $this->widget('bootstrap.widgets.TbDateRangePicker', array(
-        'name' => 'Cursos[rango_fecha]',
+        'name' => 'Cursos[fecha_inicio]',
         'value' => ($model->fecha_inicio != '' ? $model->fecha_inicio . ' - ' . $model->fecha_cierre : ''),
         'options' => array(
             'language' => 'es',
@@ -50,11 +49,15 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ),
         'htmlOptions' => array(
             'placeholder' => 'Fecha Inicio - Fecha Cierre',
-            'style' => 'width:98%;'
+            'style' => 'width:98%;',
+            //'id'=>'Cursos_fecha_inicio_em_'
         ),
             )
     );
     ?>
+     <?php echo CHtml::hiddenField('Contenidos[id]', $model->id); ?>
+    </div>
+    <div id="error-date"><?php echo $form->error($model, 'fecha_inicio');?></div>
     <div class="form-actions">
     <?php
     $this->widget('bootstrap.widgets.TbButton', array(

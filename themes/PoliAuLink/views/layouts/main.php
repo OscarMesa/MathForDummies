@@ -73,11 +73,17 @@
             </div>
             <div id="panel_central">
                 <div id="menu">
-                    <div id="op" class='activo'>Curso</div>
-                    <div id="op">Talleres</div>
+                    <?php 
+                                if(isset(Yii::app()->user->__perfiles) && Yii::app()->user->esProfesor())
+                                {
+                    
+                    ?>
+                    <div id="op" class='activo'><a href="<?php echo Yii::app()->getBaseUrl(true)?>/cursos/admin">Curso</a></div>
+                    <div id="op"><a href="<?php echo Yii::app()->getBaseUrl(true)?>/talleres/admin">Talleres</a></div>
                     <div id="op">Ejercicios</div>
                     <div id="op">Multimedia</div>
                     <div id="op">Evaluaciones</div>
+                                <?php } ?>
                 </div>
                 <div id="form">
                     <div  class="grid_16">

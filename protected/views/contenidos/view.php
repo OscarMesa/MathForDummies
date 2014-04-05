@@ -12,7 +12,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Vista contenido #<?php echo $model->id; ?></h1>
+<h1 class="titulos_admin">Vista contenido #<?php echo $model->id; ?></h1>
 
 <?php
 $this->widget('bootstrap.widgets.TbDetailView', array(

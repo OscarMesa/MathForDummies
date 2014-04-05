@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'Listar Cursos','url'=>array('index')),
 	array('label'=>'Crear Curso','url'=>array('create')),
 	array('label'=>'Modificar Curso','url'=>array('update/'.$model->id)),
-	array('label'=>'Administrador de Cursos','url'=>array('admin')),
+	array('label'=>'Administrador de Cursos','url'=>array('../admin')),
 );
 ?>
 

@@ -75,8 +75,24 @@ class ContenidosController extends Controller {
             $model->attributes = $_POST['Contenidos'];
             $model->almacenado_total = TRUE;
 //            exit();
-            if ($model->save())
-                $this->redirect(array('admin'));
+            if ($model->save()){
+                if(isset($_POST['idTaller']))
+                {
+                   $contenidoTaller = new ContenidosTalleres();
+                   $contenidoTaller->contenidos_id = $model->id;
+                   $contenidoTaller->talleres_idtalleres = $_POST['idTaller'];
+                   if($contenidoTaller->save())
+                   {
+                       $user = Yii::app()->getComponent('user');
+                       $user->setFlash(
+                            'success', "<strong>Exito!</strong> El contenido a sido agregado al taller exitosamente."
+                        );
+                       $this->redirect(Yii::app()->getBaseUrl(true).'/talleres/update'.$_POST['idTaller']);
+                   }
+                }else{
+                    $this->redirect(array('admin'));
+                }
+            }
             // $this->redirect(array('view', 'id' => $model->id));
         }else {
             Contenidos::model()->deleteAll('almacenado_total=?', array(FALSE));

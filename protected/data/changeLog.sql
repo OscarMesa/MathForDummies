@@ -63,3 +63,18 @@ ALTER TABLE `usuarios` CHANGE `state_usuario` `state_usuario` ENUM( 'active', 'i
 ALTER TABLE `usuarios_perfiles` ADD `state_up` ENUM( 'active', 'inactive' ) NOT NULL AFTER `perfiles_id_perfil` 
 
 ALTER TABLE `usuarios` CHANGE `state_usuario` `state_usuario` ENUM( 'active', 'inactive', 'not_confirmed', 'not_confirmed_admin', 'recover_password' ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'active'
+
+
+V.1
+
+ALTER TABLE `talleres` ADD `state_taller` ENUM( 'active', 'inactive' ) NOT NULL AFTER `idtalleres` 
+
+ALTER TABLE `talleres` CHANGE `idtalleres` `idtalleres` INT( 11 ) NOT NULL AUTO_INCREMENT 
+
+ALTER TABLE `contenidos_talleres` ADD FOREIGN KEY ( `contenidos_id` ) REFERENCES `math`.`contenidos` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE `contenidos_talleres` ADD FOREIGN KEY ( `talleres_idtalleres` ) REFERENCES `math`.`talleres` (
+`idtalleres`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;

@@ -13,7 +13,7 @@ array('label'=>'Manage Talleres','url'=>array('admin')),
 );
 ?>
 
-<h1>View Talleres #<?php echo $model->idtalleres; ?></h1>
+<h1 class="titulos_admin">Vista de Taller #<?php echo $model->idtalleres; ?></h1>
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(

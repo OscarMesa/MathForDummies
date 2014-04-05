@@ -48,6 +48,7 @@ class Contenidos extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'multimedia'=>array(self::MANY_MANY,'ImgVideosSonido','img_videos_sonido_contenidos(contenidos_id,img_videos_id)'),
+                    'telleres'=>array(self::MANY_MANY,'Talleres','contenidos_talleres(contenidos_id,talleres_idtalleres)'),
 		);
 	}
 
@@ -92,6 +93,18 @@ class Contenidos extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function contenidosXTaller($idtalleres=NULL){
+            $criteria=new CDbCriteria();
+            $criteria->alias = 'cont';
+            $criteria->join = 'INNER JOIN contenidos_talleres ct ON (ct.contenidos_id = cont.id)';
+            $criteria->condition = ' ct.talleres_idtalleres = ?';
+            $criteria->params = array($idtalleres);
+
+            return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+        }
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -103,4 +116,7 @@ class Contenidos extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+        
 }

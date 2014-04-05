@@ -10,7 +10,7 @@ array('label'=>'Manage Talleres','url'=>array('admin')),
 ?>
 
 
-<h1>Talleres</h1>
+<h1 class="titulos_admin">Talleres</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,
