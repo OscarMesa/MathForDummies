@@ -70,17 +70,18 @@ class CursosController extends Controller {
 
         if (isset($_POST['Cursos'])) {
             $model->attributes = $_POST['Cursos'];
-            $fecha = explode(' - ', $_POST['Cursos']['rango_fecha']);
+            $fecha = explode(' - ', $_POST['Cursos']['fecha_inicio']);
              if (count($fecha) == 2) {
                 $model->fecha_inicio = $fecha[0];
                 $model->fecha_cierre = $fecha[1];
+                             // exit();
                 $model->id_docente = Yii::app()->user->getId();
             }  else {
                 $model->fecha_inicio = '';
                 $model->fecha_cierre = '';
             }
             if ($model->save())
-                $this->redirect(array('admin'));
+                $this->redirect(Yii::app()->getBaseUrl(true).'/cursos/update/'.$model->id);
         }
 
         $this->render('create', array(

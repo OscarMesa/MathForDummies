@@ -5,40 +5,19 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'List Contenidos', 'url' => array('index')),
-    array('label' => 'Create Contenidos', 'url' => array('create')),
+    array('label' => 'List Taller', 'url' => array('index')),
+    array('label' => 'Create Taller', 'url' => array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
-});
-$('.search-form form').submit(function(){
-$.fn.yiiGridView.update('contenidos-grid', {
-data: $(this).serialize()
-});
-return false;
-});
-");
 ?>
 
 <h1>Administrador de Talleres</h1>
 
 <p>
-    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
+    También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
         &lt;&gt;</b>
-    or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+    o <b>=</b>) al principio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
 </p>
-
-<?php echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
-<div class="search-form" style="display:none">
-    <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
-    ));
-    ?>
-</div><!-- search-form -->
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
@@ -46,16 +25,29 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        'id',
-        'titulo',
+        'idtalleres',
+        'nombre',
         array(
-            'name' => 'state_contenido',
+            'name' => 'state_taller',
             'filter' => array('active' => 'Activo', 'inactive' => 'Inactivo'),
             'value' => function($data) {
-                return ($data->state_contenido == 'active' ? 'Activo' : 'Inctivo');
+                return ($data->state_taller == 'active' ? 'Activo' : 'Inctivo');
             },
         ),
-        'observacion',
+        array(
+            'name' => 'id_curso',
+            'filter' => CHtml::listData(Cursos::model()->findAll('id_docente=?',array(Yii::app()->user->id)), 'id', 'nombre_curso'),
+            'value' => function($data) {
+                return $data->idCurso->nombre_curso;
+            },
+        ),
+        array(
+            'name' => 'id_materia',
+            'filter' => CHtml::listData(Materias::model()->findAll(), 'idmaterias', 'nombre_materia'),
+            'value' => function($data) {
+                return $data->idMateria->nombre_materia;
+            },
+        ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
         ),

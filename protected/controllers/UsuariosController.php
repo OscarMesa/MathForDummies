@@ -89,7 +89,7 @@ class UsuariosController extends Controller {
             } else {
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                        'error', "<strong>Error!</strong> Usted no se encuentra autorizado para realizar esta acción."
+                            'error', "<strong>Error!</strong> Usted no se encuentra autorizado para realizar esta acción."
                 );
                 $this->render('application.views.site.error');
             }

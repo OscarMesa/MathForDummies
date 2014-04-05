@@ -10,6 +10,6 @@ array('label'=>'Administrador de contenidos','url'=>array('admin')),
 );
 ?>
 
-<h1>Crear Contenido</h1>
+<h1 class="titulos_admin">Crear Contenido</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model,'contenido'=>$contenido,)); ?>

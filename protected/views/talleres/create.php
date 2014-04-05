@@ -6,8 +6,8 @@ $this->breadcrumbs=array(
 
 
 $this->menu=array(
-array('label'=>'List Talleres','url'=>array('index')),
-array('label'=>'Manage Talleres','url'=>array('admin')),
+array('label'=>'Listar talleres','url'=>array('index')),
+array('label'=>'Administrador de talleres','url'=>array('admin')),
 );
 ?>
 
