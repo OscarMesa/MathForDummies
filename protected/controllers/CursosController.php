@@ -64,10 +64,6 @@ class CursosController extends Controller {
      */
     public function actionCreate() {
         $model = new Cursos;
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
         if (isset($_POST['Cursos'])) {
             $model->attributes = $_POST['Cursos'];
             $fecha = explode(' - ', $_POST['Cursos']['fecha_inicio']);
