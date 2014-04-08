@@ -107,7 +107,7 @@ class CursosController extends Controller {
 
         if (isset($_POST['Cursos'])) {
             $model->attributes = $_POST['Cursos'];
-            $fecha = explode(' - ', $_POST['Cursos']['rango_fecha']);
+            $fecha = explode(' - ', $_POST['Cursos']['fecha_inicio']);
 
             if (count($fecha) == 2) {
                 $model->fecha_inicio = $fecha[0];
