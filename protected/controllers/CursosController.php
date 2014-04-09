@@ -76,8 +76,13 @@ class CursosController extends Controller {
                 $model->fecha_inicio = '';
                 $model->fecha_cierre = '';
             }
-            if ($model->save())
+            if ($model->save()){
+             $user = Yii::app()->getComponent('user');
+                $user->setFlash(
+                            'success', "<strong>Exito!</strong> Se el curso fue creado exitosamente."
+                );
                 $this->redirect(Yii::app()->getBaseUrl(true).'/cursos/update/'.$model->id);
+            }
         }
 
         $this->render('create', array(
@@ -114,7 +119,13 @@ class CursosController extends Controller {
             }
                 
             if ($model->validate() && $model->save())
+            {    
+                $user = Yii::app()->getComponent('user');
+                $user->setFlash(
+                            'success', "<strong>Exito!</strong> Se a modificiado el curso exitosamente."
+                );
                 $this->redirect(array('admin'));
+            }
         }
 
         $this->render('update', array(

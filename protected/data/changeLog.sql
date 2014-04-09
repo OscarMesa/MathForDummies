@@ -78,3 +78,12 @@ ALTER TABLE `contenidos_talleres` ADD FOREIGN KEY ( `contenidos_id` ) REFERENCES
 ALTER TABLE `contenidos_talleres` ADD FOREIGN KEY ( `talleres_idtalleres` ) REFERENCES `math`.`talleres` (
 `idtalleres`
 ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE `ejercicios` DROP `estado_correccion` ;
+
+ALTER TABLE `tema` ADD `idcurso` INT( 5 ) NOT NULL AFTER `idmateria` ,
+ADD INDEX ( `idcurso` ) ;
+
+ALTER TABLE `tema` ADD FOREIGN KEY ( `idcurso` ) REFERENCES `math`.`cursos` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
