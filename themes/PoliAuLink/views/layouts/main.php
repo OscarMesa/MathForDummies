@@ -15,8 +15,8 @@
 
         <div id="menu_superior" class="grid_16 alpha omega"> <?php
             $this->widget('zii.widgets.CMenu', array(
-                'items' => array(
-                    array('label' => 'Ingresar', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+                'items' => array( 
+                    //array('label' => 'Ingresar', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                     array('label' => 'Salir (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
                 ),
             ));
