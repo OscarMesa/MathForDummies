@@ -23,6 +23,8 @@ return array(
         'application.models.appjoomla.*',
         'application.components.*',
         'ext.yii-mail.YiiMailMessage',
+        'application.modules.cruge.components.*',
+        'application.modules.cruge.extensions.crugemailer.*',
     //  'application.controllers.*',
     ),
     'preload' => array(
@@ -40,6 +42,58 @@ return array(
             'generatorPaths' => array(
                 'bootstrap.gii',
             ),
+        ),
+        //Cruge, manejo de usuarios
+        'cruge' => array(
+            'userFilter' => 'application.components.MiFiltroUsuario',
+            'tableprefix' => 'math_',
+            // para que utilice a protected.modules.cruge.models.auth.CrugeAuthDefault.php
+            //
+			// en vez de 'default' pon 'authdemo' para que utilice el demo de autenticacion alterna
+            // para saber mas lee documentacion de la clase modules/cruge/models/auth/AlternateAuthDemo.php
+            //
+			'availableAuthMethods' => array('default'),
+            'availableAuthModes' => array('username', 'email'), //En este caso el usuario podra iniciar o con el nombre de usuario o el email
+            // url base para los links de activacion de cuenta de usuario
+            'baseUrl' => 'http://localhost/PoliAuLink',
+            // NO OLVIDES PONER EN FALSE TRAS INSTALAR
+            'debug' => true,
+            'rbacSetupEnabled' => true,
+            'allowUserAlways' => false,
+            // MIENTRAS INSTALAS..PONLO EN: false
+            // lee mas abajo respecto a 'Encriptando las claves'
+            //
+			'useEncryptedPassword' => false,
+            // Algoritmo de la función hash que deseas usar
+            // Los valores admitidos están en: http://www.php.net/manual/en/function.hash-algos.php
+            'hash' => 'md5',
+            // Estos tres atributos controlan la redirección del usuario. Solo serán son usados si no
+            // hay un filtro de sesion definido (el componente MiSesionCruge), es mejor usar un filtro.
+            //  lee en la wiki acerca de:
+            //   "CONTROL AVANZADO DE SESIONES Y EVENTOS DE AUTENTICACION Y SESION"
+            //
+			// ejemplo:
+            //		'afterLoginUrl'=>array('/site/welcome'),  ( !!! no olvidar el slash inicial / )
+            //		'afterLogoutUrl'=>array('/site/page','view'=>'about'),
+            //
+			'afterLoginUrl' => null,
+            'afterLogoutUrl' => null,
+            'afterSessionExpiredUrl' => null,
+            // manejo del layout con cruge.
+            //
+			'loginLayout' => '//layouts/column2',
+            'registrationLayout' => '//layouts/column2',
+            'activateAccountLayout' => '//layouts/column2',
+            //'editProfileLayout' => '//layouts/column2',
+            // en la siguiente puedes especificar el valor "ui" o "column2" para que use el layout
+            // de fabrica, es basico pero funcional.  si pones otro valor considera que cruge
+            // requerirá de un portlet para desplegar un menu con las opciones de administrador.
+            //
+			'generalUserManagementLayout' => 'ui',
+            // permite indicar un array con los nombres de campos personalizados, 
+            // incluyendo username y/o email para personalizar la respuesta de una consulta a: 
+            // $usuario->getUserDescription(); 
+            'userDescriptionFieldsArray' => array('email'),
         ),
     ),
     // application components
@@ -62,15 +116,15 @@ return array(
                 ),
             ),
         ),
+        //User para cruge
+        'user' => array(
+            'allowAutoLogin' => true,
+            'class' => 'application.modules.cruge.components.CrugeWebUser',
+            'loginUrl' => array('/cruge/ui/login'),
+        ),
         'bootstrap' => array(
             'class' => 'bootstrap.components.Bootstrap',
             'responsiveCss'=>true,
-        ),
-        'user' => array(
-            'class'=>'WebUser',
-            // enable cookie-based authentication
-            'allowAutoLogin' => true,
-            'autoUpdateFlash' => false,
         ),
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(
@@ -87,7 +141,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=math;unix_socket:/path/to/socket/mysql.sock',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => '',
+            'password' => 'root',
             'charset' => 'utf8',
             'tablePrefix' => '',
             'enableProfiling' => true,
@@ -122,6 +176,15 @@ return array(
               ),
              */
             ),
+        ),
+        'authManager' => array(
+            'class' => 'application.modules.cruge.components.CrugeAuthManager',
+        ),
+        'crugemailer' => array(
+            'class' => 'application.components.MyCrugerMail',
+            'mailfrom' => 'admin@documentacion.com',
+            'subjectprefix' => 'Recupera tu contraseña.',
+            'debug' => true,
         ),
         'mail' => array(
             'class' => 'ext.yii-mail.YiiMail',
