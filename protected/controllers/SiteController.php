@@ -95,10 +95,14 @@ class SiteController extends Controller {
      * Displays the login page
      */
     public function actionLogin() {
+        Yii::import('application.modules.cruge.controllers.UiController');
         $model = new LoginForm;
-        if (!Yii::app()->user->isGuest) {
-            $this->redirect(Yii::app()->baseUrl . '/' . Yii::app()->defaultController);
-        }
+//        if (!Yii::app()->user->isGuest) {
+//            $this->redirect(Yii::app()->baseUrl . '/' . Yii::app()->defaultController);
+//        }
+        $cruger = new UiController(-1);
+        $model = $cruger->actionLogin();
+        print_r($model);exit();
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);

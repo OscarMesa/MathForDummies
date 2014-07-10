@@ -122,7 +122,7 @@ class UiController extends Controller
 
     public function actionLogin()
     {
-
+       
         $this->layout = CrugeUtil::config()->loginLayout;
 
         $model = Yii::app()->user->um->getNewCrugeLogon('login');
@@ -134,7 +134,8 @@ class UiController extends Controller
         Yii::app()->user->setFlash('loginflash', null);
 
         Yii::log(__CLASS__ . "\nactionLogin\n", "info");
-
+//        print_r($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']]);
+//        exit();
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
             if ($model->validate()) {
@@ -158,7 +159,8 @@ class UiController extends Controller
                 );
             }
         }
-        $this->render('login', array('model' => $model));
+        return $model;
+        //$this->render('login', array('model' => $model));
     }
 
     public function actionPwdRec()
