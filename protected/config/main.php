@@ -52,7 +52,7 @@ return array(
 			// en vez de 'default' pon 'authdemo' para que utilice el demo de autenticacion alterna
             // para saber mas lee documentacion de la clase modules/cruge/models/auth/AlternateAuthDemo.php
             //
-			'availableAuthMethods' => array('default'),
+            'availableAuthMethods' => array('default'),
             'availableAuthModes' => array('username', 'email'), //En este caso el usuario podra iniciar o con el nombre de usuario o el email
             // url base para los links de activacion de cuenta de usuario
             'baseUrl' => 'http://localhost/PoliAuLink',
@@ -76,9 +76,9 @@ return array(
             //		'afterLoginUrl'=>array('/site/welcome'),  ( !!! no olvidar el slash inicial / )
             //		'afterLogoutUrl'=>array('/site/page','view'=>'about'),
             //
-			'afterLoginUrl' => null,
+            'afterLoginUrl' => null,
             'afterLogoutUrl' => null,
-            'afterSessionExpiredUrl' => null,
+            'afterSessionExpiredUrl' => array('/usuarios/inicio'),
             // manejo del layout con cruge.
             //
 			'loginLayout' => '//layouts/column2',
@@ -89,7 +89,7 @@ return array(
             // de fabrica, es basico pero funcional.  si pones otro valor considera que cruge
             // requerirá de un portlet para desplegar un menu con las opciones de administrador.
             //
-			'generalUserManagementLayout' => 'ui',
+            'generalUserManagementLayout' => 'ui',
             // permite indicar un array con los nombres de campos personalizados, 
             // incluyendo username y/o email para personalizar la respuesta de una consulta a: 
             // $usuario->getUserDescription(); 
@@ -141,7 +141,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=math;unix_socket:/path/to/socket/mysql.sock',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'charset' => 'utf8',
             'tablePrefix' => '',
             'enableProfiling' => true,
@@ -190,12 +190,15 @@ return array(
             'class' => 'ext.yii-mail.YiiMail',
             'transportType' => 'smtp',
             'transportOptions' => array(
-                'host' => 'aerovision.com.co',
-                'username' => 'info@aerovision.com.co',
-                'password' => 'aerovision',
-                'port' => '25',
+                'host' => 'smtp.gmail.com',
+                'username' => 'poliaulink@gmail.com',
+                'password' => 'politecnico',
+                'port' => '465',
+                'encryption'=>'ssl',
             ),
             'viewPath' => 'application.views.mail',
+            'logging' => true,
+            'dryRun' => false
         ),
     ),
     // application-level parameters that can be accessed
