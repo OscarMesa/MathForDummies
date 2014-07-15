@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /archivos/PabloAplication/nbproject/private/
 /archivos/PabloAplication/build/
 /archivos/documentacion/Presentacion/Video/OpenShot/PoliAuLink.mov
@@ -9,3 +10,16 @@
 /protected/runtime
 /themes/PoliAuLink/images/contenidos
 /protected/runtime/sql.log
+=======
+/archivos/PabloAplication/nbproject/private/
+/archivos/PabloAplication/build/
+/archivos/documentacion/Presentacion/Video/OpenShot/PoliAuLink.mov
+/nbproject
+/application/config/database.php
+/assets
+/protected/config
+/protected/config/main.php
+/protected/runtime
+/themes/PoliAuLink/images/contenidos
+/protected/runtime/sql.log
+>>>>>>> 05bd9bba5603cb648a1a70d0dcaa99a441d0ad06

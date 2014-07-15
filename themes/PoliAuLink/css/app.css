@@ -44,12 +44,15 @@ body{
 	width:80%;
 }
 
+<<<<<<< HEAD
 #panel_central .operations{
 background-color: #CCC;
 border-radius: 4px;
 padding: 7px;
 }
 
+=======
+>>>>>>> 05bd9bba5603cb648a1a70d0dcaa99a441d0ad06
 #curso #panel_central #menu{
 	float:left;
 	width:100%;

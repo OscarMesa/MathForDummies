@@ -21,6 +21,7 @@ if (Yii::app()->user->isSuperAdmin)
     echo Yii::app()->user->ui->superAdminNote();
 ?>
 <div class="container">
+<<<<<<< HEAD
     <table>
       <tr>
         <td width="232">
@@ -47,5 +48,26 @@ if (Yii::app()->user->isSuperAdmin)
         </td>
       </tr>
     </table>
+=======
+    <div class="span-19">
+        <div id="content">
+            <?php echo $content; ?>
+        </div><!-- content -->
+    </div>
+    <?php if (Yii::app()->user->checkAccess('admin')) { ?>	
+        <div class="span-5 last">
+            <div id="sidebar">
+                <?php
+                $this->widget('bootstrap.widgets.TbMenu', array(
+                    'type' => 'pills',
+                    'items' => Yii::app()->user->ui->adminItems,
+                    'htmlOptions' => array('class' => 'operations'),
+                ));
+                ?>
+            </div><!-- sidebar -->
+        </div>
+    <?php } ?>
+
+>>>>>>> 05bd9bba5603cb648a1a70d0dcaa99a441d0ad06
 </div>
 <?php $this->endContent(); ?>

@@ -8996,6 +8996,7 @@ in /var/www/PoliAuLink/protected/modules/cruge/components/CrugeFactory.php (46)
 in /var/www/PoliAuLink/protected/modules/cruge/components/CrugeUserManager.php (412)
 2014/07/10 00:29:09 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `math_session` `t` WHERE `t`.`idsession`=0 LIMIT 1)
 2014/07/10 00:29:09 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `math_session` `t` WHERE `t`.`idsession`=0 LIMIT 1)
+<<<<<<< HEAD
 2014/07/15 04:21:00 [trace] [system.db.ar.CActiveRecord] CrugeSession.findByPk()
 in C:\xampp\htdocs\PoliAuLink\protected\modules\cruge\models\data\CrugeSession.php (90)
 in C:\xampp\htdocs\PoliAuLink\protected\modules\cruge\components\CrugeFactory.php (46)
@@ -41552,3 +41553,5 @@ in C:\xampp\htdocs\PoliAuLink\protected\modules\cruge\components\CrugeFactory.ph
 in C:\xampp\htdocs\PoliAuLink\protected\modules\cruge\components\CrugeUserManager.php (472)
 2014/07/15 06:36:52 [profile] [system.db.CDbCommand.query] begin:system.db.CDbCommand.query(SELECT * FROM `math_user` `t` WHERE `t`.`iduser`=:yp0 LIMIT 1)
 2014/07/15 06:36:52 [profile] [system.db.CDbCommand.query] end:system.db.CDbCommand.query(SELECT * FROM `math_user` `t` WHERE `t`.`iduser`=:yp0 LIMIT 1)
+=======
+>>>>>>> 05bd9bba5603cb648a1a70d0dcaa99a441d0ad06
