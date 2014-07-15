@@ -44,6 +44,12 @@ body{
 	width:80%;
 }
 
+#panel_central .operations{
+background-color: #CCC;
+border-radius: 4px;
+padding: 7px;
+}
+
 #curso #panel_central #menu{
 	float:left;
 	width:100%;

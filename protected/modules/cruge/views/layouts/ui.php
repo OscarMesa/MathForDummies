@@ -21,24 +21,31 @@ if (Yii::app()->user->isSuperAdmin)
     echo Yii::app()->user->ui->superAdminNote();
 ?>
 <div class="container">
-    <div class="span-19">
-        <div id="content">
-            <?php echo $content; ?>
-        </div><!-- content -->
-    </div>
-    <?php if (Yii::app()->user->checkAccess('admin')) { ?>	
-        <div class="span-5 last">
-            <div id="sidebar">
-                <?php
-                $this->widget('bootstrap.widgets.TbMenu', array(
-                    'type' => 'pills',
-                    'items' => Yii::app()->user->ui->adminItems,
-                    'htmlOptions' => array('class' => 'operations'),
-                ));
-                ?>
-            </div><!-- sidebar -->
-        </div>
-    <?php } ?>
-
+    <table>
+      <tr>
+        <td width="232">
+            <?php if (Yii::app()->user->checkAccess('admin')) { ?>  
+                <div class="span-5 last" style="margin-left:0px;">
+                    <div id="sidebar">
+                        <?php
+                        $this->widget('bootstrap.widgets.TbMenu', array(
+                            'type' => 'list',
+                            'items' => Yii::app()->user->ui->adminItems,
+                            'htmlOptions' => array('class' => 'operations'),
+                        ));
+                        ?>
+                    </div><!-- sidebar -->
+                </div>
+            <?php } ?>
+        </td>
+        <td>
+            <div class="span-19" style="margin-left:0px;">
+                <div id="content">
+                    <?php echo $content; ?>
+                </div><!-- content -->
+            </div>
+        </td>
+      </tr>
+    </table>
 </div>
 <?php $this->endContent(); ?>
