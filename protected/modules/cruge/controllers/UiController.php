@@ -574,7 +574,7 @@ class UiController extends Controller
     public function asignarPermisosDeLectura($nameRol)
     {
         Yii::import('application.modules.cruge.components.CrugeAuthManager');
-        $permisosLectura = CrugeAuthitem::model()->findAll('name LIKE "%index%" OR name LIKE "%view%"');
+        $permisosLectura = MathAuthitem::model()->findAll('name LIKE "%index%" OR name LIKE "%view%"');
         $crugeAuthManager = new CrugeAuthManager();
         $crugeAuthManager->init();
         foreach ($permisosLectura as $permiso) {
