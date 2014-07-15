@@ -101,17 +101,19 @@ class SiteController extends Controller {
 //            $this->redirect(Yii::app()->baseUrl . '/' . Yii::app()->defaultController);
 //        }
         $cruger = new UiController(-1);
-        $model = $cruger->actionLogin();
-        print_r($model);exit();
+        $r = $model = $cruger->actionLogin();
+      //  print_r($model);exit();
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }
+        }   
 
         // collect user input data
-        if (isset($_POST['LoginForm'])) {
-            $model->attributes = $_POST['LoginForm'];
+       
+        if ($r === true){
+             $this->redirect(Yii::app()->baseUrl . '/' . Yii::app()->defaultController);
+            /*$model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
 
             $user = Yii::app()->getComponent('user');
@@ -129,11 +131,7 @@ class SiteController extends Controller {
                 } else if ($model->validate() && $model->login()) {
                     $this->redirect(Yii::app()->baseUrl . '/' . Yii::app()->defaultController);
                 }
-            } else {
-                if ($model->validate() && $model->login()) {
-                    $this->redirect(Yii::app()->baseUrl . '/' . Yii::app()->defaultController);
-                }
-            }
+            } */
         }//','',''
 
         $this->render('application.views.usuarios.login', array(

@@ -12,9 +12,10 @@ class CursosController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
+        return array('accessControl',array('CrugeAccessControlFilter'));
+//        return array(
+//            'accessControl', // perform access control for CRUD operations
+//        );
     }
 
     /**
@@ -23,28 +24,7 @@ class CursosController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-        $permisos_profesor = array();
-        if (Yii::app()->user->esProfesor()) {
-            $permisos_profesor = array('create', 'update', 'curso', 'admin','delete');
-        } else {
-            $permisos_profesor = array('create', 'update', 'curso');
-        }
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => $permisos_profesor,
-                'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
         );
     }
 

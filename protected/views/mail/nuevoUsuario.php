@@ -89,11 +89,13 @@ html
           </td>
       </tr>    
       <tr>
+          <?php if(!$activo){?>
           <td>
               <p><span>Dirijace al siguiente link para finalizar la activación de su cuenta.</span></p> <br/>
               <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/activarUsuario?id='.$usuario->id_usuario.'&hash='.  sha1('PoliAuLinkServer');?>">Click aqui</a>
        
           </td>
+          <?php }?>
       </tr>
 </table>
     <table width="580" height="15" align="center" border="0" cellspacing="0" cellpadding="0">

@@ -17,7 +17,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/themes
 
 <?php
 
-$modelRegistro = new Usuarios();
+$modelRegistro = new CrugeStoredUser();
 
 $this->widget('bootstrap.widgets.TbTabs', array(
     'id' => 'mytabs',

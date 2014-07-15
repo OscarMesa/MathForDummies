@@ -137,17 +137,19 @@ class UiController extends Controller
 //        print_r($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']]);
 //        exit();
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
+            echo '<pre>';
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
             if ($model->validate()) {
+                //print_r($model);exit();
                 if ($model->login(false) == true) {
-
                     Yii::log(__CLASS__ . "\nCrugeLogon->login() returns true\n", "info");
-
+                    if($model->getModel()->state )
                     // a modo de conocimiento, Yii::app()->user->returnUrl es
                     // establecida automaticamente por CAccessControlFilter cuando
                     // preFilter llama a accessDenied quien a su vez llama a
                     // CWebUser::loginRequired que es donde finalmente se llama a setReturnUrl
-                    $this->redirect(Yii::app()->user->returnUrl);
+                   // $this->redirect(Yii::app()->user->returnUrl);
+                   return true;
                 } else {
                     Yii::app()->user->setFlash('loginflash', Yii::app()->user->getLastError());
                 }

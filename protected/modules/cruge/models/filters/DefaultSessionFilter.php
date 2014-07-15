@@ -53,6 +53,18 @@ class DefaultSessionFilter implements ICrugeSessionFilter
             $this->lastErrorDescr = "su cuenta se encuentra suspendida";
             return null;
         }
+        if ($user->state == CRUGEUSERSTATE_NOTCONFIRMATE) {
+            $this->lastErrorDescr = "su cuenta no ha sido confirmada";
+            return null;
+        }
+        if ($user->state == CRUGEUSERSTATE_NOTCONFIRMATEADMIN) {
+            $this->lastErrorDescr = "su cuenta no ha sido confirmada por el administrador";
+            return null;
+        }
+        if ($user->state == CRUGEUSERSTATE_RECOVERPASSWORD) {
+            $this->lastErrorDescr = "su cuenta tiene una solicitud pendiente para recuperar la contraseña";
+            return null;
+        }
 
         // busca una sesion abierta para este usuario, para reutilizarla
         //

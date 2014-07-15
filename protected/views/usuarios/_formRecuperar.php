@@ -13,20 +13,20 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 ?>
 
-<?php echo $form->textFieldRow($modelRegistro, 'correo', array('class' => 'span3')); ?>
+<?php echo $form->textFieldRow($modelRegistro, 'email', array('class' => 'span3')); ?>
 
-<?php echo CHtml::activeLabel($modelRegistro, 'validacion'); ?>
+<?php echo CHtml::activeLabel($modelRegistro, 'EReCaptcha'); ?>
 <?php
 $this->widget('ext.recaptcha.EReCaptcha', array(
     'model' => $modelRegistro,
-    'attribute' => 'validacion',
+    'attribute' => 'EReCaptcha',
     'theme' => 'red', 'language' => 'es_ES',
     'publicKey' => '6LfyGPESAAAAAKbLfsQOkRIdQGiKhGBKBBhgAIzr',
     'htmlOptions' => array(
         'class' => 'span3'
 )))
 ?>
-<?php echo $form->error($modelRegistro, 'validacion', array('id' => 'Usuarios_validacion_em_')); ?>
+<?php echo $form->error($modelRegistro, 'EReCaptcha', array('id' => 'Usuarios_validacion_em_')); ?>
 
 
 <?php

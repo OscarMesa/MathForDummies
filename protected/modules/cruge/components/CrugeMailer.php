@@ -80,7 +80,7 @@ class CrugeMailer extends CrugeMailerBase implements ICrugeMailer
             $this->render(
                 'sendpasswordto'
                 ,
-                array('model' => $userInst, 'password' => $notEncryptedPassword)
+                array('model' => $userInst, 'password' => $notEncryptedPassword,'activo'=>true)
             )
         );
     }
@@ -95,7 +95,7 @@ class CrugeMailer extends CrugeMailerBase implements ICrugeMailer
             $this->render(
                 'sendregistrationemail'
                 ,
-                array('model' => $userInst, 'password' => $notEncryptedPassword)
+                array('model' => $userInst, 'password' => $notEncryptedPassword,'activo' => true)
             )
         );
     }

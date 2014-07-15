@@ -20,6 +20,9 @@ CrugeTranslator
 define("CRUGEUSERSTATE_NOTACTIVATED", 0);
 define("CRUGEUSERSTATE_ACTIVATED", 1);
 define("CRUGEUSERSTATE_SUSPENDED", 2);
+define("CRUGEUSERSTATE_NOTCONFIRMATE", 3);
+define("CRUGEUSERSTATE_NOTCONFIRMATEADMIN", 4);
+define("CRUGEUSERSTATE_RECOVERPASSWORD", 5);
 
 define("CRUGEFIELDTYPE_TEXTBOX", 0);
 define("CRUGEFIELDTYPE_TEXTAREA", 1);
@@ -41,7 +44,7 @@ class CrugeUserManager
     public function getUserStateOptions()
     {
         $stAr = array();
-        for ($i = CRUGEUSERSTATE_NOTACTIVATED; $i <= CRUGEUSERSTATE_SUSPENDED; $i++) {
+        for ($i = CRUGEUSERSTATE_NOTACTIVATED; $i <= CRUGEUSERSTATE_RECOVERPASSWORD; $i++) {
             $stAr[$i] = $this->getStateName($i);
         }
         return $stAr;
@@ -56,6 +59,13 @@ class CrugeUserManager
                 return CrugeTranslator::t("Cuenta Activada");
             case CRUGEUSERSTATE_SUSPENDED:
                 return CrugeTranslator::t("Cuenta Suspendida");
+            case CRUGEUSERSTATE_NOTCONFIRMATEADMIN:
+                return CrugeTranslator::t("Cuenta no confirmada por el administrador");
+            case CRUGEUSERSTATE_RECOVERPASSWORD:
+                return CrugeTranslator::t("Esta cuenta ha solicitudo reuperar la contraseña");
+            case CRUGEUSERSTATE_NOTCONFIRMATE:
+                return CrugeTranslator::t("Cuenta no confirmada");
+            
         }
         return $state;
     }

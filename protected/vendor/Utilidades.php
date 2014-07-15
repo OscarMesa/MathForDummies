@@ -11,6 +11,9 @@
  * @author omesa
  */
 class Utilidades {
+    
+    public static $mail = "poliaulink@gmail.com";
+
 
     //put your code here
     public static function hola() {

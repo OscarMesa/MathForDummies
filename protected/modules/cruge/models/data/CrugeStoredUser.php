@@ -23,6 +23,8 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
     public $_fields = array();
     public $deleteConfirmation; // required on 'delete'
     public $newPassword; // declararlo 'safe'
+    public $passConfirm;
+    public $EReCaptcha;
 
     // terminos y condiciones, caso registration,
     public $terminosYCondiciones;
@@ -312,6 +314,11 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
                 'allowEmpty' => true,
                 'message' => CrugeTranslator::t('logon', 'Security code is invalid'),
             ),
+            array('EReCaptcha', 
+               'application.extensions.recaptcha.EReCaptchaValidator', 
+               'privateKey'=>'6LfyGPESAAAAABH6_bGhXXQ6vst0atD6wUn5rb_C ',
+                'on' => 'registerwcaptcha'),
+            array('passConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'on'=>array('cambiopassword')),
             array('iduser, username, email, state, logondate', 'safe', 'on' => 'search'),
 
         );
@@ -380,17 +387,19 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
     {
         return array(
             'idusuario' => ucfirst(CrugeTranslator::t('usuario#')),
-            'username' => ucfirst(CrugeTranslator::t('username')),
-            'email' => ucfirst(CrugeTranslator::t('correo')),
-            'password' => ucfirst(CrugeTranslator::t('clave')),
+            'username' => ucfirst(CrugeTranslator::t('Nombre de usuario')),
+            'email' => ucfirst(CrugeTranslator::t('Correo')),
+            'password' => ucfirst(CrugeTranslator::t('Contraseña')),
+            'passConfirm' => ucfirst(CrugeTranslator::t('Confirmar contraseña')),
             'authkey' => ucfirst(CrugeTranslator::t('llave de autenticacion')),
             'state' => ucfirst(CrugeTranslator::t('estado de la cuenta')),
-            'newPassword' => ucfirst(CrugeTranslator::t('clave')),
+            'newPassword' => ucfirst(CrugeTranslator::t('Contraseña')),
             'deleteConfirmation' => ucfirst(CrugeTranslator::t('confirmar eliminacion')),
             'regdate' => ucfirst(CrugeTranslator::t('registrado')),
             'actdate' => ucfirst(CrugeTranslator::t('activado')),
             'logondate' => ucfirst(CrugeTranslator::t('ultimo acceso')),
             'terminosYCondiciones' => ucfirst(CrugeTranslator::t('comprendo y acepto, por favor registrarme')),
+            'EReCaptcha' => ucfirst(CrugeTranslator::t('Introduce código de verificación:')),
         );
     }
 

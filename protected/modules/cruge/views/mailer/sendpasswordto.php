@@ -1,132 +1,139 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Datos de cuenta</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Gracias por su registro</title>
 
-        <!-- Hotmail ignora cierto código valido, se agrega esto -->
-        <style type="text/css">
-            .ReadMsgBody
-            {width: 100%; background-color: #FFFFFF;}
-            .ExternalClass
-            {width: 100%; background-color: #FFFFFF;}
-            body
-            {width: 100%; height: 100%; background-color: #FFFFFF; margin:0; padding:0; -webkit-font-smoothing: antialiased;}
-            html
-            {width: 100%; height: 100%;}
+<!-- Hotmail ignora cierto código valido, se agrega esto -->
+<style type="text/css">
+.ReadMsgBody
+{width: 100%; background-color: #FFFFFF;}
+.ExternalClass
+{width: 100%; background-color: #FFFFFF;}
+body
+{width: 100%; height: 100%; background-color: #FFFFFF; margin:0; padding:0; -webkit-font-smoothing: antialiased;}
+html
+{width: 100%; height: 100%;}
 
-            @media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 480px) {
 
-                .mobile_text_1 { font-size: 9px; color: #fff; text-align: right; }
-                .mobile_text_2 { font-size: 14px; color: #404040; text-align: left; font-weight:bold; }
-                .mobile_text_3 { font-size: 12px; color: #404040; text-align: left; }
-                .mobile_text_4 { font-size: 11px; color: #404040; text-align: left; }
-                .mobile_text_5 { font-size: 11px; color: #fff; text-align: center; line-height: 20px; }
-                .mobile_text_6 { font-size: 10px; color: #404040; text-align: left; line-height: 15px; }
+.mobile_text_1 { font-size: 9px; color: #fff; text-align: right; }
+.mobile_text_2 { font-size: 14px; color: #404040; text-align: left; font-weight:bold; }
+.mobile_text_3 { font-size: 12px; color: #404040; text-align: left; }
+.mobile_text_4 { font-size: 11px; color: #404040; text-align: left; }
+.mobile_text_5 { font-size: 11px; color: #fff; text-align: center; line-height: 20px; }
+.mobile_text_6 { font-size: 10px; color: #404040; text-align: left; line-height: 15px; }
 
-            }
-
-
-            p {
-                color: #68737F;
-                margin-bottom: -14px;
-                font-size: 14px;
-                font-family: 'Times New Roman';
-                font-weight: bold;
-            }
-            .titulos{
-                color: #7B507B;
-                margin-right: 3px;
-            }
-        </style>
-    </head>
-    <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-
-        <!-- Wrapper -->
-        <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" align="center">
-            <tr>
-                <td width="100%" height="100%" valign="top">	
-
-                    <!-- Main wrapper --><table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
-                        <tr>
-                            <td>
-
-                                <!-- Iphone Wrapper -->
-
-                                <table width="660" border="0" cellpadding="0" cellspacing="0" align="center">
-                                    <tr>
-                                        <td width="30"></td>
-                                        <td width="600" bgcolor="">
-                                            <!-- Top -->
-                                            <table width="600" border="0" cellspacing="0" cellpadding="0">
-                                            </table>
-                                            <table width="600" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td width="600" bgcolor=""><img src="<?php echo Yii::app()->getBaseUrl(true) ?>/images/mail/head-mail.png" width="" height="" style="" /></td>
-                                                </tr>
-                                            </table>
-                                            <table width="580" style="" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td width="193"><p style="color: #7B507B; font-weight: bold; font-size: 18px;"><?php
-                                                            $nombre = CrugeFieldValue::model()->find('iduser=? AND idfield=1', array($model->iduser));
-                                                            $genero = CrugeFieldValue::model()->find('iduser=? AND idfield=2', array($model->iduser));
-                                                            if(count($genero)>0)
-                                                                echo ucwords(($genero->value == 1 ? 'señor' : 'señora') . ' ' . $nombre->value);
-                                                            ?></p>
-                                                        <p>Las credenciales de su cuenta son:</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table style="margin-top: 34px;" width="580" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td width="400">
-                                                        <div><p><b class="titulos">Usuario:</b> <?php echo $model->username; ?></p> <p><b class="titulos">E-mail: </b><?php echo $model->email; ?></p> <p><b class="titulos">Contraseña: </b><?php echo $password; ?></p></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="180">
-                                                        <p style="margin-top: 50px"> Por favor tome las precauciones necesarias para guardar su nueva clave</p>
-                                                    </td>
-                                                </tr>
-                                                <tr><td>
-                                                        <p style="color: #7B507B;font-weight: bold;text-align: center;margin-top: 20px">¡Gestion de documentos!</p>
-                                                    </td></tr>
-                                            </table>
-                                            <table width="580" height="15" align="center" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                            <table width="600" border="0" align="center" bgcolor="#F2F2F2" cellpadding="0" cellspacing="5" id="separador">
-                                                <tr>
-
-                                                </tr>
-                                            </table>
-                                            <table width="600" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td width="600" bgcolor="#FFFFFF"><img src="<?php echo Yii::app()->getBaseUrl(true) ?>/images/mail/linea-inf-mail.png" width="" height="" /></td>
-                                                </tr>
-                                            </table>
+}
 
 
+</style>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
-                                        </td>
-                                        <td width="30"></td>
-                                    </tr>
-                                </table>
+<!-- Wrapper -->
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+	<tr>
+	  <td width="100%" height="100%" valign="top">	
 
-                                <!-- End Iphone Wrapper -->
+		<!-- Main wrapper --><table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<td>
+				
+					<!-- Iphone Wrapper -->
+                    
+                    <table width="660" border="0" cellpadding="0" cellspacing="0" align="center">
+						<tr>
+							<td width="30"></td>
+						  <td width="600" bgcolor="#DDDDDD">
+				<!-- Top -->
+                <table width="600" border="0" cellspacing="0" cellpadding="0">
+<!--  <tr>
+    <td width="600" height="10" bgcolor="#FFFFFF" align="center" valign="top" style="text-align:center; font-size: 9px; color: #040401; font-family: Helvetica, Arial, sans-serif; line-height: 20px; vertical-align: top;"><section class="mobile_text_1">No puedes ver correctamente este correo? <a href="http://[web_version]" style="color:#000000;">Click</a> aquí</section></td>
+  </tr>-->
+  </table>
+  <table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="600" bgcolor="#FFFFFF"><img src="http://www.nettic.com.co/boletines/tudiscotek/top.png" width="600" height="35" /></td>
+  </tr>
+  </table>
+  <table width="580" align="center" height="40" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+     <td width="193" height="40"><img src="http://gammarisk.com.co/oscar/iefo.png" alt="logo" /></td>
+  </tr>
+  </table>
+  <table width="580" height="40" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="300"><p style="text-align:left; font-size: 20px; color: #000000; line-height:10px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>Hola, <?php echo $model->username; ?></strong><br/>
+      </p></td>
+    <td align="right">
+    <table width="280"  align="center" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="280" height="28"><img src="http://fc08.deviantart.net/fs70/f/2011/160/0/a/gmail_metal_icon_256x256_px_by_agamemmnon-d3igont.png" width="41" height="33" /></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+  <table width="580" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+        <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">Estamos enviando este correo de confirmacón a su cuenta, con el fin de realizar la activación de su usuario. Recuerde que deberá ingresar a la dirección que anexamos en este correo, para realizar una activación exitosa. </span>
+    </td>
+  </tr>
+      <tr>
+          <td>
+              <b>Estos son algunos de sus datos registrados:</b><br/>
+              <b>Nombre: </b><?php echo $model->username;?><br/>
+              <b>Correo: </b><?php echo $model->email;?><br/>
+              <b>Contraseña: </b><?php echo $model->password;?><br/>
+          </td>
+      </tr>    
+      <tr>
+          <?php if(!$activo){?>
+          <td>
+              <p><span>Dirijace al siguiente link para finalizar la activación de su cuenta.</span></p> <br/>
+              <a href="<?php Yii::app()->user->um->getActivationUrl($model);?>">Click aqui</a>
+       
+          </td>
+          <?php }?>
+      </tr>
+</table>
+    <table width="580" height="15" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td></td>
+  </tr>
+</table>
+    <table width="600" border="0" align="center" bgcolor="#F2F2F2" cellpadding="0" cellspacing="5" id="separador">
+      <tr>
+    <td height="25" valign="middle" style="font-size: 16px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>¡PoliAuLink!</strong></td>
+  </tr>
+</table>
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="600" bgcolor="#FFFFFF"><img src="http://www.nettic.com.co/boletines/tudiscotek/shadow-bottom.png" width="600" height="35" /></td>
+  </tr>
+  </table>
 
-                            </td>
-                        </tr>
-                    </table><!-- End Main wrapper -->
 
-                </td>
-            </tr>
-        </table><!-- End Wrapper -->
 
-        <!-- Done -->
+</td>
+						<td width="30"></td>
+					</tr>
+				</table>
+                    
+                    
+                    <!-- End Iphone Wrapper -->
 
-    </body>
+		
+				</td>
+			</tr>
+		</table><!-- End Main wrapper -->
+
+		</td>
+	</tr>
+</table><!-- End Wrapper -->
+
+<!-- Done -->
+
+</body>
 </html>

@@ -12,6 +12,7 @@ class UsuariosController extends Controller {
      * @return array action filters
      */
     public function filters() {
+        // return array('accessControl', array('CrugeAccessControlFilter'));
         return array(
             'accessControl', // perform access control for CRUD operations
         );
@@ -203,22 +204,22 @@ class UsuariosController extends Controller {
     }
 
     public function actionCreateAnonimo() {
-        $model = new Usuarios();
+        $model = new CrugeStoredUser();
 
         // Uncomment the following line if AJAX validation is needed
-        if (isset($_POST['Usuarios'])) {
+        if (isset($_POST['CrugeStoredUser'])) {
             $model->scenario = 'createanonimo';
 
-            $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
-            $model->passConfirm = sha1($_POST['Usuarios']['passConfirm']);
+            $model->password = $_POST['Usuarios']['contrasena'];
+            $model->passConfirm = $_POST['Usuarios']['passConfirm'];
 
             $this->performAjaxValidation($model);
 
-            $model->attributes = $_POST['Usuarios'];
+            $model->attributes = $_POST['CrugeStoredUser'];
 
-            $model->state_usuario = 'not_confirmed';
+            $model->state = CRUGEUSERSTATE_NOTCONFIRMATE;
             if ($model->save()) {
-                $model->setPerfiles($_POST['Perfiles']);
+                $model->setPerfiles($_POST['MathAuthassignment']);
                 $this->EnviarMailNuevoUsuario($model);
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
