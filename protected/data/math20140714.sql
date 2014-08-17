@@ -26,20 +26,21 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `comentarios_curso`
 --
 
-CREATE TABLE IF NOT EXISTS `comentarios_curso` (
-  `idcurso` int(11) NOT NULL,
-  `idusuario` int(11) NOT NULL,
-  `comentario` varchar(45) NOT NULL,
-  PRIMARY KEY (`idcurso`,`idusuario`),
-  KEY `fk_Comentarios_curso_cursos1_idx` (`idcurso`),
-  KEY `fk_Comentarios_curso_usuarios1_idx` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `comentarios_evaluacion`
 --
+
+CREATE TABLE IF NOT EXISTS `contenidos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_contenido` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `titulo` varchar(45) DEFAULT NULL,
+  `texto` text,
+  `observacion` text,
+  `almacenado_total` tinyint(1) NOT NULL COMMENT 'este campo permite saber si un contenido se ha almenado en su totalidad o es un registro que puede o no ser tomado en cuenta.',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=198 ;
 
 CREATE TABLE IF NOT EXISTS `comentarios_evaluacion` (
   `idusuario` int(11) NOT NULL,
@@ -48,6 +49,19 @@ CREATE TABLE IF NOT EXISTS `comentarios_evaluacion` (
   PRIMARY KEY (`idusuario`,`idevaluacion`),
   KEY `fk_comentarios_evaluacion_usuarios1_idx` (`idusuario`),
   KEY `fk_comentarios_evaluacion_evaluaciones1_idx` (`idevaluacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `comentarios_curso` (
+  `idcurso` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `comentario` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcurso`,`idusuario`),
+  KEY `fk_Comentarios_curso_cursos1_idx` (`idcurso`),
+  KEY `fk_Comentarios_curso_usuarios1_idx` (`idusuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,21 +79,24 @@ CREATE TABLE IF NOT EXISTS `comentarios_taller` (
   KEY `fk_comentarios_taller_talleres1_idx` (`idtaller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE IF NOT EXISTS `contenidos_ejercicio` (
+  `contenidos_id` int(11) NOT NULL,
+  `state_ce` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `ejercicios_id` int(11) NOT NULL,
+  PRIMARY KEY (`contenidos_id`,`ejercicios_id`),
+  KEY `fk_contenidos_has_ejercicios_ejercicios1` (`ejercicios_id`),
+  KEY `fk_contenidos_has_ejercicios_contenidos1` (`contenidos_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `contenidos`
 --
 
-CREATE TABLE IF NOT EXISTS `contenidos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `state_contenido` enum('active','inactive') NOT NULL DEFAULT 'active',
-  `titulo` varchar(45) DEFAULT NULL,
-  `texto` text,
-  `observacion` text,
-  `almacenado_total` tinyint(1) NOT NULL COMMENT 'este campo permite saber si un contenido se ha almenado en su totalidad o es un registro que puede o no ser tomado en cuenta.',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=198 ;
+
 
 --
 -- Volcado de datos para la tabla `contenidos`
@@ -96,15 +113,6 @@ INSERT INTO `contenidos` (`id`, `state_contenido`, `titulo`, `texto`, `observaci
 --
 -- Estructura de tabla para la tabla `contenidos_ejercicio`
 --
-
-CREATE TABLE IF NOT EXISTS `contenidos_ejercicio` (
-  `contenidos_id` int(11) NOT NULL,
-  `state_ce` enum('active','inactive') NOT NULL DEFAULT 'active',
-  `ejercicios_id` int(11) NOT NULL,
-  PRIMARY KEY (`contenidos_id`,`ejercicios_id`),
-  KEY `fk_contenidos_has_ejercicios_ejercicios1` (`ejercicios_id`),
-  KEY `fk_contenidos_has_ejercicios_contenidos1` (`contenidos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
