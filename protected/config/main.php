@@ -20,7 +20,6 @@ return array(
    'import' => array(
        'application.models.*',
        'application.extensions.*',
-       'application.models.appjoomla.*',
        'application.components.*',
        'ext.yii-mail.YiiMailMessage',
        'application.modules.cruge.components.*',
@@ -55,7 +54,7 @@ return array(
            'availableAuthMethods' => array('default'),
            'availableAuthModes' => array('username', 'email'), //En este caso el usuario podra iniciar o con el nombre de usuario o el email
            // url base para los links de activacion de cuenta de usuario
-           'baseUrl' => 'http://localhost/PoliAuLink',
+           'baseUrl' => $_SERVER['HTTP_HOST'].'/PoliAuLink',
            // NO OLVIDES PONER EN FALSE TRAS INSTALAR
            'debug' => true,
            'rbacSetupEnabled' => true,
@@ -93,6 +92,7 @@ return array(
            // permite indicar un array con los nombres de campos personalizados,
            // incluyendo username y/o email para personalizar la respuesta de una consulta a:
            // $usuario->getUserDescription();
+           'defaultSessionFilter'=>'application.components.MiSesionCruge',
            'userDescriptionFieldsArray' => array('email'),
        ),
    ),
