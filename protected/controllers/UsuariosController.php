@@ -50,7 +50,7 @@ class UsuariosController extends Controller {
 
             $this->redirect(Yii::app()->getBaseUrl(true) . '/cursos/curso');
         } else {
-            $this->redirect('site/login');
+            $this->redirect(Yii::app()->getBaseUrl(true).'/site/login');
         }
     }
 
@@ -204,8 +204,9 @@ class UsuariosController extends Controller {
     }
 
     public function actionCreateAnonimo() {
-        $model = new CrugeStoredUser();
-
+        $model = new CrugessStoredUser();
+        echo '<pre>';
+        print_r($_POST);die;
         // Uncomment the following line if AJAX validation is needed
         if (isset($_POST['CrugeStoredUser'])) {
             $model->scenario = 'createanonimo';
@@ -219,7 +220,7 @@ class UsuariosController extends Controller {
 
             $model->state = CRUGEUSERSTATE_NOTCONFIRMATE;
             if ($model->save()) {
-                $model->setPerfiles($_POST['MathAuthassignment']);
+                $model->setPerfiles(array($_POST['MathAuthassignment']['name']));
                 $this->EnviarMailNuevoUsuario($model);
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
