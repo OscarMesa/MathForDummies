@@ -1,31 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
--- http://www.phpmyadmin.net
---
--- Servidor: localhost
--- Tiempo de generación: 09-07-2014 a las 12:28:00
--- Versión del servidor: 5.6.19
--- Versión de PHP: 5.3.10-1ubuntu3.12
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Base de datos: `math`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `comentarios_curso`
---
-
 CREATE TABLE IF NOT EXISTS `comentarios_curso` (
   `idcurso` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
@@ -33,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `comentarios_curso` (
   PRIMARY KEY (`idcurso`,`idusuario`),
   KEY `fk_Comentarios_curso_cursos1_idx` (`idcurso`),
   KEY `fk_Comentarios_curso_usuarios1_idx` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -48,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `comentarios_evaluacion` (
   PRIMARY KEY (`idusuario`,`idevaluacion`),
   KEY `fk_comentarios_evaluacion_usuarios1_idx` (`idusuario`),
   KEY `fk_comentarios_evaluacion_evaluaciones1_idx` (`idevaluacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -70,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `comentarios_taller` (
 --
 -- Estructura de tabla para la tabla `contenidos`
 --
-
+DROP TABLE contenidos;
 CREATE TABLE IF NOT EXISTS `contenidos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_contenido` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -111,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `contenidos_ejercicio` (
 --
 -- Estructura de tabla para la tabla `contenidos_talleres`
 --
-
+DROP TABLE contenidos_talleres;
 CREATE TABLE IF NOT EXISTS `contenidos_talleres` (
   `contenidos_id` int(11) NOT NULL,
   `talleres_idtalleres` int(11) NOT NULL,
@@ -132,7 +104,7 @@ INSERT INTO `contenidos_talleres` (`contenidos_id`, `talleres_idtalleres`) VALUE
 --
 -- Estructura de tabla para la tabla `cursos`
 --
-
+DROP TABLE cursos;
 CREATE TABLE IF NOT EXISTS `cursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_curso` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -196,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `cursos_has_tema` (
 -- Estructura de tabla para la tabla `cursos_juego`
 --
 
+DROP TABLE IF EXISTS cursos_juego;
 CREATE TABLE IF NOT EXISTS `cursos_juego` (
   `cursos_id` int(11) NOT NULL,
   `juego_idjuego` int(11) NOT NULL,
@@ -210,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `cursos_juego` (
 -- Estructura de tabla para la tabla `cursos_talleres`
 --
 
+DROP TABLE IF EXISTS cursos_talleres;
 CREATE TABLE IF NOT EXISTS `cursos_talleres` (
   `cursos_id` int(11) NOT NULL,
   `talleres_idtalleres` int(11) NOT NULL,
@@ -224,6 +198,7 @@ CREATE TABLE IF NOT EXISTS `cursos_talleres` (
 -- Estructura de tabla para la tabla `ejercicios`
 --
 
+DROP TABLE IF EXISTS ejercicios;
 CREATE TABLE IF NOT EXISTS `ejercicios` (
   `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT,
   `state_ejercicios` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -245,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `ejercicios` (
 --
 -- Estructura de tabla para la tabla `ejercicios_ecuaciones`
 --
-
+DROP TABLE IF EXISTS ejercicios_ecuaciones;
 CREATE TABLE IF NOT EXISTS `ejercicios_ecuaciones` (
   `ejercicios_id` int(11) NOT NULL,
   `state_ee` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -261,6 +236,7 @@ CREATE TABLE IF NOT EXISTS `ejercicios_ecuaciones` (
 -- Estructura de tabla para la tabla `ejercicios_evaluaciones`
 --
 
+DROP TABLE IF EXISTS ejercicios_evaluaciones;
 CREATE TABLE IF NOT EXISTS `ejercicios_evaluaciones` (
   `ejercicios_id_ejercicio` int(11) NOT NULL,
   `evaluaciones_id` int(11) NOT NULL,
@@ -273,8 +249,8 @@ CREATE TABLE IF NOT EXISTS `ejercicios_evaluaciones` (
 
 --
 -- Estructura de tabla para la tabla `ejercicios_respuestaejercicio`
---
-
+-- desde aqui
+DROP TABLE IF EXISTS ejercicios_respuestaejercicio;
 CREATE TABLE IF NOT EXISTS `ejercicios_respuestaejercicio` (
   `ejercicios_id_ejercicio` int(11) NOT NULL,
   `RespuestaEjercicio_idRespuestaEjercicio` int(11) NOT NULL,
@@ -289,6 +265,7 @@ CREATE TABLE IF NOT EXISTS `ejercicios_respuestaejercicio` (
 -- Estructura de tabla para la tabla `ejercicios_talleres`
 --
 
+DROP TABLE IF EXISTS ejercicios_talleres;
 CREATE TABLE IF NOT EXISTS `ejercicios_talleres` (
   `ejercicios_id_ejercicio` int(11) NOT NULL,
   `talleres_idtalleres` int(11) NOT NULL,
@@ -302,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `ejercicios_talleres` (
 --
 -- Estructura de tabla para la tabla `estados`
 --
-
+DROP TABLE IF EXISTS estados;
 CREATE TABLE IF NOT EXISTS `estados` (
   `id_estado` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
@@ -314,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 --
 -- Estructura de tabla para la tabla `evaluaciones`
 --
-
+DROP TABLE IF EXISTS evaluaciones;
 CREATE TABLE IF NOT EXISTS `evaluaciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_evalucaciones` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -330,6 +307,7 @@ CREATE TABLE IF NOT EXISTS `evaluaciones` (
 -- Estructura de tabla para la tabla `evalucacion_integrante`
 --
 
+DROP TABLE IF EXISTS evalucacion_integrante;
 CREATE TABLE IF NOT EXISTS `evalucacion_integrante` (
   `id_evaluacion` int(11) NOT NULL,
   `state_evalucacion_integrante` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -347,6 +325,7 @@ CREATE TABLE IF NOT EXISTS `evalucacion_integrante` (
 -- Estructura de tabla para la tabla `img_videos_sonido`
 --
 
+DROP TABLE IF EXISTS img_videos_sonido;
 CREATE TABLE IF NOT EXISTS `img_videos_sonido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_img_videos` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -401,6 +380,7 @@ INSERT INTO `img_videos_sonido` (`id`, `state_img_videos`, `url`, `nombre`, `typ
 -- Estructura de tabla para la tabla `img_videos_sonido_contenidos`
 --
 
+DROP TABLE IF EXISTS img_videos_sonido_contenidos;
 CREATE TABLE IF NOT EXISTS `img_videos_sonido_contenidos` (
   `img_videos_id` int(11) NOT NULL,
   `contenidos_id` int(11) NOT NULL,
@@ -425,7 +405,7 @@ INSERT INTO `img_videos_sonido_contenidos` (`img_videos_id`, `contenidos_id`, `s
 --
 -- Estructura de tabla para la tabla `integrantes_curso`
 --
-
+DROP TABLE IF EXISTS integrantes_curso;
 CREATE TABLE IF NOT EXISTS `integrantes_curso` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_integrantes_curso` enum('active','inactive','penddocente','pendalumno') NOT NULL DEFAULT 'active',
@@ -443,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `integrantes_curso` (
 --
 -- Estructura de tabla para la tabla `juego`
 --
-
+DROP TABLE IF EXISTS juego;
 CREATE TABLE IF NOT EXISTS `juego` (
   `idjuego` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
@@ -457,6 +437,7 @@ CREATE TABLE IF NOT EXISTS `juego` (
 -- Estructura de tabla para la tabla `materias`
 --
 
+DROP TABLE IF EXISTS materias;
 CREATE TABLE IF NOT EXISTS `materias` (
   `idmaterias` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_materia` varchar(45) DEFAULT NULL,
@@ -482,6 +463,7 @@ INSERT INTO `materias` (`idmaterias`, `nombre_materia`, `state_materia`) VALUES
 -- Estructura de tabla para la tabla `materias_docente`
 --
 
+DROP TABLE IF EXISTS materias_docente;
 CREATE TABLE IF NOT EXISTS `materias_docente` (
   `materias_idmaterias` int(11) NOT NULL,
   `usuarios_id_usuario` int(11) NOT NULL,
@@ -496,6 +478,7 @@ CREATE TABLE IF NOT EXISTS `materias_docente` (
 -- Estructura de tabla para la tabla `math_authassignment`
 --
 
+DROP TABLE IF EXISTS math_authassignment;
 CREATE TABLE IF NOT EXISTS `math_authassignment` (
   `userid` int(11) NOT NULL,
   `bizrule` text COLLATE utf8_unicode_ci,
@@ -512,6 +495,7 @@ CREATE TABLE IF NOT EXISTS `math_authassignment` (
 -- Estructura de tabla para la tabla `math_authitem`
 --
 
+DROP TABLE IF EXISTS math_authitem;
 CREATE TABLE IF NOT EXISTS `math_authitem` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` int(11) NOT NULL,
@@ -600,7 +584,7 @@ INSERT INTO `math_authitem` (`name`, `type`, `description`, `bizrule`, `data`) V
 --
 -- Estructura de tabla para la tabla `math_authitemchild`
 --
-
+DROP TABLE IF EXISTS math_authitemchild;
 CREATE TABLE IF NOT EXISTS `math_authitemchild` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -614,6 +598,7 @@ CREATE TABLE IF NOT EXISTS `math_authitemchild` (
 -- Estructura de tabla para la tabla `math_field`
 --
 
+DROP TABLE IF EXISTS math_field;
 CREATE TABLE IF NOT EXISTS `math_field` (
   `idfield` int(11) NOT NULL AUTO_INCREMENT,
   `fieldname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -635,7 +620,7 @@ CREATE TABLE IF NOT EXISTS `math_field` (
 --
 -- Estructura de tabla para la tabla `math_fieldvalue`
 --
-
+DROP TABLE IF EXISTS math_fieldvalue;
 CREATE TABLE IF NOT EXISTS `math_fieldvalue` (
   `idfieldvalue` int(11) NOT NULL AUTO_INCREMENT,
   `iduser` int(11) NOT NULL,
@@ -652,6 +637,7 @@ CREATE TABLE IF NOT EXISTS `math_fieldvalue` (
 -- Estructura de tabla para la tabla `math_session`
 --
 
+DROP TABLE IF EXISTS math_session;
 CREATE TABLE IF NOT EXISTS `math_session` (
   `idsession` int(11) NOT NULL AUTO_INCREMENT,
   `iduser` int(11) NOT NULL,
@@ -680,6 +666,7 @@ INSERT INTO `math_session` (`idsession`, `iduser`, `created`, `expire`, `status`
 -- Estructura de tabla para la tabla `math_system`
 --
 
+DROP TABLE IF EXISTS math_system;
 CREATE TABLE IF NOT EXISTS `math_system` (
   `idsystem` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -714,6 +701,7 @@ INSERT INTO `math_system` (`idsystem`, `name`, `largename`, `sessionmaxdurationm
 -- Estructura de tabla para la tabla `math_user`
 --
 
+DROP TABLE IF EXISTS math_user;
 CREATE TABLE IF NOT EXISTS `math_user` (
   `iduser` int(11) NOT NULL AUTO_INCREMENT,
   `regdate` bigint(30) DEFAULT NULL,
@@ -743,73 +731,10 @@ INSERT INTO `math_user` (`iduser`, `regdate`, `actdate`, `logondate`, `username`
 -- Estructura de tabla para la tabla `perfiles`
 --
 
-CREATE TABLE IF NOT EXISTS `perfiles` (
-  `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
-  `state_perfiles` enum('active','inactive') NOT NULL DEFAULT 'active',
-  `nombre` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id_perfil`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `perfiles`
---
-
-INSERT INTO `perfiles` (`id_perfil`, `state_perfiles`, `nombre`) VALUES
-(4, 'active', 'Docente'),
-(5, 'active', 'Estudiante'),
-(6, 'active', 'Administrador');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `permisos`
---
-
-CREATE TABLE IF NOT EXISTS `permisos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `state_permisos` enum('active','inactive') NOT NULL DEFAULT 'active',
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `permisos`
---
-
-INSERT INTO `permisos` (`id`, `state_permisos`, `nombre`) VALUES
-(1, 'active', 'insertar usuario'),
-(2, 'active', 'seleccionar usario'),
-(3, 'active', 'eliminar usuario');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `permisos_perfil`
---
-
-CREATE TABLE IF NOT EXISTS `permisos_perfil` (
-  `perfiles_id` int(11) NOT NULL,
-  `state_permisos_perfil` enum('active','inactive') NOT NULL DEFAULT 'active',
-  `permisos_id` int(11) NOT NULL,
-  PRIMARY KEY (`perfiles_id`,`permisos_id`),
-  KEY `fk_perfiles_has_permisos_permisos1` (`permisos_id`),
-  KEY `fk_perfiles_has_permisos_perfiles1` (`perfiles_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `permisos_perfil`
---
-
-INSERT INTO `permisos_perfil` (`perfiles_id`, `state_permisos_perfil`, `permisos_id`) VALUES
-(4, 'active', 1),
-(4, 'active', 3);
-
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `profesion`
 --
-
+DROP TABLE IF EXISTS profesion;
 CREATE TABLE IF NOT EXISTS `profesion` (
   `id_profesion` int(5) NOT NULL AUTO_INCREMENT,
   `state_profesion` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -822,7 +747,7 @@ CREATE TABLE IF NOT EXISTS `profesion` (
 --
 -- Estructura de tabla para la tabla `respuestaejercicio`
 --
-
+DROP TABLE IF EXISTS respuestaejercicio;
 CREATE TABLE IF NOT EXISTS `respuestaejercicio` (
   `idRespuestaEjercicio` int(11) NOT NULL,
   `respuesta_ejercicio` varchar(45) NOT NULL,
@@ -839,6 +764,7 @@ CREATE TABLE IF NOT EXISTS `respuestaejercicio` (
 -- Estructura de tabla para la tabla `respuestas_evaluado`
 --
 
+DROP TABLE IF EXISTS respuestas_evaluado;
 CREATE TABLE IF NOT EXISTS `respuestas_evaluado` (
   `ejercicios_id_ejercicio` int(11) NOT NULL,
   `evalucacion_integrante_id_evaluacion` int(11) NOT NULL,
@@ -858,6 +784,7 @@ CREATE TABLE IF NOT EXISTS `respuestas_evaluado` (
 -- Estructura de tabla para la tabla `talleres`
 --
 
+DROP TABLE IF EXISTS talleres;
 CREATE TABLE IF NOT EXISTS `talleres` (
   `idtalleres` int(11) NOT NULL AUTO_INCREMENT,
   `state_taller` enum('active','inactive') NOT NULL,
@@ -883,6 +810,7 @@ INSERT INTO `talleres` (`idtalleres`, `state_taller`, `id_materia`, `id_curso`, 
 -- Estructura de tabla para la tabla `tema`
 --
 
+DROP TABLE IF EXISTS tema;
 CREATE TABLE IF NOT EXISTS `tema` (
   `idtema` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -897,6 +825,7 @@ CREATE TABLE IF NOT EXISTS `tema` (
 -- Estructura de tabla para la tabla `tema_contenidos`
 --
 
+DROP TABLE IF EXISTS tema_contenidos;
 CREATE TABLE IF NOT EXISTS `tema_contenidos` (
   `tema_idtema` int(11) NOT NULL,
   `contenidos_id` int(11) NOT NULL,
@@ -911,6 +840,7 @@ CREATE TABLE IF NOT EXISTS `tema_contenidos` (
 -- Estructura de tabla para la tabla `tema_evaluaciones`
 --
 
+DROP TABLE IF EXISTS tema_evaluaciones;
 CREATE TABLE IF NOT EXISTS `tema_evaluaciones` (
   `tema_idtema` int(11) NOT NULL,
   `evaluaciones_id` int(11) NOT NULL,
@@ -925,6 +855,7 @@ CREATE TABLE IF NOT EXISTS `tema_evaluaciones` (
 -- Estructura de tabla para la tabla `tema_talleres`
 --
 
+DROP TABLE IF EXISTS tema_talleres;
 CREATE TABLE IF NOT EXISTS `tema_talleres` (
   `tema_idtema` int(11) NOT NULL,
   `talleres_idtalleres` int(11) NOT NULL,
@@ -939,6 +870,7 @@ CREATE TABLE IF NOT EXISTS `tema_talleres` (
 -- Estructura de tabla para la tabla `universidad`
 --
 
+DROP TABLE IF EXISTS universidad;
 CREATE TABLE IF NOT EXISTS `universidad` (
   `id_universidad` int(5) NOT NULL AUTO_INCREMENT,
   `state_universidad` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -946,34 +878,7 @@ CREATE TABLE IF NOT EXISTS `universidad` (
   PRIMARY KEY (`id_universidad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `state_usuario` enum('active','inactive','not_confirmed','not_confirmed_admin','recover_password') NOT NULL DEFAULT 'active',
-  `nombre` varchar(30) NOT NULL,
-  `apellido1` varchar(30) NOT NULL,
-  `apellido2` varchar(30) DEFAULT NULL,
-  `contrasena` varchar(40) DEFAULT NULL,
-  `telefono` int(15) NOT NULL,
-  `celular` varchar(20) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuario`, `state_usuario`, `nombre`, `apellido1`, `apellido2`, `contrasena`, `telefono`, `celular`, `correo`) VALUES
-(1, 'active', 'oscar', 'mesa', NULL, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 5804661, '3012280744', 'oscarmesa.elpoli@gmail.com'),
-(2, 'inactive', 'Diego', 'Ochoa', NULL, '9a98af001a57b6a9f8013ae51acf8ac2a05b5cd8', 5804661, '3012280744', 'diego8525@gmail.com'),
-(3, 'active', 'ffsd', 'apellido1', NULL, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0, '0', 'diego8525@hotmail.com'),
-(8, 'recover_password', 'oscar', '', NULL, '670882072561d9166a468c4df18d4d42798a469a', 0, '', 'oscar@nettic.com.co');
 
 -- --------------------------------------------------------
 
@@ -981,6 +886,7 @@ INSERT INTO `usuarios` (`id_usuario`, `state_usuario`, `nombre`, `apellido1`, `a
 -- Estructura de tabla para la tabla `usuarios_contenidos`
 --
 
+DROP TABLE IF EXISTS usuarios_contenidos;
 CREATE TABLE IF NOT EXISTS `usuarios_contenidos` (
   `usuarios_id_usuario` int(11) NOT NULL,
   `contenidos_id` int(11) NOT NULL,
@@ -989,40 +895,10 @@ CREATE TABLE IF NOT EXISTS `usuarios_contenidos` (
   KEY `fk_usuarios_has_contenidos_usuarios1_idx` (`usuarios_id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios_perfiles`
---
-
-CREATE TABLE IF NOT EXISTS `usuarios_perfiles` (
-  `usuarios_id_usuario` int(11) NOT NULL,
-  `perfiles_id_perfil` int(11) NOT NULL,
-  `state_up` enum('active','inactive') NOT NULL,
-  PRIMARY KEY (`usuarios_id_usuario`,`perfiles_id_perfil`),
-  KEY `fk_usuarios_has_perfiles_perfiles1_idx` (`perfiles_id_perfil`),
-  KEY `fk_usuarios_has_perfiles_usuarios1_idx` (`usuarios_id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuarios_perfiles`
---
-
-INSERT INTO `usuarios_perfiles` (`usuarios_id_usuario`, `perfiles_id_perfil`, `state_up`) VALUES
-(1, 4, 'active'),
-(1, 5, 'active'),
-(1, 6, 'active'),
-(2, 4, 'active'),
-(2, 5, 'active'),
-(2, 6, 'active'),
-(8, 4, 'active');
-
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `usuarios_profesion`
 --
-
+DROP TABLE IF EXISTS usuarios_profesion;
 CREATE TABLE IF NOT EXISTS `usuarios_profesion` (
   `id_usuario` int(11) NOT NULL,
   `Profesion_id_profesion` int(5) NOT NULL,
@@ -1037,6 +913,7 @@ CREATE TABLE IF NOT EXISTS `usuarios_profesion` (
 -- Estructura de tabla para la tabla `usuario_universidades`
 --
 
+DROP TABLE IF EXISTS usuario_universidades;
 CREATE TABLE IF NOT EXISTS `usuario_universidades` (
   `id_usuario` int(11) NOT NULL,
   `state_uu` enum('active','inactive') NOT NULL DEFAULT 'active',
@@ -1061,7 +938,7 @@ ALTER TABLE `contenidos_talleres`
 -- Filtros para la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  ADD CONSTRAINT `cursos_ibfk_1` FOREIGN KEY (`id_docente`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `cursos_ibfk_1` FOREIGN KEY (`id_docente`) REFERENCES `math_user` (`iduser`),
   ADD CONSTRAINT `cursos_ibfk_2` FOREIGN KEY (`idmateria`) REFERENCES `materias` (`idmaterias`);
 
 --
@@ -1093,13 +970,6 @@ ALTER TABLE `math_fieldvalue`
   ADD CONSTRAINT `fk_math_fieldvalue_math_user1` FOREIGN KEY (`iduser`) REFERENCES `math_user` (`iduser`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `permisos_perfil`
---
-ALTER TABLE `permisos_perfil`
-  ADD CONSTRAINT `permisos_perfil_ibfk_1` FOREIGN KEY (`perfiles_id`) REFERENCES `perfiles` (`id_perfil`),
-  ADD CONSTRAINT `permisos_perfil_ibfk_2` FOREIGN KEY (`permisos_id`) REFERENCES `permisos` (`id`);
-
---
 -- Filtros para la tabla `talleres`
 --
 ALTER TABLE `talleres`
@@ -1110,14 +980,14 @@ ALTER TABLE `talleres`
 -- Filtros para la tabla `usuarios_perfiles`
 --
 ALTER TABLE `usuarios_perfiles`
-  ADD CONSTRAINT `usuarios_perfiles_ibfk_1` FOREIGN KEY (`usuarios_id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuarios_perfiles_ibfk_1` FOREIGN KEY (`usuarios_id_usuario`) REFERENCES `math_user` (`iduser`) ON UPDATE CASCADE,
   ADD CONSTRAINT `usuarios_perfiles_ibfk_2` FOREIGN KEY (`perfiles_id_perfil`) REFERENCES `perfiles` (`id_perfil`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario_universidades`
 --
 ALTER TABLE `usuario_universidades`
-  ADD CONSTRAINT `usuario_universidades_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `usuario_universidades_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `math_user` (`iduser`),
   ADD CONSTRAINT `usuario_universidades_ibfk_2` FOREIGN KEY (`universidades_id`) REFERENCES `universidad` (`id_universidad`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

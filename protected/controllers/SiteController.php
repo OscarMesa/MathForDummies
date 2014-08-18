@@ -136,7 +136,6 @@ class SiteController extends Controller {
 
         $this->render('application.views.usuarios.login', array(
             'model' => $model,
-            'perfiles' => Perfiles::model()->findAll()
         ));
     }
 
@@ -151,7 +150,6 @@ class SiteController extends Controller {
 
     public function actionAjaxRegistro() {
         $this->renderPartial('application.views.usuarios._formRegistro', array(
-            'modelPerfil' => Perfiles::model()->findAll(),
             'modelRegistro' => new Usuarios()
         ));
         exit();
