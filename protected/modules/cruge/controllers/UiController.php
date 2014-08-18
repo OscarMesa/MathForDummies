@@ -162,7 +162,6 @@ class UiController extends Controller
             }
         }
         return $model;
-        //$this->render('login', array('model' => $model));
     }
 
     public function actionPwdRec()

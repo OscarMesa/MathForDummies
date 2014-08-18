@@ -50,7 +50,7 @@ class UsuariosController extends Controller {
 
             $this->redirect(Yii::app()->getBaseUrl(true) . '/cursos/curso');
         } else {
-            $this->redirect('site/login');
+            $this->redirect(Yii::app()->getBaseUrl(true).'/site/login');
         }
     }
 
