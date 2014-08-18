@@ -172,7 +172,7 @@ class UiController extends Controller
         
         Yii::app()->user->setFlash('pwdrecflash', null);
 
-        if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
+        if(isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
             if ($model->validate()) {
                 //$newPwd = CrugeUtil::passwordGenerator();

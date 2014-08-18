@@ -451,5 +451,21 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
             ),
         ));
 	}
+        
+        public function setPerfiles($perfiles)
+        {
+            foreach ($perfiles as $key => $perfil) {
+                $p = new MathAuthassignment();
+                $p->userid = $this->iduser;
+                $p->bizrule = null;
+                $p->data = "N;";
+                $p->itemname = $perfil;
+                if(!$p->save()){
+                    if(YII_DEBUG){
+                        print_r($p->errors);die;
+                    }
+                }
+            }
+        }
 
 }

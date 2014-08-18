@@ -23,8 +23,9 @@ echo $form->passwordFieldRow($modelRegistro, 'passConfirm', array('class' => 'sp
 
 echo $form->textFieldRow($modelRegistro, 'email', array('class' => 'span3'));
 
-$model_perfil_v = new MathAuthassignment();
-echo $form->dropDownListRow($model_perfil_v, 'itemname', CHtml::listData(MathAuthassignment::model()->findAll("itemname NOT IN('invitados')"), 'itemname', 'itemname'));
+$model_perfil_v = new MathAuthitem();
+
+echo $form->dropDownListRow($model_perfil_v, 'name', CHtml::listData(MathAuthitem::model()->findAll("name NOT IN('invitados') AND type = 2"), 'name', 'name'), array('empty'=>'Perfil'));
 echo"<br>";
 $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Guardar Registro'));
 
