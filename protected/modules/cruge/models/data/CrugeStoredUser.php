@@ -24,8 +24,7 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
     public $deleteConfirmation; // required on 'delete'
     public $newPassword; // declararlo 'safe'
     public $passConfirm;
-    public $EReCaptcha;
-
+    
     // terminos y condiciones, caso registration,
     public $terminosYCondiciones;
     public $verifyCode;
@@ -256,11 +255,10 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
             array(
                 'username',
                 'match',
-                'pattern' => '/^[a-zA-Z0-9\_\-\.]{3,45}$/'
-            ,
-                'message' => CrugeTranslator::t('logon', 'Invalid username')
+                'pattern' => '/^[a-zA-Z0-9\_\-\.]{3,45}$/',
+                'message' => CrugeTranslator::t('logon', 'Invalid username'),
             ),
-            array('username,email,password', 'required'),
+            array('username,email,password', 'required','on' => 'insert,update'),
             array('newPassword', 'safe', 'on' => 'update'),
             array('newPassword', 'required', 'on' => 'insert, manualcreate'),
             array('newPassword', 'length', 'min' => 6, 'max' => 20),
@@ -314,10 +312,6 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
                 'allowEmpty' => true,
                 'message' => CrugeTranslator::t('logon', 'Security code is invalid'),
             ),
-            array('EReCaptcha', 
-               'application.extensions.recaptcha.EReCaptchaValidator', 
-               'privateKey'=>'6LfyGPESAAAAABH6_bGhXXQ6vst0atD6wUn5rb_C ',
-                'on' => 'registerwcaptcha'),
             array('passConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'on'=>array('cambiopassword')),
             array('iduser, username, email, state, logondate', 'safe', 'on' => 'search'),
 
@@ -387,19 +381,18 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
     {
         return array(
             'idusuario' => ucfirst(CrugeTranslator::t('usuario#')),
-            'username' => ucfirst(CrugeTranslator::t('Nombre de usuario')),
-            'email' => ucfirst(CrugeTranslator::t('Correo')),
-            'password' => ucfirst(CrugeTranslator::t('Contraseña')),
-            'passConfirm' => ucfirst(CrugeTranslator::t('Confirmar contraseña')),
-            'authkey' => ucfirst(CrugeTranslator::t('llave de autenticacion')),
-            'state' => ucfirst(CrugeTranslator::t('estado de la cuenta')),
-            'newPassword' => ucfirst(CrugeTranslator::t('Contraseña')),
-            'deleteConfirmation' => ucfirst(CrugeTranslator::t('confirmar eliminacion')),
-            'regdate' => ucfirst(CrugeTranslator::t('registrado')),
-            'actdate' => ucfirst(CrugeTranslator::t('activado')),
-            'logondate' => ucfirst(CrugeTranslator::t('ultimo acceso')),
+            'username' => ucfirst(CrugeTranslator::t("logon", 'Username')),
+            'email' => ucfirst(CrugeTranslator::t("logon",'Email')),
+            'password' => ucfirst(CrugeTranslator::t("logon",'Contraseña')),
+            'passConfirm' => ucfirst(CrugeTranslator::t("logon",'Confirmar contraseña')),
+            'authkey' => ucfirst(CrugeTranslator::t("logon",'llave de autenticacion')),
+            'state' => ucfirst(CrugeTranslator::t("logon",'estado de la cuenta')),
+            'newPassword' => ucfirst(CrugeTranslator::t("logon",'Contraseña')),
+            'deleteConfirmation' => ucfirst(CrugeTranslator::t("logon",'confirmar eliminacion')),
+            'regdate' => ucfirst(CrugeTranslator::t("logon",'registrado')),
+            'actdate' => ucfirst(CrugeTranslator::t("logon",'activado')),
+            'logondate' => ucfirst(CrugeTranslator::t("logon",'ultimo acceso')),
             'terminosYCondiciones' => ucfirst(CrugeTranslator::t('comprendo y acepto, por favor registrarme')),
-            'EReCaptcha' => ucfirst(CrugeTranslator::t('Introduce código de verificación:')),
         );
     }
 
@@ -451,21 +444,4 @@ class CrugeStoredUser extends CActiveRecord implements ICrugeStoredUser
             ),
         ));
 	}
-        
-        public function setPerfiles($perfiles)
-        {
-            foreach ($perfiles as $key => $perfil) {
-                $p = new MathAuthassignment();
-                $p->userid = $this->iduser;
-                $p->bizrule = null;
-                $p->data = "N;";
-                $p->itemname = $perfil;
-                if(!$p->save()){
-                    if(YII_DEBUG){
-                        print_r($p->errors);die;
-                    }
-                }
-            }
-        }
-
 }

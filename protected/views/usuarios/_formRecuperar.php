@@ -26,7 +26,7 @@ $this->widget('ext.recaptcha.EReCaptcha', array(
         'class' => 'span3'
 )))
 ?>
-<?php echo $form->error($modelRegistro, 'EReCaptcha', array('id' => 'Usuarios_validacion_em_')); ?>
+<?php echo $form->error($modelRegistro, 'EReCaptcha', array('id' => 'MathUser_EReCaptcha_em_')); ?>
 
 
 <?php

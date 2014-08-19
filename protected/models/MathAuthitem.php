@@ -63,8 +63,8 @@ class MathAuthitem extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'name' => 'Name',
-			'type' => 'Type',
+			'name' => 'Perfil',
+			'type' => 'Tipo',
 			'description' => 'Description',
 			'bizrule' => 'Bizrule',
 			'data' => 'Data',

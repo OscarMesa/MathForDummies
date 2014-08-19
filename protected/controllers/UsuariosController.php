@@ -105,13 +105,14 @@ class UsuariosController extends Controller {
 
     public function actionCambioPassword() {
         if (isset($_GET['hash']) && isset($_GET['id']) && sha1('PoliAuLinkServer') == $_GET['hash']) {
-            $usuario = Usuarios::model()->findByPk($_GET['id'], 'state_usuario="recover_password"');
+            $usuario = MathUser::model()->find("iduser = ? AND state=?",array($_GET['id'],CRUGEUSERSTATE_RECOVERPASSWORD));
             if (count($usuario) > 0) {
                 $usuario->scenario = 'cambiopassword';
+                $usuario->password = "";
                 $this->render("nuevoPassword", array('model' => $usuario));
             } else {
                 $user = Yii::app()->getComponent('user');
-                $user->setFlash(
+                Yii::app()->user->setFlash(
                         'error', "<strong>Error!</strong> Este usuario no tiene solicitudes para cambio de contraseña o posiblemente no exista."
                 );
                 $this->render('application.views.site.error');
@@ -126,42 +127,45 @@ class UsuariosController extends Controller {
     }
 
     public function actionGuardarCambioNuevoPassword() {
-        $model = new Usuarios();
-        $model->scenario = 'cambiopassword';
-        if (isset($_POST['Usuarios'])) {
-            $model->attributes = $_POST['Usuarios'];
+        $model = new MathUser('cambiopassword');
+        if (isset($_POST['MathUser'])) {
+            $model->attributes = $_POST['MathUser'];
             $this->performAjaxValidation($model);
-            $model = $this->loadModel($_POST['Usuarios']['id_usuario']);
-            $model->contrasena = sha1($_POST['Usuarios']['contrasena']);
-            $model->state_usuario = 'active';
+            $model = $this->loadModel($_POST['MathUser']['iduser']);
+            $model->password = sha1($_POST['MathUser']['password']);
+            $model->state = CRUGEUSERSTATE_ACTIVATED;
             if ($model->update()) {
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
                         'success', "<strong>Exito!</strong> El cambio se realizo exitosamente."
                 );
                 $this->redirect(Yii::app()->getBaseUrl(true));
+            }else{
+                if(YII_DEBUG){
+                    print_r($model->errors);die;
+                }
             }
         }
         $this->render('nuevoPassword', array('model' => $model));
     }
 
     public function actionRecuperarPassword() {
-        $usuario = new Usuarios();
-        $usuario->scenario = 'registerwcaptcha';
+        $usuario = new MathUser('registerwcaptcha');
 
-        if (isset($_POST['Usuarios'])) {
-            $usuario->attributes = $_POST['Usuarios'];
+        if (isset($_POST['MathUser'])) {
+            $usuario->attributes = $_POST['MathUser'];
+          //  print_r($_POST);die;
             $this->performAjaxValidation($usuario);
             //print_r($_POST);
-            $u = $usuario->find('correo=?', array($usuario->correo));
+            $u = $usuario->find('email=?', array($usuario->email));
 
             $this->enviarMailRecuperacionUsuario($u);
-            $u->state_usuario = 'recover_password';
+            $u->state = CRUGEUSERSTATE_RECOVERPASSWORD;
             $u->update();
             $user = Yii::app()->getComponent('user');
-            $user->setFlash(
-                    'success', "<strong>Exito!</strong> Se ha enviado un correo con la informacón para realizar este cambío."
-            );
+            Yii::app()->user->setFlash(
+                        'success', "<strong>Exito!</strong> Se ha enviado un correo con la informacón para realizar este cambío."
+                );
             $this->redirect(Yii::app()->getBaseUrl(true));
         }
     }
@@ -204,23 +208,21 @@ class UsuariosController extends Controller {
     }
 
     public function actionCreateAnonimo() {
-        $model = new CrugessStoredUser();
-        echo '<pre>';
-        print_r($_POST);die;
+        $model = new MathUser();
         // Uncomment the following line if AJAX validation is needed
-        if (isset($_POST['CrugeStoredUser'])) {
+        if (isset($_POST['MathAuthitem'])) {
             $model->scenario = 'createanonimo';
+//
+//            $model->password = $_POST['Usuarios']['contrasena'];
+//            $model->passConfirm = $_POST['Usuarios']['passConfirm'];
 
-            $model->password = $_POST['Usuarios']['contrasena'];
-            $model->passConfirm = $_POST['Usuarios']['passConfirm'];
-
+            $model->attributes = $_POST['MathUser'];
+  
             $this->performAjaxValidation($model);
 
-            $model->attributes = $_POST['CrugeStoredUser'];
-
-            $model->state = CRUGEUSERSTATE_NOTCONFIRMATE;
+            $model->state = CRUGEUSERSTATE_NOTCONFIRMATE;          
             if ($model->save()) {
-                $model->setPerfiles(array($_POST['MathAuthassignment']['name']));
+                $model->setPerfiles(array($_POST['MathAuthitem']['name']));
                 $this->EnviarMailNuevoUsuario($model);
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
@@ -228,8 +230,8 @@ class UsuariosController extends Controller {
                 );
                 $this->redirect(array('site/login'));
             } else {
-                $model->contrasena = '';
                 $model->passConfirm = '';
+                $model->password = '';
             }
         }
         print_r($model->errors);
@@ -248,7 +250,7 @@ class UsuariosController extends Controller {
         $params = array('usuario' => $usuario);
         $message->subject = 'Recuperar contraseña';
         $message->setBody($params, 'text/html');
-        $message->addTo($usuario->correo);
+        $message->addTo($usuario->email);
         $message->from = 'admin@poliAuLink.edu.co';
         Yii::app()->mail->send($message);
     }
@@ -273,7 +275,7 @@ class UsuariosController extends Controller {
 
     /**
      * 
-     * @param Usuarios $usuario
+     * @param MathUser $usuario
      */
     public function EnviarMailNuevoUsuario($usuario) {
         Yii::import('ext.yii-mail.YiiMailMessage');
@@ -281,10 +283,10 @@ class UsuariosController extends Controller {
         //this points to the file test.php inside the view path
         $message->view = "nuevoUsuario";
         $sid = 1;
-        $params = array('usuario' => $usuario);
+        $params = array('usuario' => $usuario,);
         $message->subject = 'Registro exitoso';
         $message->setBody($params, 'text/html');
-        $message->addTo($usuario->correo);
+        $message->addTo($usuario->email);
         $message->from = 'admin@poliAuLink.edu.co';
         Yii::app()->mail->send($message);
     }
@@ -412,7 +414,7 @@ class UsuariosController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = Usuarios::model()->findByPk($id);
+        $model = MathUser::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

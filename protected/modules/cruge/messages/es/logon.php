@@ -15,8 +15,9 @@ return array(
     'or' => 'o',
     'Lost Password?' => 'Recuperar Clave',
     'Register' => 'Registrarse',
-    'Username' => 'Usuario',
-    //'Email' => 'Email'
+    'Username' => 'Nombre de usuario',
+    'Email' => 'Correo',
+    'Enter verification code:' => 'Introduce código de verificación:',
     'Invalid username' => 'Nombre de usuario inválido',
     'Password may contain numbers or symbols ({symbols}) and between {min} and {max} characters' => 'La clave sólo puede tener dígitos, letras o los símbolos {symbols} con longitud entre {min} y {max} caracteres',
     'Please, confirm checking the checkbox' => 'Por favor, confirme con la casilla de chequeo',
