@@ -64,7 +64,7 @@ html
   </table>
   <table width="580" height="40" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="300"><p style="text-align:left; font-size: 20px; color: #000000; line-height:10px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>Hola, <?php echo $usuario->nombre; ?></strong><br/>
+    <td width="300"><p style="text-align:left; font-size: 20px; color: #000000; line-height:10px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>Hola, <?php echo $usuario->username; ?></strong><br/>
       </p></td>
     <td align="right">
     <table width="280"  align="center" border="0" cellspacing="0" cellpadding="0">
@@ -83,16 +83,16 @@ html
       <tr>
           <td>
               <b>Estos son algunos de sus datos registrados:</b><br/>
-              <b>Nombre: </b><?php echo $usuario->nombre;?><br/>
-              <b>Correo: </b><?php echo $usuario->correo;?><br/>
-              <b>Perfil: </b><?php $perfil = $usuario->getRandomPerfil(); echo ($perfil==null?'Usten aun no tiene un pefil asignado':$perfil->nombre);?>
+              <b>Nombre: </b><?php echo $usuario->username ;?><br/>
+              <b>Correo: </b><?php echo $usuario->email;?><br/>
+              <b>Perfil: </b><?php $perfil = $usuario->getPerfil(); echo (count($perfil)==0?'Usten aun no tiene un pefil asignado':$perfil[0]->name);?>
           </td>
       </tr>    
       <tr>
-          <?php if(!$activo){?>
+          <?php if($usuario->state == CRUGEUSERSTATE_NOTCONFIRMATE){?>
           <td>
               <p><span>Dirijace al siguiente link para finalizar la activación de su cuenta.</span></p> <br/>
-              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/activarUsuario?id='.$usuario->id_usuario.'&hash='.  sha1('PoliAuLinkServer');?>">Click aqui</a>
+              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/activarUsuario?id='.$usuario->iduser.'&hash='.  sha1('PoliAuLinkServer');?>">Click aqui</a>
        
           </td>
           <?php }?>

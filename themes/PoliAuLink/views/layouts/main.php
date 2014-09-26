@@ -8,7 +8,7 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>
-        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.tools.min.js"></script>
+<!--        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.tools.min.js"></script>-->
     </head>
 
     <body>
@@ -66,40 +66,30 @@
             </div>
             <div id="panel_central">
                 <div id="menu">
-                    <?php 
-                                if(isset(Yii::app()->user->__perfiles) && Yii::app()->user->esProfesor())
-                                {
-                    
-                    ?>
-                    <div id="op" class='activo'><a href="<?php echo Yii::app()->getBaseUrl(true)?>/cursos/admin">Curso</a></div>
-                    <div id="op"><a href="<?php echo Yii::app()->getBaseUrl(true)?>/talleres/admin">Talleres</a></div>
-                    <div id="op">Ejercicios</div>
-                    <div id="op">Multimedia</div>
-                    <div id="op">Evaluaciones</div>
-                                <?php } ?>
+                    <?php
+                    if (isset(Yii::app()->user->__perfiles) && Yii::app()->user->esProfesor()) {
+                        ?>
+                        <div id="op" class='activo'><a href="<?php echo Yii::app()->getBaseUrl(true) ?>/cursos/admin">Curso</a></div>
+                        <div id="op"><a href="<?php echo Yii::app()->getBaseUrl(true) ?>/talleres/admin">Talleres</a></div>
+                        <div id="op">Ejercicios</div>
+                        <div id="op">Multimedia</div>
+                        <div id="op">Evaluaciones</div>
+<?php } ?>
                 </div>
                 <div id="form">
                     <div  class="grid_16">
-                        <?php
-                        
-                        $this->widget('bootstrap.widgets.TbAlert', array(
-                            'block' => true,
-                            'fade' => true,
-                            'closeText' => '&times;', // false equals no close link
-                            'events' => array(),
-                            'htmlOptions' => array(),
-                            'userComponentId' => 'user',
-                            'alerts' => array(// configurations per alert type
-                                // success, info, warning, error or danger
-                                'success' => array('closeText' => '&times;'),
-                                'info', // you don't need to specify full config
-                                'warning' => array('block' => false, 'closeText' => false),
-                                'error' => array('block' => false, 'closeText' => 'AAARGHH!!')
+                       <?php $this->widget('bootstrap.widgets.TbAlert', array(
+                            'block'=>true, // display a larger alert block?
+                            'fade'=>true, // use transitions?
+                            'closeText'=>'&times;', // close link text - if set to false, no close link is displayed
+                            'alerts'=>array( // configurations per alert type
+                                'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
+                                'error'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
+                                'info'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
+                                'warning'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
+                                'danger'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
                             ),
-                        ));
-                        ?>
-
-
+                        )); ?>
                         <?php echo $content; ?>
                     </div>
                 </div>
@@ -116,22 +106,24 @@
 
 
 
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Administrar Usuarios'
-					, 'url'=>Yii::app()->user->ui->userManagementAdminUrl
-					, 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Login'
-					, 'url'=>Yii::app()->user->ui->loginUrl
-					, 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')'
-					, 'url'=>Yii::app()->user->ui->logoutUrl
-					, 'visible'=>!Yii::app()->user->isGuest),
-			),
-		)); ?>
+<?php
+$this->widget('zii.widgets.CMenu', array(
+    'items' => array(
+        array('label' => 'Home', 'url' => array('/site/index')),
+        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+        array('label' => 'Contact', 'url' => array('/site/contact')),
+        array('label' => 'Administrar Usuarios'
+            , 'url' => Yii::app()->user->ui->userManagementAdminUrl
+            , 'visible' => !Yii::app()->user->isGuest),
+        array('label' => 'Login'
+            , 'url' => Yii::app()->user->ui->loginUrl
+            , 'visible' => Yii::app()->user->isGuest),
+        array('label' => 'Logout (' . Yii::app()->user->name . ')'
+            , 'url' => Yii::app()->user->ui->logoutUrl
+            , 'visible' => !Yii::app()->user->isGuest),
+    ),
+));
+?>
 
 
- <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
+<?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
