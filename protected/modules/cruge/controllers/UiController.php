@@ -137,8 +137,9 @@ class UiController extends Controller
 //        print_r($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']]);
 //        exit();
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
-            echo '<pre>';
+
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
+            
             if ($model->validate()) {
                 //print_r($model);exit();
                 if ($model->login(false) == true) {

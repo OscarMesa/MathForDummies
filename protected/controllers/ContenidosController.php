@@ -74,6 +74,7 @@ class ContenidosController extends Controller {
         if (isset($_POST['Contenidos'])) {
             $model->attributes = $_POST['Contenidos'];
             $model->almacenado_total = TRUE;
+            
 //            exit();
             if ($model->save()){
                 if(isset($_POST['idTaller']))

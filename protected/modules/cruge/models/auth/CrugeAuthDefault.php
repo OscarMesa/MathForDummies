@@ -71,14 +71,14 @@ class CrugeAuthDefault extends CBaseUserIdentity implements ICrugeAuth
             __METHOD__ . ' ' . CrugeTranslator::t('logger', 'Returned User') . ":\n" . CJSON::encode($model),
             "info"
         );
-
+        
         $this->_userinstance = null;
         if ($model != null) {
             if ($model->password == $this->_getPwd()) {
                 $this->_userinstance = $model;
                 $this->errorCode = self::ERROR_NONE;
             } else {
-                if (CrugeUtil::config()->debug == true) {
+                if (YII_DEBUG == true) {
                     // ayuda a instalar, quiza el usuario olvide quitar la encriptacion de claves
                     // y reciba error de ERROR_PASSWORD_INVALID, es porque esta actuando el Hash
                     // y el usuario recien creado trae una clave no encritpada
