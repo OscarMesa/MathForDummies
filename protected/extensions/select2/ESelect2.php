@@ -35,7 +35,7 @@ class ESelect2 extends CInputWidget
     public function init()
     {
         $this->defaultOptions = array(
-            'formatNoMatches' => 'js:function(){return "' . Yii::t('ESelect2.select2', 'No se han encontrado coincidencias') . '";}',
+            'formatNoMatches' => 'js:function(){return "' . Yii::t('ESelect2.select2', 'No matches found') . '";}',
             'formatInputTooShort' => 'js:function(input,min){return "' . Yii::t('ESelect2.select2', 'Please enter {chars} more characters', array('{chars}' => '"+(min-input.length)+"')) . '";}',
 			'formatInputTooLong' => 'js:function(input,max){return "' . Yii::t('ESelect2.select2', 'Please enter {chars} less characters', array('{chars}' => '"+(input.length-max)+"')) . '";}',
             'formatSelectionTooBig' => 'js:function(limit){return "' . Yii::t('ESelect2.select2', 'You can only select {count} items', array('{count}' => '"+limit+"')) . '";}',

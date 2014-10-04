@@ -14,7 +14,7 @@
  */
 class MathUser extends CrugeStoredUser {
 
-    public $nameperfil;
+    public $nameperfil; 
     public $EReCaptcha;
 
     public function tableName() {
@@ -24,25 +24,24 @@ class MathUser extends CrugeStoredUser {
     public function rules() {
         $rules = parent::rules();
         $rules[] = array('nameperfil', 'required', 'on' => 'createanonimo');
-        $rules[] = array('password', 'required','on' => 'cambiopassword');
+        $rules[] = array('password', 'required', 'on' => 'cambiopassword');
         $rules[] = array('email', 'validate_exists', 'on' => 'registerwcaptcha');
         $rules[] = array('email', 'required');
         $rules[] = array('username,email', 'validate_unique', 'on' => 'createanonimo');
         $rules[] = array('passConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Tu contraseña y la contraseña de confirmación deben coincidir', 'on' => array('createanonimo'));
-        $rules[] = array('EReCaptcha', 
-               'application.extensions.recaptcha.EReCaptchaValidator', 
-               'privateKey'=>'6LfyGPESAAAAABH6_bGhXXQ6vst0atD6wUn5rb_C ',
-                'on' => 'registerwcaptcha');
+        $rules[] = array('EReCaptcha',
+            'application.extensions.recaptcha.EReCaptchaValidator',
+            'privateKey' => '6LfyGPESAAAAABH6_bGhXXQ6vst0atD6wUn5rb_C ',
+            'on' => 'registerwcaptcha');
         return $rules;
     }
-    
+
     public function validate_exists($att, $params) {
-            $model = self::model()->findByAttributes(array($att => $this[$att]));
-            if ($model == null) {
-                $this->addError($att, "El correo ingresado no existe.");
-                return;
-            }
-        
+        $model = self::model()->findByAttributes(array($att => $this[$att]));
+        if ($model == null) {
+            $this->addError($att, "El correo ingresado no existe.");
+            return;
+        }
     }
 
     public function validate_unique($att, $params) {
@@ -53,7 +52,7 @@ class MathUser extends CrugeStoredUser {
                 $this->addError($att, $duptext);
                 return;
             }
-        }else{
+        } else {
             parent::validate_unique($att, $params);
         }
     }
@@ -109,9 +108,20 @@ class MathUser extends CrugeStoredUser {
     public function setNameperfil($nameperfil) {
         $this->nameperfil = $nameperfil;
     }
-    
-    public static function model($className = __CLASS__)
-    {
+
+    public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+
+    public function beforeSave() {
+        if (parent::beforeSave()) {
+            if($this->scenario == 'createanonimo'){
+                $method = Yii::app()->modules['cruge']['hash'];
+                $this->password = $method($this->password); // if you save dates as INT
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

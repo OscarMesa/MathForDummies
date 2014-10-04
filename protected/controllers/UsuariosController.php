@@ -172,24 +172,24 @@ class UsuariosController extends Controller {
 
     public function actionActivarusuario() {
         if (isset($_GET['hash']) && isset($_GET['id']) && sha1('PoliAuLinkServer') == $_GET['hash']) {
-            $usuario = Usuarios::model()->findByPk($_GET['id'], 'state_usuario="not_confirmed"');
+            $usuario = MathUser::model()->findByPk($_GET['id'], 'state=?',array(CRUGEUSERSTATE_NOTCONFIRMATE));
             if (count($usuario) > 0) {
-                $perfil = $usuario->getRandomPerfil();
+//                $perfil = $usuario->getRandomPerfil();
                 $esDocente = FALSE;
-                if ($perfil->id_perfil == 4) {
-                    $esDocente = TRUE;
-                    $usuario->state_usuario = 'not_confirmed_admin';
-                    $mensaje = '<strong>Confirmación exitoso!</strong> Su cuenta a sido confimada exitosamente, aunque queda a la espera de que el administrador confirme su cuenta.';
-                } else {
+//                if ($perfil->id_perfil == 4) {
+//                    $esDocente = TRUE;
+//                    $usuario->state_usuario = 'not_confirmed_admin';
+//                    $mensaje = '<strong>Confirmación exitoso!</strong> Su cuenta a sido confimada exitosamente, aunque queda a la espera de que el administrador confirme su cuenta.';
+//                } else {
                     $mensaje = "<strong>Confirmación exitoso!</strong> Su cuenta a sido confimada exitosamente.";
-                    $usuario->state_usuario = 'active';
-                }
+                    $usuario->state = CRUGEUSERSTATE_ACTIVATED;
+//                }
                 $usuario->update();
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
                         'success', $mensaje
                 );
-                $this->EnviarMailAdministradores($usuario, $esDocente);
+               // $this->EnviarMailAdministradores($usuario, $esDocente);
                 $this->redirect(array('site/login'));
             } else {
                 $user = Yii::app()->getComponent('user');
@@ -275,7 +275,7 @@ class UsuariosController extends Controller {
 
     /**
      * 
-     * @param MathUser $usuario
+     * @param ICrugeAuth $usuario
      */
     public function EnviarMailNuevoUsuario($usuario) {
         Yii::import('ext.yii-mail.YiiMailMessage');

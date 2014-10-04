@@ -9,7 +9,6 @@
 //echo '</pre>';
 
 
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/themes/PoliAuLink/js/inicio.js');
 
 // Render them all with single `TbAlert`
 

@@ -12,9 +12,7 @@ class ContenidosController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
+        return array('accessControl',array('CrugeAccessControlFilter'));
     }
 
     /**
@@ -23,28 +21,7 @@ class ContenidosController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-        $permisos_profesor = array();
-        if (Yii::app()->user->esProfesor()) {
-            $permisos_profesor = array('create', 'update', 'curso', 'admin', 'delete');
-        } else {
-            $permisos_profesor = array('create', 'update', 'curso');
-        }
-        return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => $permisos_profesor,
-                'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
+         return array(
         );
     }
 
@@ -66,7 +43,9 @@ class ContenidosController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id) {
+        $this->layout = "modal";
+        
         $model = new Contenidos();
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);

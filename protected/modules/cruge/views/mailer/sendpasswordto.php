@@ -85,15 +85,15 @@ html
               <b>Estos son algunos de sus datos registrados:</b><br/>
               <b>Nombre: </b><?php echo $model->username;?><br/>
               <b>Correo: </b><?php echo $model->email;?><br/>
-              <b>Contraseña: </b><?php echo $model->password;?><br/>
           </td>
-      </tr>    
+      </tr>  
       <tr>
-          <?php if(!$activo){?>
+          <?php
+          
+          if($model->state != CRUGEUSERSTATE_ACTIVATED){?>
           <td>
               <p><span>Dirijace al siguiente link para finalizar la activación de su cuenta.</span></p> <br/>
-              <a href="<?php Yii::app()->user->um->getActivationUrl($model);?>">Click aqui</a>
-       
+              <a href="<?php echo Yii::app()->user->um->getActivationUrl($model);?>">Click aqui</a>
           </td>
           <?php }?>
       </tr>

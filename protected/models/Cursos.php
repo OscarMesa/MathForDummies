@@ -12,6 +12,8 @@
  * @property string $descripcion_curso
  * @property string $fecha_inicio
  * @property string $fecha_cierre
+ * @property int $tiene_foro booleano que indica si tiene o no un curso.
+ * @property int $id_grado entero que informa a que grado se vincula el curso.
  */
 
 class Cursos extends CActiveRecord
@@ -32,17 +34,17 @@ class Cursos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idmateria, descripcion_curso, state_curso, nombre_curso,', 'required'),
+			array('idmateria, descripcion_curso, state_curso, nombre_curso,id_grado', 'required'),
                         array('fecha_inicio','required','message'=>'El rango de fecha es necesario.'),
                         array('fecha_inicio','compararFechaFin'),
 			array('idmateria', 'numerical', 'integerOnly'=>true),
 			array('state_curso', 'length', 'max'=>8),
 			array('nombre_curso', 'length', 'max'=>45),
 			array('fecha_inicio', 'safe'),
-			array('fecha_cierre', 'safe'),
+			array('fecha_cierre,tiene_foro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, state_curso, idmateria, nombre_curso, descripcion_curso,fecha_inicio, fecha_cierre', 'safe', 'on'=>'search'),
+			array('id_grado,tiene_foro, id, state_curso, idmateria, nombre_curso, descripcion_curso,fecha_inicio, fecha_cierre', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,8 +56,9 @@ class Cursos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'usuario' => array(self::BELONGS_TO, 'Usuarios', 'id_docente'),
+                    'usuario' => array(self::BELONGS_TO, 'MathUser', 'id_docente'),
                     'materia' => array(self::BELONGS_TO, 'Materias', 'idmateria'),
+                    'grado' => array(self::BELONGS_TO, 'Grado', 'id_grado'),
 		);
 	}
         
@@ -94,6 +97,8 @@ class Cursos extends CActiveRecord
 			'descripcion_curso' => 'Descripcion Curso',
 			'fecha_inicio' => 'Fecha Inicio Curso',
 			'fecha_cierre' => 'Fecha Cierre Curso',
+                        'tiene_foro' => 'Cuenta con foro',
+                        'id_grado' => 'Grado',
 		);
 	}
 
@@ -123,7 +128,9 @@ class Cursos extends CActiveRecord
 		$criteria->compare('descripcion_curso',$this->descripcion_curso,true);
 		$criteria->compare('fecha_inicio',$this->fecha_inicio,true);
 		$criteria->compare('fecha_cierre',$this->fecha_cierre,true);
-
+		$criteria->compare('tiene_foro',$this->tiene_foro,true);
+		$criteria->compare('id_grado',$this->id_grado,true);
+                
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
