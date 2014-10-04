@@ -69,6 +69,10 @@ class CursosController extends Controller {
             'model' => $model,
         ));
     }
+    
+    public function render($view, $data = null, $return = false) {
+        parent::render($view, $data, $return);
+    }
 
     public function actionCurso() {
         $model = new Cursos();
