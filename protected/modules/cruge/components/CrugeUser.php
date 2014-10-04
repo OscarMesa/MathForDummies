@@ -91,7 +91,7 @@ class CrugeUser extends CBaseUserIdentity implements IUserIdentity
             Yii::log(__METHOD__ . "\n_performAuth es true\n", "info");
             return true;
         } else {
-
+            
             switch ($this->errorCode) {
                 case self::ERROR_USERNAME_INVALID:
                     $this->_lastErrorDescr = "usuario o correo invalido";

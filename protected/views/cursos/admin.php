@@ -43,9 +43,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name' => 'id_docente',
-            'filter' => CHtml::listData(Usuarios::model()->findAll(), 'id_usuario', 'nombre'),
+            'filter' => CHtml::listData(MathUser::model()->findAll(), 'id', 'username'),
             'value' => function($data){
-                return $data->usuario->nombre;
+                return $data->usuario->username;
             },
             'htmlOptions' => array('width' => '80px',),
         ),

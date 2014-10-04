@@ -13,6 +13,6 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-        <h1 class="titulos_admin">Modificar contenido <?php echo $model->id; ?></h1>
+        <h1 class="titulos_admin">Modificar contenido</h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model,'contenido'=>$contenido)); ?>

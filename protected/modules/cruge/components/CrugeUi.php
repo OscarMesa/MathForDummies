@@ -318,20 +318,20 @@ class CrugeUi extends CComponent
             ,
                                         'icon'=>'cog',
             ),
-//            array(
-//                'label' => CrugeTranslator::t('admin', 'Tasks')
-//            ,
-//                'url' => $this->getRbacListTasksUrl()
-//            ,
-//                                        'icon'=>'tasks',    
-//            ),
-//            array(
-//                'label' => CrugeTranslator::t('admin', 'Operations')
-//            ,
-//                'url' => $this->getRbacListOpsUrl()
-//             ,
-//                                        'icon'=>'chevron-right',   
-//            ),
+            array(
+                'label' => CrugeTranslator::t('admin', 'Tasks')
+            ,
+                'url' => $this->getRbacListTasksUrl()
+            ,
+                                        'icon'=>'tasks',    
+            ),
+            array(
+                'label' => CrugeTranslator::t('admin', 'Operations')
+            ,
+                'url' => $this->getRbacListOpsUrl()
+             ,
+                                        'icon'=>'chevron-right',   
+            ),
             array(
                 'label' => CrugeTranslator::t('admin', 'Assign Roles to Users')
             ,
@@ -347,13 +347,13 @@ class CrugeUi extends CComponent
                 ,
                                         'icon'=>'wrench',   
             ),
-            array(
+            /*array(
                 'label' => CrugeTranslator::t('admin', 'System Variables')
             ,
                 'url' => $this->getSystemUpdateUrl()
                 ,
                                         'icon'=>'eye-open',    
-            ),
+            ),*/
         );
     }
 
@@ -431,11 +431,11 @@ class CrugeUi extends CComponent
 				,
 					'url' => $this->getSessionAdminUrl()
 				),
-				array(
+				/*array(
 					'label' => CrugeTranslator::t('admin', 'System Variables')
 				,
 					'url' => $this->getSystemUpdateUrl()
-				),
+				),*/
 			)),
         );
     }

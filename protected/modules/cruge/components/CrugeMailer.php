@@ -68,7 +68,7 @@ class CrugeMailer extends CrugeMailerBase implements ICrugeMailer
         return CrugeTranslator::t($text);
     }
 
-    public function sendPasswordTo(ICrugeStoredUser $userInst, $notEncryptedPassword)
+    public function sendPasswordTo(ICrugeStoredUser $userInst, $notEncryptedPassword, $estado = false)
     {
 //        echo '<pre>';
 //        print_r($userInst);
@@ -80,7 +80,7 @@ class CrugeMailer extends CrugeMailerBase implements ICrugeMailer
             $this->render(
                 'sendpasswordto'
                 ,
-                array('model' => $userInst, 'password' => $notEncryptedPassword,'activo'=>true)
+                array('model' => $userInst, 'password' => $notEncryptedPassword,'activo'=>$estado)
             )
         );
     }

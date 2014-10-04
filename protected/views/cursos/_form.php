@@ -17,12 +17,28 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 ?>
 
+<?php if(!$model->isNewRecord){?>
+
 <div id="form_curso">
     <p class="help-block">Los campos con <span class="required">*</span> son queridos.</p>
 
     <?php #echo $form->errorSummary($model); ?>
-    
+
+    <div class="btn-group">
+    <button class="btn dropdown-toggle btn-danger" data-toggle="dropdown">
+        <i class="icon-cog icon-white"></i>
+        Configuración
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#" onclick="AbrirModal('Temas del curso',800,400,'<?php echo Yii::app()->getBaseUrl(true)?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia;?>">Agregar temas</a></li>
+        <li><a href="#" onclick="AbrirModal('Estudiante del curso',800,400,'')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
+    </ul>
+</div>
+<?php } ?>
     <?php echo $form->textFieldRow($model, 'nombre_curso', array('class' => 'span5', 'maxlength' => 45)); ?>
+    
+    <?php echo $form->dropDownListRow($model, 'id_grado', CHtml::listData(Grado::model()->findAll(), 'id_grado', 'desc_verbal'), array('style' => '')) ?>
     
     <?php
     $this->widget('bootstrap.widgets.TbDateRangePicker', array(
@@ -56,9 +72,13 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     ?>
 
     <?php echo $form->dropDownListRow($model, 'idmateria', CHtml::listData(Materias::model()->findAll('state_materia=?', array('active')), 'idmaterias', 'nombre_materia'), array('style' => '')) ?>
-
+    
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
-
+    
+    <?php if(!$model->isNewRecord){?>
+    <?php echo $form->checkBoxRow($model, 'tiene_foro', array());?>
+    <?php } ?>
+   
      <?php echo CHtml::hiddenField('Contenidos[id]', $model->id); ?>
     
     

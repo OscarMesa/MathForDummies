@@ -1,3 +1,53 @@
+ALTER TABLE `tema`
+ADD COLUMN `idperiodo`  int(5) NULL AFTER `idcurso`,
+COMMENT='Mediate este campo podremos saber cual es el periodo al que pertenece el tema que se le esta cargando al curso';
+
+ALTER TABLE `tema` ADD CONSTRAINT `fk_idperiodo` FOREIGN KEY (`idperiodo`) REFERENCES `periodo` (`id_periodo`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+CREATE TABLE `NewTable` (
+`id_periodo`  int(5) NOT NULL AUTO_INCREMENT ,
+`valor_numerico`  int(5) NOT NULL ,
+`valor_textual`  varchar(100) NULL ,
+PRIMARY KEY (`id_periodo`)
+)
+;
+
+
+ALTER TABLE `cursos`
+DROP COLUMN `tiene_foro`,
+ADD COLUMN `tiene_foro`  int(1) NULL AFTER `fecha_cierre`,
+ADD COLUMN `id_grado`  int(5) NOT NULL AFTER `tiene_foro`,
+COMMENT='Campo que vincula el curso a un grado escolar.';
+
+ALTER TABLE `cursos` ADD CONSTRAINT `cursos_fk_grado` FOREIGN KEY (`id_grado`) REFERENCES `grado` (`id_grado`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+
+CREATE TABLE `NewTable` (
+`id_grado`  int(5) NOT NULL AUTO_INCREMENT ,
+`desc_numerica`  int(5) NOT NULL ,
+`desc_verbal`  varchar(100) NOT NULL COMMENT 'Descripcion verbal del grado, por ejemplo: sexto, decimo, once' 
+)
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+
+ALTER TABLE `tema`
+CHANGE COLUMN `idmateria` `idcurso`  int(11) NOT NULL AFTER `descripcion`,
+COMMENT='El campo del curso indica que un tema se asocia solo a un curso en especifico y navegando a traves de la relacion de la materia podremos saber a que materia pertenece un tema en especifico.';
+
+ALTER TABLE `tema` ADD CONSTRAINT `fk_idcurso` FOREIGN KEY (`idcurso`) REFERENCES `cursos` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+ALTER TABLE `cursos`
+ADD COLUMN `tiene_foro`  int(1) NULL DEFAULT 0 AFTER `fecha_cierre`;
+
+
 INSERT DELAYED IGNORE INTO `cursos` (`id`, `state_curso`, `id_docente`, `idmateria`, `nombre_curso`, `descripcion_curso`, `fecha_inicio`, `fecha_cierre`) VALUES
 (1, 'inactive', 1, 1, 'asdf', 'sdf', '2014-03-27', '2014-04-19');
 

@@ -23,9 +23,9 @@
 		<?php echo $form->textField($model,'description',array('size'=>50,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'description'); ?>
 		<?php if($model->categoria  == "tarea") { ?>
-		<div class='hint'>Tip: precede este valor con un ":" para que la tarea sea exportada como un menuitem al usar<br/> <span class='code'>
+<!--		<div class='hint'>Tip: precede este valor con un ":" para que la tarea sea exportada como un menuitem al usar<br/> <span class='code'>
 		Yii::app()->user->rbac->getMenu();</span> y finalizala con un {nombremenuitem} para que quede dentro de un -nombremenuitem-.
-		ejemplo: <span class='code'>":Edita tu Perfil{menuprincipal}"</span></div>
+		ejemplo: <span class='code'>":Edita tu Perfil{menuprincipal}"</span></div>-->
 		<?php } ?>
 	</div>
 <!--	<div class='row'>

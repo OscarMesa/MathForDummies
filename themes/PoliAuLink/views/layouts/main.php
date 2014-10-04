@@ -8,6 +8,7 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>
+        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/app_script.js"></script>
 <!--        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.tools.min.js"></script>-->
     </head>
 
@@ -118,6 +119,12 @@ $this->widget('zii.widgets.CMenu', array(
         array('label' => 'Login'
             , 'url' => Yii::app()->user->ui->loginUrl
             , 'visible' => Yii::app()->user->isGuest),
+        array('label' => 'BackUp'
+            , 'url' => array('/jbackup')
+            , 'visible' => !Yii::app()->user->isGuest),
+        array('label' => 'Grados'
+            , 'url' => array('/grado/admin')
+            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
         array('label' => 'Logout (' . Yii::app()->user->name . ')'
             , 'url' => Yii::app()->user->ui->logoutUrl
             , 'visible' => !Yii::app()->user->isGuest),

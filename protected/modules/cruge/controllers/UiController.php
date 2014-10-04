@@ -137,8 +137,9 @@ class UiController extends Controller
 //        print_r($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']]);
 //        exit();
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
-            echo '<pre>';
+
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
+            
             if ($model->validate()) {
                 //print_r($model);exit();
                 if ($model->login(false) == true) {
@@ -160,6 +161,10 @@ class UiController extends Controller
                     "error"
                 );
             }
+        }else{
+//            echo "<pre>"; print_r();
+            if(get_class(Yii::app()->controller->action->controller) != 'SiteController')
+                $this->redirect (Yii::app()->getBaseUrl (true).'/'.Yii::app()->defaultController);
         }
         return $model;
     }
@@ -258,7 +263,7 @@ class UiController extends Controller
                 if ($newPwd != '') {
                     Yii::log("\n\n***NUEVA CLAVE***\n\n", "info");
                     Yii::app()->user->um->changePassword($model, $newPwd);
-                    Yii::app()->crugemailer->sendPasswordTo($model, $newPwd);
+                   // Yii::app()->crugemailer->sendPasswordTo($model, $newPwd);
                 }
 
                 if (Yii::app()->user->um->save($model, 'update')) {
@@ -1190,7 +1195,6 @@ class UiController extends Controller
     */
     public function actionActivationUrl($key)
     {
-
         $this->layout = CrugeUtil::config()->activateAccountLayout;
 
         $model = Yii::app()->user->um->loadUserByKey($key);

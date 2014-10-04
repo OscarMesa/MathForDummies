@@ -24,7 +24,8 @@ if (Yii::app()->user->isSuperAdmin)
     <table>
       <tr>
         <td width="232">
-            <?php if (Yii::app()->user->checkAccess('admin')) { ?>  
+            <?php      
+            if (Yii::app()->user->checkAccess('admin')) { ?>  
                 <div class="span-5 last" style="margin-left:0px;">
                     <div id="sidebar">
                         <?php
