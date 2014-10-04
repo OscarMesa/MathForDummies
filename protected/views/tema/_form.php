@@ -9,7 +9,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'validateOnType' => false
     ),
         ));
+Yii::app()->clientScript->registerScript('logoFix','$("a.logo").pngFix();');
+
 ?>
+
+
 
 <p class="help-block">Los campos con <span class="required">*</span> son requeridos.</p>
 

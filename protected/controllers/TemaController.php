@@ -66,7 +66,7 @@ class TemaController extends Controller {
         if (isset($_POST['Tema'])) {
             $model->attributes = $_POST['Tema'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->idtema));
+                $this->redirect(array('admin', 'id' => $model->idtema));
         }
         $this->render('create', array(
             'model' => $model,
