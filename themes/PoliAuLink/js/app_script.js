@@ -20,7 +20,7 @@ $(document).on("ready", function() {
             'padding': '0'
         });
         $(this).find('.modal-content').css({
-            height: '100%',
+            height: alto+'px',
             'border-radius': '0',
             'padding': '0'
         });
@@ -31,7 +31,9 @@ $(document).on("ready", function() {
         });
         
         $(".modal-body").css('height', alto+'px');
-
+        $(".modal-content").css('height', alto+'px');
+//        $("#myModal").css('height', ancho+'px');
+        $("#myModal").css('width', ancho+'px');
         $("#myModal").modal({show: true});
         return false;
     }
