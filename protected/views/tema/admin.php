@@ -46,6 +46,7 @@ return false;
 </div><!-- search-form -->
 
 <?php
+    $_SESSION['curso'] = $curso;
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'tema-grid',
     'dataProvider' => $model->search(),
@@ -69,7 +70,22 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => '{update}{delete}',
+            'template' => '{view}{update}{delete}',
+            'buttons' => array( 
+                'view' => array(),
+                'update' => array(
+                    'url' => function($data){
+                        $curso = $_SESSION['curso'];
+                        return Yii::app()->createUrl("tema/update", array("idcurso"=>$curso->id,"id"=>$data->idtema)); 
+                    } 
+                ),
+                'view' => array(
+                    'url' => function($data){
+                        $curso = $_SESSION['curso'];
+                        return Yii::app()->createUrl("tema/view", array("idcurso"=>$curso->id,"id"=>$data->idtema)); 
+                    }
+                ),
+            )
         ),
     ),
 ));

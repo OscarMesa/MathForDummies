@@ -7,5 +7,6 @@
 
 return array(
     'this user has not yet confirmed your account' => 'Este usuario aún no ha confirmado su cuenta.',
-    'this user has requested password change' => 'Este usuario ha solicitado cambio de contraseña.'
+    'this user has requested password change' => 'Este usuario ha solicitado cambio de contraseña.',
+    'the issue was updated successfully'=>  'El tema fue actualizado correctamente'
 );

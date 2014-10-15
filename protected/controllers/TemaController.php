@@ -47,6 +47,7 @@ class TemaController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout ="modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -80,19 +81,24 @@ class TemaController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
+        $this->layout = 'modal';
         $model = $this->loadModel($id);
-
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
         if (isset($_POST['Tema'])) {
             $model->attributes = $_POST['Tema'];
-            if ($model->save())
+            if ($model->save()){
+                $user = Yii::app()->getComponent('user');
+                $user->setFlash(
+                            'success', "<strong>Exito!</strong> ".Yii::t('polimsn', 'the issue was updated successfully')
+                );
                 $this->redirect(array('view', 'id' => $model->idtema));
+            }
         }
 
         $this->render('update', array(
             'model' => $model,
+            'curso' => Cursos::model()->findByPk($_GET['idcurso'])
         ));
     }
 
@@ -132,7 +138,7 @@ class TemaController extends Controller {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Tema']))
             $model->attributes = $_GET['Tema'];
-            $model->idcurso = $id;
+        $model->idcurso = $id;
 
         $this->render('admin', array(
             'model' => $model,
