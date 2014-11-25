@@ -60,29 +60,37 @@
 
 
 <?php
-        $this->widget('bootstrap.widgets.TbNavbar', array(
-            'items' => array(
-                array('label' => 'Inicio', 'url' => array('/site/index')),
-                array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-                array('label' => 'Contact', 'url' => array('/site/contact')),
-                array('label' => 'Administrar Usuarios'
-                    , 'url' => Yii::app()->user->ui->userManagementAdminUrl
-                    , 'visible' => !Yii::app()->user->isGuest),
-                array('label' => 'Login'
-                    , 'url' => Yii::app()->user->ui->loginUrl
-                    , 'visible' => Yii::app()->user->isGuest),
-                array('label' => 'BackUp'
-                    , 'url' => array('/jbackup')
-                    , 'visible' => !Yii::app()->user->isGuest),
-                array('label' => 'Grados'
-                    , 'url' => array('/grado/admin')
-                    , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
-                array('label' => 'Logout('.Yii::app()->user->name.')'
-                    , 'url' => Yii::app()->user->ui->logoutUrl
-                    , 'visible' => !Yii::app()->user->isGuest),
-            ),
-        ));
-
+    $this->widget('bootstrap.widgets.TbNavbar', array(
+          'brand'=>'PoliAuLink',
+          //'brandUrl'=>'#',
+          'fixed' => 'top',
+          'collapse'=>true, // requires bootstrap-responsive.css
+        'items' => array(
+                array(
+                        'class'=>'bootstrap.widgets.TbMenu',
+                        'items' => array(
+                                        array('label' => 'Inicio', 'url' => array('/site/index')),
+                                        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+                                        array('label' => 'Contact', 'url' => array('/site/contact')),
+                                        array('label' => 'Administrar Usuarios'
+                                            , 'url' => Yii::app()->user->ui->userManagementAdminUrl
+                                            , 'visible' => !Yii::app()->user->isGuest),
+                                        array('label' => 'Login'
+                                            , 'url' => Yii::app()->user->ui->loginUrl
+                                            , 'visible' => Yii::app()->user->isGuest),
+                                        array('label' => 'BackUp'
+                                            , 'url' => array('/jbackup')
+                                            , 'visible' => !Yii::app()->user->isGuest),
+                                        array('label' => 'Grados'
+                                            , 'url' => array('/grado/admin')
+                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
+                                        array('label' => 'Logout('.Yii::app()->user->name.')'
+                                            , 'url' => Yii::app()->user->ui->logoutUrl
+                                            , 'visible' => !Yii::app()->user->isGuest),
+                                    ),
+                ),
+        ),
+    ));
 ?>
 
 
