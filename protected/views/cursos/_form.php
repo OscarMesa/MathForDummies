@@ -32,7 +32,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     </button>
     <ul class="dropdown-menu">
         <li><a href="#" onclick="AbrirModal('Temas del curso',600,460,'<?php echo Yii::app()->getBaseUrl(true)?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia;?>">Agregar temas</a></li>
-        <li><a href="#" onclick="AbrirModal('Estudiante del curso',600,460,'')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
+        <li><a href="#" onclick="AbrirModal('Estudiante del curso',600,460,'<?php echo Yii::app()->getBaseUrl(true)?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
     </ul>
 </div>
 <?php } ?>

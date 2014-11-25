@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScript('logoFix','$("a.logo").pngFix();');
 
 <?php echo $form->dropDownListRow($model, 'idperiodo', CHtml::listData(Periodo::model()->findAll(), 'id_periodo', 'valor_textual'), array('options' => array($model->idperiodo => array('selected' => true)))) ?>
 
-<?php echo $form->textAreaRow($model, 'descripcion', array('class' => 'span5', 'maxlength' => 1000)); ?>
+<?php echo $form->textAreaRow($model, 'descripcion', array('class' => 'span5')); ?>
 
 <?php echo CHtml::hiddenField('Tema[idcurso]', $curso->id); ?>
 

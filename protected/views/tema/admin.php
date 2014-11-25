@@ -10,15 +10,17 @@ $this->menu = array(
 );
 
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
-});
-$('.search-form form').submit(function(){
-$.fn.yiiGridView.update('tema-grid', {
-data: $(this).serialize()
-});
-return false;
+    $('.search-button').click(function(){
+    $('.search-form').toggle();
+    return false;
+    });
+    $('.search-form form').submit(function(){
+        var data = $(this).serialize();
+        console.log(data);
+        $.fn.yiiGridView.update('tema-grid', {
+            data: data
+        });
+    return false;
 });
 ");
 ?>
@@ -46,47 +48,95 @@ return false;
 </div><!-- search-form -->
 
 <?php
-    $_SESSION['curso'] = $curso;
+//        print_r($model);
+$dataProvider = $model->search();
+$_SESSION['curso'] = $curso;
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'tema-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
         'idtema',
-        'descripcion',
+        array(
+            'name' => 'descripcion',
+            'value' => function($data) {
+        return Utilidades::limitText($data->descripcion, 60);
+    }
+        ),
         array(
             'name' => 'idcurso',
             'filter' => false,
             'value' => function($data) {
-                return $data->curso->nombre_curso;
-            }
+        return $data->curso->nombre_curso;
+    }
         ),
         array(
             'name' => 'idperiodo',
             'filter' => CHtml::listData(Periodo::model()->findAll(), 'id_periodo', 'valor_numerico'),
             'value' => function($data) {
-                return $data->periodo->valor_textual;
-            }
+        return $data->periodo->valor_textual;
+    }
+        ),
+        array(
+            'name' => 'estado',
+            'filter' => array('active' => 'Activo', 'inactive' => 'Inactivo'),
+            'value' => function($data) {
+        return $data->estado == 'active' ? 'Activo' : 'Inactivo';
+    }
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => '{view}{update}{delete}',
-            'buttons' => array( 
-                'view' => array(),
+            'template' => '{view}{update}{delete}{active}',
+            'buttons' => array(
                 'update' => array(
-                    'url' => function($data){
-                        $curso = $_SESSION['curso'];
-                        return Yii::app()->createUrl("tema/update", array("idcurso"=>$curso->id,"id"=>$data->idtema)); 
-                    } 
+                    'url' => function($data) {
+                $curso = $_SESSION['curso'];
+                return Yii::app()->createUrl("tema/update", array("idcurso" => $curso->id, "id" => $data->idtema));
+            },
+                ),
+                'delete' => array(
                 ),
                 'view' => array(
-                    'url' => function($data){
-                        $curso = $_SESSION['curso'];
-                        return Yii::app()->createUrl("tema/view", array("idcurso"=>$curso->id,"id"=>$data->idtema)); 
-                    }
+                    'url' => function($data) {
+                $curso = $_SESSION['curso'];
+                return Yii::app()->createUrl("tema/view", array("idcurso" => $curso->id, "id" => $data->idtema));
+            }
                 ),
+                'delete' => array(
+                    'visible' => '($data->estado == "active")?true:false',
+                    'icon' => 'icon-remove',
+                    'url' => 'Yii::app()->createUrl("tema/delete", array("idcurso"=>$data->curso->id,"id"=>$data->idtema))',
+                    'label' => 'Desactivar',
+                ),
+                'active' => array(
+                    'label' => 'Activar',
+                    'visible' => '($data->estado != "active")?true:false',
+                    'url' => 'Yii::app()->createUrl("tema/active", array("idcurso"=>$data->curso->id,"id"=>$data->idtema,"ajax"=>1))',
+                    'icon' => 'icon-ok',
+                    'click' => 'js:activar'
+                )
             )
         ),
     ),
 ));
 ?>
+
+
+<script type="text/javascript">
+    function activar()
+    {
+            if (!confirm('¿Está seguro que desea activar este elemento?')) return false;
+            $.ajax({
+                url:jQuery(this).attr('href'),
+                type:"POST",
+                success: function(data) {
+                    $.fn.yiiGridView.update("tema-grid");
+                },
+                error: function(XHR) {
+                return afterDelete(th, false, XHR);
+                }
+            });
+            return false;
+    }
+
+</script>

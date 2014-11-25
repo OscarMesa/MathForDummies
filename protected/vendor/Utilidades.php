@@ -96,6 +96,20 @@ class Utilidades {
             echo '<p><i class="icon-user"></i>'.$perfil->nombre.'</p>';
         }
     }
+    
+    /**
+     * Acorta texto.
+     * @param type $text
+     * @param type $limit
+     * @return type
+     */
+    public static function limitText($text, $limit)
+    {
+        if (strlen($text) > $limit)
+            return substr($text, 0, $limit) . '...';
+        else
+            return $text;
+    }
 }
 
 ?>

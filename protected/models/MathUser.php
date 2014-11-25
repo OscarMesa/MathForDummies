@@ -61,7 +61,9 @@ class MathUser extends CrugeStoredUser {
      * @return type
      */
     public function relations() {
-        return parent::relations() + array('items' => array(self::MANY_MANY, 'MathAuthitem', 'math_authassignment(itemname, userid)'),);
+        return parent::relations() + array('items' => array(self::MANY_MANY, 'MathAuthitem', 'math_authassignment(itemname, userid)'),
+                                            'cursos'=>array(self::MANY_MANY, 'Cursos', 'integrantes_curso(cursos_id,id_integrante)')
+            );
     }
 
     public function attributeLabels() {
@@ -122,6 +124,25 @@ class MathUser extends CrugeStoredUser {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Entraga dataProvider de los estudiantes incritos en un curso.
+     * @param type $curso
+     */
+    public function participantesCurso($curso)
+    {
+        $criteriCurso = new CDbCriteria();
+        $criteriCurso->compare('id', $curso);
+        $criteria=new CDbCriteria();
+
+	$criteria->with = array('cursos'=>$criteriCurso);
+        
+        
+        
+        return new CActiveDataProvider($this, array(
+                'criteria'=>$criteria,
+        ));
     }
 
 }

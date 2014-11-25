@@ -9,6 +9,7 @@
  * @property string $titulo
  * @property integer $idcurso
  * @property integer $idperiodo
+ * @property string $estado
  * 
  * The followings are the available model relations:
  * @property Cursos $idcurso0
@@ -33,9 +34,10 @@ class Tema extends CActiveRecord
 		return array(
 			array('idcurso,idperiodo,titulo', 'required'),
 			array('idtema, idcurso,idperiodo', 'numerical', 'integerOnly'=>true),
-			array('descripcion', 'length', 'max'=>1000),
+//			array('descripcion', 'length', 'max'=>1000),
 			array('titulo', 'length', 'max'=>200),
-			// The following rule is used by search().
+                        array('estado', 'safe'),
+                    	// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('idtema, descripcion, idcurso,idperiodo', 'safe', 'on'=>'search'),
 		);
@@ -64,7 +66,8 @@ class Tema extends CActiveRecord
 			'idtema' => 'Id',
 			'descripcion' => 'Descripcion',
 			'idcurso' => 'Curso',
-                        'idperiodo' => 'Período'
+                        'idperiodo' => 'Período',
+                        'estado' => 'Estado',
 		);
 	}
 
@@ -91,6 +94,7 @@ class Tema extends CActiveRecord
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('idcurso',$this->idcurso);
 		$criteria->compare('idperiodo',$this->idperiodo);
+		$criteria->compare('estado',$this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

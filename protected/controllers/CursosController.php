@@ -37,6 +37,35 @@ class CursosController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
+    
+    /**
+     * Me permite agregar estudiantes en el curso.
+     * @param type $id
+     */
+    public function actionAgregarEstudiantes($id)
+    {
+        echo 'shego';die;   
+        if($id > 0)
+        {
+            $curso = new Cursos();
+            $modEstudiante = new MathUser();
+            if($curso != null)
+            {
+                if(isset($_POST['estudiantes']))
+                {
+                    
+                }
+                $this->render('agregarEstudiante', array(
+                    'dataproviderEstudiantes' => $modEstudiante->participantesCurso($id),
+                    'model' => $modEstudiante,
+                ));
+            }else{
+                throw new CHttpException(400, 'Este curso no existe.');                 
+            }
+        }else{
+            throw new CHttpException(400, 'El identificador del curso debe ser mayor a 0.');                 
+        }
+    }
 
     /**
      * Creates a new model.
@@ -59,7 +88,7 @@ class CursosController extends Controller {
             if ($model->save()){
              $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                            'success', "<strong>Exito!</strong> Se el curso fue creado exitosamente."
+                            'success', "<strong>Exito!</strong> Se guardo el curso fue creado exitosamente."
                 );
                 $this->redirect(Yii::app()->getBaseUrl(true).'/cursos/update/'.$model->id);
             }

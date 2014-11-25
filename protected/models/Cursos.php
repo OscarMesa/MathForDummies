@@ -57,6 +57,7 @@ class Cursos extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'usuario' => array(self::BELONGS_TO, 'MathUser', 'id_docente'),
+                    'participantes'=>array(self::MANY_MANY, 'MathUser', 'integrantes_curso(cursos_id,id_integrante)'),
                     'materia' => array(self::BELONGS_TO, 'Materias', 'idmateria'),
                     'grado' => array(self::BELONGS_TO, 'Grado', 'id_grado'),
 		);
