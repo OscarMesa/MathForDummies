@@ -17,54 +17,6 @@
         <div id="menu_superior" class="grid_16 alpha omega">
         </div>
         <div id="curso">
-            <div id="panel_izq">
-                <div id="avatar">
-                    <img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/profe.png">
-                </div>
-                <div id="informacion_personal">
-                    <div class='acordion'>
-                        <div class="titulo"> Datos Personales</div>
-                        <table>
-                            <tr>
-                                <td colspan="2">Diego Alberto Ochoa Ortiz</td>
-                            </tr>
-                            <tr>
-                                <td>Perfil</td><td>Docente</td>
-                            </tr>
-                            <tr>
-
-                            </tr>				
-                        </table>
-                    </div>
-                    <div class='acordion'>
-                        <div class="titulo"> Cursos Actuales </div>
-                        <table>
-                            <tr>
-                                <td>Materia</td><td>Estado</td>
-                            </tr>						
-                            <tr>
-                                <td>Matematica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
-                            </tr>	
-                            <tr>
-                                <td>Fisica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
-                            </tr>	
-                            <tr>
-                                <td>Quimica</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/inactivo.png'></td>
-                            </tr>	
-                            <tr>
-                                <td>Español</td><td><img src='<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/activo.png'></td>
-                            </tr>				
-                        </table>
-                    </div>
-                    <div class='acordion'>
-                        <div class="titulo"> Nuevo Curso </div>
-                    </div>								
-                </div>
-
-                <div id="pie">
-                    <img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/iefo.png" aling="left"><b>INSTITUCION EDUCATIVA FEDERICO OZANAM <br/> &copy; 2014</b>
-                </div>               
-            </div>
             <div id="panel_central">
                 <div id="menu">
                     <?php
@@ -75,7 +27,7 @@
                         <div id="op">Ejercicios</div>
                         <div id="op">Multimedia</div>
                         <div id="op">Evaluaciones</div>
-<?php } ?>
+                    <?php } ?>
                 </div>
                 <div id="form">
                     <div  class="grid_16">
@@ -108,28 +60,29 @@
 
 
 <?php
-$this->widget('zii.widgets.CMenu', array(
-    'items' => array(
-        array('label' => 'Home', 'url' => array('/site/index')),
-        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-        array('label' => 'Contact', 'url' => array('/site/contact')),
-        array('label' => 'Administrar Usuarios'
-            , 'url' => Yii::app()->user->ui->userManagementAdminUrl
-            , 'visible' => !Yii::app()->user->isGuest),
-        array('label' => 'Login'
-            , 'url' => Yii::app()->user->ui->loginUrl
-            , 'visible' => Yii::app()->user->isGuest),
-        array('label' => 'BackUp'
-            , 'url' => array('/jbackup')
-            , 'visible' => !Yii::app()->user->isGuest),
-        array('label' => 'Grados'
-            , 'url' => array('/grado/admin')
-            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
-        array('label' => 'Logout (' . Yii::app()->user->name . ')'
-            , 'url' => Yii::app()->user->ui->logoutUrl
-            , 'visible' => !Yii::app()->user->isGuest),
-    ),
-));
+        $this->widget('bootstrap.widgets.TbNavbar', array(
+            'items' => array(
+                array('label' => 'Inicio', 'url' => array('/site/index')),
+                array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+                array('label' => 'Contact', 'url' => array('/site/contact')),
+                array('label' => 'Administrar Usuarios'
+                    , 'url' => Yii::app()->user->ui->userManagementAdminUrl
+                    , 'visible' => !Yii::app()->user->isGuest),
+                array('label' => 'Login'
+                    , 'url' => Yii::app()->user->ui->loginUrl
+                    , 'visible' => Yii::app()->user->isGuest),
+                array('label' => 'BackUp'
+                    , 'url' => array('/jbackup')
+                    , 'visible' => !Yii::app()->user->isGuest),
+                array('label' => 'Grados'
+                    , 'url' => array('/grado/admin')
+                    , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
+                array('label' => 'Logout('.Yii::app()->user->name.')'
+                    , 'url' => Yii::app()->user->ui->logoutUrl
+                    , 'visible' => !Yii::app()->user->isGuest),
+            ),
+        ));
+
 ?>
 
 
