@@ -61,10 +61,10 @@
 
 <?php
     $this->widget('bootstrap.widgets.TbNavbar', array(
-          'brand'=>'PoliAuLink',
-          //'brandUrl'=>'#',
-          'fixed' => 'top',
-          'collapse'=>true, // requires bootstrap-responsive.css
+        'brand'=>'PoliAuLink',
+        //'brandUrl'=>'#',
+        'fixed' => 'top',
+        'collapse'=>true, // requires bootstrap-responsive.css
         'items' => array(
                 array(
                         'class'=>'bootstrap.widgets.TbMenu',

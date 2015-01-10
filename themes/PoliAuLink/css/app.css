@@ -126,3 +126,7 @@ body{
 .modal-body{
     overflow: hidden;
 }
+
+#mytabs{
+ margin-top: 20px;
+}
