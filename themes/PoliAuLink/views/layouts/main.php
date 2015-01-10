@@ -72,9 +72,6 @@
                                         array('label' => 'Inicio', 'url' => array('/site/index')),
                                         array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
                                         array('label' => 'Contact', 'url' => array('/site/contact')),
-                                        array('label' => 'Administrar Usuarios'
-                                            , 'url' => Yii::app()->user->ui->userManagementAdminUrl
-                                            , 'visible' => !Yii::app()->user->isGuest),
                                         array('label' => 'Login'
                                             , 'url' => Yii::app()->user->ui->loginUrl
                                             , 'visible' => Yii::app()->user->isGuest),
@@ -84,6 +81,12 @@
                                         array('label' => 'Grados'
                                             , 'url' => array('/grado/admin')
                                             , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
+                                        array('label' => 'Cursos'
+                                            , 'url' => array('/cursos/curso')
+                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
+                                        array('label' => 'Administrar Usuarios'
+                                            , 'url' => Yii::app()->user->ui->userManagementAdminUrl
+                                            , 'visible' => !Yii::app()->user->isGuest),
                                         array('label' => 'Logout('.Yii::app()->user->name.')'
                                             , 'url' => Yii::app()->user->ui->logoutUrl
                                             , 'visible' => !Yii::app()->user->isGuest),
