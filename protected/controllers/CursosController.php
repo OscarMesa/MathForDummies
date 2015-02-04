@@ -13,9 +13,6 @@ class CursosController extends Controller {
      */
     public function filters() {
         return array('accessControl',array('CrugeAccessControlFilter'));
-//        return array(
-//            'accessControl', // perform access control for CRUD operations
-//        );
     }
 
     /**
@@ -43,12 +40,11 @@ class CursosController extends Controller {
      * @param type $id
      */
     public function actionAgregarEstudiantes($id)
-    {
-        echo 'shego';die;   
+    { 
         if($id > 0)
         {
-            $curso = new Cursos();
-            $modEstudiante = new MathUser();
+            $curso = Cursos::model()->findByPk($id);
+            $modEstudiante = new MathUserC();
             if($curso != null)
             {
                 if(isset($_POST['estudiantes']))
@@ -58,6 +54,7 @@ class CursosController extends Controller {
                 $this->render('agregarEstudiante', array(
                     'dataproviderEstudiantes' => $modEstudiante->participantesCurso($id),
                     'model' => $modEstudiante,
+                    'id' => $id
                 ));
             }else{
                 throw new CHttpException(400, 'Este curso no existe.');                 

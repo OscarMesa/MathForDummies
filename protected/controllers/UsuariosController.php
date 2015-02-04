@@ -9,40 +9,50 @@ class UsuariosController extends Controller {
     public $layout = '//layouts/column2';
 
     /**
-     * @return array action filters
-     */
-    public function filters() {
-        // return array('accessControl', array('CrugeAccessControlFilter'));
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
-    }
-
-    /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
      * @return array access control rules
      */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('CambioPassword', 'guardarCambioNuevoPassword', 'recuperarPassword', 'activarDocente', 'activarUsuario', 'index', 'view', 'inicio', 'createAnonimo'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'active', 'inactive', 'ajaxFiltroUsuarios'),
-                'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
         );
     }
-
+    
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array('accessControl',array('CrugeAccessControlFilter'));
+    }
+    
+    /**
+     * Este metodo obtiene los usuarios que son tipo estudiante.
+     * @author Oskar <oscarmesa.elpoli@gmail.com>
+     */
+    public function actionObtenerEstudiantesAjax()
+    {
+        $serch = $_REQUEST['term'];
+        $campos = CrugeField::model()->findAll(array(
+            'alias' => 'campos',
+            'condition' => "campos.idfield IN (1)",
+            'with' => array(
+                        'values' => array(
+                            'alias' => 'valores',
+                            'together' => true,
+                            'condition' => 'iduser NOT IN (SELECT inte.id_integrante FROM integrantes_curso inte WHERE cursos_id = ?) AND lower(value) LIKE ? COLLATE utf8_general_ci',
+                            'params' => array($_REQUEST['curso'],'%'.$serch.'%')
+                        )
+                      ),
+        ));
+        $array_return  = array();
+        foreach ($campos as $valor) {
+                foreach ($valor->values as $v) {
+                    $array_return[] = array('id'=>$v->iduser, 'text'=> $v->value);
+                }
+        }
+        echo json_encode($array_return);
+    }
+    
     public function actionInicio() {
         //print_r(Yii::app()->user);exit();
         if (!Yii::app()->user->isGuest) {
@@ -440,6 +450,8 @@ class UsuariosController extends Controller {
         Usuarios::model()->updateByPk($id, array('state_usuario' => 'inactive'));
         $this->render('application.views.site.inicio');
     }
+    
+    
 
     /**
      * Este metodo se encarga de enviar el grid por ajax, filtrando por cualquier campo
