@@ -26,7 +26,7 @@ if (Yii::app()->user->isSuperAdmin)
         <td width="192">
             <?php      
             if (Yii::app()->user->checkAccess('admin')) { ?>  
-                <div class="span-5 last" style="margin-left:0px;">
+                <div class="span-5 last" style="margin-left:0px; position: fixed; top: 54px;">
                     <div id="sidebar">
                         <?php
                         $this->widget('bootstrap.widgets.TbMenu', array(

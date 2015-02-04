@@ -38,6 +38,7 @@
 			CrugeTranslator::t("Generar una nueva clave")
 			,Yii::app()->user->ui->ajaxGenerateNewPasswordUrl
 			,array('success'=>'js:fnSuccess','error'=>'js:fnError')
+			,array("class"=>"btn btn-primary")
 		); ?>
 		
 	</div>
