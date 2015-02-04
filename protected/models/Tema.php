@@ -36,7 +36,7 @@ class Tema extends CActiveRecord
 			array('idtema, idcurso,idperiodo', 'numerical', 'integerOnly'=>true),
 //			array('descripcion', 'length', 'max'=>1000),
 			array('titulo', 'length', 'max'=>200),
-                        array('estado', 'safe'),
+                        array('estado,descripcion', 'safe'),
                     	// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('idtema, descripcion, idcurso,idperiodo', 'safe', 'on'=>'search'),

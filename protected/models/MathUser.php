@@ -126,23 +126,4 @@ class MathUser extends CrugeStoredUser {
         return false;
     }
     
-    /**
-     * Entraga dataProvider de los estudiantes incritos en un curso.
-     * @param type $curso
-     */
-    public function participantesCurso($curso)
-    {
-        $criteriCurso = new CDbCriteria();
-        $criteriCurso->compare('id', $curso);
-        $criteria=new CDbCriteria();
-
-	$criteria->with = array('cursos'=>$criteriCurso);
-        
-        
-        
-        return new CActiveDataProvider($this, array(
-                'criteria'=>$criteria,
-        ));
-    }
-
 }

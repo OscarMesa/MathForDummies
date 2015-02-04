@@ -25,10 +25,7 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<ul class="nav nav-tabs">
-    <li><a href="<?php echo Yii::app()->getBaseUrl(true) ?>/tema/create/<?php echo $curso->id ?>"><span class="glyphicon glyphicon-home"></span>Crear</a></li>
-    <li class="active"><a href="<?php echo Yii::app()->getBaseUrl(true) ?>/tema/admin/<?php echo $curso->id ?>"><span class="glyphicon glyphicon-user"></span> Administrar</a></li>
-</ul>
+<?php echo $this->renderPartial("_menu",array('model' => $model,'activeAdmin'=>true ));?>
 
 <h2>Admnistrar temas en <?php echo $curso->nombre_curso; ?></h2>
 
@@ -57,12 +54,18 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'filter' => $model,
     'columns' => array(
         'idtema',
-        array(
+        /*array(
             'name' => 'descripcion',
             'value' => function($data) {
-        return Utilidades::limitText($data->descripcion, 60);
-    }
-        ),
+                return Utilidades::limitText($data->descripcion, 60);
+            }
+        ),*/
+        array(
+            'name' => 'titulo',
+            'value' => function($data) {
+                return $data->titulo;
+            }
+        ),        
         array(
             'name' => 'idcurso',
             'filter' => false,

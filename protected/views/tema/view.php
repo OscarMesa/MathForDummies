@@ -13,10 +13,7 @@ $this->menu = array(
 );
 ?>
 
-<ul class="nav nav-tabs">
-    <li class=""><a href="<?php echo Yii::app()->getBaseUrl(true) ?>/tema/create/<?php echo $model->curso->id ?>"><i class="icon-plus"></i>&nbsp;Crear</a></li>
-    <li><a href="<?php echo Yii::app()->getBaseUrl(true) ?>/tema/admin/<?php echo $model->curso->id ?>"><i class="icon-briefcase"></i>&nbsp;Administrar</a></li>
-</ul>
+<?php echo $this->renderPartial("_menu",array('model' => $model ));?>
 
 <h3>Tema #<?php echo $model->idtema; ?> en curso <?php echo $model->curso->nombre_curso; ?></h3>
 
