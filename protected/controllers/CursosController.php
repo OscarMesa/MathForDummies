@@ -43,6 +43,7 @@ class CursosController extends Controller {
     { 
         if($id > 0)
         {
+            $this->layout="\layouts\column3";
             $curso = Cursos::model()->findByPk($id);
             $modEstudiante = new MathUserC();
             if($curso != null)
