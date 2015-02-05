@@ -11,7 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     ),
         ));
 ?>
-<?php echo CHtml::hiddenField('estudiantes', ""); ?>
+<?php echo CHtml::hiddenField('estudiantes', "",array('style'=>'width:300px')); ?>
 <?php
 $this->widget('ext.select2.ESelect2', array(
     'selector' => '#estudiantes',
