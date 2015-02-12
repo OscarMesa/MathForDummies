@@ -8,5 +8,7 @@
 return array(
     'this user has not yet confirmed your account' => 'Este usuario aún no ha confirmado su cuenta.',
     'this user has requested password change' => 'Este usuario ha solicitado cambio de contraseña.',
-    'the issue was updated successfully'=>  'El tema fue actualizado correctamente'
+    'the issue was updated successfully'=>  'El tema fue actualizado correctamente',
+    'The student was added successfully , I was one sent an email to% s notificanción' => 'El estudiante fue agregado exitosamente , se una enviado  un correo de notificanción a % s',
+    'The student successfully been added , is to send an email to {mail}' => 'El estudiante a sido agregado exitosamente, se a enviado un correo electronico a {mail}'
 );

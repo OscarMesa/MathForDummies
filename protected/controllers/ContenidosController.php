@@ -85,7 +85,17 @@ class ContenidosController extends Controller {
             'contenido' => $this,
         ));
     }
-
+    
+    /**
+     * este método se encarga de cargar un nuevo contenido para un curso.
+     * @author Oskar <oscarmesa.elpoli@gmail.com>
+     */
+    public function actionNuevoContedioMediaCurso()
+    {
+        $this->render('contedioMedia');
+        
+    }
+    
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.

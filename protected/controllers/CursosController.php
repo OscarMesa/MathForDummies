@@ -60,10 +60,19 @@ class CursosController extends Controller {
                     $integran_cursos->cursos_id = $id;
                     $integran_cursos->fecha_registro = date('Y-m-d');
                     $integran_cursos->fecha_registro = 1;
-                        if($integran_cursos->save())
-                            echo "guardo";
-                        else
-                             throw new Exception("No se pudo guardar");
+                    $integran_cursos->estado = ACTIVE;
+                    $usuario = Yii::app()->user->um->loadUserById($_POST['estudiantes']);
+                    echo '<pre>';
+                    print_r($usuario->email);
+                    die;
+                    if($integran_cursos->save())
+                    {  
+                        Yii::t('polimsn', 'The student successfully been added , is to send an email to {mail}', array('{mail}'=>$usuario->email));
+                        $user = Yii::app()->getComponent('user')->setFlash(
+                                    'error', $errores
+                        );
+                    }else
+                         throw new Exception("No se pudo guardar");
                     $t->commit();
                     }  catch (Exception $e){
                         $errores = "<strong>Corrija los siguientes errores!</strong><br/>";
