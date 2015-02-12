@@ -43,14 +43,46 @@ class CursosController extends Controller {
     { 
         if($id > 0)
         {
-            $this->layout="\layouts\column3";
+            $this->layout="//layouts/column3";
             $curso = Cursos::model()->findByPk($id);
             $modEstudiante = new MathUserC();
             if($curso != null)
             {
+//                print_r($_REQUEST);die;
                 if(isset($_POST['estudiantes']))
                 {
-                    
+//                    print_r($_REQUEST);die;
+                    $t = Yii::app()->db->beginTransaction();
+                    try{
+                    $integran_cursos = new IntegrantesCurso();
+                    $integran_cursos->id_integrante = $_POST['estudiantes'];
+                    $integran_cursos->state_integrantes_curso = 'active';
+                    $integran_cursos->cursos_id = $id;
+                    $integran_cursos->fecha_registro = date('Y-m-d');
+                    $integran_cursos->fecha_registro = 1;
+                        if($integran_cursos->save())
+                            echo "guardo";
+                        else
+                             throw new Exception("No se pudo guardar");
+                    $t->commit();
+                    }  catch (Exception $e){
+                        $errores = "<strong>Corrija los siguientes errores!</strong><br/>";
+                        foreach ($integran_cursos->getErrors() as $errorField => $errorsArray)
+                        {
+                            $errores .= "<b>".$errorField."<b/><br><ul>";
+                            foreach ($errorsArray as $value) {
+                                $errores .= "<li>". $value ."</li>";
+                            }
+                            $errores .= "</ul>";
+                        }
+                        
+                        $user = Yii::app()->getComponent('user');
+                        $user->setFlash(
+                                    'error', $errores
+                        );
+                        $t->rollback();
+                        
+                    }
                 }
                 $this->render('agregarEstudiante', array(
                     'dataproviderEstudiantes' => $modEstudiante->participantesCurso($id),

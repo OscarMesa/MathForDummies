@@ -1,7 +1,7 @@
 <?php
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'cursos-form-addEstudiante',
-    'action' => Yii::app()->createAbsoluteUrl("/cursos/AgregarEstudiantes", array($curso)),
+    'action' => Yii::app()->createAbsoluteUrl("/cursos/agregarestudiantes/",array('id'=>$curso)),
     'enableAjaxValidation' => false,
     'enableClientValidation' => true,
     'clientOptions' => array(
