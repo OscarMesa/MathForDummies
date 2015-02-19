@@ -66,14 +66,12 @@ class CursosController extends Controller {
                              throw new Exception("No se pudo guardar");
                     $t->commit();
                     }  catch (Exception $e){
-                        $errores = "<strong>Corrija los siguientes errores!</strong><br/>";
+                        $errores = "<strong>Verfique la información: </strong><br/>";
                         foreach ($integran_cursos->getErrors() as $errorField => $errorsArray)
                         {
-                            $errores .= "<b>".$errorField."<b/><br><ul>";
                             foreach ($errorsArray as $value) {
-                                $errores .= "<li>". $value ."</li>";
+                                $errores .="<span style='font-size:13px;'>".$value."</span><br>";
                             }
-                            $errores .= "</ul>";
                         }
                         
                         $user = Yii::app()->getComponent('user');
