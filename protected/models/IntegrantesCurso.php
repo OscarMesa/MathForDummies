@@ -33,7 +33,7 @@ class IntegrantesCurso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cursos_id, id_integrante, fecha_registro, estado', 'required'),
+			array('cursos_id, id_integrante, fecha_registro, estado', 'required', 'message'=> '{attribute} es requerido.'),
 			array('cursos_id, id_integrante, estado', 'numerical', 'integerOnly'=>true),
 			array('state_integrantes_curso', 'length', 'max'=>11),
 			// The following rule is used by search().
@@ -64,7 +64,7 @@ class IntegrantesCurso extends CActiveRecord
 			'id' => 'ID',
 			'state_integrantes_curso' => 'State Integrantes Curso',
 			'cursos_id' => 'Cursos',
-			'id_integrante' => 'Id Integrante',
+			'id_integrante' => 'Estudiante ',
 			'fecha_registro' => 'Fecha Registro',
 			'estado' => 'Estado',
 		);

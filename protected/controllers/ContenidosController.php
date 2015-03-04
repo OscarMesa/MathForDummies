@@ -92,8 +92,8 @@ class ContenidosController extends Controller {
      */
     public function actionNuevoContedioMediaCurso()
     {
+        //$this->layout="//layouts/column4";
         $this->render('contedioMedia');
-        
     }
     
     /**

@@ -31,19 +31,14 @@ class Summernote extends CPortlet {
     
     public function registerScriptJS()
     {
-        $this->cs->registerScriptFile("http://code.jquery.com/jquery-1.9.1.min.js");
-        $this->cs->registerScriptFile("http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css");
-        $this->cs->registerScriptFile("http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js");
-        $this->cs->registerScriptFile("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css");
         $this->cs->registerScriptFile($this->baseUrl.'/js/summernote.min.js');
         $this->cs->registerScriptFile($this->baseUrl.'/js/app-summernote.js');
     }
     
     public function registerStyleCSS()
     {
+        $this->cs->registerCssFile("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css");
         $this->cs->registerCssFile($this->baseUrl.'/css/summernote-bs2.css');
-        $this->cs->registerCssFile($this->baseUrl.'/css/summernote-bs3.css');
-        $this->cs->registerCssFile($this->baseUrl.'/css/summernote-bs3.css');
         $this->cs->registerCssFile($this->baseUrl.'/css/summernote.css');
     }
 }
