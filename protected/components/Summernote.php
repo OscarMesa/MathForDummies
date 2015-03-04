@@ -37,7 +37,6 @@ class Summernote extends CPortlet {
     
     public function registerStyleCSS()
     {
-        
         $this->cs->registerCssFile("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css");
         $this->cs->registerCssFile($this->baseUrl.'/css/summernote-bs2.css');
         $this->cs->registerCssFile($this->baseUrl.'/css/summernote.css');
