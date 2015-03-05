@@ -217,7 +217,7 @@ class CursosController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-
+ 
         $model = new Cursos('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Cursos']))
