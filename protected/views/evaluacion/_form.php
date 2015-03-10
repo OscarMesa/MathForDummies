@@ -48,7 +48,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
 
 <?php 
 
-//echo CHtml::checkBoxList('temas', 'idtema', CHtml::listData($temas, 'idtema', 'titulo'),array('class' => 'span5', 'template'=>'<label class="checkbox"><spam>{label}</spam>{input}</label>')); ?>
+echo CHtml::checkBoxList('temas', 'idtema', CHtml::listData($temas, 'idtema', 'titulo'),array('class' => 'span5', 'template'=>'<label class="checkbox"><spam>{label}</spam>{input}</label>')); ?>
 
     <?php echo $form->hiddenField($model, 'cursos_id', array()); ?>
 <div class="form-actions">
