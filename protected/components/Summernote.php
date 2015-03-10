@@ -33,6 +33,8 @@ class Summernote extends CPortlet {
     {
         $this->cs->registerScriptFile($this->baseUrl.'/js/summernote.min.js');
         $this->cs->registerScriptFile($this->baseUrl.'/js/app-summernote.js');
+        $this->cs->registerScriptFile($this->baseUrl.'/js/boostrap_3.0.1.js');
+
     }
     
     public function registerStyleCSS()

@@ -29,6 +29,13 @@ class ContenidosController extends Controller {
         $multimedia = ImgVideosSonido::model()->with(array('multimedia' => array('alias' => 'multimedia')));
     }
 
+    public function actionSubir_img()
+    {
+       var_dump($_FILES);
+
+       
+    }    
+
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
