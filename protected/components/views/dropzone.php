@@ -12,12 +12,16 @@
 
 Yii::app()->clientScript->registerScript("search", "
 
+$(document).on('submit','#aform',function(){
+
+	console.log('sdfsdfdssdf sf df');
+
+});
+
 Dropzone.prototype.removeFile=function(file){
 	console.log(file);
 	this.emit(\"removedfile\", file);
-	this.uploadFiles($('aform').serialize());
-}
-
+};
 
 ");
 	

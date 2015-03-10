@@ -31,9 +31,7 @@ class ContenidosController extends Controller {
 
     public function actionSubir_img()
     {
-       var_dump($_FILES);
-
-       
+        $_FILES
     }    
 
     /**
