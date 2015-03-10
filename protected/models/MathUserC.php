@@ -61,7 +61,7 @@ class MathUserC extends CActiveRecord
 			'cursoses' => array(self::HAS_MANY, 'Cursos', 'id_docente'),
 			'mathAuthitems' => array(self::MANY_MANY, 'MathAuthitem', 'math_authassignment(userid, itemname)'),
 			'mathFieldvalues' => array(self::HAS_MANY, 'MathFieldvalue', 'iduser'),
-                        'cursos'=>array(self::MANY_MANY, 'Cursos', 'integrantes_curso(cursos_id,id_integrante)')
+                        'cursos'=>array(self::MANY_MANY, 'Cursos', 'integrantes_curso(cursos_id,id_integrante)'),
 		);
 	}
 
@@ -142,7 +142,7 @@ class MathUserC extends CActiveRecord
                 'criteria'=> array(
                     'alias' => 'usr',
                     'with' => array(
-                        'cursos' => array('alias' => 'cursos','joinType'=>'INNER JOIN','together' => true,'condition' => 'cursos.id = '.$curso, )
+                        'cursos' => array('alias' => 'cursos','joinType'=>'INNER JOIN','together' => true,'condition' => 'cursos_cursos.estado=1 AND cursos.id = '.$curso, )
                     ),
                     
                 ),

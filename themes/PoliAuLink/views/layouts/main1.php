@@ -10,11 +10,22 @@
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/app_script.js"></script>
 <!--        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.tools.min.js"></script>-->
+        <?php 
+              Yii::app()->clientScript->registerScript('procesando','$(function(){'
+                    . ' $(document).submit(function() {
+                            $(\'.procesando\').css(\'display\', \'block\');
+                          setTimeout(function(){
+
+                            $(\'.procesando\').css(\'display\', \'none\');
+
+                         }, 7000);
+                       });'
+                    . '});');
+        ?>
     </head>
-
+    
     <body>
-
-
+        <div id="cargando" class="alert alert-warning procesando alert-block" style="display: block;"><img src="/themes/PoliAuLink/images/ajax-loader.gif"> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
         <div id="footer">
             <p style="text-align: center;">
             </p>

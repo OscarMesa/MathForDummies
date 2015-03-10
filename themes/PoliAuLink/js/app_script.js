@@ -14,26 +14,25 @@ $(document).on("ready", function() {
         $("#myModal .modal-header .modal-title").html(titulo);
         $("#iframeApp").attr('src', direccion);
 
-        $(this).find('.modal-dialog').css({
-            width: '40%x', //choose your width
-            height: '100%',
-            'padding': '0'
+        $('#myModal .modal-dialog').css({
+            width: ancho, //choose your width
+            height: alto,
         });
         $(this).find('.modal-content').css({
-            height: alto+'px',
+            height: alto,
             'border-radius': '0',
             'padding': '0'
         });
-        $(this).find('.modal-body').css({
+        $('#myModal .modal-body').css({
             width: 'auto',
             height: '100%',
-            'padding': '0'
+            'max-height': alto
         });
         
-        $(".modal-body").css('height', alto+'px');
-        $(".modal-content").css('height', alto+'px');
+        $(".modal-body").css('height', alto);
+        $(".modal-content").css('height', alto);
 //        $("#myModal").css('height', ancho+'px');
-        $("#myModal").css('width', ancho+'px');
+        $("#myModal").attr('style', 'width:'+ancho+';top:0; height:'+alto);
         $("#myModal").modal({show: true});
         return false;
     }

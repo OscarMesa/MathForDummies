@@ -1,7 +1,7 @@
 <?php
 
 class CursosController extends Controller {
- 
+
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -12,7 +12,7 @@ class CursosController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array('accessControl',array('CrugeAccessControlFilter'));
+        return array('accessControl', array('CrugeAccessControlFilter'));
     }
 
     /**
@@ -34,61 +34,73 @@ class CursosController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
-    
+
+    /**
+     * este mètodo me elimna un usuario del curso.
+     * @author Oskar<oscarmesa.elpoli@gmail.com>
+     */
+    public function actionEliminarUsuarioCurso() {
+        $integrante_cursos = IntegrantesCurso::model()->find(array('condition' => 'cursos_id=? AND id_integrante=?', 'params' => array($_REQUEST['curso'], $_REQUEST['estudiante'])));
+        $integrante_cursos->estado = INACTIVE;
+        if (!$integrante_cursos->update())
+            throw new Exception("No se pudo actualizar");
+    }
+
     /**
      * Me permite agregar estudiantes en el curso.
      * @param type $id
      */
-    public function actionAgregarEstudiantes($id)
-    { 
-        if($id > 0)
-        {
-            $this->layout="//layouts/column3";
-            $curso = Cursos::model()->findByPk($id);
+    public function actionAgregarEstudiantes($id) {
+        if ($id > 0) {
+            $this->layout = "//layouts/column3";
+            $curso = Cursos::model()->findByPk($id,array(
+                'with' => array(
+                    'temas' => array(
+                        'condition' => "estado='active'"
+                    )
+                )
+            ));
             $modEstudiante = new MathUserC();
-            if($curso != null)
-            {
+            if ($curso != null) {
 //                print_r($_REQUEST);die;
-                if(isset($_POST['estudiantes']))
-                {
+                if (isset($_POST['estudiantes'])) {
 //                    print_r($_REQUEST);die;
                     $t = Yii::app()->db->beginTransaction();
-                    try{
-                    $integran_cursos = new IntegrantesCurso();
-                    $integran_cursos->id_integrante = $_POST['estudiantes'];
-                    $integran_cursos->state_integrantes_curso = 'active';
-                    $integran_cursos->cursos_id = $id;
-                    $integran_cursos->fecha_registro = date('Y-m-d');
-                    $integran_cursos->fecha_registro = 1;
-                    $integran_cursos->estado = ACTIVE;
-                    $usuario = Yii::app()->user->um->loadUserById($_POST['estudiantes']);
-                    echo '<pre>';
-                    print_r($usuario->email);
-                    die;
-                    if($integran_cursos->save())
-                    {  
-                        Yii::t('polimsn', 'The student successfully been added , is to send an email to {mail}', array('{mail}'=>$usuario->email));
-                        $user = Yii::app()->getComponent('user')->setFlash(
-                                    'error', $errores
-                        );
-                    }else
-                         throw new Exception("No se pudo guardar");
-                    $t->commit();
-                    }  catch (Exception $e){
-                        $errores = "<strong>Verfique la información: </strong><br/>";
-                        foreach ($integran_cursos->getErrors() as $errorField => $errorsArray)
-                        {
-                            foreach ($errorsArray as $value) {
-                                $errores .="<span style='font-size:13px;'>".$value."</span><br>";
+                    try {
+                        $integran_cursos = new IntegrantesCurso();
+                        $integran_cursos->id_integrante = $_POST['estudiantes'];
+                        $integran_cursos->cursos_id = $id;
+                        $integran_cursos->estado = ACTIVE;
+                        $usuario = Yii::app()->user->um->loadUserById($_POST['estudiantes']);
+                        try {
+                            $integran_cursos->save();
+                        } catch (CDbException $ex) {
+                            if ($ex->errorInfo[1] == 1062) {
+                                $integran_cursos->updateAll(array('estado' => 1), 'id_integrante = ' . $_POST['estudiantes'] . ' AND cursos_id = ' . $id);
+                            }else{
+                                print_r($ex);die;
                             }
                         }
-                        
+                        $this->enviarNotificacionEstudianteAgregado($usuario, $curso);
+                        $m = Yii::t('polimsn', 'The student successfully been added , is to send an email to {mail}', array('{mail}' => $usuario->email));
+                        $user = Yii::app()->getComponent('user')->setFlash(
+                                'success', $m
+                        );
+                        $t->commit();
+                    } catch (Exception $e) {
+                        print_r($e);
+                        $errores = "<strong>Verfique la información: </strong><br/>";
+                        foreach ($integran_cursos->getErrors() as $errorField => $errorsArray) {
+                            foreach ($errorsArray as $value) {
+                                $errores .="<span style='font-size:13px;'>" . $value . "</span><br>";
+                            }
+                        }
+
                         $user = Yii::app()->getComponent('user');
                         $user->setFlash(
-                                    'error', $errores
+                                'error', $errores
                         );
                         $t->rollback();
-                        
                     }
                 }
                 $this->render('agregarEstudiante', array(
@@ -96,12 +108,29 @@ class CursosController extends Controller {
                     'model' => $modEstudiante,
                     'id' => $id
                 ));
-            }else{
-                throw new CHttpException(400, 'Este curso no existe.');                 
+            } else {
+                throw new CHttpException(400, 'Este curso no existe o no tiene temas vinculados.');
             }
-        }else{
-            throw new CHttpException(400, 'El identificador del curso debe ser mayor a 0.');                 
+        } else {
+            throw new CHttpException(400, 'El identificador del curso debe ser mayor a 0.');
         }
+    }
+
+    /**
+     * Este metodo se encarga de enviar una notificación al nuevo estudiante en el curso.
+     * @param CrugeField $usuario
+     * @param Cursos $curso
+     */
+    public function enviarNotificacionEstudianteAgregado($usuario, $curso) {
+        Yii::import('ext.yii-mail.YiiMailMessage');
+        $message = new YiiMailMessage;
+        $message->view = "usuarioAgregadoCurso";
+        $params = array('curso' => $curso, 'usuario' => $usuario);
+        $message->subject = Yii::t('polimsn', 'Successful linkage course {name_course}',array('{name_course}'=>ucwords($curso->nombre_curso)));
+        $message->setBody($params, 'text/html');
+        $message->to = array($usuario->email => 'importaciones');
+        $message->from = array(Yii::app()->params['email'] => Yii::app()->name);
+        Yii::app()->mail->send($message);
     }
 
     /**
@@ -113,21 +142,21 @@ class CursosController extends Controller {
         if (isset($_POST['Cursos'])) {
             $model->attributes = $_POST['Cursos'];
             $fecha = explode(' - ', $_POST['Cursos']['fecha_inicio']);
-             if (count($fecha) == 2) {
+            if (count($fecha) == 2) {
                 $model->fecha_inicio = $fecha[0];
                 $model->fecha_cierre = $fecha[1];
-                             // exit();
+                // exit();
                 $model->id_docente = Yii::app()->user->getId();
-            }  else {
+            } else {
                 $model->fecha_inicio = '';
                 $model->fecha_cierre = '';
             }
-            if ($model->save()){
-             $user = Yii::app()->getComponent('user');
+            if ($model->save()) {
+                $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                            'success', "<strong>Exito!</strong> Se guardo el curso fue creado exitosamente."
+                        'success', "<strong>Exito!</strong> Se guardo el curso fue creado exitosamente."
                 );
-                $this->redirect(Yii::app()->getBaseUrl(true).'/cursos/update/'.$model->id);
+                $this->redirect(Yii::app()->getBaseUrl(true) . '/cursos/update/' . $model->id);
             }
         }
 
@@ -135,7 +164,7 @@ class CursosController extends Controller {
             'model' => $model,
         ));
     }
-    
+
     public function render($view, $data = null, $return = false) {
         parent::render($view, $data, $return);
     }
@@ -152,7 +181,7 @@ class CursosController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -163,16 +192,15 @@ class CursosController extends Controller {
             if (count($fecha) == 2) {
                 $model->fecha_inicio = $fecha[0];
                 $model->fecha_cierre = $fecha[1];
-            }  else {
+            } else {
                 $model->fecha_inicio = '';
                 $model->fecha_cierre = '';
             }
-                
-            if ($model->validate() && $model->save())
-            {    
+
+            if ($model->validate() && $model->save()) {
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                            'success', "<strong>Exito!</strong> Se a modificiado el curso exitosamente."
+                        'success', "<strong>Exito!</strong> Se a modificiado el curso exitosamente."
                 );
                 $this->redirect(array('admin'));
             }
@@ -198,8 +226,7 @@ class CursosController extends Controller {
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
@@ -217,7 +244,7 @@ class CursosController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
- 
+
         $model = new Cursos('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Cursos']))

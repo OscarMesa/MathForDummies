@@ -1,27 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "integrantes_curso".
+ * This is the model class for table "cursos_evaluaciones".
  *
- * The followings are the available columns in table 'integrantes_curso':
- * @property integer $id
+ * The followings are the available columns in table 'cursos_evaluaciones':
  * @property integer $cursos_id
- * @property integer $id_integrante
- * @property string $fecha_registro
- * @property integer $estado
- *
- * The followings are the available model relations:
- * @property Cursos $cursos
- * @property MathUser $idIntegrante
+ * @property integer $evaluaciones_id
+ * @property string $fecha_inicio
+ * @property string $fecha_fin
+ * @property string $porcentaje
+ * @property string $tiempo_limite
  */
-class IntegrantesCurso extends CActiveRecord
+class CursosEvaluaciones extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'integrantes_curso';
+		return 'cursos_evaluaciones';
 	}
 
 	/**
@@ -32,11 +29,13 @@ class IntegrantesCurso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cursos_id, id_integrante, estado', 'required', 'message'=> '{attribute} es requerido.'),
-			array('cursos_id, id_integrante, estado', 'numerical', 'integerOnly'=>true),
+			array('cursos_id, evaluaciones_id', 'required'),
+			array('cursos_id, evaluaciones_id', 'numerical', 'integerOnly'=>true),
+			array('porcentaje', 'length', 'max'=>10),
+			array('fecha_inicio, fecha_fin, tiempo_limite', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cursos_id, id_integrante, fecha_registro, estado', 'safe', 'on'=>'search'),
+			array('cursos_id, evaluaciones_id, fecha_inicio, fecha_fin, porcentaje, tiempo_limite', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,8 +47,6 @@ class IntegrantesCurso extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cursos' => array(self::BELONGS_TO, 'Cursos', 'cursos_id'),
-			'idIntegrante' => array(self::BELONGS_TO, 'MathUser', 'id_integrante'),
 		);
 	}
 
@@ -59,11 +56,12 @@ class IntegrantesCurso extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
 			'cursos_id' => 'Cursos',
-			'id_integrante' => 'Estudiante ',
-			'fecha_registro' => 'Fecha Registro',
-			'estado' => 'Estado',
+			'evaluaciones_id' => 'Evaluaciones',
+			'fecha_inicio' => 'Fecha Inicio',
+			'fecha_fin' => 'Fecha Fin',
+			'porcentaje' => 'este es el porcentaje del examen con relacion al curso',
+			'tiempo_limite' => 'Tiempo Limite',
 		);
 	}
 
@@ -85,11 +83,12 @@ class IntegrantesCurso extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('cursos_id',$this->cursos_id);
-		$criteria->compare('id_integrante',$this->id_integrante);
-		$criteria->compare('fecha_registro',$this->fecha_registro,true);
-		$criteria->compare('estado',$this->estado);
+		$criteria->compare('evaluaciones_id',$this->evaluaciones_id);
+		$criteria->compare('fecha_inicio',$this->fecha_inicio,true);
+		$criteria->compare('fecha_fin',$this->fecha_fin,true);
+		$criteria->compare('porcentaje',$this->porcentaje,true);
+		$criteria->compare('tiempo_limite',$this->tiempo_limite,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +99,7 @@ class IntegrantesCurso extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return IntegrantesCurso the static model class
+	 * @return CursosEvaluaciones the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

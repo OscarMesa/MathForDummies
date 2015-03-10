@@ -1,8 +1,9 @@
 <?php
 return array(
-	'No matches found' => 'Brak wyników szukania',
-	'Please enter {chars} more characters' => 'Proszę wprowadzić jeszcze {chars} znaków',
-	'You can only select {count} items' => 'Można wybrac tylko {count} pozycji',
-	'Loading more results...' => 'Ładowanie pozostałych wyników',
-	'Searching...' => 'Szukanie...',
+	'No matches found' => 'Tidak diketemukan hasil',
+	'Please enter {chars} more characters' => 'Mohon memasukkan karakter lebih dari {chars}',
+	'Please enter {chars} less characters' => 'Mohon memasukkan karakter kurang dari {chars}',
+	'You can only select {count} items' => 'Anda hanya dapat memilih {count} item',
+	'Loading more results...' => 'Memuat lebih banyak hasil...',
+	'Searching...' => 'Mencari...',
 );

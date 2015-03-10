@@ -56,7 +56,7 @@ class Cursos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'usuario' => array(self::BELONGS_TO, 'MathUser', 'id_docente'),
+                    'usuario' => array(self::BELONGS_TO, 'CrugeStoredUser', 'id_docente'),
                     'participantes'=>array(self::MANY_MANY, 'MathUser', 'integrantes_curso(cursos_id,id_integrante)'),
                     'materia' => array(self::BELONGS_TO, 'Materias', 'idmateria'),
                     'grado' => array(self::BELONGS_TO, 'Grado', 'id_grado'),
@@ -66,8 +66,8 @@ class Cursos extends CActiveRecord
         
         public function compararFechaFin($attribute,$params)
         {
-            echo $this->fecha_inicio.'<br/>';
-            echo $this->fecha_cierre.'<br/>';
+//            echo $this->fecha_inicio.'<br/>';
+//            echo $this->fecha_cierre.'<br/>';
            // exit();
             if($this->_getUnix($this->fecha_inicio) > $this->_getUnix($this->fecha_cierre))
             {
@@ -123,7 +123,7 @@ class Cursos extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		//$criteria->compare('id',$this->id);
-		//$criteria->compare('state_curso',$this->state_curso,true);
+//		$criteria->compare('state_curso','active',true);
 		//$criteria->compare('id_docente',$this->id_docente);
 		$criteria->compare('idmateria',$this->idmateria);
 		$criteria->compare('nombre_curso',$this->nombre_curso,true);
