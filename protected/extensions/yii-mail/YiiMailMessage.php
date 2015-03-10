@@ -46,12 +46,18 @@ class YiiMailMessage extends CComponent {
 	* @var Swift_Mime_Message
 	*/
 	public $message;
-
+        
+        /**
+         *
+         * @var type from
+         */
+//        public $from = array();
 	/**
 	* Any requests to set or get attributes or call methods on this class that 
 	* are not found are redirected to the {@link Swift_Mime_Message} object.
 	* @param string the attribute name
 	*/
+        
 	public function __get($name) {
 		try {
 			return parent::__get($name);
@@ -110,6 +116,7 @@ class YiiMailMessage extends CComponent {
 	*/
 	public function __construct($subject = null, $body = null, $contentType = null, $charset = null) {
 		Yii::app()->mail->registerScripts();
+//                $this->from = array_merge(array(),$this->from);
 		$this->message = Swift_Message::newInstance($subject, $body, $contentType, $charset);
 	}
 

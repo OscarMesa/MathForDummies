@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var Cursos model 
+ */
 if (Yii::app()->controller->action->id == 'update') {
     $url = "/cursos/update/" . $model->id;
 } else {
@@ -20,7 +23,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <?php if(!$model->isNewRecord){?>
 
 <div id="form_curso">
-    <p class="help-block">Los campos con <span class="required">*</span> son queridos.</p>
+    <p class="help-block">Los campos con <span class="required">*</span> son requeridos.</p>
 
     <?php #echo $form->errorSummary($model); ?>
 
@@ -31,8 +34,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-        <li><a href="#" onclick="AbrirModal('Temas del curso',600,460,'<?php echo Yii::app()->getBaseUrl(true)?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia;?>">Agregar temas</a></li>
-        <li><a href="#" onclick="AbrirModal('Estudiante del curso',600,460,'<?php echo Yii::app()->getBaseUrl(true)?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
+        <li><a href="#" onclick="AbrirModal('Temas del curso','600px','460px','<?php echo Yii::app()->getBaseUrl(true)?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia;?>">Agregar temas</a></li>
+        <li><a href="#" onclick="AbrirModal('Estudiante del curso','600px','460px','<?php echo Yii::app()->getBaseUrl(true)?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
+        <li><a href="#" onclick="AbrirModal('Evaluaciónes del curso','750px','100%','<?php echo Yii::app()->getBaseUrl(true)?>/evaluacion/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar Evaluación</a></li>
     </ul>
 </div>
 <?php } ?>
@@ -40,7 +44,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     
     <?php echo $form->dropDownListRow($model, 'id_grado', CHtml::listData(Grado::model()->findAll(), 'id_grado', 'desc_verbal'), array('style' => '')) ?>
     
+    <?php //$model->?>
     <?php
+    echo $model->getAttributeLabel('fecha_inicio'). " - ".$model->getAttributeLabel('fecha_cierre');
     $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'name' => 'Cursos[fecha_inicio]',
         'value' => ($model->fecha_inicio != '' ? $model->fecha_inicio . ' - ' . $model->fecha_cierre : ''),

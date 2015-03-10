@@ -7,7 +7,7 @@ class ContenidosController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
-
+    
     /**
      * @return array action filters
      */
@@ -99,6 +99,7 @@ class ContenidosController extends Controller {
      */
     public function actionNuevoContedioMediaCurso()
     {
+        $this->bootstrap = true;
         //$this->layout="//layouts/column4";
         $this->render('contedioMedia');
     }

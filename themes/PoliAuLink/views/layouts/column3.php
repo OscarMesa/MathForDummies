@@ -11,6 +11,26 @@
                                 'danger'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
                             ),
                         )); ?>
+
+<?php 
+            Yii::app()->clientScript->registerCssFile(Yii::app()->createAbsoluteUrl('/themes/PoliAuLink/css/column3.css'), 'screen, projection');
+
+            Yii::app()->clientScript->registerScript('procesando','$(function(){'
+                    . ' $(document).submit(function() {
+                            $(\'.procesando\').css(\'display\', \'block\');
+                          setTimeout(function(){
+
+                            $(\'.procesando\').css(\'display\', \'none\');
+
+                         }, 7000);
+                       });'
+                    . '});');
+              
+              
+             
+        ?>
+<div id="cargando" class="alert alert-warning procesando alert-block" style="display: none;"><img src="<?php echo Yii::app()->createAbsoluteUrl('themes/PoliAuLink/images/ajax-loader.gif');?>"> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
+      
 <div class="span-19">
 	<div id="content">
 		<?php echo $content; ?>

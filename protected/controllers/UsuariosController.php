@@ -31,24 +31,23 @@ class UsuariosController extends Controller {
      */
     public function actionObtenerEstudiantesAjax()
     {
+        Yii::import('application.modules.cruge.interfaces.ICrugeField');
+        Yii::import('application.modules.cruge.models.data.CrugeField');
         $serch = $_REQUEST['term'];
-        $campos = CrugeField::model()->findAll(array(
-            'alias' => 'campos',
-            'condition' => "campos.idfield IN (1)",
-            'with' => array(
-                        'values' => array(
-                            'alias' => 'valores',
-                            'together' => true,
-                            'condition' => 'iduser NOT IN (SELECT inte.id_integrante FROM integrantes_curso inte WHERE cursos_id = ?) AND lower(value) LIKE ? COLLATE utf8_general_ci',
-                            'params' => array($_REQUEST['curso'],'%'.$serch.'%')
-                        )
-                      ),
-        ));
+        $sql = "SELECT `valores`.`iduser`, `valores`.`value`,
+		(SELECT c1.`value` FROM math_fieldvalue c1 WHERE (c1.idfield IN (8)) AND valores.iduser = c1.iduser LIMIT 1) AS AplicaCurso
+                FROM `math_field` `campos`  
+                LEFT OUTER JOIN `math_fieldvalue` `valores` ON (`valores`.`idfield`=`campos`.`idfield`)  
+                WHERE (campos.idfield IN (1)) 
+                AND (iduser NOT IN (SELECT inte.id_integrante FROM integrantes_curso inte WHERE cursos_id = ? AND estado = 1) 
+                AND lower(value) LIKE ? COLLATE utf8_general_ci)";
+        $connection=Yii::app()->db; 
+        $command=$connection->createCommand($sql);
+        $r = $command->queryAll(true,array($_REQUEST['curso'],'%'.$serch.'%'));
         $array_return  = array();
-        foreach ($campos as $valor) {
-                foreach ($valor->values as $v) {
-                    $array_return[] = array('id'=>$v->iduser, 'text'=> $v->value);
-                }
+        foreach ($r as $valor) {
+            if($valor['AplicaCurso'])
+                    $array_return[] = array('id'=>$valor['iduser'], 'text'=> $valor['value']);
         }
         echo json_encode($array_return);
     }

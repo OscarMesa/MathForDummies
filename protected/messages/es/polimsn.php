@@ -10,5 +10,8 @@ return array(
     'this user has requested password change' => 'Este usuario ha solicitado cambio de contraseña.',
     'the issue was updated successfully'=>  'El tema fue actualizado correctamente',
     'The student was added successfully , I was one sent an email to% s notificanción' => 'El estudiante fue agregado exitosamente , se una enviado  un correo de notificanción a % s',
-    'The student successfully been added , is to send an email to {mail}' => 'El estudiante a sido agregado exitosamente, se a enviado un correo electronico a {mail}'
+    'The student successfully been added , is to send an email to {mail}' => 'El estudiante a sido agregado exitosamente, se a enviado un correo electronico a {mail}',
+    'Successful linkage course {name_course}' => 'Vinculacón exitosa al curso {name_course}',
+    'Processing , Please wait a moment...' => 'Procesando, por favor espere un momento...',
+    'Fields with <span class="required">*</span> are required.' => 'Los campos con <span class="required">*</span> son requeridos',
 );

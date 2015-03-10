@@ -60,14 +60,14 @@ html
   </table>
   <table width="580" height="40" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="300"><p style="text-align:left; font-size: 15px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">
-            <?php echo Yii::app()->user->um->getFieldValue($curso->usuario,'nombre'); ?>, 
+    <td width="450"><p style="text-align:left; font-size: 15px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">
+            <?php echo ucwords(Yii::app()->user->um->getFieldValueInstance($usuario->iduser,'nombrecompleto')->value); ?>, 
             tu vinculacion al cursor <b><?php echo $curso->nombre_curso; ?></b> fue exitosa.<br/>
       </p></td>
     <td align="right">
-    <table width="280"  align="center" border="0" cellspacing="0" cellpadding="0">
+    <table width="130"  align="center" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="280" height="28"><img src="http://fc08.deviantart.net/fs70/f/2011/160/0/a/gmail_metal_icon_256x256_px_by_agamemmnon-d3igont.png" width="41" height="33" /></td>
+        <td width="130" height="28"><img src="http://fc08.deviantart.net/fs70/f/2011/160/0/a/gmail_metal_icon_256x256_px_by_agamemmnon-d3igont.png" width="41" height="33" /></td>
         </tr>
     </table></td>
   </tr>
@@ -77,7 +77,7 @@ html
     <td>
         <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">
               El curso se encuentran habilitado a partir de 
-              <?php echo $curso->fecha_inicio ?>, su culminacion sera en el <?php $curso->fecha_cierre; ?>.
+              <?php echo $curso->fecha_inicio ?>, su culminacion sera en el <?php echo $curso->fecha_cierre; ?>.
           
       </span>
     </td>
@@ -86,11 +86,13 @@ html
           <td>
               <b><?php echo $curso->nombre_curso; ?> contiene los siguentes temas:</b>
               <?php
+                  echo "<table><ul>";
                   foreach ($curso->temas as $val) {
-                      echo  "</br> <span class='icon-ok'></span> ".$val['titulo'];
+                      echo  "<tr><td> <li>".$val['titulo']."</li><td></tr>";
                   } 
+                  echo "</ul></table>";
               ?>
-              Cualquier sugerencia o inquietud se podra comunicar con le profesor <b>Diego Ochoa</b>
+              Cualquier sugerencia o inquietud se podra comunicar con le profesor <b><?php echo ucwords(Yii::app()->user->um->getFieldValueInstance($curso->id_docente,'nombrecompleto')->value); ?></b>
           </td>
       </tr>    
       <tr>
