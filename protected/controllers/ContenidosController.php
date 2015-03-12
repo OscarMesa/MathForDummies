@@ -29,10 +29,34 @@ class ContenidosController extends Controller {
         $multimedia = ImgVideosSonido::model()->with(array('multimedia' => array('alias' => 'multimedia')));
     }
 
-    public function actionSubir_img()
+    public function actionSubir_documento_adjunto()
     {
-        $_FILES
+        
+        $model = new  DocumentosAdjuntos;
+        $f = $_FILES['file'];
+
+        $datos=array(
+                        'id_usuario_doc_adj'=>Yii::app()->user->getId(),
+                        'nom_original_doc_adj'=>$f['name'],
+                        'registro_doc_adj'=>file_get_contents($f['tmp_name']),
+                        'extension_doc_adj'=>$f['type'],
+                    );
+
+        $model->attributes=$datos;
+        if($model->save()){
+            echo json_encode(array('id'=>Yii::app()->db->getLastInsertID(), $f['name'])); 
+        }
     }    
+
+    public function actionEliminar_documento_adjunto()
+    {
+        $model = DocumentosAdjuntos::model()->deleteByPk($id);
+        if($model){
+            echo "si";
+        }else{
+            echo "no";
+        }
+    }
 
     /**
      * Displays a particular model.

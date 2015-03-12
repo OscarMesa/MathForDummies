@@ -13,15 +13,20 @@
 Yii::app()->clientScript->registerScript("search", "
 
 $(document).on('submit','#aform',function(){
-
-	console.log('sdfsdfdssdf sf df');
-
+	console.log('asdasdas');
 });
 
 Dropzone.prototype.removeFile=function(file){
 	console.log(file);
 	this.emit(\"removedfile\", file);
 };
+
+Dropzone.prototype.on('success', function (rep,h) {
+	data = $.parseJSON(h);
+    console.log(data.id);
+    $(rep.previewElement).attr('cod_img', data.id);
+});
+
 
 ");
 	
