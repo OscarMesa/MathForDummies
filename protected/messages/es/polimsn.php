@@ -14,5 +14,6 @@ return array(
     'Successful linkage course {name_course}' => 'Vinculacón exitosa al curso {name_course}',
     'Processing , Please wait a moment...' => 'Procesando, por favor espere un momento...',
     'Fields with <span class="required">*</span> are required.' => 'Los campos con <span class="required">*</span> son requeridos',
-    'You must select at least one exercise for creating evaluation.' => 'Debe seleccionar al menos un ejercicio para la creación de la evaluación.'
+    'You must select at least one exercise for creating evaluation.' => 'Debe seleccionar al menos un ejercicio para la creación de la evaluación.',
+    'You must select at least one item for creating evaluation.' => 'Debe seleccionar al menos un tema para la creación de la evaluación.'
 );

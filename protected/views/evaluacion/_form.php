@@ -82,7 +82,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
 <div class="row-fluid">
     <div class="span-6 bql-evaluacion-content">
         <?php
-        echo CHtml::checkBoxList('temas', $select_array, CHtml::listData($temas, 'idtema', 'titulo'), array('class' => '',
+        echo CHtml::checkBoxList('Evaluacion[temas]', $select_array, CHtml::listData($temas, 'idtema', 'titulo'), array('class' => '',
             'template' => '<label class="checkbox">{input}{label}</label>',
 //                                                              
         ));

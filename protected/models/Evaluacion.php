@@ -17,6 +17,7 @@
  */
 class Evaluacion extends CActiveRecord
 {
+    const TP_EVL_VIRTUAL = 2;
     private $ejercicios;
     private $temas;
 	/**
@@ -44,7 +45,8 @@ class Evaluacion extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('cursos_id, fecha_inicio, fecha_fin, porcentaje, tiempo_limite, estado_evaluación', 'safe', 'on'=>'search'),
-                        array('ejercicios','ValidarExistenciaEjericicos')
+                        array('ejercicios','ValidarExistenciaEjericicos'),
+                        array('temas','ValidarExistenciaTemas'),
 		);
 	}
 
@@ -65,8 +67,13 @@ class Evaluacion extends CActiveRecord
         
         public function ValidarExistenciaEjericicos($attribute,$params)
         {
-            if(count($this->ejercicios)<=0)
-                $this->addError('ejercicios',  Yii::t('polimsn','You must select at least one exercise for creating evaluation.'));
+            if(count($this->ejercicios)<=0 && $this->tipo_evaluacion_id = self::TP_EVL_VIRTUAL)
+                $this->addError($attribute,  Yii::t('polimsn','You must select at least one exercise for creating evaluation.'));
+        }
+        public function ValidarExistenciaTemas($attribute,$params)
+        {
+            if(count($this->temas)<=0)
+                $this->addError($attribute,  Yii::t('polimsn','You must select at least one item for creating evaluation.'));
         }
 
 	/**

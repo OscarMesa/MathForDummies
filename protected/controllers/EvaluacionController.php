@@ -45,6 +45,8 @@ class EvaluacionController extends Controller {
         $this->layout = "modal";
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
+            if(isset($_POST['Evaluacion']['ejercicio']))
+                $model->ej
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->cursos_id));
         }
