@@ -2,15 +2,12 @@
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'evaluacion-form',
     'enableAjaxValidation' => false,
-    'enableClientValidation' => true,
+    'enableClientValidation' => false,
     'clientOptions' => array(
         'validateOnSubmit' => true,
         'validateOnChange' => true,
         'afterValidate' => "js: function(form, data, hasError) {
-            console.log(form);
-            console.log(data);
-            console.log(hasError);
-            return false;
+            return hasError;
         }"
     ),
      
@@ -78,6 +75,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         ?>
     </div>
 </div>
+<?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10)); ?>
 </div>
 
 <label for="temas[]">Temas</label>

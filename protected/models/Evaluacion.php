@@ -17,6 +17,8 @@
  */
 class Evaluacion extends CActiveRecord
 {
+    private $ejercicios;
+    private $temas;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -42,6 +44,7 @@ class Evaluacion extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('cursos_id, fecha_inicio, fecha_fin, porcentaje, tiempo_limite, estado_evaluación', 'safe', 'on'=>'search'),
+                        array('ejercicios','ValidarExistenciaEjericicos')
 		);
 	}
 
@@ -59,6 +62,12 @@ class Evaluacion extends CActiveRecord
                        
 		);
 	}
+        
+        public function ValidarExistenciaEjericicos($attribute,$params)
+        {
+            if(count($this->ejercicios)<=0)
+                $this->addError('ejercicios',  Yii::t('polimsn','You must select at least one exercise for creating evaluation.'));
+        }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -73,6 +82,7 @@ class Evaluacion extends CActiveRecord
 			'tiempo_limite' => 'Tiempo Limite',
 			'estado_evaluación' => 'Estado Evaluación',
 			'tipo_evaluacion_id' => 'Tipo de evaluación',
+			'ejercicios' => 'Ejericios',
 		);
 	}
 
