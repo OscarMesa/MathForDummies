@@ -10,6 +10,7 @@
  * @property string $porcentaje
  * @property string $tiempo_limite
  * @property integer $estado_evaluación
+ * @property integer $tipo_evaluacion_id
  *
  * The followings are the available model relations:
  * @property Cursos $cursos
@@ -32,7 +33,8 @@ class Evaluacion extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cursos_id', 'required'),
+			array('cursos_id,porcentaje,tiempo_limite,tipo_evaluacion_id', 'required'),
+                        array('fecha_inicio','required','message'=>'El rango de fecha es requerido'),
 			array('cursos_id, estado_evaluación', 'numerical', 'integerOnly'=>true),
                         array('porcentaje', 'match', 'pattern'=>'(/^\d*\.?\d*[0-9]+\d*$)|(^[0-9]+\d*\.\d*$)/'),
 			array('porcentaje', 'length', 'max'=>10),
@@ -52,6 +54,7 @@ class Evaluacion extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'curso' => array(self::BELONGS_TO, 'Cursos', 'cursos_id'),
+			'tipo' => array(self::BELONGS_TO, 'TipoEvaluacion', 'cursos_id'),
 			'temas_evaluacion' => array(self::HAS_MANY, 'TemaEvaluaciones', 'evaluaciones_id'),
                        
 		);
@@ -69,6 +72,7 @@ class Evaluacion extends CActiveRecord
 			'porcentaje' => 'Porcentaje',
 			'tiempo_limite' => 'Tiempo Limite',
 			'estado_evaluación' => 'Estado Evaluación',
+			'tipo_evaluacion_id' => 'Tipo de evaluación',
 		);
 	}
 
@@ -96,6 +100,7 @@ class Evaluacion extends CActiveRecord
 		$criteria->compare('porcentaje',$this->porcentaje,true);
 		$criteria->compare('tiempo_limite',$this->tiempo_limite,true);
 		$criteria->compare('estado_evaluación',$this->estado_evaluación);
+		$criteria->compare('tipo_evaluacion_id',$this->tipo_evaluacion_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

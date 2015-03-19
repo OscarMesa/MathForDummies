@@ -13,7 +13,7 @@ defined('MYSQL_DB') or define('MYSQL_DB','math');
 defined('MYSQL_PORT') or define('MYSQL_PORT','5432');
 
 // remove the following lines when in production mode
-defined('YII_DEBUG') or define('YII_DEBUG',FALSE);
+defined('YII_DEBUG') or define('YII_DEBUG',TRUE);
 defined('ACTIVE') or define('ACTIVE',1);
 defined('INACTIVE') or define('INACTIVE',2);
 // specify how many levels of call stack should be shown in each log message
