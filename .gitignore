@@ -9,3 +9,4 @@
 /protected/runtime
 /themes/PoliAuLink/images/contenidos
 !/protected/config/
+/nbproject/project.properties
