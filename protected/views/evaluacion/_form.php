@@ -1,4 +1,14 @@
 <?php
+        $baseUrl = Yii::app()->baseUrl;
+        $cs = Yii::app()->getClientScript();
+
+        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.js', CClientScript::POS_END);
+        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.date.extensions.js', CClientScript::POS_END);
+        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.extensions.js', CClientScript::POS_END);
+        $cs->registerScript('input-mask', ''
+        . '$("[data-mask]").inputmask();'
+        . '');
+
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'evaluacion-form',
     'enableAjaxValidation' => false,
@@ -6,11 +16,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'clientOptions' => array(
         'validateOnSubmit' => true,
         'validateOnChange' => true,
-        'afterValidate' => "js: function(form, data, hasError) {
-            return hasError;
-        }"
     ),
-     
         ));
 ?>
 
@@ -52,42 +58,43 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
 
 <?php echo $form->error($model, 'fecha_inicio', array('class' => 'help-block error', 'maxlength' => 10)); ?>
 
-<?php echo $form->textFieldRow($model, 'porcentaje', array('class' => 'span5', 'maxlength' => 10)); ?>
+<?php echo $form->textFieldRow($model, 'porcentaje', array('class' => 'span5', 'maxlength' => 10, "data-inputmask" => "'mask': ['999%']")); ?>
 
 <?php echo $form->textFieldRow($model, 'tiempo_limite', array('class' => 'span5')); ?>
 
-<?php echo $form->radioButtonListRow($model, 'tipo_evaluacion_id', CHtml::listData(TipoEvaluacion::model()->findAll(),'tipoid','tipo_evaluacion'), array('data-toggle'=>"tooltip", 'data-placement'=>"top", 'data-original-title'=>""),array()); ?>
+<?php echo $form->radioButtonListRow($model, 'tipo_evaluacion_id', CHtml::listData(TipoEvaluacion::model()->findAll(), 'tipoid', 'tipo_evaluacion'), array('data-toggle' => "tooltip", 'data-placement' => "top", 'data-original-title' => ""), array()); ?>
 
-<?php // echo $form->textFieldRow($model, 'estado_evaluación', array('class' => 'span5')); ?>
-<div id="contenidos-virtuales" style="display: none">
-<label for="ejercicios[]">Ejercicios</label>
-<div class="row-fluid">
-    <div class="bql-evaluacion-content">
-        <?php 
-        $this->widget('bootstrap.widgets.TbListView',array(
-                'id'=>'list-evaluaciones-items',
-                'dataProvider'=>$Mejercicios->searchForEvaluacion(),
-                'itemView'=>'_ejerciciosEvaluacion',
-                'sortableAttributes'=>array(
+<div id="contenidos-virtuales" style="<?php echo ($model->tipo_evaluacion_id == 2 ? "display: block" : "display: none") ?>">
+    <label for="ejercicios[]">Ejercicios</label>
+    <div class="row-fluid">
+        <div class="bql-evaluacion-content">
+            <?php
+            $this->widget('bootstrap.widgets.TbListView', array(
+                'id' => 'list-evaluaciones-items',
+                'dataProvider' => $Mejercicios->searchForEvaluacion(),
+                'itemView' => '_ejerciciosEvaluacion',
+                'viewData' => array('model' => $model),
+                'sortableAttributes' => array(
                     'name',
                 ),
             ));
-        ?>
+            ?>
+        </div>
     </div>
-</div>
-<?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10)); ?>
+    <?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10)); ?>
 </div>
 
 <label for="temas[]">Temas</label>
 <div class="row-fluid">
     <div class="span-6 bql-evaluacion-content">
         <?php
-        echo CHtml::checkBoxList('Evaluacion[temas]', $select_array, CHtml::listData($temas, 'idtema', 'titulo'), array('class' => '',
+        echo CHtml::checkBoxList('Evaluacion[temas]', $model->temas, CHtml::listData($temas, 'idtema', 'titulo'), array('class' => '',
             'template' => '<label class="checkbox">{input}{label}</label>',
 //                                                              
         ));
         ?>
     </div>
+    <?php echo $form->error($model, 'temas', array('class' => 'help-block error', 'maxlength' => 10)); ?>
 </div>
 
 <?php echo $form->hiddenField($model, 'cursos_id', array()); ?>
@@ -101,17 +108,17 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
     ?>
 </div>
 <script type="text/javascript">
-    $("#Evaluacion_tipo_evaluacion_id_1").change(function(e){
-       $("#contenidos-virtuales").show('slow'); 
+    $("#Evaluacion_tipo_evaluacion_id_1").change(function (e) {
+        $("#contenidos-virtuales").show('slow');
     });
-    $("#Evaluacion_tipo_evaluacion_id_0").change(function(e){
-       $("#contenidos-virtuales").hide('slow');
+    $("#Evaluacion_tipo_evaluacion_id_0").change(function (e) {
+        $("#contenidos-virtuales").hide('slow');
     });
 </script>
 <?php $this->endWidget(); ?>
 <?php
 $script = Yii::app()->getClientScript();
-$script->registerScript('tooltip','(function($){'
+$script->registerScript('tooltip', '(function($){'
         . '$("#Evaluacion_tipo_evaluacion_id_0").attr("data-original-title","Esta evaluación aplica cuando solo se va a evaluar dentro del aula mediante un método tradicional.");
             $("#Evaluacion_tipo_evaluacion_id_1").attr("data-original-title","Esta evaluación será realizada por el estudiante a través de la plataforma. De igual manera se habilitará una sección para agregar contenidos.");'
         . '})(jQuery)');

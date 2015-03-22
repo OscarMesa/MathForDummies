@@ -45,10 +45,10 @@ class EvaluacionController extends Controller {
         $this->layout = "modal";
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
-            if(isset($_POST['Evaluacion']['ejercicio']))
-                $model->ej
+            if(isset($_POST['Evaluacion']['temas']))
+                $model->temas = $_POST['Evaluacion']['temas'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->cursos_id));
+                $this->redirect(array('update', 'id' => $model->cursos_id));
         }
         $model->cursos_id = $id;
         $curso = Cursos::model()->findByPk($id); 
