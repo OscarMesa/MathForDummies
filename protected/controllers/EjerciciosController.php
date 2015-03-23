@@ -1,6 +1,6 @@
 <?php
 
-class EvaluacionController extends Controller {
+class EjerciciosController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -21,7 +21,7 @@ class EvaluacionController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-        return array();
+      return array();
     }
 
     /**
@@ -29,6 +29,7 @@ class EvaluacionController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = "modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -37,31 +38,21 @@ class EvaluacionController extends Controller {
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param int $id Identificador del curso.
      */
-    public function actionCreate($id) {
-        $model = new Evaluacion();
-        $Mejercicios = new Ejercicios('search');
-        $this->layout = "modal";
-        if (isset($_POST['Evaluacion'])) {
-            $model->attributes = $_POST['Evaluacion'];
-            if(isset($_POST['Evaluacion']['temas']))
-                $model->temas = $_POST['Evaluacion']['temas'];
+    public function actionCreate() {
+        $model = new Ejercicios;
+
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
+
+        if (isset($_POST['Ejercicios'])) {
+            $model->attributes = $_POST['Ejercicios'];
             if ($model->save())
-                $this->redirect(array('update', 'id' => $model->cursos_id));
+                $this->redirect(array('view', 'id' => $model->id_ejercicio));
         }
-        $model->cursos_id = $id;
-        $curso = Cursos::model()->findByPk($id); 
-        $Mejercicios->idMateria = $curso->idmateria;       
-        $Mejercicios->idusuariocreador = Yii::app()->user->id;       
-        $temas = Tema::model()->findAll(array('condition'=>'estado="active" AND idcurso=?','params'=>array($id)));
-        $select_array = array();
+
         $this->render('create', array(
             'model' => $model,
-            'curso' => Cursos::model()->findByPk($id),
-            'temas' => $temas,
-            'Mejercicios' => $Mejercicios,
-            'select_array' => $select_array
         ));
     }
 
@@ -76,10 +67,10 @@ class EvaluacionController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Evaluacion'])) {
-            $model->attributes = $_POST['Evaluacion'];
+        if (isset($_POST['Ejercicios'])) {
+            $model->attributes = $_POST['Ejercicios'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->cursos_id));
+                $this->redirect(array('view', 'id' => $model->id_ejercicio));
         }
 
         $this->render('update', array(
@@ -108,7 +99,7 @@ class EvaluacionController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Evaluacion');
+        $dataProvider = new CActiveDataProvider('Ejercicios');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -118,11 +109,10 @@ class EvaluacionController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $this->layout = "modal";
-        $model = new Evaluacion('search');
+        $model = new Ejercicios('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Evaluacion']))
-            $model->attributes = $_GET['Evaluacion'];
+        if (isset($_GET['Ejercicios']))
+            $model->attributes = $_GET['Ejercicios'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -135,7 +125,7 @@ class EvaluacionController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = Evaluacion::model()->findByPk($id);
+        $model = Ejercicios::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -146,7 +136,7 @@ class EvaluacionController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'evaluacion-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'ejercicios-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }

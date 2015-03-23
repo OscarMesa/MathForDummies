@@ -34,8 +34,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-        <li><a href="#" onclick="AbrirModal('Temas del curso','600px','460px','<?php echo Yii::app()->getBaseUrl(true)?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia;?>">Agregar temas</a></li>
-        <li><a href="#" onclick="AbrirModal('Estudiante del curso','600px','460px','<?php echo Yii::app()->getBaseUrl(true)?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
+        <li><a href="#" onclick="AbrirModal('Temas del curso','800px','100%','<?php echo Yii::app()->getBaseUrl(true)?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia;?>">Agregar temas</a></li>
+        <li><a href="#" onclick="AbrirModal('Estudiante del curso','600px','90%','<?php echo Yii::app()->getBaseUrl(true)?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
         <li><a href="#" onclick="AbrirModal('Evaluaciónes del curso','750px','100%','<?php echo Yii::app()->getBaseUrl(true)?>/evaluacion/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar Evaluación</a></li>
     </ul>
 </div>
@@ -65,7 +65,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ),
         'htmlOptions' => array(
             'placeholder' => 'Fecha Inicio - Fecha Cierre',
-            'style' => 'width:98%;',
+            'style' => 'width:50% !important;',
             //'id'=>'Cursos_fecha_inicio_em_'
         ),
             )
@@ -78,7 +78,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     ?>
 
     <?php echo $form->dropDownListRow($model, 'idmateria', CHtml::listData(Materias::model()->findAll('state_materia=?', array('active')), 'idmaterias', 'nombre_materia'), array('style' => '')) ?>
-    
+   
     <?php echo $form->textAreaRow($model, 'descripcion_curso', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
     
     <?php if(!$model->isNewRecord){?>

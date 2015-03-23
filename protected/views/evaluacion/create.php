@@ -13,4 +13,4 @@ array('label'=>'Manage Evaluacion','url'=>array('admin')),
 
 <h3>Crear evaluación en <?php echo $curso->nombre_curso; ?></h3>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'temas' => $temas)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'Mejercicios' => $Mejercicios,'temas' => $temas,'select_array'=>$select_array)); ?>
