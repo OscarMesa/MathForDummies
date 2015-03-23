@@ -4,5 +4,4 @@
 
 ?>
 
-<div id="summernote">Hello Summernote</div>
-
+<textarea name='<?php echo $this->nom; ?>' id="summernote"></textarea>

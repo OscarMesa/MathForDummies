@@ -40,6 +40,7 @@ class ContenidosController extends Controller {
                         'nom_original_doc_adj'=>$f['name'],
                         'registro_doc_adj'=>file_get_contents($f['tmp_name']),
                         'extension_doc_adj'=>$f['type'],
+                        'tamanio_doc_adj'=>$f['size'],
                     );
 
         $model->attributes=$datos;
@@ -48,9 +49,23 @@ class ContenidosController extends Controller {
         }
     }    
 
+    public function actionDescargar_documento_adjunto()
+    {
+
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Content-Transfer-Encoding: binary');
+            header('Content-length: '.$val['tamanio_doc_adj']);
+            header('Content-Type: '.$val['extension_doc_adj']);
+            header('Content-Disposition: attachment; filename='.str_replace(' ','-',$val['nom_original_doc_adj']));
+         
+            echo $val['registro_doc_adj'];
+    }
+
     public function actionEliminar_documento_adjunto()
     {
-        $model = DocumentosAdjuntos::model()->deleteByPk($id);
+        $model = DocumentosAdjuntos::model()->deleteByPk(Yii::app()->request->getPost('cod'));
         if($model){
             echo "si";
         }else{
@@ -72,47 +87,25 @@ class ContenidosController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id) {
-        $this->layout = "modal";
-        
+    public function actionCreate() {
+
         $model = new Contenidos();
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
 
         if (isset($_POST['Contenidos'])) {
             $model->attributes = $_POST['Contenidos'];
-            $model->almacenado_total = TRUE;
+
             
 //            exit();
             if ($model->save()){
-                if(isset($_POST['idTaller']))
-                {
-                   $contenidoTaller = new ContenidosTalleres();
-                   $contenidoTaller->contenidos_id = $model->id;
-                   $contenidoTaller->talleres_idtalleres = $_POST['idTaller'];
-                   if($contenidoTaller->save())
-                   {
-                       $user = Yii::app()->getComponent('user');
-                       $user->setFlash(
+                       //tomar el ultimo id insrtado para insertart todos lo ocntenido de este usuario para ese contenido si hay.
+                       Yii::app()->user->setFlash(
                             'success', "<strong>Exito!</strong> El contenido a sido agregado al taller exitosamente."
                         );
-                       $this->redirect(Yii::app()->getBaseUrl(true).'/talleres/update'.$_POST['idTaller']);
-                   }
-                }else{
-                    $this->redirect(array('admin'));
-                }
             }
-            // $this->redirect(array('view', 'id' => $model->id));
-        }else {
-            Contenidos::model()->deleteAll('almacenado_total=?', array(FALSE));
-            $model->almacenado_total = FALSE;
-            $model->insert();
+        }else{
+                $this->render('create', array(                    'model' => $model,
+                ));
         }
-
-        $this->render('create', array(
-            'model' => $model,
-            'contenido' => $this,
-        ));
     }
     
     /**
