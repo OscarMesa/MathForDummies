@@ -17,7 +17,8 @@ class dropzone extends CPortlet {
 
 	public $baseUrl;
 	public $cs;
-	public $action;
+    public $action;
+	public $files=array();
 
     public function __construct() {
         $this->baseUrl = Yii::app()->baseUrl; 

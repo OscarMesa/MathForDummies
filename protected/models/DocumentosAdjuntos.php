@@ -9,6 +9,8 @@
  * @property string $nom_original_doc_adj
  * @property string $registro_doc_adj
  * @property string $extension_doc_adj
+ * @property string $tamanio_doc_adj
+ * @property integer $state_doc_adj
  *
  * The followings are the available model relations:
  * @property Contenidos[] $contenidoses
@@ -32,12 +34,12 @@ class DocumentosAdjuntos extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_usuario_doc_adj, nom_original_doc_adj, registro_doc_adj, extension_doc_adj, tamanio_doc_adj', 'required'),
-			array('id_usuario_doc_adj', 'numerical', 'integerOnly'=>true),
+			array('id_usuario_doc_adj, state_doc_adj', 'numerical', 'integerOnly'=>true),
 			array('extension_doc_adj', 'length', 'max'=>20),
 			array('tamanio_doc_adj', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_doc_adj, id_usuario_doc_adj, nom_original_doc_adj, registro_doc_adj, extension_doc_adj, tamanio_doc_adj', 'safe', 'on'=>'search'),
+			array('id_doc_adj, id_usuario_doc_adj, nom_original_doc_adj, registro_doc_adj, extension_doc_adj, tamanio_doc_adj, state_doc_adj', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +66,8 @@ class DocumentosAdjuntos extends CActiveRecord
 			'nom_original_doc_adj' => 'Nom Original Doc Adj',
 			'registro_doc_adj' => 'Registro Doc Adj',
 			'extension_doc_adj' => 'Extension Doc Adj',
-			'tamanio_doc_adj' => 'tamanio_doc_adj',
+			'tamanio_doc_adj' => 'Tamanio Doc Adj',
+			'state_doc_adj' => 'State Doc Adj',
 		);
 	}
 
@@ -92,10 +95,28 @@ class DocumentosAdjuntos extends CActiveRecord
 		$criteria->compare('registro_doc_adj',$this->registro_doc_adj,true);
 		$criteria->compare('extension_doc_adj',$this->extension_doc_adj,true);
 		$criteria->compare('tamanio_doc_adj',$this->tamanio_doc_adj,true);
+		$criteria->compare('state_doc_adj',$this->state_doc_adj);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function buscar_adjuntos($usuario=false, $state=0)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->select = 'id_doc_adj';
+		$criteria->condition = 'state_doc_adj=:state AND id_usuario_doc_adj=:usuario';
+		$criteria->params = array(':state'=>$state, ':usuario'=>$usuario);
+		$model = $this->findAll($criteria);
+		return $model;
+	}
+
+	public function actualiza_adjunto($id = false)
+	{
+		$adj = $this->findByPk($id);
+		$adj->state_doc_adj=1;
+		$adj->update();
 	}
 
 	/**

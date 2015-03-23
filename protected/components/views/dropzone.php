@@ -7,18 +7,15 @@
     <input name="file" type="file" multiple />
   </div>
 <?php
-	$f= Yii::app()->db->createCommand("select * from documentos_adjuntos where id_usuario_doc_adj='".Yii::app()->user->getId()."'")->queryAll();
-	
 	function formatBytes($size, $precision = 2)
 	{
 	    $base = log($size, 1024);
 	    $suffixes = array('', 'k', 'M', 'G', 'T');   
-
 	    return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 	}
 
-	if($f){
-		foreach ($f as $val) {
+	if($this->files){
+		foreach ($this->files as $val) {
 			echo '<div class="dz-preview dz-file-preview dz-processing dz-success dz-complete" cod_img="'.$val['id_doc_adj'].'">  
 							<div class="dz-image">
 								<img data-dz-thumbnail="">

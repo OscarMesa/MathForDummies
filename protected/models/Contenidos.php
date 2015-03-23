@@ -33,6 +33,7 @@ class Contenidos extends CActiveRecord
 		return array(
 			array('state_contenido', 'length', 'max'=>8),
 			array('titulo', 'length', 'max'=>45),
+			array('titulo, detalle', 'required'),
 			array('detalle', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

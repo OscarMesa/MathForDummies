@@ -18,6 +18,7 @@ class Summernote extends CPortlet {
     public $cs;
     public $baseUrl;
     public $nom;
+    public $val;
     
     public function __construct() {
         $this->baseUrl = Yii::app()->baseUrl; 
