@@ -40,6 +40,7 @@ class ContenidosController extends Controller {
                         'nom_original_doc_adj'=>$f['name'],
                         'registro_doc_adj'=>file_get_contents($f['tmp_name']),
                         'extension_doc_adj'=>$f['type'],
+                        'tamanio_doc_adj'=>$f['size'],
                     );
 
         $model->attributes=$datos;
@@ -48,13 +49,32 @@ class ContenidosController extends Controller {
         }
     }    
 
+    public function actionDescargar_documento_adjunto()
+    {
+
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Content-Transfer-Encoding: binary');
+            header('Content-length: '.$val['tamanio_doc_adj']);
+            header('Content-Type: '.$val['extension_doc_adj']);
+            header('Content-Disposition: attachment; filename='.str_replace(' ','-',$val['nom_original_doc_adj']));
+         
+            echo $val['registro_doc_adj'];
+    }
+
     public function actionEliminar_documento_adjunto()
     {
-        $model = DocumentosAdjuntos::model()->deleteByPk($id);
-        if($model){
-            echo "si";
-        }else{
-            echo "no";
+        $transaction=Yii::app()->db->beginTransaction();
+        try
+        {
+            ContenidosDocumentosAdjuntos::model()->eliminar_relacion_adj(Yii::app()->request->getPost('cod'));
+            DocumentosAdjuntos::model()->deleteByPk(Yii::app()->request->getPost('cod'));
+            $transaction->commit();
+        }
+        catch(Exception $e)
+        {
+           $transaction->rollback();
         }
     }
 
@@ -72,47 +92,33 @@ class ContenidosController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id) {
-        $this->layout = "modal";
-        
-        $model = new Contenidos();
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+    public function actionCreate() {
 
+        $model = new Contenidos();
         if (isset($_POST['Contenidos'])) {
             $model->attributes = $_POST['Contenidos'];
-            $model->almacenado_total = TRUE;
-            
-//            exit();
-            if ($model->save()){
-                if(isset($_POST['idTaller']))
-                {
-                   $contenidoTaller = new ContenidosTalleres();
-                   $contenidoTaller->contenidos_id = $model->id;
-                   $contenidoTaller->talleres_idtalleres = $_POST['idTaller'];
-                   if($contenidoTaller->save())
-                   {
-                       $user = Yii::app()->getComponent('user');
-                       $user->setFlash(
-                            'success', "<strong>Exito!</strong> El contenido a sido agregado al taller exitosamente."
-                        );
-                       $this->redirect(Yii::app()->getBaseUrl(true).'/talleres/update'.$_POST['idTaller']);
-                   }
-                }else{
-                    $this->redirect(array('admin'));
+            if ($model->save()){ 
+                $insert_id = Yii::app()->db->getLastInsertID();
+                $adjuntos = DocumentosAdjuntos::model()->buscar_adjuntos(Yii::app()->user->getId());
+                if(count($adjuntos)) {
+                    foreach ($adjuntos as $val) {
+                        $r_ca = new ContenidosDocumentosAdjuntos();
+                        $r_ca->id_contenido=$insert_id;
+                        $r_ca->id_document_adj=$val->id_doc_adj;
+                        if($r_ca->save()){
+                            DocumentosAdjuntos::model()->actualiza_adjunto($val->id_doc_adj);                            
+                        }
+                    }
                 }
+                Yii::app()->user->setFlash(
+                    'success', "<strong>Exito!</strong> El contenido a sido agregado."
+                );
             }
-            // $this->redirect(array('view', 'id' => $model->id));
-        }else {
-            Contenidos::model()->deleteAll('almacenado_total=?', array(FALSE));
-            $model->almacenado_total = FALSE;
-            $model->insert();
-        }
+        }else{
 
-        $this->render('create', array(
-            'model' => $model,
-            'contenido' => $this,
-        ));
+            $files = DocumentosAdjuntos::model()->buscar_adjuntos(Yii::app()->user->getId());
+            $this->render('create', array('model' => $model, 'files'=> $files) );
+        }
     }
     
     /**
@@ -139,14 +145,34 @@ class ContenidosController extends Controller {
 
         if (isset($_POST['Contenidos'])) {
             $model->attributes = $_POST['Contenidos'];
-            if ($model->save())
-                $this->redirect(array('admin'));
+            if ($model->save()){
+                $insert_id = $model->id;
+                $adjuntos = DocumentosAdjuntos::model()->buscar_adjuntos(Yii::app()->user->getId());
+                if(count($adjuntos)) {
+                    foreach ($adjuntos as $val) {
+                        $r_ca = new ContenidosDocumentosAdjuntos();
+                        $r_ca->id_contenido=$insert_id;
+                        $r_ca->id_document_adj=$val->id_doc_adj;
+                        if($r_ca->save()){
+                            DocumentosAdjuntos::model()->actualiza_adjunto($val->id_doc_adj);                            
+                        }
+                    }
+                }
+            }
+        }else{
+            $this->render('update', array(
+                'model' => $model,
+                'contenido' => $this,
+                'files'=> Yii::app()->db->createCommand("SELECT t2.* 
+                                              FROM contenidos_documentos_adjuntos t1, 
+                                                   documentos_adjuntos t2
+                                              WHERE 
+                                                    t1.id_contenido = '".$id."' 
+                                                    AND   
+                                                    t2.id_doc_adj = t1.id_document_adj")
+                                        ->queryAll()
+            ));
         }
-
-        $this->render('update', array(
-            'model' => $model,
-            'contenido' => $this,
-        ));
     }
 
     /**
@@ -173,7 +199,6 @@ class ContenidosController extends Controller {
      */
     public function actionIndex() {
         $model = new Contenidos();
-        $model->almacenado_total = TRUE;
         $model->state_contenido = "";
         $this->render('index', array(
             'dataProvider' => $model->search(),
@@ -186,7 +211,6 @@ class ContenidosController extends Controller {
     public function actionAdmin() {
         $model = new Contenidos('search');
         $model->unsetAttributes();  // clear any default values
-        $model->almacenado_total = TRUE;
         if (isset($_GET['Contenidos'])){
             $model->attributes = $_GET['Contenidos'];
             $model->id = $_GET['Contenidos']['id'];

@@ -22,7 +22,6 @@ $this->menu = array(
         &lt;&gt;</b>
     o <b>=</b>) al inicio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
 </p>
-
 <?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
     <?php
@@ -46,7 +45,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 return ($data->state_contenido == 'active'?'Activo':'Inactivo');
             },
         ),
-        'observacion',
+        'detalle',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
         ),

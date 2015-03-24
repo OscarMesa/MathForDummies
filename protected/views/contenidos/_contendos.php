@@ -18,7 +18,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 return ($data->state_contenido == 'active' ? 'Activo' : 'Inactivo');
             },
         ),
-        'observacion',
+        'detalle',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
             //'template'=>'{delete}{update}',

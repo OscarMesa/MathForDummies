@@ -26,7 +26,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
             },
         ),
         'titulo',
-        'observacion',
+        'detalle:html',
     ),
 ));
 ?>

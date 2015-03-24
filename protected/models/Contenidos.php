@@ -7,9 +7,11 @@
  * @property integer $id
  * @property string $state_contenido
  * @property string $titulo
- * @property string $texto
- * @property string $observacion
- * @property boolean $almacenado_total
+ * @property string $detalle
+ *
+ * The followings are the available model relations:
+ * @property DocumentosAdjuntos[] $documentosAdjuntoses
+ * @property Talleres[] $talleres
  */
 class Contenidos extends CActiveRecord
 {
@@ -29,13 +31,13 @@ class Contenidos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('state_contenido, titulo, texto, observacion', 'required'),
 			array('state_contenido', 'length', 'max'=>8),
-			array('titulo', 'length', 'max'=>55),
-			array('texto, observacion', 'safe'),
+			array('titulo', 'length', 'max'=>45),
+			array('titulo, detalle', 'required'),
+			array('detalle', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('state_contenido, titulo, texto, observacion', 'safe', 'on'=>'search'),
+			array('id, state_contenido, titulo, detalle', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,8 +49,8 @@ class Contenidos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'multimedia'=>array(self::MANY_MANY,'ImgVideosSonido','img_videos_sonido_contenidos(contenidos_id,img_videos_id)'),
-                    'telleres'=>array(self::MANY_MANY,'Talleres','contenidos_talleres(contenidos_id,talleres_idtalleres)'),
+			'documentosAdjuntoses' => array(self::MANY_MANY, 'DocumentosAdjuntos', 'contenidos_documentos_adjuntos(id_contenido, id_document_adj)'),
+			'talleres' => array(self::MANY_MANY, 'Talleres', 'contenidos_talleres(contenidos_id, talleres_idtalleres)'),
 		);
 	}
 
@@ -58,10 +60,10 @@ class Contenidos extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'id' => 'ID',
 			'state_contenido' => 'Estado Contenido',
 			'titulo' => 'Titulo',
-			'texto' => 'Area de texto',
-			'observacion' => 'Observación',
+			'detalle' => 'Detalle',
 		);
 	}
 
@@ -80,31 +82,18 @@ class Contenidos extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
+
 		$criteria=new CDbCriteria;
-                //if(isset($_GET['Contenidos']['id']))
-                    
-                $criteria->compare('id',$this->id);
-		$criteria->compare('state_contenido',$this->state_contenido);
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('state_contenido',$this->state_contenido,true);
 		$criteria->compare('titulo',$this->titulo,true);
-		$criteria->compare('texto',$this->texto,true);
-		$criteria->compare('observacion',$this->observacion,true);
-		$criteria->compare('almacenado_total',$this->almacenado_total);
+		$criteria->compare('detalle',$this->detalle,true);
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-        
-        public function contenidosXTaller($idtalleres=NULL){
-            $criteria=new CDbCriteria();
-            $criteria->alias = 'cont';
-            $criteria->join = 'INNER JOIN contenidos_talleres ct ON (ct.contenidos_id = cont.id)';
-            $criteria->condition = ' ct.talleres_idtalleres = ?';
-            $criteria->params = array($idtalleres);
-
-            return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-        }
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -116,7 +105,4 @@ class Contenidos extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
-        
-        
 }

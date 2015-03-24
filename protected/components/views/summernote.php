@@ -1,8 +1,5 @@
 <?php
     $this->registerScriptJS();
     $this->registerStyleCSS();
-
 ?>
-
-<div id="summernote">Hello Summernote</div>
-
+<textarea name='<?php echo $this->nom; ?>' id="Contenidos_detalle" class='summernote'><?php echo CHtml::encode($this->val); ?></textarea>

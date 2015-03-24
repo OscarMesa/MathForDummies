@@ -5,14 +5,16 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-	$this->menu=array(
+$this->menu=array(
 	array('label'=>'Listar Contenidos','url'=>array('../index')),
 	array('label'=>'Crear Contenido','url'=>array('../create')),
 	array('label'=>'Ver Contenido','url'=>array('view','id'=>$model->id)),
 	array('label'=>'Administrador de Contenidos','url'=>array('admin')),
-	);
-	?>
+);
+?>
 
-        <h1 class="titulos_admin">Modificar contenido</h1>
+<h1 class="titulos_admin">Modificar contenido</h1>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model,'contenido'=>$contenido)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model,
+											  'contenido'=>$contenido,
+											  'files'=>$files)); ?>
