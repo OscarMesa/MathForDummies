@@ -13,7 +13,7 @@
 
 		<?php echo $form->textFieldRow($model,'tiempo_limite',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldRow($model,'estado_evaluación',array('class'=>'span5')); ?>
+		<?php echo $form->textFieldRow($model,'estado_evaluacion',array('class'=>'span5')); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(

@@ -127,4 +127,12 @@ $script->registerScript('tooltip', '(function($){'
 
 <script type="text/javascript">
     //$(".full-scream-ejercicio")
+    $(".ejercicio input:checkbox").click(function(){
+        if(this.checked)
+        {
+            $(this).parent().parent().parent().children('.panel-body').append('<div class="porcentaje-ejercicio-evaluacion row"><label><span>Porcentaje</span><input type="text" name="Evaluacion[ejercicios][porcentaje]['+$(this).attr('value')+']"></label></div>');
+        }else{
+             $(this).parent().parent().parent().children('.panel-body').children('.porcentaje-ejercicio-evaluacion').remove();
+        }
+    });
 </script>

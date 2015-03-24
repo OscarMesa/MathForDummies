@@ -52,9 +52,6 @@ class EvaluacionController extends Controller {
             $model->attributes = $_POST['Evaluacion'];
             $model->estado_evaluación = ACTIVE;
             $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
-//            echo '<pre>';
-//            print_r($model->temas);
-//            print_r($model->ejercicios);die();
             if (count($fecha) == 2) {
                 $fecha1 = explode(" ", $fecha[0]);
                 $k = $fecha1[1] . " " . $fecha1[2];
@@ -72,8 +69,14 @@ class EvaluacionController extends Controller {
             }
 
             if ($model->save()){
-                $model->cursos_id = Yii::app()->db->getLastInsertId();
-                $this->redirect(array('update', 'id' => $model->cursos_id));
+                $model->id_evaluacion = Yii::app()->db->getLastInsertId();
+                $model->guardarEjercicios();
+                $model->guardarTemas();
+                $user = Yii::app()->getComponent('user');
+                $user->setFlash(
+                            'success', "<strong>Exito!</strong> The evaluation was stored successfully."
+                );
+                $this->redirect(array('view', 'id' => $model->id_evaluacion));
             }
         }
         $model->cursos_id = $id;

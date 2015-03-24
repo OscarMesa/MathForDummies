@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<h1>Manage Evaluacions</h1>
+<h1>Administrador de Evaluaciones</h1>
 
 <p>
     You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -51,7 +51,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'fecha_fin',
         'porcentaje',
         'tiempo_limite',
-        'estado_evaluación',
+        'estado_evaluacion',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
         ),
