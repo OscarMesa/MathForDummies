@@ -4,6 +4,7 @@
  * This is the model class for table "evaluacion".
  *
  * The followings are the available columns in table 'evaluacion':
+ * @property integer $id_evaluacion
  * @property integer $cursos_id
  * @property string $fecha_inicio
  * @property string $fecha_fin
@@ -11,6 +12,8 @@
  * @property string $tiempo_limite
  * @property integer $estado_evaluación
  * @property integer $tipo_evaluacion_id
+ * @property integer $prefijo_horario_fini
+ * @property integer $prefijo_horario_ffin
  *
  * The followings are the available model relations:
  * @property array $ejercicios
@@ -34,17 +37,17 @@ class Evaluacion extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('cursos_id,porcentaje,tiempo_limite,tipo_evaluacion_id', 'required'),
+            array('cursos_id,porcentaje,tipo_evaluacion_id', 'required'),
             array('fecha_inicio', 'required', 'message' => 'El rango de fecha es requerido'),
             array('cursos_id, estado_evaluación', 'numerical', 'integerOnly' => true),
-//            array('porcentaje', 'match', 'pattern' => '(/^\d*\.?\d*[0-9]+\d*$)|(^[0-9]+\d*\.\d*$)/'),
             array('porcentaje', 'length', 'max' => 10),
-            array('fecha_inicio, fecha_fin, tiempo_limite,ejercicios', 'safe'),
+            array('fecha_inicio, fecha_fin, tiempo_limite,ejercicios,id_evaluacion', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('cursos_id, fecha_inicio, fecha_fin, porcentaje, tiempo_limite, estado_evaluación', 'safe', 'on' => 'search'),
             array('ejercicios', 'ValidarExistenciaEjericicos'),
             array('temas', 'ValidarExistenciaTemas'),
+            array('porcentaje', 'ValidarDecimalNumberPorcentaje'),
         );
     }
 
@@ -60,6 +63,13 @@ class Evaluacion extends CActiveRecord {
             'temas_evaluacion' => array(self::HAS_MANY, 'TemaEvaluaciones', 'evaluaciones_id'),
         );
     }
+    
+    public function ValidarDecimalNumberPorcentaje($attribute, $params){
+        $regex = '/^[+\-]?(?:\d+(?:\.\d*)?|\.\d+)$/';
+        if(!preg_match($regex, $this->porcentaje))
+            $this->addError ($attribute, Yii::t('polimsn', 'The percentage must be an integer or decimal number. For example: 2, 2.3,68.9,80.'));
+    }
+
 
     public function ValidarExistenciaEjericicos($attribute, $params) {
         if (count($this->ejercicios) <= 0 && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL)
@@ -76,6 +86,7 @@ class Evaluacion extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
+            'id_evaluacion' => 'Id Evaluación',
             'cursos_id' => 'Cursos',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
@@ -104,6 +115,7 @@ class Evaluacion extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
+        $criteria->compare('id_evaluacion', $this->id_evaluacion);
         $criteria->compare('cursos_id', $this->cursos_id);
         $criteria->compare('fecha_inicio', $this->fecha_inicio, true);
         $criteria->compare('fecha_fin', $this->fecha_fin, true);
@@ -127,20 +139,39 @@ class Evaluacion extends CActiveRecord {
         return parent::model($className);
     }
 
-    function getEjercicios() {
+    public function getEjercicios() {
         return $this->ejercicios;
     }
 
-    function getTemas() {
+    public function getTemas() {
         return $this->temas;
     }
 
-    function setEjercicios($ejercicios) {
+    public function setEjercicios($ejercicios) {
         $this->ejercicios = $ejercicios;
     }
 
-    function setTemas($temas) {
+    public function setTemas($temas) {
         $this->temas = $temas;
     }
-
+    
+    public function guardarTemas()
+    {
+        EjerciciosEvaluaciones::model()->deleteAll(array(
+            'condition'=>'evaluaciones_id=?',
+            'params'=>array($this->id_evaluacion)
+            )
+                );
+                foreach ($this->ejercicios as $ejercicio) {
+                    $n = new EjerciciosEvaluaciones();
+                    $n->ejercicios_id_ejercicio = $ejercicio;
+                    $n->evaluaciones_id = $this->id_evaluacion;
+                    $n->save();
+                }
+    }
+    
+    public function guardarEjercicios()
+    {
+        
+    }
 }

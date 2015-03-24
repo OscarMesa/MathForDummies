@@ -34,6 +34,11 @@ class EvaluacionController extends Controller {
         ));
     }
 
+    public function resta($inicio, $fin) {
+        $dif = date("H:i:s", strtotime("00:00:00") + strtotime($fin) - strtotime($inicio));
+        return $dif;
+    }
+
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -45,16 +50,37 @@ class EvaluacionController extends Controller {
         $this->layout = "modal";
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
-            if(isset($_POST['Evaluacion']['temas']))
-                $model->temas = $_POST['Evaluacion']['temas'];
-            if ($model->save())
+            $model->estado_evaluación = ACTIVE;
+            $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
+//            echo '<pre>';
+//            print_r($model->temas);
+//            print_r($model->ejercicios);die();
+            if (count($fecha) == 2) {
+                $fecha1 = explode(" ", $fecha[0]);
+                $k = $fecha1[1] . " " . $fecha1[2];
+                $model->fecha_inicio = $fecha1[0] . " " . date("H:i", strtotime($k));
+                $model->prefijo_horario_fini = $fecha1[2];
+                $fecha2 = explode(" ", $fecha[1]);
+                $k = $fecha2[1] . " " . $fecha2[2];
+                $model->fecha_fin = $fecha2[0] . " " . date("H:i", strtotime($k));
+                $model->prefijo_horario_ffin = $fecha2[2];
+                $model->tiempo_limite = $this->resta($model->fecha_inicio, $model->fecha_fin);
+
+                $datetime1 = new DateTime($model->fecha_fin);
+                $datetime2 = new DateTime($model->fecha_inicio);
+                $model->tiempo_limite = $this->getIntervalUnits($datetime1->diff($datetime2));
+            }
+
+            if ($model->save()){
+                $model->cursos_id = Yii::app()->db->getLastInsertId();
                 $this->redirect(array('update', 'id' => $model->cursos_id));
+            }
         }
         $model->cursos_id = $id;
-        $curso = Cursos::model()->findByPk($id); 
-        $Mejercicios->idMateria = $curso->idmateria;       
-        $Mejercicios->idusuariocreador = Yii::app()->user->id;       
-        $temas = Tema::model()->findAll(array('condition'=>'estado="active" AND idcurso=?','params'=>array($id)));
+        $curso = Cursos::model()->findByPk($id);
+        $Mejercicios->idMateria = $curso->idmateria;
+        $Mejercicios->idusuariocreador = Yii::app()->user->id;
+        $temas = Tema::model()->findAll(array('condition' => 'estado="active" AND idcurso=?', 'params' => array($id)));
         $select_array = array();
         $this->render('create', array(
             'model' => $model,
@@ -63,6 +89,20 @@ class EvaluacionController extends Controller {
             'Mejercicios' => $Mejercicios,
             'select_array' => $select_array
         ));
+    }
+
+    public function getIntervalUnits($interval) {
+        // Day
+        $total = $interval->format('%a');
+
+        //hour
+        $total = ($total * 24) + ($interval->h );
+        //min
+        $total = ($total * 60) + ($interval->i );
+        //sec
+        $total = ($total * 60) + ($interval->s );
+
+        return $total;
     }
 
     /**
