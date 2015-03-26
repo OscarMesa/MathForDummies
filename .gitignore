@@ -5,7 +5,6 @@
 /application/config/database.php
 /assets
 /protected/config
-/protected/config/main.php
 /protected/runtime
 /themes/OzAuLink/images/contenidos
 !/protected/config/

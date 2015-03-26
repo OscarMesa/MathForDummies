@@ -118,4 +118,22 @@ class Ejercicios extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+         public function searchForEvaluacion()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id_ejercicio',$this->id_ejercicio);
+		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
+		$criteria->compare('ejercicio',$this->ejercicio,true);
+		$criteria->compare('idDificultad',$this->idDificultad);
+		$criteria->compare('idMateria',$this->idMateria);
+		$criteria->addCondition('visible="publico"');
+		$criteria->addCondition('(visible="privado" AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
+                return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }
