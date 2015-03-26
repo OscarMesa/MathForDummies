@@ -22,7 +22,7 @@ Yii::app()->clientScript->registerScript('search', "
     });
 ");
 ?>
-<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeAdmin' => true ));?>
+<?php echo $this->renderPartial("_menu", array('model' => $curso, 'activeAdmin' => true)); ?>
 <h1>Administrador de Evaluaciones</h1>
 
 <p>
@@ -46,15 +46,21 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
+        array(
+            'name' => 'cursos_id',
+            'filter' => false,
+            'value' => function($data){ return $data->curso->nombre_curso;}
+        ),
         'fecha_inicio',
         'fecha_fin',
-        array(
-                    'name'=>'cursos_id',
-                    'value' => $model->curso->nombre_curso
-                ),
         'porcentaje',
         'tiempo_limite',
         'estado_evaluacion',
+        array(
+            'name' => 'cursos_id',
+            'filter' => CHtml::listData(Estados::model()->findAll(), 'id_estado', 'nombre'),
+            'value' => function($data){ return $data->estado->nombre;}
+        ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
         ),
