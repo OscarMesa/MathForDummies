@@ -68,12 +68,12 @@ class Ejercicios extends CActiveRecord
 	{
 		return array(
 			'id_ejercicio' => 'Id Ejercicio',
-			'state_ejercicios' => 'State Ejercicios',
-			'idMateria' => 'Id Materia',
-			'ejercicio' => 'Ejercicio',
+			'state_ejercicios' => 'Estado',
+			'idMateria' => 'Materia',
+			'ejercicio' => 'Resumen',
 			'idusuariocreador' => 'Idusuariocreador',
-			'idDificultad' => 'Id Dificultad',
-			'visible' => 'Visible',
+			'idDificultad' => 'Nivel de Dificultad',
+			'visible' => 'Privacidad',
 		);
 	}
 
