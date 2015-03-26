@@ -46,7 +46,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     
     <?php //$model->?>
     <?php
-    echo $model->getAttributeLabel('fecha_inicio'). " - ".$model->getAttributeLabel('fecha_cierre');
+    echo $model->getAttributeLabel('fecha_inicio'). " - ".$model->getAttributeLabel('fecha_cierre')."<br>";
     $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'name' => 'Cursos[fecha_inicio]',
         'value' => ($model->fecha_inicio != '' ? $model->fecha_inicio . ' - ' . $model->fecha_cierre : ''),
@@ -65,7 +65,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ),
         'htmlOptions' => array(
             'placeholder' => 'Fecha Inicio - Fecha Cierre',
-            'style' => 'width:50% !important;',
+            'style' => 'width:97.1% !important;',
             //'id'=>'Cursos_fecha_inicio_em_'
         ),
             )

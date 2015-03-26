@@ -7,15 +7,15 @@
  * @property integer $id_ejercicio
  * @property string $state_ejercicios
  * @property string $ejercicio
+ * @property string $solucion
+ * @property integer $dificultad
+ * @property string $valoracion_porcentaje
+ * @property integer $idtema
  * @property integer $idusuariocreador
- * @property integer $idDificultad
- * @property integer $idMateria
- * @property string $visible
+ * @property integer $IdDocente
  *
  * The followings are the available model relations:
- * @property Dificultad $idDificultad0
- * @property MathUser $idusuariocreador0
- * @property Evaluacion[] $evaluacions
+ * @property EjerciciosEvaluaciones[] $ejerciciosEvaluaciones
  */
 class Ejercicios extends CActiveRecord
 {
@@ -35,12 +35,13 @@ class Ejercicios extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ejercicio,visible, idMateria', 'required'),
-			array('idusuariocreador, idDificultad,idMateria', 'numerical', 'integerOnly'=>true),
+			array('ejercicio, solucion, dificultad, valoracion_porcentaje', 'required'),
+			array('dificultad, idtema, idusuariocreador, IdDocente', 'numerical', 'integerOnly'=>true),
 			array('state_ejercicios', 'length', 'max'=>8),
+			array('ejercicio, solucion, valoracion_porcentaje', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_ejercicio, state_ejercicios, ejercicio, idusuariocreador, idDificultad, idMateria', 'safe', 'on'=>'search'),
+			array('id_ejercicio, state_ejercicios, ejercicio, solucion, dificultad, valoracion_porcentaje, idtema, idusuariocreador, IdDocente', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,11 +53,7 @@ class Ejercicios extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idDificultad0' => array(self::BELONGS_TO, 'Dificultad', 'idDificultad'),
-			'materia' => array(self::BELONGS_TO, 'Materias', 'idMateria'),
-                        'ejercicio_evaluacion' => array(self::HAS_MANY,'EjerciciosEvaluaciones','ejercicios_id_ejercicio'),
-			'idusuariocreador0' => array(self::BELONGS_TO, 'MathUser', 'idusuariocreador'),
-			'evaluacions' => array(self::MANY_MANY, 'Evaluacion', 'ejercicios_evaluaciones(ejercicios_id_ejercicio, evaluaciones_id)'),
+			'ejerciciosEvaluaciones' => array(self::HAS_MANY, 'EjerciciosEvaluaciones', 'ejercicios_id_ejercicio'),
 		);
 	}
 
@@ -69,10 +66,12 @@ class Ejercicios extends CActiveRecord
 			'id_ejercicio' => 'Id Ejercicio',
 			'state_ejercicios' => 'State Ejercicios',
 			'ejercicio' => 'Ejercicio',
+			'solucion' => 'Solucion',
+			'dificultad' => 'Dificultad',
+			'valoracion_porcentaje' => 'Valoracion Porcentaje',
+			'idtema' => 'Idtema',
 			'idusuariocreador' => 'Idusuariocreador',
-			'idDificultad' => 'Id Dificultad',
-                        'idMateria' => 'Materia',
-                        'visible' => 'Visible' 
+			'IdDocente' => 'Id Docente',
 		);
 	}
 
@@ -97,31 +96,14 @@ class Ejercicios extends CActiveRecord
 		$criteria->compare('id_ejercicio',$this->id_ejercicio);
 		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
 		$criteria->compare('ejercicio',$this->ejercicio,true);
+		$criteria->compare('solucion',$this->solucion,true);
+		$criteria->compare('dificultad',$this->dificultad);
+		$criteria->compare('valoracion_porcentaje',$this->valoracion_porcentaje,true);
+		$criteria->compare('idtema',$this->idtema);
 		$criteria->compare('idusuariocreador',$this->idusuariocreador);
-		$criteria->compare('idDificultad',$this->idDificultad);
-		$criteria->compare('idMateria',$this->idMateria);
-		$criteria->compare('visible',$this->visible);
+		$criteria->compare('IdDocente',$this->IdDocente);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-        
-        
-        public function searchForEvaluacion()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id_ejercicio',$this->id_ejercicio);
-		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
-		$criteria->compare('ejercicio',$this->ejercicio,true);
-		$criteria->compare('idDificultad',$this->idDificultad);
-		$criteria->compare('idMateria',$this->idMateria);
-		$criteria->addCondition('visible="publico"');
-		$criteria->addCondition('(visible="privado" AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
-                return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
