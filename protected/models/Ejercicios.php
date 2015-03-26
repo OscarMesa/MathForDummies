@@ -6,16 +6,17 @@
  * The followings are the available columns in table 'ejercicios':
  * @property integer $id_ejercicio
  * @property string $state_ejercicios
+ * @property integer $idMateria
  * @property string $ejercicio
- * @property string $solucion
- * @property integer $dificultad
- * @property string $valoracion_porcentaje
- * @property integer $idtema
  * @property integer $idusuariocreador
- * @property integer $IdDocente
+ * @property integer $idDificultad
+ * @property string $visible
  *
  * The followings are the available model relations:
- * @property EjerciciosEvaluaciones[] $ejerciciosEvaluaciones
+ * @property Dificultad $idDificultad0
+ * @property Materias $idMateria0
+ * @property MathUser $idusuariocreador0
+ * @property Evaluacion[] $evaluacions
  */
 class Ejercicios extends CActiveRecord
 {
@@ -35,13 +36,13 @@ class Ejercicios extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ejercicio, solucion, dificultad, valoracion_porcentaje', 'required'),
-			array('dificultad, idtema, idusuariocreador, IdDocente', 'numerical', 'integerOnly'=>true),
+			array('ejercicio', 'required'),
+			array('idMateria, idusuariocreador, idDificultad', 'numerical', 'integerOnly'=>true),
 			array('state_ejercicios', 'length', 'max'=>8),
-			array('ejercicio, solucion, valoracion_porcentaje', 'length', 'max'=>45),
+			array('visible', 'length', 'max'=>7),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_ejercicio, state_ejercicios, ejercicio, solucion, dificultad, valoracion_porcentaje, idtema, idusuariocreador, IdDocente', 'safe', 'on'=>'search'),
+			array('id_ejercicio, state_ejercicios, idMateria, ejercicio, idusuariocreador, idDificultad, visible', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +54,10 @@ class Ejercicios extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'ejerciciosEvaluaciones' => array(self::HAS_MANY, 'EjerciciosEvaluaciones', 'ejercicios_id_ejercicio'),
+			'idDificultad0' => array(self::BELONGS_TO, 'Dificultad', 'idDificultad'),
+			'idMateria0' => array(self::BELONGS_TO, 'Materias', 'idMateria'),
+			'idusuariocreador0' => array(self::BELONGS_TO, 'MathUser', 'idusuariocreador'),
+			'evaluacions' => array(self::MANY_MANY, 'Evaluacion', 'ejercicios_evaluaciones(ejercicios_id_ejercicio, evaluaciones_id)'),
 		);
 	}
 
@@ -65,13 +69,11 @@ class Ejercicios extends CActiveRecord
 		return array(
 			'id_ejercicio' => 'Id Ejercicio',
 			'state_ejercicios' => 'State Ejercicios',
+			'idMateria' => 'Id Materia',
 			'ejercicio' => 'Ejercicio',
-			'solucion' => 'Solucion',
-			'dificultad' => 'Dificultad',
-			'valoracion_porcentaje' => 'Valoracion Porcentaje',
-			'idtema' => 'Idtema',
 			'idusuariocreador' => 'Idusuariocreador',
-			'IdDocente' => 'Id Docente',
+			'idDificultad' => 'Id Dificultad',
+			'visible' => 'Visible',
 		);
 	}
 
@@ -95,13 +97,11 @@ class Ejercicios extends CActiveRecord
 
 		$criteria->compare('id_ejercicio',$this->id_ejercicio);
 		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
+		$criteria->compare('idMateria',$this->idMateria);
 		$criteria->compare('ejercicio',$this->ejercicio,true);
-		$criteria->compare('solucion',$this->solucion,true);
-		$criteria->compare('dificultad',$this->dificultad);
-		$criteria->compare('valoracion_porcentaje',$this->valoracion_porcentaje,true);
-		$criteria->compare('idtema',$this->idtema);
 		$criteria->compare('idusuariocreador',$this->idusuariocreador);
-		$criteria->compare('IdDocente',$this->IdDocente);
+		$criteria->compare('idDificultad',$this->idDificultad);
+		$criteria->compare('visible',$this->visible,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
