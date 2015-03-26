@@ -70,7 +70,6 @@
                         'class'=>'bootstrap.widgets.TbMenu',
                         'items' => array(
                                         array('label' => 'Inicio', 'url' => array('/site/index')),
-                                        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
                                         array('label' => 'Contact', 'url' => array('/site/contact')),
                                         array('label' => 'Login'
                                             , 'url' => Yii::app()->user->ui->loginUrl

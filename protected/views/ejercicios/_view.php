@@ -1,12 +1,7 @@
-<?php
-/* @var $this EjerciciosController */
-/* @var $data Ejercicios */
-?>
-
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_ejercicio')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_ejercicio), array('view', 'id'=>$data->id_ejercicio)); ?>
+		<b><?php echo CHtml::encode($data->getAttributeLabel('id_ejercicio')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id_ejercicio),array('view','id'=>$data->id_ejercicio)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('state_ejercicios')); ?>:</b>

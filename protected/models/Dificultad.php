@@ -1,31 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "ejercicios".
+ * This is the model class for table "dificultad".
  *
- * The followings are the available columns in table 'ejercicios':
- * @property integer $id_ejercicio
- * @property string $state_ejercicios
- * @property integer $idMateria
- * @property string $ejercicio
- * @property integer $idusuariocreador
+ * The followings are the available columns in table 'dificultad':
  * @property integer $idDificultad
- * @property string $visible
+ * @property string $descripcion
  *
  * The followings are the available model relations:
- * @property Dificultad $idDificultad0
- * @property Materias $idMateria0
- * @property MathUser $idusuariocreador0
- * @property Evaluacion[] $evaluacions
+ * @property Ejercicios[] $ejercicioses
  */
-class Ejercicios extends CActiveRecord
+class Dificultad extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ejercicios';
+		return 'dificultad';
 	}
 
 	/**
@@ -36,13 +28,10 @@ class Ejercicios extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ejercicio', 'required'),
-			array('idMateria, idusuariocreador, idDificultad', 'numerical', 'integerOnly'=>true),
-			array('state_ejercicios', 'length', 'max'=>8),
-			array('visible', 'length', 'max'=>7),
+			array('descripcion', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_ejercicio, state_ejercicios, idMateria, ejercicio, idusuariocreador, idDificultad, visible', 'safe', 'on'=>'search'),
+			array('idDificultad, descripcion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,10 +43,7 @@ class Ejercicios extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idDificultad0' => array(self::BELONGS_TO, 'Dificultad', 'idDificultad'),
-			'idMateria0' => array(self::BELONGS_TO, 'Materias', 'idMateria'),
-			'idusuariocreador0' => array(self::BELONGS_TO, 'MathUser', 'idusuariocreador'),
-			'evaluacions' => array(self::MANY_MANY, 'Evaluacion', 'ejercicios_evaluaciones(ejercicios_id_ejercicio, evaluaciones_id)'),
+			'ejercicioses' => array(self::HAS_MANY, 'Ejercicios', 'idDificultad'),
 		);
 	}
 
@@ -67,13 +53,8 @@ class Ejercicios extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_ejercicio' => 'Id Ejercicio',
-			'state_ejercicios' => 'Estado',
-			'idMateria' => 'Materia',
-			'ejercicio' => 'Resumen',
-			'idusuariocreador' => 'Idusuariocreador',
-			'idDificultad' => 'Nivel de Dificultad',
-			'visible' => 'Privacidad',
+			'idDificultad' => 'Id Dificultad',
+			'descripcion' => 'Descripcion',
 		);
 	}
 
@@ -95,13 +76,8 @@ class Ejercicios extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_ejercicio',$this->id_ejercicio);
-		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
-		$criteria->compare('idMateria',$this->idMateria);
-		$criteria->compare('ejercicio',$this->ejercicio,true);
-		$criteria->compare('idusuariocreador',$this->idusuariocreador);
 		$criteria->compare('idDificultad',$this->idDificultad);
-		$criteria->compare('visible',$this->visible,true);
+		$criteria->compare('descripcion',$this->descripcion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -112,7 +88,7 @@ class Ejercicios extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Ejercicios the static model class
+	 * @return Dificultad the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

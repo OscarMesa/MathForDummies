@@ -1,21 +1,18 @@
 <?php
-/* @var $this EjerciciosController */
-/* @var $model Ejercicios */
-
 $this->breadcrumbs=array(
 	'Ejercicioses'=>array('index'),
 	$model->id_ejercicio=>array('view','id'=>$model->id_ejercicio),
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Ejercicios', 'url'=>array('index')),
-	array('label'=>'Create Ejercicios', 'url'=>array('create')),
-	array('label'=>'View Ejercicios', 'url'=>array('view', 'id'=>$model->id_ejercicio)),
-	array('label'=>'Manage Ejercicios', 'url'=>array('admin')),
-);
-?>
+	$this->menu=array(
+	array('label'=>'List Ejercicios','url'=>array('index')),
+	array('label'=>'Create Ejercicios','url'=>array('create')),
+	array('label'=>'View Ejercicios','url'=>array('view','id'=>$model->id_ejercicio)),
+	array('label'=>'Manage Ejercicios','url'=>array('admin')),
+	);
+	?>
 
-<h1>Update Ejercicios <?php echo $model->id_ejercicio; ?></h1>
+	<h1>Update Ejercicios <?php echo $model->id_ejercicio; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
