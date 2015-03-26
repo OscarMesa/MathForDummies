@@ -61,7 +61,7 @@
 
 <?php
     $this->widget('bootstrap.widgets.TbNavbar', array(
-        'brand'=>'PoliAuLink',
+        'brand'=>'OzAuLink',
         //'brandUrl'=>'#',
         'fixed' => 'top',
         'collapse'=>true, // requires bootstrap-responsive.css

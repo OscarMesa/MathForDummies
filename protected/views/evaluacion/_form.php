@@ -1,13 +1,4 @@
 <?php
-//        $baseUrl = Yii::app()->baseUrl;
-//        $cs = Yii::app()->getClientScript();
-//
-//        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.js', CClientScript::POS_END);
-//        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.date.extensions.js', CClientScript::POS_END);
-//        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.extensions.js', CClientScript::POS_END);
-//        $cs->registerScript('input-mask', ''
-//        . '$(".data-inputmask").inputmask();'
-//        . '');
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'evaluacion-form',
