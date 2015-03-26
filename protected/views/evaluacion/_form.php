@@ -1,13 +1,13 @@
 <?php
-        $baseUrl = Yii::app()->baseUrl;
-        $cs = Yii::app()->getClientScript();
-
-        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.js', CClientScript::POS_END);
-        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.date.extensions.js', CClientScript::POS_END);
-        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.extensions.js', CClientScript::POS_END);
-        $cs->registerScript('input-mask', ''
-        . '$("[data-mask]").inputmask();'
-        . '');
+//        $baseUrl = Yii::app()->baseUrl;
+//        $cs = Yii::app()->getClientScript();
+//
+//        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.js', CClientScript::POS_END);
+//        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.date.extensions.js', CClientScript::POS_END);
+//        $cs->registerScriptFile($baseUrl . '/themes/PoliAuLink/plugins/input-mask/jquery.inputmask.extensions.js', CClientScript::POS_END);
+//        $cs->registerScript('input-mask', ''
+//        . '$(".data-inputmask").inputmask();'
+//        . '');
 
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'evaluacion-form',
@@ -34,6 +34,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'language' => 'es',
         'format' => 'YYYY-MM-DD h:mm A',
         'timePicker' => true,
+        'timePicker12Hour'=>true,
         'showDropdowns' => true,
         'showDropdowns' => false,
         'timePickerIncrement' => 5,
@@ -58,12 +59,12 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
 
 <?php echo $form->error($model, 'fecha_inicio', array('class' => 'help-block error', 'maxlength' => 10)); ?>
 
-<?php echo $form->textFieldRow($model, 'porcentaje', array('class' => 'span5', 'maxlength' => 10, "data-inputmask" => "'mask': ['999%']")); ?>
+<?php echo $form->textFieldRow($model, 'porcentaje', array('class' => 'span5 data-inputmask', 'maxlength' => 10,)); ?>
 
-<?php echo $form->textFieldRow($model, 'tiempo_limite', array('class' => 'span5')); ?>
-
+<?php //echo $form->textFieldRow($model, 'tiempo_limite', array('class' => 'span5 data-inputmask','placeholder'=>'HH:MM:SS')); ?>
+<div class="lst-tp_evaluacion">
 <?php echo $form->radioButtonListRow($model, 'tipo_evaluacion_id', CHtml::listData(TipoEvaluacion::model()->findAll(), 'tipoid', 'tipo_evaluacion'), array('data-toggle' => "tooltip", 'data-placement' => "top", 'data-original-title' => ""), array()); ?>
-
+</div>
 <div id="contenidos-virtuales" style="<?php echo ($model->tipo_evaluacion_id == 2 ? "display: block" : "display: none") ?>">
     <label for="ejercicios[]">Ejercicios</label>
     <div class="row-fluid">
@@ -81,7 +82,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
             ?>
         </div>
     </div>
-    <?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10)); ?>
+    <?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10, 'style'=>'margin-top: 7px;')); ?>
 </div>
 
 <label for="temas[]">Temas</label>
@@ -94,7 +95,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         ));
         ?>
     </div>
-    <?php echo $form->error($model, 'temas', array('class' => 'help-block error', 'maxlength' => 10)); ?>
+    <?php echo $form->error($model, 'temas', array('class' => 'help-block error', 'maxlength' => 10,'style'=>'margin-top: 7px;')); ?>
 </div>
 
 <?php echo $form->hiddenField($model, 'cursos_id', array()); ?>
@@ -126,4 +127,12 @@ $script->registerScript('tooltip', '(function($){'
 
 <script type="text/javascript">
     //$(".full-scream-ejercicio")
+    $(".ejercicio input:checkbox").click(function(){
+        if(this.checked)
+        {
+            $(this).parent().parent().parent().children('.panel-body').append('<div class="porcentaje-ejercicio-evaluacion row"><label><span>Porcentaje</span><input type="text" name="Evaluacion[ejercicios][porcentaje]['+$(this).attr('value')+']"></label></div>');
+        }else{
+             $(this).parent().parent().parent().children('.panel-body').children('.porcentaje-ejercicio-evaluacion').remove();
+        }
+    });
 </script>

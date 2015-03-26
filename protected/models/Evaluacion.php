@@ -4,13 +4,16 @@
  * This is the model class for table "evaluacion".
  *
  * The followings are the available columns in table 'evaluacion':
+ * @property integer $id_evaluacion
  * @property integer $cursos_id
  * @property string $fecha_inicio
  * @property string $fecha_fin
  * @property string $porcentaje
  * @property string $tiempo_limite
- * @property integer $estado_evaluación
+ * @property integer $estado_evaluacion
  * @property integer $tipo_evaluacion_id
+ * @property integer $prefijo_horario_fini
+ * @property integer $prefijo_horario_ffin
  *
  * The followings are the available model relations:
  * @property array $ejercicios
@@ -34,17 +37,19 @@ class Evaluacion extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('cursos_id,porcentaje,tiempo_limite,tipo_evaluacion_id', 'required'),
+            array('cursos_id,porcentaje,tipo_evaluacion_id', 'required'),
             array('fecha_inicio', 'required', 'message' => 'El rango de fecha es requerido'),
-            array('cursos_id, estado_evaluación', 'numerical', 'integerOnly' => true),
-//            array('porcentaje', 'match', 'pattern' => '(/^\d*\.?\d*[0-9]+\d*$)|(^[0-9]+\d*\.\d*$)/'),
+            array('cursos_id, estado_evaluacion', 'numerical', 'integerOnly' => true),
             array('porcentaje', 'length', 'max' => 10),
-            array('fecha_inicio, fecha_fin, tiempo_limite,ejercicios', 'safe'),
+            array('fecha_inicio, fecha_fin, tiempo_limite,ejercicios,id_evaluacion', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('cursos_id, fecha_inicio, fecha_fin, porcentaje, tiempo_limite, estado_evaluación', 'safe', 'on' => 'search'),
+            array('cursos_id, fecha_inicio, fecha_fin, porcentaje, tiempo_limite, estado_evaluacion', 'safe', 'on' => 'search'),
             array('ejercicios', 'ValidarExistenciaEjericicos'),
+            array('ejercicios', 'validarSoloNumeroPorcentaje'),
+            array('ejercicios', 'ValidarTotalPorcentaje'),
             array('temas', 'ValidarExistenciaTemas'),
+            array('porcentaje', 'ValidarDecimalNumberPorcentaje'),
         );
     }
 
@@ -61,9 +66,43 @@ class Evaluacion extends CActiveRecord {
         );
     }
 
+    public function ValidarDecimalNumberPorcentaje($attribute, $params) {
+        $regex = '/^[+\-]?(?:\d+(?:\.\d*)?|\.\d+)$/';
+        if (!preg_match($regex, $this->porcentaje))
+            $this->addError($attribute, Yii::t('polimsn', 'The percentage must be an integer or decimal number. For example: 2, 2.3,68.9,80.'));
+    }
+
     public function ValidarExistenciaEjericicos($attribute, $params) {
-        if (count($this->ejercicios) <= 0 && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL)
+        if (count($this->ejercicios['check']) <= 0 && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL)
             $this->addError($attribute, Yii::t('polimsn', 'You must select at least one exercise for creating evaluation.'));
+    }
+
+    public function validarSoloNumeroPorcentaje($attribute, $params) {
+        if ($this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL) {
+            $total = 0;
+            $regex = '/^[+\-]?(?:\d+(?:\.\d*)?|\.\d+)$/';
+            $decimal = true;
+//            print_r($this->ejercicios['porcentaje']);die;
+            foreach ($this->ejercicios['porcentaje'] as $v) {
+                if (!preg_match($regex, $v)) {
+                    $decimal = false;
+                    break;
+                }
+            }
+        }
+//        var_dump($decimal);die;
+        if (!$decimal)
+            $this->addError($attribute, Yii::t('polimsn', 'The percentage values can be decimal numbers only. For example: 2, 2.3,68.9,80.'));
+    }
+
+    public function ValidarTotalPorcentaje($attribute, $params) {
+        if ($this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL) {
+            $total = 0;
+            foreach ($this->ejercicios['porcentaje'] as $v)
+                $total += $v;
+            if ($total != 100)
+                $this->addError($attribute, Yii::t('polimsn', 'The total percentage of the exercises to be equal 100%.'));
+        }
     }
 
     public function ValidarExistenciaTemas($attribute, $params) {
@@ -76,12 +115,13 @@ class Evaluacion extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
+            'id_evaluacion' => 'Id Evaluación',
             'cursos_id' => 'Cursos',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
             'porcentaje' => 'Porcentaje',
             'tiempo_limite' => 'Tiempo Limite',
-            'estado_evaluación' => 'Estado Evaluación',
+            'estado_evaluacion' => 'Estado Evaluación',
             'tipo_evaluacion_id' => 'Tipo de evaluación',
             'ejercicios' => 'Ejericios',
         );
@@ -104,12 +144,13 @@ class Evaluacion extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
+        $criteria->compare('id_evaluacion', $this->id_evaluacion);
         $criteria->compare('cursos_id', $this->cursos_id);
         $criteria->compare('fecha_inicio', $this->fecha_inicio, true);
         $criteria->compare('fecha_fin', $this->fecha_fin, true);
         $criteria->compare('porcentaje', $this->porcentaje, true);
         $criteria->compare('tiempo_limite', $this->tiempo_limite, true);
-        $criteria->compare('estado_evaluación', $this->estado_evaluación);
+        $criteria->compare('estado_evaluacion', $this->estado_evaluacion);
         $criteria->compare('tipo_evaluacion_id', $this->tipo_evaluacion_id);
 
         return new CActiveDataProvider($this, array(
@@ -127,20 +168,54 @@ class Evaluacion extends CActiveRecord {
         return parent::model($className);
     }
 
-    function getEjercicios() {
+    public function getEjercicios() {
         return $this->ejercicios;
     }
 
-    function getTemas() {
+    public function getTemas() {
         return $this->temas;
     }
 
-    function setEjercicios($ejercicios) {
+    public function setEjercicios($ejercicios) {
         $this->ejercicios = $ejercicios;
     }
 
-    function setTemas($temas) {
+    public function setTemas($temas) {
         $this->temas = $temas;
+    }
+
+    public function guardarEjercicios() {
+        EjerciciosEvaluaciones::model()->deleteAll(array(
+            'condition' => 'evaluaciones_id=?',
+            'params' => array($this->id_evaluacion)
+                )
+        );
+        foreach ($this->ejercicios['check'] as $ejercicio) {
+            $n = new EjerciciosEvaluaciones();
+            $n->ejercicios_id_ejercicio = $ejercicio;
+            $n->evaluaciones_id = $this->id_evaluacion;
+            $n->valoracion_porcentaje = $this->ejercicios['check'][$ejercicio];
+            if(!$n->save()){
+                print_r($n->errors);die;
+            }
+        }
+    }
+
+    public function guardarTemas() {
+        TemaEvaluaciones::model()->deleteAll(array(
+            'condition' => 'evaluaciones_id=?',
+            'params' => array($this->id_evaluacion)
+                )
+        );
+        
+        foreach ($this->temas as $tema) {
+            $n = new TemaEvaluaciones();
+            $n->tema_idtema = $tema;
+            $n->evaluaciones_id = $this->id_evaluacion;
+            if(!$n->save()){
+                print_r($n->errors);die;
+            }
+        }
     }
 
 }

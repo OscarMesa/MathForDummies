@@ -13,16 +13,17 @@ array('label'=>'Manage Evaluacion','url'=>array('admin')),
 );
 ?>
 
-<h1>View Evaluacion #<?php echo $model->cursos_id; ?></h1>
+<h1>Ver Evaluacion #<?php echo $model->cursos_id; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
+                'id_evaluacion',
 		'cursos_id',
 		'fecha_inicio',
 		'fecha_fin',
 		'porcentaje',
 		'tiempo_limite',
-		'estado_evaluación',
+		'estado_evaluacion',
 ),
 )); ?>
