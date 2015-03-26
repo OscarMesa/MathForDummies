@@ -12,18 +12,27 @@ array('label'=>'Delete Evaluacion','url'=>'#','linkOptions'=>array('submit'=>arr
 array('label'=>'Manage Evaluacion','url'=>array('admin')),
 );
 ?>
-
+<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
 <h1>Ver Evaluacion #<?php echo $model->cursos_id; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
                 'id_evaluacion',
-		'cursos_id',
+                array(
+                    'type'=>'raw',
+                    'label'=> Evaluacion::model()->getAttributeLabel('cursos_id'),
+                    //'attribute' => 'idcurso',
+                    'value' => $model->curso->nombre_curso
+                ),
 		'fecha_inicio',
 		'fecha_fin',
 		'porcentaje',
 		'tiempo_limite',
-		'estado_evaluacion',
+		array(
+                    'type'=>'raw',
+                    'label'=>  Evaluacion::model()->getAttributeLabel('estado_evaluacion'),
+                    'value'=>$model->estado->nombre,
+                ),
 ),
 )); ?>

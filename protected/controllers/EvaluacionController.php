@@ -29,6 +29,7 @@ class EvaluacionController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = "modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -50,7 +51,7 @@ class EvaluacionController extends Controller {
         $this->layout = "modal";
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
-            $model->estado_evaluación = ACTIVE;
+            $model->estado_evaluacion = ACTIVE;
             $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
             if (count($fecha) == 2) {
                 $fecha1 = explode(" ", $fecha[0]);

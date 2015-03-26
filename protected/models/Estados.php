@@ -9,7 +9,7 @@
  *
 
  */
-class Estdados extends CActiveRecord
+class Estados extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

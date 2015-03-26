@@ -374,12 +374,12 @@ CREATE TABLE IF NOT EXISTS `img_videos_sonido` (
 INSERT INTO `img_videos_sonido` (`id`, `state_img_videos`, `url`, `nombre`, `type`, `descripcion`, `idUsiario`) VALUES
 (1, 'active', '', 'ewrwqer', 'img', 'qewrwe', 1),
 (2, 'active', '', 'fadasf', 'img', 'adsfdsaf', 1),
-(3, 'active', 'themes/PoliAuLink/images/14/ana.jpg', 'fadasf', 'img', 'adsfdsaf', 1),
-(4, 'active', 'themes/PoliAuLink/images/14/ana.jpg', 'fadasf', 'img', 'adsfdsaf', 1),
-(5, 'active', 'themes/PoliAuLink/images/14/ana.jpg', 'fadasf', 'img', 'adsfdsaf', 1),
-(6, 'active', 'themes/PoliAuLink/images/15/46.png', 'adsf', 'img', 'asdfdsaf', 1),
-(7, 'active', 'themes/PoliAuLink/images/contenidos/49/273738_661765541_263078633_n.jpg', 'prueba', 'img', 'asdfsadf', 1),
-(8, 'active', 'themes/PoliAuLink/images/contenidos/50/av-9.jpg', 'adsf', 'img', 'asdfsadf', 1),
+(3, 'active', 'themes/OzAuLink/images/14/ana.jpg', 'fadasf', 'img', 'adsfdsaf', 1),
+(4, 'active', 'themes/OzAuLink/images/14/ana.jpg', 'fadasf', 'img', 'adsfdsaf', 1),
+(5, 'active', 'themes/OzAuLink/images/14/ana.jpg', 'fadasf', 'img', 'adsfdsaf', 1),
+(6, 'active', 'themes/OzAuLink/images/15/46.png', 'adsf', 'img', 'asdfdsaf', 1),
+(7, 'active', 'themes/OzAuLink/images/contenidos/49/273738_661765541_263078633_n.jpg', 'prueba', 'img', 'asdfsadf', 1),
+(8, 'active', 'themes/OzAuLink/images/contenidos/50/av-9.jpg', 'adsf', 'img', 'asdfsadf', 1),
 (9, 'active', '', 'asdfasdf', 'video', 'Esta es la descripcion.', 1),
 (10, 'active', '', 'sdfasdf', 'video', 'asdfsdf', 1),
 (11, 'active', '', 'fasdf', 'video', 'fasdf', 1),
@@ -392,16 +392,16 @@ INSERT INTO `img_videos_sonido` (`id`, `state_img_videos`, `url`, `nombre`, `typ
 (18, 'active', 'http://vimeo.com/85475429', 'dfasdf', 'video', 'asdfasdf', 1),
 (19, 'active', 'http://vimeo.com/85475429', 'asfasfdhttp://vimeo.com/85475429', 'video', 'asdfasdfasdfadsf', 1),
 (20, 'active', 'http://vimeo.com/85475429', 'asdfasdf', 'video', 'dsf', 1),
-(21, 'active', 'themes/PoliAuLink/images/contenidos/160/273738_661765541_263078633_n.jpg', 'sdfg', 'img', 'sdfgsdfgsdf', 1),
-(22, 'active', 'themes/PoliAuLink/images/contenidos/161/certificado.png', 'dfd', 'img', 'asdfasdf', 1),
+(21, 'active', 'themes/OzAuLink/images/contenidos/160/273738_661765541_263078633_n.jpg', 'sdfg', 'img', 'sdfgsdfgsdf', 1),
+(22, 'active', 'themes/OzAuLink/images/contenidos/161/certificado.png', 'dfd', 'img', 'asdfasdf', 1),
 (23, 'active', 'http://vimeo.com/85475429', 'asdfasdf', 'video', 'asdfasdf', 1),
 (24, 'active', 'http://vimeo.com/85475429', 'tales', 'video', 'dasdfsafdsafdasdf', 1),
 (25, 'active', 'http://vimeo.com/85475429', 'prueba', 'video', 'asdfasdf', 1),
-(26, 'active', 'themes/PoliAuLink/images/contenidos/167/46.png', 'otra prueba', 'img', 'sadfasfdasdfasf', 1),
-(27, 'active', 'themes/PoliAuLink/images/contenidos/178/10174854_655914264446567_765582406_n.jpg', 'contenido 1', 'img', 'esta es una prueba', 1),
-(28, 'active', 'themes/PoliAuLink/images/contenidos/164/respiracion.jpg', 'Contenido 1', 'img', 'Descripcion.', 1),
-(29, 'active', 'themes/PoliAuLink/images/contenidos/179/certificado.png', 'hello', 'img', 'asfsadfsdf', 1),
-(30, 'active', 'themes/PoliAuLink/images/contenidos/166/576098_10150986024207739_1502339542_n.jpg', 'Imagen 1', 'img', 'Imagen para mostrar ejemplo', 1);
+(26, 'active', 'themes/OzAuLink/images/contenidos/167/46.png', 'otra prueba', 'img', 'sadfasfdasdfasf', 1),
+(27, 'active', 'themes/OzAuLink/images/contenidos/178/10174854_655914264446567_765582406_n.jpg', 'contenido 1', 'img', 'esta es una prueba', 1),
+(28, 'active', 'themes/OzAuLink/images/contenidos/164/respiracion.jpg', 'Contenido 1', 'img', 'Descripcion.', 1),
+(29, 'active', 'themes/OzAuLink/images/contenidos/179/certificado.png', 'hello', 'img', 'asfsadfsdf', 1),
+(30, 'active', 'themes/OzAuLink/images/contenidos/166/576098_10150986024207739_1502339542_n.jpg', 'Imagen 1', 'img', 'Imagen para mostrar ejemplo', 1);
 
 -- --------------------------------------------------------
 
@@ -621,7 +621,7 @@ INSERT INTO `math_authitem` (`name`, `type`, `description`, `bizrule`, `data`) V
 ('controller_talleres', 0, '', NULL, 'N;'),
 ('controller_universidad', 0, '', NULL, 'N;'),
 ('controller_usuarios', 0, '', NULL, 'N;'),
-('edit-advanced-profile-features', 0, 'C:\\xampp\\htdocs\\PoliAuLink\\protected\\modules\\cruge\\views\\ui\\usermanagementupdate.php linea 114', NULL, 'N;'),
+('edit-advanced-profile-features', 0, 'C:\\xampp\\htdocs\\OzAuLink\\protected\\modules\\cruge\\views\\ui\\usermanagementupdate.php linea 114', NULL, 'N;'),
 ('invitados', 2, 'Rol invitado.', '', 'N;');
 
 -- --------------------------------------------------------

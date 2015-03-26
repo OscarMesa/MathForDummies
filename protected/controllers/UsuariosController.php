@@ -78,7 +78,7 @@ class UsuariosController extends Controller {
 //            print_r($_GET);
 //            exit();
 
-            if (isset($_GET['hash']) && isset($_GET['id']) && sha1('PoliAuLinkServer') == $_GET['hash']) {
+            if (isset($_GET['hash']) && isset($_GET['id']) && sha1('OzAuLinkServer') == $_GET['hash']) {
                 $usuario = Usuarios::model()->findByPk($_GET['id'], 'state_usuario="not_confirmed_admin"');
                 if (count($usuario) > 0) {
                     $usuario->state_usuario = 'active';
@@ -113,7 +113,7 @@ class UsuariosController extends Controller {
     }
 
     public function actionCambioPassword() {
-        if (isset($_GET['hash']) && isset($_GET['id']) && sha1('PoliAuLinkServer') == $_GET['hash']) {
+        if (isset($_GET['hash']) && isset($_GET['id']) && sha1('OzAuLinkServer') == $_GET['hash']) {
             $usuario = MathUser::model()->find("iduser = ? AND state=?",array($_GET['id'],CRUGEUSERSTATE_RECOVERPASSWORD));
             if (count($usuario) > 0) {
                 $usuario->scenario = 'cambiopassword';
@@ -180,7 +180,7 @@ class UsuariosController extends Controller {
     }
 
     public function actionActivarusuario() {
-        if (isset($_GET['hash']) && isset($_GET['id']) && sha1('PoliAuLinkServer') == $_GET['hash']) {
+        if (isset($_GET['hash']) && isset($_GET['id']) && sha1('OzAuLinkServer') == $_GET['hash']) {
             $usuario = MathUser::model()->findByPk($_GET['id'], 'state=?',array(CRUGEUSERSTATE_NOTCONFIRMATE));
             if (count($usuario) > 0) {
 //                $perfil = $usuario->getRandomPerfil();

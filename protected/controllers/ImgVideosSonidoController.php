@@ -101,7 +101,7 @@ class ImgVideosSonidoController extends Controller {
     public function saveImgContenido($model, $id_contenido) {
         //es la carpeta donde se guardan las imagenes
         //es la carpeta donde se guardan las imagenes
-        $relativeFolder = "themes/PoliAuLink/images/contenidos/$id_contenido/";
+        $relativeFolder = "themes/OzAuLink/images/contenidos/$id_contenido/";
         $pathImages = Yii::app()->basePath . '/../' . $relativeFolder;
         if (!is_dir($pathImages)) {
             mkdir($pathImages, 0755);

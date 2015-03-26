@@ -62,6 +62,7 @@ class Evaluacion extends CActiveRecord {
         return array(
             'curso' => array(self::BELONGS_TO, 'Cursos', 'cursos_id'),
             'tipo' => array(self::BELONGS_TO, 'TipoEvaluacion', 'cursos_id'),
+            'estado' => array(self::BELONGS_TO, 'Estados', 'estado_evaluacion'),
             'temas_evaluacion' => array(self::HAS_MANY, 'TemaEvaluaciones', 'evaluaciones_id'),
         );
     }
@@ -116,7 +117,7 @@ class Evaluacion extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id_evaluacion' => 'Id Evaluación',
-            'cursos_id' => 'Cursos',
+            'cursos_id' => 'Curso',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
             'porcentaje' => 'Porcentaje',
@@ -124,6 +125,7 @@ class Evaluacion extends CActiveRecord {
             'estado_evaluacion' => 'Estado Evaluación',
             'tipo_evaluacion_id' => 'Tipo de evaluación',
             'ejercicios' => 'Ejericios',
+            'temas' => 'Temas'
         );
     }
 
