@@ -8,6 +8,8 @@
  * @property string $state_contenido
  * @property string $titulo
  * @property string $detalle
+ * @property integer $id_usuario_creador
+ * @property string $visible
  *
  * The followings are the available model relations:
  * @property DocumentosAdjuntos[] $documentosAdjuntoses
@@ -31,13 +33,15 @@ class Contenidos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('id_usuario_creador', 'required'),
+			array('id_usuario_creador', 'numerical', 'integerOnly'=>true),
 			array('state_contenido', 'length', 'max'=>8),
 			array('titulo', 'length', 'max'=>45),
-			array('titulo, detalle', 'required'),
+			array('visible', 'length', 'max'=>7),
 			array('detalle', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, state_contenido, titulo, detalle', 'safe', 'on'=>'search'),
+			array('id, state_contenido, titulo, detalle, id_usuario_creador, visible', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,9 +65,11 @@ class Contenidos extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'state_contenido' => 'Estado Contenido',
+			'state_contenido' => 'State Contenido',
 			'titulo' => 'Titulo',
 			'detalle' => 'Detalle',
+			'id_usuario_creador' => 'Id Usuario Creador',
+			'visible' => 'Visible',
 		);
 	}
 
@@ -89,6 +95,8 @@ class Contenidos extends CActiveRecord
 		$criteria->compare('state_contenido',$this->state_contenido,true);
 		$criteria->compare('titulo',$this->titulo,true);
 		$criteria->compare('detalle',$this->detalle,true);
+		$criteria->compare('id_usuario_creador',$this->id_usuario_creador);
+		$criteria->compare('visible',$this->visible,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -6,11 +6,11 @@
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
 
-defined('MYSQL_HOST') or define('MYSQL_HOST','localhost');
+defined('MYSQL_HOST') or define('MYSQL_HOST','127.0.0.1');
 defined('MYSQL_USER') or define('MYSQL_USER', 'root');
-defined('MYSQL_PASS') or define('MYSQL_PASS','root');
+defined('MYSQL_PASS') or define('MYSQL_PASS','');
 defined('MYSQL_DB') or define('MYSQL_DB','math');
-defined('MYSQL_PORT') or define('MYSQL_PORT','5432');
+defined('MYSQL_PORT') or define('MYSQL_PORT','');
 
 // remove the following lines when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',TRUE);
