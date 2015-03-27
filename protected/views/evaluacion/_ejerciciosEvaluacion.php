@@ -17,7 +17,7 @@
     <div class="panel-body">
        <?php echo $data->ejercicio;?>
         <?php if($check){?>
-        <div class="porcentaje-ejercicio-evaluacion row">
+        <div class="porcentaje-ejercicio-evaluacion">
             <label><span>Porcentaje</span>
                 <input type="text" name="Evaluacion[ejercicios][porcentaje][<?php echo $data->id_ejercicio; ?>]" value="<?php echo $model->ejercicios['porcentaje'][$data->id_ejercicio]?>">
             </label>

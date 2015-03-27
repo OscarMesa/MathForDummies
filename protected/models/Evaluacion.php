@@ -14,6 +14,7 @@
  * @property integer $tipo_evaluacion_id
  * @property integer $prefijo_horario_fini
  * @property integer $prefijo_horario_ffin
+ * @property integer $fecha_creacion
  *
  * The followings are the available model relations:
  * @property array $ejercicios
@@ -64,6 +65,7 @@ class Evaluacion extends CActiveRecord {
             'tipo' => array(self::BELONGS_TO, 'TipoEvaluacion', 'cursos_id'),
             'estado' => array(self::BELONGS_TO, 'Estados', 'estado_evaluacion'),
             'temas_evaluacion' => array(self::HAS_MANY, 'TemaEvaluaciones', 'evaluaciones_id'),
+            'ejerciciosEvaluacion' => array(self::HAS_MANY, 'EjerciciosEvaluaciones', 'evaluaciones_id')
         );
     }
 
@@ -125,7 +127,8 @@ class Evaluacion extends CActiveRecord {
             'estado_evaluacion' => 'Estado Evaluación',
             'tipo_evaluacion_id' => 'Tipo de evaluación',
             'ejercicios' => 'Ejericios',
-            'temas' => 'Temas'
+            'temas' => 'Temas',
+            'fecha_creacion' => 'Fecha de creación'
         );
     }
 
@@ -154,6 +157,9 @@ class Evaluacion extends CActiveRecord {
         $criteria->compare('tiempo_limite', $this->tiempo_limite, true);
         $criteria->compare('estado_evaluacion', $this->estado_evaluacion);
         $criteria->compare('tipo_evaluacion_id', $this->tipo_evaluacion_id);
+        $criteria->compare('fecha_creacion', $this->fecha_creacion);
+        
+        $criteria->order = "fecha_creacion DESC";
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

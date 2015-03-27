@@ -12,7 +12,7 @@ array('label'=>'Delete Evaluacion','url'=>'#','linkOptions'=>array('submit'=>arr
 array('label'=>'Manage Evaluacion','url'=>array('admin')),
 );
 ?>
-<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
+<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => false, 'activeAdmin' => false ));?>
 <h1>Ver Evaluacion #<?php echo $model->cursos_id; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(

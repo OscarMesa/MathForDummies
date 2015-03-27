@@ -19,6 +19,7 @@ return array(
     'The percentage must be an integer or decimal number. For example: 2, 2.3,68.9,80.' => 'El porcentaje debe ser un numero entero o decimal. Por ejemplo: 2, 2.3,68.9,80.',
     'The total percentage of the exercises to be equal 100%.'=>'La totalidad del porcentaje de los ejercicios debe ser del igual 100%.',
     'The percentage values can be decimal numbers only. For example: 2, 2.3,68.9,80.' => 'Los valores de los porcentajes, solo pueden ser números decimales. Por ejemplo: 2, 2.3,68.9,80.',
-    '<strong>Exito!</strong> The evaluation was stored successfully.' => '<strong>Exito!</strong> La evaluación fue almacenado exitosamente.'
+    '<strong>Exito!</strong> The evaluation was stored successfully.' => '<strong>Exito!</strong> La evaluación fue almacenado exitosamente.',
+    '<strong>Exito!</strong> The evaluation was modified successfully.' => '<strong>Exito!</strong> La evaluación fue modificada exitosamente.'
     
 );

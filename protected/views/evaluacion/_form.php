@@ -42,7 +42,8 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
     'htmlOptions' => array(
         'placeholder' => 'Fecha Inicio - Fecha Cierre',
         'style' => 'width:100%;',
-        'id' => 'Evaluacion_fecha_inicio'
+        'id' => 'Evaluacion_fecha_inicio',
+        'readonly' => $model->isNewRecord?false:true
     ),
         )
 );

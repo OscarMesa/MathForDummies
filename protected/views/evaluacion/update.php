@@ -13,6 +13,6 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Update Evaluacion <?php echo $model->cursos_id; ?></h1>
+	<h1>Actualizar Evaluación #<?php echo $model->cursos_id; ?></h1>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model, 'Mejercicios' => $Mejercicios,'temas' => $temas,'select_array'=>$select_array)); ?>

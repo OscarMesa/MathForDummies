@@ -32,12 +32,37 @@ class EvaluacionController extends Controller {
         $this->layout = "modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'curso' => Evaluacion::model()->findByPk($id)->curso
         ));
     }
 
     public function resta($inicio, $fin) {
         $dif = date("H:i:s", strtotime("00:00:00") + strtotime($fin) - strtotime($inicio));
         return $dif;
+    }
+
+    /**
+     * 
+     * @param Evaluacion $model
+     */
+    public function ajustarFechasEvaluacion(&$model) {
+        $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
+        if (count($fecha) == 2) {
+            $fecha1 = explode(" ", $fecha[0]);
+            $k = $fecha1[1] . " " . $fecha1[2];
+            $model->fecha_inicio = $fecha1[0] . " " . date("H:i", strtotime($k));
+            $model->prefijo_horario_fini = $fecha1[2];
+            $fecha2 = explode(" ", $fecha[1]);
+            $k = $fecha2[1] . " " . $fecha2[2];
+            $model->fecha_fin = $fecha2[0] . " " . date("H:i", strtotime($k));
+            $model->prefijo_horario_ffin = $fecha2[2];
+            $model->tiempo_limite = $this->resta($model->fecha_inicio, $model->fecha_fin);
+
+            $datetime1 = new DateTime($model->fecha_fin);
+            $datetime2 = new DateTime($model->fecha_inicio);
+            echo $model->tiempo_limite = $this->getIntervalUnits($datetime1->diff($datetime2));
+            die;
+        }
     }
 
     /**
@@ -52,30 +77,15 @@ class EvaluacionController extends Controller {
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
             $model->estado_evaluacion = ACTIVE;
-            $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
-            if (count($fecha) == 2) {
-                $fecha1 = explode(" ", $fecha[0]);
-                $k = $fecha1[1] . " " . $fecha1[2];
-                $model->fecha_inicio = $fecha1[0] . " " . date("H:i", strtotime($k));
-                $model->prefijo_horario_fini = $fecha1[2];
-                $fecha2 = explode(" ", $fecha[1]);
-                $k = $fecha2[1] . " " . $fecha2[2];
-                $model->fecha_fin = $fecha2[0] . " " . date("H:i", strtotime($k));
-                $model->prefijo_horario_ffin = $fecha2[2];
-                $model->tiempo_limite = $this->resta($model->fecha_inicio, $model->fecha_fin);
+            $this->ajustarFechasEvaluacion($model);
 
-                $datetime1 = new DateTime($model->fecha_fin);
-                $datetime2 = new DateTime($model->fecha_inicio);
-                $model->tiempo_limite = $this->getIntervalUnits($datetime1->diff($datetime2));
-            }
-
-            if ($model->save()){
+            if ($model->save()) {
                 $model->id_evaluacion = Yii::app()->db->getLastInsertId();
                 $model->guardarEjercicios();
                 $model->guardarTemas();
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                            'success', "<strong>Exito!</strong> The evaluation was stored successfully."
+                        'success', "<strong>Exito!</strong> The evaluation was stored successfully."
                 );
                 $this->redirect(array('view', 'id' => $model->id_evaluacion));
             }
@@ -116,18 +126,39 @@ class EvaluacionController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
+        $this->layout = "modal";
+        $Mejercicios = new Ejercicios('search');
+        $curso = $model->curso;
+        
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
-            if ($model->save())
+            $this->ajustarFechasEvaluacion($model);
+            if ($model->save()) {
+                $model->guardarEjercicios();
+                $model->guardarTemas();
+                $user = Yii::app()->getComponent('user');
+                $user->setFlash(
+                        'success', "<strong>Exito!</strong> The evaluation was stored successfully."
+                );
                 $this->redirect(array('view', 'id' => $model->cursos_id));
+            }
+        } else {
+            $model->ejercicios = array();
+            $model->ejercicios['check'] = CHtml::listData($model->ejerciciosEvaluacion, 'ejercicios_id_ejercicio', 'ejercicios_id_ejercicio');
+            $model->ejercicios['porcentaje'] = CHtml::listData($model->ejerciciosEvaluacion, 'ejercicios_id_ejercicio', 'valoracion_porcentaje');
+            $model->temas = CHtml::listData($model->temas_evaluacion, 'tema_idtema', 'tema_idtema');
+            $temas = Tema::model()->findAll(array('condition' => 'estado="active" AND idcurso=?', 'params' => array($curso->id)));
         }
 
+        $Mejercicios->idMateria = $curso->idmateria;
+//        $Mejercicios->idusuariocreador = Yii::app()->user->id;
+        $select_array = array();
         $this->render('update', array(
             'model' => $model,
+            'curso' => Cursos::model()->findByPk($id),
+            'temas' => $temas,
+            'Mejercicios' => $Mejercicios,
+            'select_array' => $select_array
         ));
     }
 
@@ -161,7 +192,7 @@ class EvaluacionController extends Controller {
     /**
      * Manages all models.
      */
-    public function actionAdmin() {
+    public function actionAdmin($id) {
         $this->layout = "modal";
         $model = new Evaluacion('search');
         $model->unsetAttributes();  // clear any default values
@@ -170,6 +201,7 @@ class EvaluacionController extends Controller {
 
         $this->render('admin', array(
             'model' => $model,
+            'curso' => Cursos::model()->findByPk($id)
         ));
     }
 
