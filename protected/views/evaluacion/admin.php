@@ -29,22 +29,22 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'cursos_id',
             'filter' => false,
-            'value' => function($data){ return $data->curso->nombre_curso;}
+            'value' => function($data){ return $data->curso->nombre_curso; }
         ),
         'fecha_inicio',
         'fecha_fin',
         array(
             'name' => 'porcentaje',
-            'value' => function($data){ return $data->porcentaje."%";}
+            'value' => function($data){ return $data->porcentaje."%"; }
         ), 
         array(
             'name' => 'tiempo_limite',
-            'value' => function($data){ return gmdate("H:i:s", $data->tiempo_limite);}
+            'value' => function($data){ return gmdate("H:i:s", $data->tiempo_limite); }
         ),            
         array(
             'name' => 'estado_evaluacion',
             'filter' => CHtml::listData(Estados::model()->findAll(), 'id_estado', 'nombre'),
-            'value' => function($data){ return $data->estado->nombre;}
+            'value' => function($data){ return $data->estado->nombre; }
         ),
                 'fecha_creacion',
         array(

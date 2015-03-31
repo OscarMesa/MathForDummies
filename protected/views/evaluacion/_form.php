@@ -17,6 +17,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php
 //    $l = new Cursos();
+
 echo $model->getAttributeLabel('fecha_inicio') . " - " . $model->getAttributeLabel('fecha_fin');
 $this->widget('bootstrap.widgets.TbDateRangePicker', array(
     'name' => 'Evaluacion[fecha_inicio]',
@@ -29,7 +30,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'showDropdowns' => true,
         'showDropdowns' => false,
         'timePickerIncrement' => 5,
-        'minDate' => $model->isNewRecord?date('Y-m-d'):$model->fecha_inicio,
+        'minDate' => $model->isNewRecord?date('Y-m-d'):date('Y-m-d',strtotime( str_replace(array(' AM',' PM'),'',$model->fecha_inicio))),
         'locale' => array(
             'cancelLabel' => 'Cancelar',
             'applyLabel' => 'Aplicar',

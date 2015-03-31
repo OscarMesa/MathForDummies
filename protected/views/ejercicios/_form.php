@@ -20,16 +20,16 @@
 
 	<?php echo $form->dropDownListRow($model, 'visible', array('Publico'=>'publico','Privado'=>'privado'),array('style'=> 'width:100%')) ?> 
 
-	<?php  if(!$model->isNewRecord): /* ?>
+	<?php  if(!$model->isNewRecord):  ?>
 				<div id="contenidos-virtuales">
-				    <label for="ejercicios[]">Contenidos</label>
+				    <label for="contenidos[]">Contenidos</label>
 				    <div class="row-fluid">
 				        <div class="bql-evaluacion-content">
 				            <?php
 				            $this->widget('bootstrap.widgets.TbListView', array(
 				                'id' => 'list-evaluaciones-items',
-				                'dataProvider' => $Mejercicios->searchForEvaluacion(),
-				                'itemView' => '_ejerciciosEvaluacion',
+				                'dataProvider' => $Mcontenidos->searchForContenido(),
+				                'itemView' => '_contenidosEjercicio',
 				                'viewData' => array('model' => $model),
 				                'sortableAttributes' => array(
 				                    'name',
@@ -40,7 +40,7 @@
 				    </div>
 				    <?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10, 'style'=>'margin-top: 7px;')); ?>
 				</div>
-	<?php */ endif; ?>
+	<?php endif; ?>
 
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(

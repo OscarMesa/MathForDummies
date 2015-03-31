@@ -48,8 +48,11 @@ class EvaluacionController extends Controller {
     public function ajustarFechasEvaluacion(&$model) {
         $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
         if (count($fecha) == 2) {
+            var_dump($fecha); 
             $fecha1 = explode(" ", $fecha[0]);
+
             $k = $fecha1[1] . " " . $fecha1[2];
+
             $model->fecha_inicio = $fecha1[0] . " " . date("H:i", strtotime($k));
             $model->prefijo_horario_fini = $fecha1[2];
             $fecha2 = explode(" ", $fecha[1]);
@@ -77,11 +80,12 @@ class EvaluacionController extends Controller {
             $model->attributes = $_POST['Evaluacion'];
             $model->estado_evaluacion = ACTIVE;
             $this->ajustarFechasEvaluacion($model);
-
             if ($model->save()) {
                 $model->id_evaluacion = Yii::app()->db->getLastInsertId();
+                
                 $model->guardarEjercicios();
                 $model->guardarTemas();
+                
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
                         'success', "<strong>Exito!</strong> The evaluation was stored successfully."
@@ -132,11 +136,13 @@ class EvaluacionController extends Controller {
             $model->attributes = $_POST['Evaluacion'];
             $this->ajustarFechasEvaluacion($model);
             if ($model->save()) {
+                
                 $model->guardarEjercicios();
                 $model->guardarTemas();
+               
                 $user = Yii::app()->getComponent('user');
                 $user->setFlash(
-                        'success', "<strong>Exito!</strong> The evaluation was stored successfully."
+                        'success',Yii::t('polimsn', "<strong>Exito!</strong> The evaluation was stored successfully.")
                 );
                 $this->redirect(array('view', 'id' => $id));
             }
@@ -146,6 +152,9 @@ class EvaluacionController extends Controller {
             $model->ejercicios['porcentaje'] = CHtml::listData($model->ejerciciosEvaluacion, 'ejercicios_id_ejercicio', 'valoracion_porcentaje');
             $model->temas = CHtml::listData($model->temas_evaluacion, 'tema_idtema', 'tema_idtema');
         }
+
+        $model->fecha_inicio = $model->fecha_inicio.' '.$model->prefijo_horario_fini;
+        $model->fecha_fin = $model->fecha_fin.' '.$model->prefijo_horario_fini;
 
         $Mejercicios->idMateria = $curso->idmateria;
         $temas = Tema::model()->findAll(array('condition' => 'estado="active" AND idcurso=?', 'params' => array($curso->id)));

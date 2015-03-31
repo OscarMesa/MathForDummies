@@ -119,7 +119,7 @@ class Ejercicios extends CActiveRecord
 		return parent::model($className);
 	}
         
-         public function searchForEvaluacion()
+    public function searchForEvaluacion()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
