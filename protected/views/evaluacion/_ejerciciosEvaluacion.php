@@ -19,7 +19,7 @@
         <?php if($check){?>
         <div class="porcentaje-ejercicio-evaluacion">
             <label><span>Porcentaje</span>
-                <input type="text" name="Evaluacion[ejercicios][porcentaje][<?php echo $data->id_ejercicio; ?>]" value="<?php echo $model->ejercicios['porcentaje'][$data->id_ejercicio]?>">
+                <input type="text" name="Evaluacion[ejercicios][porcentaje][<?php echo $data->id_ejercicio; ?>]" value="<?php echo $model->ejercicios['porcentaje'][$data->id_ejercicio]?>"><span class="spn-porcentaje">%</span>
             </label>
         </div>
         <?php } ?>

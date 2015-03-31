@@ -29,7 +29,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'showDropdowns' => true,
         'showDropdowns' => false,
         'timePickerIncrement' => 5,
-        'minDate' => date('Y-m-d'),
+        'minDate' => $model->isNewRecord?date('Y-m-d'):$model->fecha_inicio,
         'locale' => array(
             'cancelLabel' => 'Cancelar',
             'applyLabel' => 'Aplicar',
@@ -43,7 +43,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
         'placeholder' => 'Fecha Inicio - Fecha Cierre',
         'style' => 'width:100%;',
         'id' => 'Evaluacion_fecha_inicio',
-        'readonly' => $model->isNewRecord?false:true
+       // 'readonly' => 
     ),
         )
 );
@@ -96,7 +96,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
     $this->widget('bootstrap.widgets.TbButton', array(
         'buttonType' => 'submit',
         'type' => 'primary',
-        'label' => $model->isNewRecord ? 'Create' : 'Save',
+        'label' => $model->isNewRecord ? 'Crear' : 'Guardar',
     ));
     ?>
 </div>
@@ -122,7 +122,7 @@ $script->registerScript('tooltip', '(function($){'
     $(".ejercicio input:checkbox").click(function(){
         if(this.checked)
         {
-            $(this).parent().parent().parent().children('.panel-body').append('<div class="porcentaje-ejercicio-evaluacion row"><label><span>Porcentaje</span><input type="text" name="Evaluacion[ejercicios][porcentaje]['+$(this).attr('value')+']"></label></div>');
+            $(this).parent().parent().parent().children('.panel-body').append('<div class="porcentaje-ejercicio-evaluacion"><label><span>Porcentaje</span><input type="text" name="Evaluacion[ejercicios][porcentaje]['+$(this).attr('value')+']"><span class="spn-porcentaje">%<span></label></div>');
         }else{
              $(this).parent().parent().parent().children('.panel-body').children('.porcentaje-ejercicio-evaluacion').remove();
         }

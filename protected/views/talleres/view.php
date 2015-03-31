@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 array('label'=>'List Talleres','url'=>array('index')),
 array('label'=>'Create Talleres','url'=>array('create')),
-array('label'=>'Update Talleres','url'=>array('update','id'=>$model->idtalleres)),
+array('label'=>'Actualizar Talleres','url'=>array('update','id'=>$model->idtalleres)),
 array('label'=>'Delete Talleres','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->idtalleres),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>'Manage Talleres','url'=>array('admin')),
 );

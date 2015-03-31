@@ -3,7 +3,7 @@
 $this->breadcrumbs=array(
 	'Talleres'=>array('index'),
 	$model->idtalleres=>array('view','id'=>$model->idtalleres),
-	'Update',
+	'Actualizar',
 );
     $this->menu=array(
     array('label'=>'List Talleres','url'=>array('index')),
@@ -13,6 +13,6 @@ $this->breadcrumbs=array(
     );
     ?>
 
- <div class='titulos_admin'>Taller <?php echo $model->nombre; ?></div>
+ <div class='titulos_admin'>Actualizar Taller <?php echo $model->nombre; ?></div>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

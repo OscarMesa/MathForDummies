@@ -157,7 +157,8 @@ return array(
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                'cursos/agregarestudiantes/<id:d+1>'=> 'cursos/agregarestudiantes/id'
+                'cursos/agregarestudiantes/<id:d+1>'=> 'cursos/agregarestudiantes/id',
+                'asignatura/create/<id:d+1>'=> 'materia/create/id'
 //               'programa/subirArchivo/<id>' => 'programa/subirArchivo',
 //               'programa/ActualizaEstado/<programa>/<estado>' => 'programa/ActualizaEstado'
             ),

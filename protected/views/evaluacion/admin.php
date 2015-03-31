@@ -9,18 +9,6 @@ $this->menu = array(
     array('label' => 'Create Evaluacion', 'url' => array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-    $('.search-button').click(function(){
-    $('.search-form').toggle();
-    return false;
-    });
-    $('.search-form form').submit(function(){
-    $.fn.yiiGridView.update('evaluacion-grid', {
-    data: $(this).serialize()
-    });
-    return false;
-    });
-");
 ?>
 <?php echo $this->renderPartial("_menu", array('model' => $curso, 'activeAdmin' => true)); ?>
 <h1>Administrador de Evaluaciones</h1>

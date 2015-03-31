@@ -1,29 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "materias".
+ * This is the model class for table "area".
  *
- * The followings are the available columns in table 'materias':
- * @property integer $idmaterias
- * @property string $nombre_materia
- * @property string $state_materia
- * @property integer $idarea
+ * The followings are the available columns in table 'area':
+ * @property integer $id_area
+ * @property string $descripcion
  *
  * The followings are the available model relations:
- * @property Contenidos[] $contenidoses
- * @property Cursos[] $cursoses
- * @property Ejercicios[] $ejercicioses
- * @property Area $idarea0
- * @property Talleres[] $talleres
+ * @property Materias[] $materiases
  */
-class Materias extends CActiveRecord
+class Area extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'materias';
+		return 'area';
 	}
 
 	/**
@@ -34,13 +28,11 @@ class Materias extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre_materia, state_materia, idarea', 'required'),
-			array('idarea', 'numerical', 'integerOnly'=>true),
-			array('nombre_materia', 'length', 'max'=>45),
-			array('state_materia', 'length', 'max'=>8),
+			array('descripcion', 'required'),
+			array('descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idmaterias, nombre_materia, state_materia, idarea', 'safe', 'on'=>'search'),
+			array('id_area, descripcion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,11 +44,7 @@ class Materias extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'contenidoses' => array(self::MANY_MANY, 'Contenidos', 'contenidos_materia(id_materia, id_contenido)'),
-			'cursoses' => array(self::HAS_MANY, 'Cursos', 'idmateria'),
-			'ejercicioses' => array(self::HAS_MANY, 'Ejercicios', 'idMateria'),
-			'area' => array(self::BELONGS_TO, 'Area', 'idarea'),
-			'talleres' => array(self::HAS_MANY, 'Talleres', 'id_materia'),
+			'materiases' => array(self::HAS_MANY, 'Materias', 'idarea'),
 		);
 	}
 
@@ -66,10 +54,8 @@ class Materias extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idmaterias' => 'Id',
-			'nombre_materia' => 'Asignatura',
-			'state_materia' => 'Estado',
-			'idarea' => 'Área',
+			'id_area' => 'Id',
+			'descripcion' => 'Área',
 		);
 	}
 
@@ -91,10 +77,8 @@ class Materias extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idmaterias',$this->idmaterias);
-		$criteria->compare('nombre_materia',$this->nombre_materia,true);
-		$criteria->compare('state_materia',$this->state_materia,true);
-		$criteria->compare('idarea',$this->idarea);
+		$criteria->compare('id_area',$this->id_area);
+		$criteria->compare('descripcion',$this->descripcion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -105,7 +89,7 @@ class Materias extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Materias the static model class
+	 * @return Area the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

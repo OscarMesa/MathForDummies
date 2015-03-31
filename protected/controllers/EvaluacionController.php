@@ -36,8 +36,8 @@ class EvaluacionController extends Controller {
         ));
     }
 
-    public function resta($inicio, $fin) {
-        $dif = date("H:i:s", strtotime("00:00:00") + strtotime($fin) - strtotime($inicio));
+    public function resta($inicio, $fin, $format = "H:i:s") {
+        $dif = date($format, strtotime("00:00:00") + strtotime($fin) - strtotime($inicio));
         return $dif;
     }
 
@@ -60,8 +60,7 @@ class EvaluacionController extends Controller {
 
             $datetime1 = new DateTime($model->fecha_fin);
             $datetime2 = new DateTime($model->fecha_inicio);
-            echo $model->tiempo_limite = $this->getIntervalUnits($datetime1->diff($datetime2));
-            die;
+            $model->tiempo_limite = $this->getIntervalUnits($datetime1->diff($datetime2));
         }
     }
 
@@ -129,7 +128,6 @@ class EvaluacionController extends Controller {
         $this->layout = "modal";
         $Mejercicios = new Ejercicios('search');
         $curso = $model->curso;
-        
         if (isset($_POST['Evaluacion'])) {
             $model->attributes = $_POST['Evaluacion'];
             $this->ajustarFechasEvaluacion($model);
@@ -140,17 +138,17 @@ class EvaluacionController extends Controller {
                 $user->setFlash(
                         'success', "<strong>Exito!</strong> The evaluation was stored successfully."
                 );
-                $this->redirect(array('view', 'id' => $model->cursos_id));
+                $this->redirect(array('view', 'id' => $id));
             }
         } else {
             $model->ejercicios = array();
             $model->ejercicios['check'] = CHtml::listData($model->ejerciciosEvaluacion, 'ejercicios_id_ejercicio', 'ejercicios_id_ejercicio');
             $model->ejercicios['porcentaje'] = CHtml::listData($model->ejerciciosEvaluacion, 'ejercicios_id_ejercicio', 'valoracion_porcentaje');
             $model->temas = CHtml::listData($model->temas_evaluacion, 'tema_idtema', 'tema_idtema');
-            $temas = Tema::model()->findAll(array('condition' => 'estado="active" AND idcurso=?', 'params' => array($curso->id)));
         }
 
         $Mejercicios->idMateria = $curso->idmateria;
+        $temas = Tema::model()->findAll(array('condition' => 'estado="active" AND idcurso=?', 'params' => array($curso->id)));
 //        $Mejercicios->idusuariocreador = Yii::app()->user->id;
         $select_array = array();
         $this->render('update', array(

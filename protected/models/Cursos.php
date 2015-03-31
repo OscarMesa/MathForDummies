@@ -94,7 +94,7 @@ class Cursos extends CActiveRecord
 			'id' => 'Identificador',
 			'state_curso' => 'Estado Curso',
 			//'id_docente' => 'Id Docente',
-			'idmateria' => 'Area del Curso',
+			'idmateria' => 'Asignatura',
 			'nombre_curso' => 'Nombre Curso',
 			'descripcion_curso' => 'Descripcion Curso',
 			'fecha_inicio' => 'Fecha Inicio Curso',

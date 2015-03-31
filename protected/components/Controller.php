@@ -37,5 +37,7 @@ class Controller extends CController {
         parent::init();
         
     }
+    
+    public $estado = array('inactive'=>'Inactivo','active'=>'Activo');
 
 }

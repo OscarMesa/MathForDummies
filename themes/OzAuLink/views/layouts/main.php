@@ -86,6 +86,12 @@
                                         array('label' => 'Administrar Usuarios'
                                             , 'url' => Yii::app()->user->ui->userManagementAdminUrl
                                             , 'visible' => !Yii::app()->user->isGuest),
+                                        array('label' => 'Areas'
+                                            , 'url' => array("/area/admin")
+                                            , 'visible' => !Yii::app()->user->isGuest),
+                                        array('label' => 'Asignaturas'
+                                            , 'url' => array("/asignatura/admin")
+                                            , 'visible' => !Yii::app()->user->isGuest),    
                                         array('label' => 'Logout('.Yii::app()->user->name.')'
                                             , 'url' => Yii::app()->user->ui->logoutUrl
                                             , 'visible' => !Yii::app()->user->isGuest),

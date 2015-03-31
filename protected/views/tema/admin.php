@@ -9,20 +9,6 @@ $this->menu = array(
     array('label' => 'Create Tema', 'url' => array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-    $('.search-button').click(function(){
-    $('.search-form').toggle();
-    return false;
-    });
-    $('.search-form form').submit(function(){
-        var data = $(this).serialize();
-        console.log(data);
-        $.fn.yiiGridView.update('tema-grid', {
-            data: data
-        });
-    return false;
-});
-");
 ?>
 
 <?php echo $this->renderPartial("_menu",array('model' => $model,'activeAdmin'=>true ));?>
@@ -123,23 +109,3 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     ),
 ));
 ?>
-
-
-<script type="text/javascript">
-    function activar()
-    {
-            if (!confirm('¿Está seguro que desea activar este elemento?')) return false;
-            $.ajax({
-                url:jQuery(this).attr('href'),
-                type:"POST",
-                success: function(data) {
-                    $.fn.yiiGridView.update("tema-grid");
-                },
-                error: function(XHR) {
-                return afterDelete(th, false, XHR);
-                }
-            });
-            return false;
-    }
-
-</script>

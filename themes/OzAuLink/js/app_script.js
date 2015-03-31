@@ -43,3 +43,20 @@ $(document).on("ready", function() {
     {
         return  "<div id=\"myModal\" class=\"modal hide fade\" tabindex=\"-1\" data-width=\"760\" style=\"display: none;\"><div class=\"modal-header\"> <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>    <h4 class=\"modal-title\">Responsive</h4> </div>  <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-body\">  <iframe id=\"iframeApp\"  src=\"\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"yes\" allowtransparency=\"true\" style=\"max-height: 85%;\"></iframe> </div></div></div></div>";
     }
+
+        function activar()
+    {
+        var grid = jQuery(this).attr('grid');
+            if (!confirm('¿Está seguro que desea activar este elemento?')) return false;
+            $.ajax({
+                url:jQuery(this).attr('href'),
+                type:"POST",
+                success: function(data) {
+                    $.fn.yiiGridView.update(grid);
+                },
+                error: function(XHR) {
+                return afterDelete(th, false, XHR);
+                }
+            });
+            return false;
+    }
