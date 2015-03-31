@@ -124,7 +124,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'style' => 'width: 100%;'
         ),
         'options' => array(
-            'placeholder' => 'Seleccione una materia..',
+            'placeholder' => 'Seleccione una aignatura.',
             'allowClear' => true,
         ),
             )
@@ -161,9 +161,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <script type="text/javascript">
     $('#area').on('select2-removed',function(){
         $("#Cursos_idmateria").empty();
-        $("#Cursos_idmateria").select2({
-  placeholder: 'Choose 2 items'
-};
+        $("#select2-chosen-2").html("Seleccione una asignatura.");
+        $("#select2-chosen-2").addClass('select2-chosen');
+        $("#select2-chosen-2").parent().addClass('select2-choice select2-default');
     });
     $('#area').on('change', function () {
         if ($('#area').select2('data') != null) {
