@@ -52,7 +52,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'template' => '{view}{update}{delete}{active}',
             'buttons' => array(
                 'delete' => array(
-                    'visible' => '($data->estado == ACTIVE)?true:false',
+                    'visible' => '($data->estado_evaluacion == ACTIVE)?true:false',
                     'icon' => 'icon-remove',
                     'url' => 'Yii::app()->createUrl("evaluacion/delete", array("idcurso"=>$data->curso->id,"id"=>$data->id_evaluacion))',
                     'label' => 'Desactivar',
