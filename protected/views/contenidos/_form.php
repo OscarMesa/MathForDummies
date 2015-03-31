@@ -10,12 +10,14 @@
 
         ));
     ?>
+            <?php echo $form->hiddenField($model, 'id_usuario_creador', array('class' => 'span11', 'value'=> Yii::app()->user->getId() )); ?>
             <?php echo $form->textFieldRow($model, 'titulo', array('class' => 'span11')); ?>
             
             <?php $this->widget('Summernote', array('title'=> 'Detalle', 'nom'=>'Contenidos[detalle]', 'val'=>$model->detalle) ); ?>
             <?php echo $form->error($model, 'detalle', array('class' => 'help-block error', 'maxlength' => 10)); ?>
            
             <?php echo $form->dropDownListRow($model, 'state_contenido', array('active'=>'Activo','inactive'=>'Inactivo'),array('style'=> 'width:100%')) ?> 
+            <?php echo $form->dropDownListRow($model, 'visible', array('privado'=>'Privado','Publico'=>'Publico'),array('style'=> 'width:100%')) ?> 
             
             <br>
             <?php

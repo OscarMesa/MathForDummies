@@ -3,7 +3,7 @@
 ?>
 <div class="panel panel-success ejercicio" style="">
     <div class="panel-heading">
-    <?php if(isset($model->ejercicios) && count($model->ejercicios)>0){;?>
+    <?php if( property_exists($model,"ejercicios") && isset($model->ejercicios) && count($model->ejercicios)>0){ ?>
         <?php if(array_search($data->id_ejercicio,$model->ejercicios['check']) !== false){ $check = true;?>
                      <div class="checkbox"><?php echo CHtml::checkBox('Evaluacion[ejercicios][check]['.$data->id_ejercicio.']', 1, array('value'=>$data->id_ejercicio))?> 
         <?php }else{ ?>

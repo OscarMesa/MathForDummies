@@ -81,6 +81,8 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
 <div class="row-fluid">
     <div class="span-6 bql-evaluacion-content">
         <?php
+        if(!property_exists($model, "temas"))
+            $model->setTemas(array());
         echo CHtml::checkBoxList('Evaluacion[temas]', $model->temas, CHtml::listData($temas, 'idtema', 'titulo'), array('class' => '',
             'template' => '<label class="checkbox">{input}{label}</label>',
 //                                                              
