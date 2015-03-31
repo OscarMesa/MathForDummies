@@ -93,6 +93,7 @@ class EjerciciosController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'Mcontenidos' => Contenidos::model(),
         ));
     }
 

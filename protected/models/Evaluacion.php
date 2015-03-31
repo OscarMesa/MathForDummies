@@ -23,6 +23,7 @@
 class Evaluacion extends CActiveRecord {
 
     const TP_EVL_VIRTUAL = 2;
+    const TP_EVL_PRESENCIAL = 1;
 
     /**
      * @return string the associated database table name
@@ -76,40 +77,44 @@ class Evaluacion extends CActiveRecord {
     }
 
     public function ValidarExistenciaEjericicos($attribute, $params) {
-        if (count($this->ejercicios['check']) <= 0 && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL)
+        if ( property_exists($this, 'ejercicios') && count($this->ejercicios['check']) <= 0 && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL)
             $this->addError($attribute, Yii::t('polimsn', 'You must select at least one exercise for creating evaluation.'));
     }
 
     public function validarSoloNumeroPorcentaje($attribute, $params) {
-        if ($this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL) {
-            $total = 0;
-            $regex = '/^[+\-]?(?:\d+(?:\.\d*)?|\.\d+)$/';
-            $decimal = true;
-//            print_r($this->ejercicios['porcentaje']);die;
-            foreach ($this->ejercicios['porcentaje'] as $v) {
-                if (!preg_match($regex, $v)) {
-                    $decimal = false;
-                    break;
+        if ( property_exists($this, 'ejercicios') ){
+                if ($this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL) {
+                    $total = 0;
+                    $regex = '/^[+\-]?(?:\d+(?:\.\d*)?|\.\d+)$/';
+                    $decimal = true;
+
+                    foreach ($this->ejercicios['porcentaje'] as $v) {
+                        if (!preg_match($regex, $v)) {
+                            $decimal = false;
+                            break;
+                        }
+                    }
+                    if (!$decimal)
+                        $this->addError($attribute, Yii::t('polimsn', 'The percentage values can be decimal numbers only. For example: 2, 2.3,68.9,80.'));
                 }
-            }
         }
-//        var_dump($decimal);die;
-        if (!$decimal)
-            $this->addError($attribute, Yii::t('polimsn', 'The percentage values can be decimal numbers only. For example: 2, 2.3,68.9,80.'));
     }
 
     public function ValidarTotalPorcentaje($attribute, $params) {
-        if ($this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL) {
-            $total = 0;
-            foreach ($this->ejercicios['porcentaje'] as $v)
-                $total += $v;
-            if ($total != 100)
-                $this->addError($attribute, Yii::t('polimsn', 'The total percentage of the exercises to be equal 100%.'));
-        }
+
+            if ($this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL && property_exists($this, 'ejercicios') ) {
+                $total = 0;
+                foreach ($this->ejercicios['porcentaje'] as $v)
+                    $total += $v;
+                if ($total != 100)
+                    $this->addError($attribute, Yii::t('polimsn', 'The total percentage of the exercises to be equal 100%.'));
+            }
+
     }
 
     public function ValidarExistenciaTemas($attribute, $params) {
-        if (count($this->temas) <= 0)
+        
+        if ( property_exists($this, 'ejercicios') && count($this->temas) <= 0)
             $this->addError($attribute, Yii::t('polimsn', 'You must select at least one item for creating evaluation.'));
     }
 
@@ -193,18 +198,23 @@ class Evaluacion extends CActiveRecord {
     }
 
     public function guardarEjercicios() {
+        
         EjerciciosEvaluaciones::model()->deleteAll(array(
             'condition' => 'evaluaciones_id=?',
             'params' => array($this->id_evaluacion)
                 )
         );
-        foreach ($this->ejercicios['check'] as $ejercicio) {
-            $n = new EjerciciosEvaluaciones();
-            $n->ejercicios_id_ejercicio = $ejercicio;
-            $n->evaluaciones_id = $this->id_evaluacion;
-            $n->valoracion_porcentaje = $this->ejercicios['check'][$ejercicio];
-            if(!$n->save()){
-                print_r($n->errors);die;
+
+        if(property_exists($this,"ejercicios") && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL){
+
+            foreach ($this->ejercicios['check'] as $ejercicio) {
+                $n = new EjerciciosEvaluaciones();
+                $n->ejercicios_id_ejercicio = $ejercicio;
+                $n->evaluaciones_id = $this->id_evaluacion;
+                $n->valoracion_porcentaje = $this->ejercicios['porcentaje'][$ejercicio];
+                if(!$n->save()){
+                    print_r($n->errors);die;
+                }
             }
         }
     }
@@ -215,13 +225,14 @@ class Evaluacion extends CActiveRecord {
             'params' => array($this->id_evaluacion)
                 )
         );
-        
-        foreach ($this->temas as $tema) {
-            $n = new TemaEvaluaciones();
-            $n->tema_idtema = $tema;
-            $n->evaluaciones_id = $this->id_evaluacion;
-            if(!$n->save()){
-                print_r($n->errors);die;
+        if(property_exists($this,"temas")){
+            foreach ($this->temas as $tema) {
+                $n = new TemaEvaluaciones();
+                $n->tema_idtema = $tema;
+                $n->evaluaciones_id = $this->id_evaluacion;
+                if(!$n->save()){
+                    print_r($n->errors);die;
+                }
             }
         }
     }

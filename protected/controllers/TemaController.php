@@ -117,7 +117,7 @@ class TemaController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
-            'curso' => $curso,
+            //'curso' => Cursos::model()->findByPk($id),
             'curso' => Cursos::model()->findByPk($_GET['idcurso'])
         ));
     }
