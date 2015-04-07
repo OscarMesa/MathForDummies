@@ -87,8 +87,10 @@ class EjerciciosController extends Controller {
 
         if (isset($_POST['Ejercicios'])) {
             $model->attributes = $_POST['Ejercicios'];
-            if ($model->save())
+            if ($model->save()){
+                $model->guardarContenidos();
                 $this->redirect(array('view', 'id' => $model->id_ejercicio));
+            }
         }
 
         $this->render('update', array(

@@ -136,4 +136,35 @@ class Ejercicios extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function getContenidos() {
+        return $this->contenidos;
+    }
+
+    public function setContenidos($contenidos) {
+        $this->contenidos = $contenidos;
+    }
+
+    public function guardarContenidos(){
+        
+        ContenidosEjercicio::model()->deleteAll(array(
+            'condition' => 'ejercicios_id=?',
+            'params' => array($this->id_ejercicio)
+            )
+        );
+
+        if(property_exists($this,"contenidos")){
+            foreach ($this->$this->ejercicios['contenidos']['check'] as $contenido) {
+                $n = new ContenidosEjercicio();
+                $n->contenidos_id = $contenido;
+                $n->ejercicios_id = $this->id_evaluacion;
+                $n->orden = $this->ejercicios['contenidos']['orden'][$contenido];
+                if(!$n->save()){
+                    print_r($n->errors);die;
+                }
+            }
+        }
+        
+    }
+
 }

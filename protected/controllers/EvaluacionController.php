@@ -158,7 +158,7 @@ class EvaluacionController extends Controller {
 
         $Mejercicios->idMateria = $curso->idmateria;
         $temas = Tema::model()->findAll(array('condition' => 'estado="active" AND idcurso=?', 'params' => array($curso->id)));
-//        $Mejercicios->idusuariocreador = Yii::app()->user->id;
+        //$Mejercicios->idusuariocreador = Yii::app()->user->id;
         $select_array = array();
         $this->render('update', array(
             'model' => $model,
