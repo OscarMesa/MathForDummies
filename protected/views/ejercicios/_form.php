@@ -57,7 +57,7 @@
     $(".contenido input:checkbox").click(function(){
         if(this.checked)
         {
-            $(this).parent().parent().parent().children('.panel-body').append('<div class="orden-contenido-ejercio"><label><span>Orden</span><input type="text" name="Evaluacion[contenido][orden]['+$(this).attr('value')+']"></label></div>');
+            $(this).parent().parent().parent().children('.panel-body').append('<div class="orden-contenido-ejercio"><label><span>Orden</span><input type="text" name="Ejercicios[contenidos][orden]['+$(this).attr('value')+']"></label></div>');
         }else{
              $(this).parent().parent().parent().children('.panel-body').children('.orden-contenido-ejercio').remove();
         }

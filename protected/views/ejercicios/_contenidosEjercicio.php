@@ -7,7 +7,7 @@
         <?php if(array_search($data->id,$model->contenidos['check']) !== false){ $check = true;?>
                      <div class="checkbox"><?php echo CHtml::checkBox('Ejercicios[contenidos][check]['.$data->id.']', 1, array('value'=>$data->id))?> 
         <?php }else{ ?>
-                      <div class="checkbox"><?php echo CHtml::checkBox('Ejercicios[contenidos][check]['.$data->id.']', 0, array('value'=>$data->id))?> 
+                     <div class="checkbox"><?php echo CHtml::checkBox('Ejercicios[contenidos][check]['.$data->id.']', 0, array('value'=>$data->id))?> 
        <?php } ?>
     <?php }else{ ?>    
       <div class="checkbox"><?php echo CHtml::checkBox('Ejercicios[contenidos][check]['.$data->id.']', 0, array('value'=>$data->id))?>
@@ -19,9 +19,9 @@
         <?php if($check){?>
         <div class="order-contenido-ejercicio">
             <label><span>Orden</span>
-                <input type="text" name="Ejercicios[contenidos][orden][<?php echo $data->id; ?>]" value="<?php echo $model->contenidos['order'][$data->id]?>">
+                <input type="text" name="Ejercicios[contenidos][orden][<?php echo $data->id; ?>]" value="<?php echo $model->contenidos['orden'][$data->id]; ?>">
             </label>
         </div>
         <?php } ?>
     </div>
-          </div>
+</div>
