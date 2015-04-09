@@ -1,6 +1,7 @@
 <?php $this->beginContent('//layouts/main'); ?>
 
- <?php echo $this->renderPartial('application.views.layouts._menu'); ?>
+ <?php // if(!Yii::app()->user->isGuest)
+     echo $this->renderPartial('application.views.layouts._menu'); ?>
 <div class="content-wrapper" style="min-height: 884px;">
     <div class="alpha grid_3">
     <div id="sidebar">
