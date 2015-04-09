@@ -27,7 +27,8 @@ echo $form->textFieldRow($modelRegistro, 'email', array('class' => 'span3'));
 
 $model_perfil_v = new MathAuthitem();
 
-echo $form->dropDownListRow($model_perfil_v, 'name', CHtml::listData(MathAuthitem::model()->findAll("name IN('Alumno') AND type = 2"), 'name', 'name'), array('empty'=>'Perfil'));
+
+echo $form->dropDownListRow($model_perfil_v, 'name', CHtml::listData(MathAuthitem::model()->findAll("name IN('Alumno') AND type = 2"), 'name', 'name'));
 echo $form->textFieldRow($modelRegistro,'nameperfil',array('style'=>'display:none'));
 echo"<br>";
 $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Guardar Registro'));
