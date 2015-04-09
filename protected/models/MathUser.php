@@ -12,6 +12,9 @@
  * @author Oskar
  * @property MathAuthitem[] $items
  */
+Yii::import('application.modules.cruge.models.data.CrugeStoredUser');
+Yii::import('application.modules.cruge.interfaces.ICrugeStoredUser');
+
 class MathUser extends CrugeStoredUser {
 
     public $nameperfil; 
