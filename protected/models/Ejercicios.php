@@ -11,6 +11,7 @@
  * @property integer $idusuariocreador
  * @property integer $idDificultad
  * @property string $visible
+ * @property array $contenidos
  *
  * The followings are the available model relations:
  * @property Dificultad $idDificultad0
@@ -40,6 +41,7 @@ class Ejercicios extends CActiveRecord
 			array('idMateria, idusuariocreador, idDificultad', 'numerical', 'integerOnly'=>true),
 			array('state_ejercicios', 'length', 'max'=>8),
 			array('visible', 'length', 'max'=>7),
+			array("contenidos","safe"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_ejercicio, state_ejercicios, idMateria, ejercicio, idusuariocreador, idDificultad, visible', 'safe', 'on'=>'search'),
@@ -55,6 +57,7 @@ class Ejercicios extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDificultad0' => array(self::BELONGS_TO, 'Dificultad', 'idDificultad'),
+			'contenidos_ejercicios' => array(self::HAS_MANY, 'ContenidosEjercicio', 'ejercicios_id'),
 			'idMateria0' => array(self::BELONGS_TO, 'Materias', 'idMateria'),
 			'idusuariocreador0' => array(self::BELONGS_TO, 'MathUser', 'idusuariocreador'),
 			'evaluacions' => array(self::MANY_MANY, 'Evaluacion', 'ejercicios_evaluaciones(ejercicios_id_ejercicio, evaluaciones_id)'),
@@ -136,4 +139,35 @@ class Ejercicios extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function getContenidos() {
+        return $this->contenidos;
+    }
+
+    public function setContenidos($contenidos) {
+        $this->contenidos = $contenidos;
+    }
+
+    public function guardarContenidos(){
+        
+        ContenidosEjercicio::model()->deleteAll(array(
+            'condition' => 'ejercicios_id=?',
+            'params' => array($this->id_ejercicio)
+            )
+        );
+
+        if(property_exists($this,"contenidos")){
+            foreach ($this->contenidos['check'] as $contenido) {
+                $n = new ContenidosEjercicio();
+                $n->contenidos_id = $contenido;
+                $n->ejercicios_id = $this->id_ejercicio;
+                $n->orden = $this->contenidos['orden'][$contenido];
+                if(!$n->save()){
+                    print_r($n->errors);die;
+                }
+            }
+        }
+        
+    }
+
 }

@@ -84,17 +84,22 @@ class EjerciciosController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
         if (isset($_POST['Ejercicios'])) {
             $model->attributes = $_POST['Ejercicios'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_ejercicio));
-        }
 
-        $this->render('update', array(
-            'model' => $model,
-            'Mcontenidos' => Contenidos::model(),
-        ));
+            if ($model->save()){
+                $model->guardarContenidos();
+//                $this->redirect(array('view', 'id' => $model->id_ejercicio));
+            }
+        }else{
+            $model->contenidos = array();
+            $model->contenidos['check'] = CHtml::listData($model->contenidos_ejercicios, 'contenidos_id', 'contenidos_id');
+            $model->contenidos['orden'] = CHtml::listData($model->contenidos_ejercicios, 'contenidos_id', 'orden');
+        }
+            $this->render('update', array(
+                'model' => $model,
+                'Mcontenidos' => Contenidos::model(),
+            ));
     }
 
     /**
