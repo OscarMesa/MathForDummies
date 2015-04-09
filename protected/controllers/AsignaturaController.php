@@ -24,6 +24,21 @@ class AsignaturaController extends Controller {
         return array(
         );
     }
+    public function actionObtenerDatosAsignatura() {
+        if (Yii::app()->request->isPostRequest) {
+            $m = Materias::model()->findByPk($_POST['asignatura']);
+            $materias = Materias::model()->findAll(array('condition'=>'idarea=? AND idmaterias != ?','params'=>array($m->idarea,$m->idmaterias)));
+            $r_materias = array();
+            foreach ($materias as $ma) {
+                $r_materias[] = $ma->attributes;
+            }
+            $r_materias[] = $m->attributes;
+            echo CJSON::encode(array('asignaturas'=>$r_materias, 'asignatura'=>$m->attributes,'area'=>$m->area->attributes));
+        }else{
+            throw new CHttpException(400, Yii::t('polimsn', 'Invalid request. Please do not repeat this request again.'));
+        }    
+    
+        }
 
     /**
      * Displays a particular model.

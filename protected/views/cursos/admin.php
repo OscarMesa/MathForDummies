@@ -41,6 +41,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'htmlOptions' => array('width' => '80px',),
         ),
         array(
+            'header' => 'Asignatura',
+            'filter' => false,
+            'value' => function($data){
+                return $data->materia->area->descripcion;
+            },
+            'htmlOptions' => array('width' => '80px',),
+        ),            
+        array(
             'name' => 'idmateria',
             'filter' => CHtml::listData(Materias::model()->findAll(), 'idmaterias', 'nombre_materia'),
             'value' => function($data){
