@@ -53,10 +53,10 @@ return array(
 		// uncomment the following to use a MySQL database
 		*/
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=gammaris_avaluos',
+			'connectionString' => 'mysql:host=localhost;dbname=math',
 			'emulatePrepare' => true,
-			'username' => 'avaluos',
-			'password' => 'avaluos',
+			'username' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 		
