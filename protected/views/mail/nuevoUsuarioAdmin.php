@@ -92,7 +92,7 @@
                                                     <td>
 <?php if ($esDocente) { ?>
                                                             <p><span>Dirijace al siguiente link para finalizar la activación de esta cuenta.</span></p> <br/>
-                                                            <a href="<?php echo Yii::app()->getBaseUrl(true) . '/usuarios/ActivarDocente?id=' . $usuario->id_usuario . '&hash=' . sha1('PoliAuLinkServer'); ?>">Click aqui</a>
+                                                            <a href="<?php echo Yii::app()->getBaseUrl(true) . '/usuarios/ActivarDocente?id=' . $usuario->id_usuario . '&hash=' . sha1('OzAuLinkServer'); ?>">Click aqui</a>
 <?php } ?>
                                                     </td>
                                                 </tr>
