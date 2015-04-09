@@ -92,7 +92,7 @@ html
           <?php if($usuario->state == CRUGEUSERSTATE_NOTCONFIRMATE){?>
           <td>
               <p><span>Dirijace al siguiente link para finalizar la activación de su cuenta.</span></p> <br/>
-              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/activarUsuario?id='.$usuario->iduser.'&hash='.  sha1('PoliAuLinkServer');?>">Click aqui</a>
+              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/activarUsuario?id='.$usuario->iduser.'&hash='.  sha1('OzAuLinkServer');?>">Click aqui</a>
        
           </td>
           <?php }?>
