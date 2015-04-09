@@ -522,7 +522,6 @@ a:focus {
  * ----------------------
  */
 .main-header {
-  position: relative;
   max-height: 100px;
   z-index: 1030;
 }
@@ -548,6 +547,23 @@ a:focus {
     color: inherit;
     border: 0;
   }
+}
+.colapse-menu .i {
+  background-image: url(../images/feed-24.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 12px !important;
+  margin-top: 8px;
+  background-position-x: -7px;
+  padding-right: 7px !important;
+}
+.colapse-menu:hover {
+  color: #555;
+  text-decoration: none;
+  background-color: #E5E5E5;
+  -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
 }
 .main-header .sidebar-toggle {
   float: left;
@@ -667,7 +683,7 @@ a:focus {
 }
 @media (max-width: 767px) {
   .main-header {
-    position: relative;
+    /*position: relative;*/
   }
   .main-header .logo,
   .main-header .navbar {
@@ -692,13 +708,15 @@ a:focus {
  */
 .left-side {
   position: absolute;
-  top: 50px;
+  top: 40px;
   left: 0;
   width: 230px;
   z-index: 810;
   -webkit-transition: transform 0.3s ease;
   -o-transition: transform 0.3s ease;
   transition: transform 0.3s ease;
+  background-image: linear-gradient(to bottom, #f9f9f9, #f2f2f2);
+  background-repeat: repeat-x;
 }
 @media (max-width: 767px) {
   .left-side {
@@ -1201,6 +1219,24 @@ a:focus {
   appearance: none;
   box-shadow: none;
   border-color: #d2d6de;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #FFF;
+  background-image: none;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 .form-control:focus {
   border-color: #3c8dbc !important;
@@ -5694,5 +5730,49 @@ textarea:read-only,
 }
 .authitem .checked {
   color: blue;
+}
+.input-group-addon,
+.input-group-btn,
+.input-group .form-control {
+  display: table-cell;
+}
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+.input-group-addon,
+.input-group-btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 4px;
+}
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
 }
 /*# sourceMappingURL=template.css.map */

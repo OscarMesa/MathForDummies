@@ -29,7 +29,7 @@ return array(
     'modules' => array(
         'jbackup' => array(
             'path' => __DIR__ . '/../_backup/', //Directory where backups are saved
-            'layout' => '//layouts/column1', //2-column layout to display the options
+            'layout' => '//layouts/column2', //2-column layout to display the options
             'filter' => 'accessControl', //filter or filters to the controller
             'bootstrap' => true, //if you want the module use bootstrap components
             'download' => true, // if you want the option to download

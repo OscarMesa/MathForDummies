@@ -16,6 +16,8 @@ Yii::import('zii.widgets.CMenu');
  */
 abstract class TbBaseMenu extends CMenu
 {
+    
+        public $isColapse = false;
 	/**
 	 *### .getDividerCssClass()
 	 *
@@ -53,12 +55,12 @@ abstract class TbBaseMenu extends CMenu
 		$n = count($items);
 
 		if ($n > 0) {
-			echo CHtml::openTag('ul', $this->htmlOptions);
-
+                       echo CHtml::openTag('ul', $this->htmlOptions);
 			$count = 0;
 			foreach ($items as $item) {
 				$count++;
-
+                                if($count==1 && $this->isColapse && !Yii::app()->user->isGuest)
+                                    echo '<li><a href="#" class="colapse-menu" data-toggle="offcanvas" role="button"><i class="i"></i></a></li>';
 				if (isset($item['divider'])) {
 					echo '<li class="' . $this->getDividerCssClass() . '"></li>';
 				} else {

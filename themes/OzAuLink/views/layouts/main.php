@@ -8,11 +8,17 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/template.css"/>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <!--Ionicons--> 
+
+        <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/app_script.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/app.js"></script>
 <!--        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.tools.min.js"></script>-->
     </head>
 
-    <body>
+    <body class="skin-blue">
 
         <div id="menu_superior" class="grid_16 alpha omega">
         </div>
@@ -64,34 +70,49 @@
         'brand'=>'OzAuLink',
         //'brandUrl'=>'#',
         'fixed' => 'top',
-        'collapse'=>true, // requires bootstrap-responsive.css
+        'collapse'=>true, // requires bootstrap-responsive.css,
+        'htmlOptions'=>array(
+        ),
         'items' => array(
                 array(
                         'class'=>'bootstrap.widgets.TbMenu',
+                        'isColapse' => true,
                         'items' => array(
                                         array('label' => 'Inicio', 'url' => array('/site/index')),
                                         array('label' => 'Contact', 'url' => array('/site/contact')),
                                         array('label' => 'Login'
                                             , 'url' => Yii::app()->user->ui->loginUrl
-                                            , 'visible' => Yii::app()->user->isGuest),
+                                            , 'visible' => Yii::app()->user->isGuest
+                                            ,),
                                         array('label' => 'BackUp'
                                             , 'url' => array('/jbackup')
-                                            , 'visible' => !Yii::app()->user->isGuest),
+                                            , 'visible' => !Yii::app()->user->isGuest
+                                            , 'active'=> (!strstr(Yii::app()->controller->uniqueID, 'jbackup')?false:true),
+                                            ),
                                         array('label' => 'Grados'
                                             , 'url' => array('/grado/admin')
-                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
+                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin'))
+                                            , 'active'=> (!strstr(Yii::app()->controller->uniqueID, 'grado')?false:true),
                                         array('label' => 'Cursos'
                                             , 'url' => array('/cursos/curso')
-                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')),
+                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')
+                                            , 'active'=> (!strstr(Yii::app()->controller->uniqueID, 'cursos')?false:true),
+                                            ),
                                         array('label' => 'Administrar Usuarios'
                                             , 'url' => Yii::app()->user->ui->userManagementAdminUrl
-                                            , 'visible' => !Yii::app()->user->isGuest),
+                                            , 'visible' => !Yii::app()->user->isGuest
+                                            , 'active'=> (!strstr(strtolower(Yii::app()->controller->uniqueID), 'cruge')?false:true)
+                                            ),
                                         array('label' => 'Areas'
                                             , 'url' => array("/area/admin")
-                                            , 'visible' => !Yii::app()->user->isGuest),
+                                            , 'visible' => !Yii::app()->user->isGuest
+                                            , 'active'=> (!strstr(strtolower(Yii::app()->controller->uniqueID), 'area')?false:true)
+                                            ),
                                         array('label' => 'Asignaturas'
                                             , 'url' => array("/asignatura/admin")
-                                            , 'visible' => !Yii::app()->user->isGuest),    
+                                            , 'visible' => !Yii::app()->user->isGuest
+                                            , 'active'=> (!strstr(strtolower(Yii::app()->controller->uniqueID), 'asignatura')?false:true)
+                                            ),    
                                         array('label' => 'Logout('.Yii::app()->user->name.')'
                                             , 'url' => Yii::app()->user->ui->logoutUrl
                                             , 'visible' => !Yii::app()->user->isGuest),
@@ -99,7 +120,15 @@
                 ),
         ),
     ));
+    
+//    echo Yii::app()->controller->getId;
+//    echo Yii::app()->controller->id;
+//    echo Yii::app()->controller->uniqueID;
+//    echo Yii::app()->controller->uniqueID;
+//var_dump(strstr(strtolower(Yii::app()->controller->uniqueID), 'cruge'));
+//    die;
 ?>
 
 
 <?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
+

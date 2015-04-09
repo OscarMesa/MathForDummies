@@ -43,7 +43,7 @@ abstract class TbBaseMenu extends CMenu
 			echo CHtml::openTag('ul', $this->htmlOptions);
 
 			$count = 0;
-			foreach ($items as $item)
+                        foreach ($items as $item)
 			{
 				$count++;
 

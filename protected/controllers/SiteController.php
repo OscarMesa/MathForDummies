@@ -1,7 +1,9 @@
 <?php
 
 class SiteController extends Controller {
-
+    
+    public $layout = "//layouts/column2";
+    
     /**
      * Declares class-based actions.
      */
@@ -19,6 +21,10 @@ class SiteController extends Controller {
             ),
         );
     }
+    
+    public function filters() {
+        return array('accessControl',array('CrugeAccessControlFilter'));
+    }
 
     /**
      * Specifies the access control rules.
@@ -26,23 +32,7 @@ class SiteController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-        return array(
-            array('deny', // deny all users
-                'actions' => array(),
-                'users' => array('?'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array(),
-                'roles' => array('admin'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('AjaxRecuperar', 'AjaxRegistro', 'AjaxInicioSesion', 'login'),
-                'users' => array('*'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
-        );
+        return array();
     }
 
     /**

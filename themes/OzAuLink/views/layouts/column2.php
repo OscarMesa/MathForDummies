@@ -1,6 +1,8 @@
 <?php $this->beginContent('//layouts/main'); ?>
 
-<div class="alpha grid_3">
+ <?php echo $this->renderPartial('application.views.layouts._menu'); ?>
+<div class="content-wrapper" style="min-height: 884px;">
+    <div class="alpha grid_3">
     <div id="sidebar">
         &nbsp;
         <?php
@@ -27,8 +29,7 @@
         ?>
 
     </div><!-- sidebar -->
-</div>   
-<div class="container" >
+</div> 
     <div class="grid_13 omega">
         <div id="content">
             <?php echo $content; ?>
