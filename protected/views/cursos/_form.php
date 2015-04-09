@@ -86,6 +86,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'options' => array(
             'allowClear' => true,
             'placeholder' => 'Selecione un area',
+            'initSelection'=>'js:function (element, callback) {
+                                callback(data);
+                            }',
             //'minimumInputLength' => 4, 
             'ajax' => array(
                 'url' => Yii::app()->createUrl('area/listarAreasAjax'),
@@ -111,7 +114,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ),
         'htmlOptions' => array(
             'events' => array('change' => 'js:function(){ alert("");}'),
-        )
+        ),        
     ));
     ?>
      <?php echo $form->labelEx($model,'idmateria'); ?>    
@@ -124,7 +127,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'style' => 'width: 100%;'
         ),
         'options' => array(
-            'placeholder' => 'Seleccione una materia..',
+            'placeholder' => 'Seleccione una aignatura.',
             'allowClear' => true,
         ),
             )
@@ -159,11 +162,35 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 </div>
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
+    <?php
+        if(!$model->isNewRecord)
+        {
+            Yii::app()->clientScript->registerScript("prueba","
+                    $.ajax({
+                      url:'".Yii::app()->createAbsoluteUrl('asignatura/obtenerDatosAsignatura')."',
+                      dataType:'json',
+                      type:'POST',
+                      data: {'asignatura':". $model->idmateria ."},
+                      success:function(data){
+                          //console.log(data.asignatura.idmaterias);
+                          $('#area').select2('data',{'id':data.area.id_area,'text':data.area.descripcion});
+                        for(var i=0;i<data.asignaturas.length;i++){
+                            $(\"#Cursos_idmateria\").append('<option value=\"'+data.asignaturas[i].idmaterias+'\">'+data.asignaturas[i].nombre_materia+'</option>');
+                        }
+                        $('#Cursos_idmateria').select2('data',{'id':data.asignatura.idmaterias,'text':data.asignatura.nombre_materia}); 
+                      },
+                      error:function(){
+                          alert('Eror');
+                      }
+                });
+            " );
+        }
+    ?>
     $('#area').on('select2-removed',function(){
         $("#Cursos_idmateria").empty();
-        $("#Cursos_idmateria").select2({
-  placeholder: 'Choose 2 items'
-};
+        $("#select2-chosen-2").html("Seleccione una asignatura.");
+        $("#select2-chosen-2").addClass('select2-chosen');
+        $("#select2-chosen-2").parent().addClass('select2-choice select2-default');
     });
     $('#area').on('change', function () {
         if ($('#area').select2('data') != null) {
