@@ -5692,4 +5692,7 @@ textarea:read-only,
 [contenteditable]:read-only {
   cursor: not-allowed;
 }
+.authitem .checked {
+  color: blue;
+}
 /*# sourceMappingURL=template.css.map */
