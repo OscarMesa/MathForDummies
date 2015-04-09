@@ -31,7 +31,7 @@ $model_perfil_v = new MathAuthitem();
 echo $form->dropDownListRow($model_perfil_v, 'name', CHtml::listData(MathAuthitem::model()->findAll("name IN('Alumno') AND type = 2"), 'name', 'name'));
 echo $form->textFieldRow($modelRegistro,'nameperfil',array('style'=>'display:none'));
 echo"<br>";
-$this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Guardar Registro'));
+$this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit','htmlOptions'=>array('class'=>'btn-danger'), 'label' => 'Guardar Registro'));
 
 
 $this->endWidget();

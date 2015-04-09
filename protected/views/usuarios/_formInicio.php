@@ -18,7 +18,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span3'));
   ?>
 <br/>
-<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Login')); ?>
+<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit','htmlOptions'=>array('class'=>'btn-danger'),'label'=>'Iniciar sesión')); ?>
  
 <?php $this->endWidget(); ?>
 

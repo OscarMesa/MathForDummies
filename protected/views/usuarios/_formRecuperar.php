@@ -31,7 +31,7 @@ $this->widget('ext.recaptcha.EReCaptcha', array(
 
 <?php
 echo"<br>";
-$this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Enviar'));
+$this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'htmlOptions'=>array('class'=>'btn-danger'),'label' => 'Enviar'));
 
 $this->endWidget();
 ?>
