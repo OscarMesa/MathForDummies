@@ -83,6 +83,7 @@ class ContenidosController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = "modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
