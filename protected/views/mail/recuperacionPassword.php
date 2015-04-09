@@ -83,7 +83,7 @@ html
       <tr>
           <td>
               <p><span>Dirijace al siguiente link para realizar el cambio.</span></p> <br/>
-              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/CambioPassword?id='.$usuario->iduser.'&hash='.  sha1('PoliAuLinkServer');?>">Click aqui</a>
+              <a href="<?php echo Yii::app()->getBaseUrl(true) .'/usuarios/CambioPassword?id='.$usuario->iduser.'&hash='.  sha1('OzAuLinkServer');?>">Click aqui</a>
        
           </td>
       </tr>
