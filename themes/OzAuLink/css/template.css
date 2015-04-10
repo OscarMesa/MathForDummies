@@ -3159,8 +3159,8 @@ table.text-center th {
   color: #fff;
 }
 .skin-blue .sidebar-menu > li.header {
-  color: #4b646f;
-  background: #1a2226;
+  color: #FFF;
+  background: #1D423C;
 }
 .skin-blue .sidebar-menu > li > a {
   border-left: 3px solid transparent;
@@ -3169,21 +3169,19 @@ table.text-center th {
 .skin-blue .sidebar-menu > li > a:hover,
 .skin-blue .sidebar-menu > li.active > a {
   color: #ffffff;
-  background: #1e282c;
-  border-left-color: #3c8dbc;
+  background: #37635C;
+  border-left-color: #468847;
+  border-bottom-color: #153832;
 }
 .skin-blue .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
-  background: #2c3b41;
+  background: #3d7c72;
 }
 .skin-blue .wrapper {
   background: #222d32;
 }
 .skin-blue .left-side {
-  background: #222d32;
-  /*				-webkit-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.7);
-          -moz-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.7);
-          box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);*/
+  background: #326059;
 }
 .skin-blue .sidebar a {
   color: #b8c7ce;
@@ -3205,16 +3203,17 @@ table.text-center th {
 }
 .skin-blue .sidebar-form input[type="text"],
 .skin-blue .sidebar-form .btn {
-  box-shadow: none;
-  background-color: #374850;
-  border: 1px solid transparent;
-  height: 35px;
+    background-color: #326059;
+    border: 1px solid #fff;
+    box-shadow: none;
+    height: 34.7px;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 .skin-blue .sidebar-form input[type="text"] {
-  color: #666;
+    border-radius: 2px 0 0 2px !important;
+    color: #f5f5f5;
   border-top-left-radius: 2px !important;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
@@ -3226,10 +3225,11 @@ table.text-center th {
   color: #666;
 }
 .skin-blue .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
-  border-left-color: #fff;
+  border-left-color: #ccc;
 }
 .skin-blue .sidebar-form .btn {
-  color: #999;
+  color: #FFF;
+  text-shadow:none;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 2px !important;
   border-bottom-right-radius: 2px !important;

@@ -7,7 +7,7 @@
         </div>
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?php echo Yii::app()->baseUrl.'/themes/OzAuLink/images/user.png'; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo Yii::app()->baseUrl.'/themes/OzAuLink/images/user.jpg'; ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p><?php echo Yii::app()->user->name; ?></p>
@@ -31,26 +31,21 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> 
-                        <span>Codeudor</span> 
+                        <span>Grados</span> 
                         <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="overflow: hidden; display: none;">
                     <li>
-                        <a href="http://localhost/creditos/codeudor/create">
+                        <a href="<?php echo Yii::app()->createUrl('grado/admin') ?>">
+                            <i class="fa fa-angle-double-right"></i> Administrar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo Yii::app()->createUrl('grado/create') ?>">
                             <i class="fa fa-angle-double-right"></i>Crear
                         </a>
                     </li>
-                    <li>
-                        <a href="http://localhost/creditos/codeudor/index">
-                            <i class="fa fa-angle-double-right"></i>Listar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost/creditos/codeudor/admin">
-                            <i class="fa fa-angle-double-right"></i>Administrador
-                        </a>
-                    </li>
-                </ul>
+                </ul>                
             </li>      
         </ul>
     </section>
