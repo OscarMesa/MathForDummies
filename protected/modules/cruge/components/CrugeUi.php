@@ -279,21 +279,21 @@ class CrugeUi extends CComponent
             ,
                 'url' => $this->getEditProfileUrl()
             ,
-                                        'icon'=>'edit',     
+                                        'icon'=>'fa fa-user',     
             ),
             array(
                 'label' => CrugeTranslator::t('admin', 'Create User')
             ,
                 'url' => $this->getUserManagementCreateUrl()
             ,
-                                        'icon'=>'pencil',      
+                                        'icon'=>'fa fa-user',      
             ),
             array(
                 'label' => CrugeTranslator::t('admin', 'Manage Users')
             ,
                 'url' => $this->getUserManagementAdminUrl()
             ,
-                                        'icon'=>'globe', 
+                                        'icon'=>'fa fa-user', 
             ),
             array('label' => CrugeTranslator::t('admin', 'Custom Fields')),
             array(
@@ -301,7 +301,7 @@ class CrugeUi extends CComponent
             ,
                 'url' => $this->getFieldsAdminListUrl()
             ,
-                                        'icon'=>'list-alt',    
+                                        'icon'=>'fa fa-user',    
             ),
 //            array(
 //                'label' => CrugeTranslator::t('admin', 'Create Profile Field')
@@ -316,28 +316,28 @@ class CrugeUi extends CComponent
             ,
                 'url' => $this->getRbacListRolesUrl()
             ,
-                                        'icon'=>'cog',
+                                        'icon'=>'fa fa-user',
             ),
             array(
                 'label' => CrugeTranslator::t('admin', 'Tasks')
             ,
                 'url' => $this->getRbacListTasksUrl()
             ,
-                                        'icon'=>'tasks',    
+                                        'icon'=>'fa fa-user',    
             ),
             array(
                 'label' => CrugeTranslator::t('admin', 'Operations')
             ,
                 'url' => $this->getRbacListOpsUrl()
              ,
-                                        'icon'=>'chevron-right',   
+                                        'icon'=>'fa fa-user',   
             ),
             array(
                 'label' => CrugeTranslator::t('admin', 'Assign Roles to Users')
             ,
                 'url' => $this->getRbacUsersAssignmentsUrl()
             ,
-                                        'icon'=>'check',     
+                                        'icon'=>'fa fa-user',     
             ),
             array('label' => CrugeTranslator::t('admin', 'System')),
             array(
@@ -345,7 +345,7 @@ class CrugeUi extends CComponent
             ,
                 'url' => $this->getSessionAdminUrl()
                 ,
-                                        'icon'=>'wrench',   
+                                        'icon'=>'fa fa-user',   
             ),
             /*array(
                 'label' => CrugeTranslator::t('admin', 'System Variables')

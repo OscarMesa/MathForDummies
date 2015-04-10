@@ -10,7 +10,7 @@
                 <img src="<?php echo Yii::app()->baseUrl.'/themes/OzAuLink/images/user.png'; ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p><?php echo Yii::app()->user->name;?></p>
+                <p><?php echo Yii::app()->user->name; ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Conectado</a>
             </div>
