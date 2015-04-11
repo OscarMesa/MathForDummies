@@ -81,41 +81,13 @@
                         'isColapse' => true,
                         'items' => array(
                                         array('label' => 'Inicio', 'url' => array('/site/index')),
-                                        array('label' => 'Contact', 'url' => array('/site/contact')),
+                                        array('label' => 'Contáctanos', 'url' => array('/site/contact')),
                                         array('label' => 'Login'
                                             , 'url' => Yii::app()->user->ui->loginUrl
                                             , 'visible' => Yii::app()->user->isGuest
                                             ,),
-                                        array('label' => 'BackUp'
-                                            , 'url' => array('/jbackup')
-                                            , 'visible' => !Yii::app()->user->isGuest
-                                            , 'active'=> (!strstr(Yii::app()->controller->uniqueID, 'jbackup')?false:true),
-                                            ),
-                                        array('label' => 'Grados'
-                                            , 'url' => array('/grado/admin')
-                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin'))
-                                            , 'active'=> (!strstr(Yii::app()->controller->uniqueID, 'grado')?false:true),
-                                        array('label' => 'Cursos'
-                                            , 'url' => array('/cursos/curso')
-                                            , 'visible' => Yii::app()->user->checkAccess('action_grado_admin')
-                                            , 'active'=> (!strstr(Yii::app()->controller->uniqueID, 'cursos')?false:true),
-                                            ),
-                                        array('label' => 'Administrar Usuarios'
-                                            , 'url' => Yii::app()->user->ui->userManagementAdminUrl
-                                            , 'visible' => !Yii::app()->user->isGuest
-                                            , 'active'=> (!strstr(strtolower(Yii::app()->controller->uniqueID), 'cruge')?false:true)
-                                            ),
-                                        array('label' => 'Areas'
-                                            , 'url' => array("/area/admin")
-                                            , 'visible' => !Yii::app()->user->isGuest
-                                            , 'active'=> (!strstr(strtolower(Yii::app()->controller->uniqueID), 'area')?false:true)
-                                            ),
-                                        array('label' => 'Asignaturas'
-                                            , 'url' => array("/asignatura/admin")
-                                            , 'visible' => !Yii::app()->user->isGuest
-                                            , 'active'=> (!strstr(strtolower(Yii::app()->controller->uniqueID), 'asignatura')?false:true)
-                                            ),    
-                                        array('label' => 'Logout('.Yii::app()->user->name.')'
+                                        
+                                        array('label' => 'Salir'
                                             , 'url' => Yii::app()->user->ui->logoutUrl
                                             , 'visible' => !Yii::app()->user->isGuest),
                                     ),

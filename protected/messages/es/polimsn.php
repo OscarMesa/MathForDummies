@@ -21,6 +21,9 @@ return array(
     'The total percentage of the exercises to be equal 100%.'=>'La totalidad del porcentaje de los ejercicios debe ser del igual 100%.',
     'The percentage values can be decimal numbers only. For example: 2, 2.3,68.9,80.' => 'Los valores de los porcentajes, solo pueden ser números decimales. Por ejemplo: 2, 2.3,68.9,80.',
     '<strong>Exito!</strong> The evaluation was stored successfully.' => '<strong>Exito!</strong> La evaluación fue almacenado exitosamente.',
-    '<strong>Exito!</strong> The evaluation was modified successfully.' => '<strong>Exito!</strong> La evaluación fue modificada exitosamente.'
-    
+    '<strong>Exito!</strong> The evaluation was modified successfully.' => '<strong>Exito!</strong> La evaluación fue modificada exitosamente.',
+    'Thank you for contacting us. We will respond to you as soon as possible.' => 'Gracias por contactarnos. Nosotros responderemos a la mayor brevedad posible.',
+    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'=>'Si tiene consultas u otras preguntas, por favor diligencia el siguiente formulario para contactarnos. Gracias.',
+    'Please enter the letters as they are shown in the image above.' => 'Por favor, introduzca las letras tal y como aparecen en la imagen de arriba.',
+    'Letters are not case-sensitive.' => 'Las letras no distinguen entre mayúsculas y minúsculas.'
 );
