@@ -1,5 +1,5 @@
-<h1><?php echo ucwords(CrugeTranslator::t("eliminar usuario"));?></h1>
-<div class="form">
+<div class="well">
+<h1><?php echo ucwords(CrugeTranslator::t("admin","Disable user"));?></h1>
 <?php
 	/*
 		$model:  es una instancia que implementa a ICrugeStoredUser
@@ -10,18 +10,19 @@
     'enableAjaxValidation'=>false,
     'enableClientValidation'=>false,
 )); ?>
-<h2><?php echo $model->username; ?>
-    <?php echo $model->email; ?>
-</h2>
+    <b>Correo: </b><?php echo $model->username; ?><br/>
+    <b>Nombre de usuario: </b><?php echo $model->email; ?>
+
 <p>
-	<?php echo ucfirst(CrugeTranslator::t("marque la casilla para confirmar la eliminacion")); ?>
-	<?php echo $form->checkBox($model,'deleteConfirmation'); ?>
+	<?php echo ucfirst(CrugeTranslator::t("admin", "check to confirm deactivation box")); ?>
+	<?php echo $form->checkBox($model,'deleteConfirmation',array("class"=>'check-box')); ?>
 	<?php echo $form->error($model,'deleteConfirmation'); ?>
 </P>
-<div class="row buttons">
-	<?php Yii::app()->user->ui->tbutton("Eliminar Usuario"); ?>
-	<?php Yii::app()->user->ui->bbutton("Volver",'cancelar'); ?>
-</div>
+    <div class="control-group">
+	<?php echo CHtml::submitButton("Desactivar usuario", array('class'=>'btn btn-primary')); ?>
+	<?php echo CHtml::submitButton('Volver', array('name'=>"cancelar",'class'=>'btn btn-primary')) ; ?>
+    </div>
+
 <?php echo $form->errorSummary($model); ?>
 <?php $this->endWidget(); ?>
 </div>

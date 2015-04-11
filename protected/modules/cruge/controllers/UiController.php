@@ -1,39 +1,38 @@
 <?php
+
 /**
-UiController
+  UiController
 
-Controladora comun para todas las vistas predefinidas en views/ui
+  Controladora comun para todas las vistas predefinidas en views/ui
 
-dependencias:
+  dependencias:
 
-La controladora no accede de ninguna manera a la capa de CrugeFactory,
-todo lo hace mediante los componentes:
+  La controladora no accede de ninguna manera a la capa de CrugeFactory,
+  todo lo hace mediante los componentes:
 
-Yii::app()->user->um
-Yii::app()->user->rbac
-Yii::app()->user->ui
+  Yii::app()->user->um
+  Yii::app()->user->rbac
+  Yii::app()->user->ui
 
-igualmente, no hay instancias directas a modelos de datos, esto es para ayudar
-a la insercion de diferentes ORDBM.
+  igualmente, no hay instancias directas a modelos de datos, esto es para ayudar
+  a la insercion de diferentes ORDBM.
 
-@author: Christian Salazar H. <christiansalazarh@gmail.com> @salazarchris74
-@license protected/modules/cruge/LICENSE
+  @author: Christian Salazar H. <christiansalazarh@gmail.com> @salazarchris74
+  @license protected/modules/cruge/LICENSE
  */
-class UiController extends Controller
-{
+class UiController extends Controller {
+
     public $basePath; // usada por CrugeUi::getResource()
 
-    public function init()
-    {
+    public function init() {
         $this->registerScripts();
         $this->layout = CrugeUtil::config()->generalUserManagementLayout;
     }
 
-    public function registerScripts()
-    {
+    public function registerScripts() {
         $this->basePath = Yii::app()->getAssetManager()->publish(
-            dirname(__FILE__) . "/../resources"
-        ) . "/";
+                        dirname(__FILE__) . "/../resources"
+                ) . "/";
 
         $cs = Yii::app()->getClientScript();
 
@@ -42,56 +41,52 @@ class UiController extends Controller
         $cs->registerCssFile($this->basePath . "estilos.css");
     }
 
-    private function _publicActionsList()
-    {
+    private function _publicActionsList() {
         return array(
             'captcha',
             'registration',
             'login',
             'logout',
             'pwdrec'
-        ,
+            ,
             'activationurl',
             'ajaxgeneratenewpassword',
             'welcome'
         );
     }
 
-    public function filters()
-    {
+    public function filters() {
         return array_merge(
-            array(
-                // con accessControl se garantiza que un usuario NO autenticado NO tenga acceso
-                // a las funciones NO públicas.
-                'accessControl',
-                // con CrugeUiAccessControlFilter se garantiza que a los actions no publicos
-                // solo accedan aquellos usuarios que tengan la operacion asignada
-                // directamente o mediante una tarea o un rol.
-                //
+                array(
+                    // con accessControl se garantiza que un usuario NO autenticado NO tenga acceso
+                    // a las funciones NO públicas.
+                    'accessControl',
+                    // con CrugeUiAccessControlFilter se garantiza que a los actions no publicos
+                    // solo accedan aquellos usuarios que tengan la operacion asignada
+                    // directamente o mediante una tarea o un rol.
+                    //
                 // al usar este filtro Y si la configuracion del modulo indica que:
-                //
+                    //
                 //	SI rbacSetupEnabled es TRUE entonces:
-                //
+                    //
                 //		1. 	el filtro "creará" si es necesario la operacion en base
-                //			al controller/action
-                //
+                    //			al controller/action
+                    //
                 //		2.	el filtro concede paso si la operacion controller/action esta
-                //		  	asignada al usuario.
-                //
+                    //		  	asignada al usuario.
+                    //
                 //	SI rbacSetupEnabled es FALSE entonces:
-                //
+                    //
                 //		1.	el filtro concede paso si la operacion controller/action esta
-                //		  	asignada al usuario.
-                //
+                    //		  	asignada al usuario.
+                    //
                 array('CrugeUiAccessControlFilter', 'publicActions' => self::_publicActionsList()),
-
-            )
-      //     ,parent::filters()		// esta linea causa problemas en una instalacion estandar de Cruge
+                )
+                //     ,parent::filters()		// esta linea causa problemas en una instalacion estandar de Cruge
         );
     }
 
-    public function accessRules()
-    {
+    public function accessRules() {
         return array(
             array(
                 'allow',
@@ -109,8 +104,7 @@ class UiController extends Controller
         );
     }
 
-    public function actions()
-    {
+    public function actions() {
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
             'captcha' => array(
@@ -120,9 +114,8 @@ class UiController extends Controller
         );
     }
 
-    public function actionLogin()
-    {
-       
+    public function actionLogin() {
+
         $this->layout = CrugeUtil::config()->loginLayout;
 
         $model = Yii::app()->user->um->getNewCrugeLogon('login');
@@ -139,84 +132,80 @@ class UiController extends Controller
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
 
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
-            
+
             if ($model->validate()) {
                 //print_r($model);exit();
                 if ($model->login(false) == true) {
                     Yii::log(__CLASS__ . "\nCrugeLogon->login() returns true\n", "info");
-                    if($model->getModel()->state )
+                    if ($model->getModel()->state)
                     // a modo de conocimiento, Yii::app()->user->returnUrl es
                     // establecida automaticamente por CAccessControlFilter cuando
                     // preFilter llama a accessDenied quien a su vez llama a
                     // CWebUser::loginRequired que es donde finalmente se llama a setReturnUrl
-                   // $this->redirect(Yii::app()->user->returnUrl);
-                   return true;
+                    // $this->redirect(Yii::app()->user->returnUrl);
+                        return true;
                 } else {
                     Yii::app()->user->setFlash('loginflash', Yii::app()->user->getLastError());
                 }
             } else {
                 Yii::log(
-                    __CLASS__ . "\nCrugeUser->validate es false\n" . CHtml::errorSummary($model)
-                    ,
-                    "error"
+                        __CLASS__ . "\nCrugeUser->validate es false\n" . CHtml::errorSummary($model)
+                        , "error"
                 );
             }
-        }else{
+        } else {
 //            echo "<pre>"; print_r();
-            if(get_class(Yii::app()->controller->action->controller) != 'SiteController')
-                $this->redirect (Yii::app()->getBaseUrl (true).'/'.Yii::app()->defaultController);
+            if (get_class(Yii::app()->controller->action->controller) != 'SiteController')
+                $this->redirect(Yii::app()->getBaseUrl(true) . '/' . Yii::app()->defaultController);
         }
         return $model;
     }
 
-    public function actionPwdRec()
-    {
+    public function actionPwdRec() {
         $this->layout = CrugeUtil::config()->resetPasswordLayout;
-        
+
         $model = Yii::app()->user->um->getNewCrugeLogon('pwdrec');
-        
+
         Yii::app()->user->setFlash('pwdrecflash', null);
 
-        if(isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
+        if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeLogon']];
             if ($model->validate()) {
                 //$newPwd = CrugeUtil::passwordGenerator();
                 //Yii::app()->user->um->changePassword($model->getModel(), $newPwd);
                 Yii::import('application.models.CrugeUser');
-                $user = CrugeUser::model()->find('email = ? OR username = ?',array($model->username,$model->username));
-                
-                
+                $user = CrugeUser::model()->find('email = ? OR username = ?', array($model->username, $model->username));
+
+
                 $newPwd = $user->password;
-                
+
                 Yii::app()->crugemailer->sendPasswordTo($model->getModel(), $newPwd);
                 Yii::app()->user->um->save($model->getModel());
 
                 Yii::app()->user->setFlash(
-                    'pwdrecflash'
-                    ,
-                    CrugeTranslator::t('La clave ha sido enviada a su correo')
+                        'pwdrecflash'
+                        , CrugeTranslator::t('La clave ha sido enviada a su correo')
                 );
             }
         }
         $this->render('pwdrec', array('model' => $model));
     }
 
-    public function actionLogout()
-    {
-		// retorna false si ocurrio un error O si el filtro de sesion
-		// dispone de onBeforeLogin el cual ha retornado false.
-        if(Yii::app()->user->logout() == false){
-			// se devuelve a la URL de donde vino
-	        $this->redirect(Yii::app()->user->returnUrl);
-			return;
-		}else{
-			
-        	$this->redirect(Yii::app()->user->ui->loginurl);
-		}
+    public function actionLogout() {
+        // retorna false si ocurrio un error O si el filtro de sesion
+        // dispone de onBeforeLogin el cual ha retornado false.
+        if (Yii::app()->user->logout() == false) {
+            // se devuelve a la URL de donde vino
+            $this->redirect(Yii::app()->user->returnUrl);
+            return;
+        } else {
+
+            $this->redirect(Yii::app()->user->ui->loginurl);
+        }
     }
 
-    public function actionUserManagementAdmin()
-    {
+    public function actionUserManagementAdmin() {
+
         $model = Yii::app()->user->um->getSearchModelICrugeStoredUser();
         $model->unsetAttributes();
         if (isset($_GET[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
@@ -226,8 +215,7 @@ class UiController extends Controller
         $this->render("usermanagementadmin", array('model' => $model, 'dataProvider' => $dataProvider));
     }
 
-    public function actionEditProfile()
-    {
+    public function actionEditProfile() {
 
         $this->layout = CrugeUtil::config()->editProfileLayout;
 
@@ -238,13 +226,11 @@ class UiController extends Controller
         }
     }
 
-    public function actionUserManagementUpdate($id)
-    {
+    public function actionUserManagementUpdate($id) {
         $this->_editUserProfile(Yii::app()->user->um->loadUserById($id), true);
     }
 
-    public function _editUserProfile(ICrugeStoredUser $model, $boolIsUserManagement)
-    {
+    public function _editUserProfile(ICrugeStoredUser $model, $boolIsUserManagement) {
         // carga los campos definidos por el administrador
         // trayendo consigo el atributo "value" accesible mediante $xx->fieldvalue
         Yii::app()->user->um->loadUserFields($model);
@@ -255,15 +241,15 @@ class UiController extends Controller
                 // el modelo ICrugeStoredUser ha validado bien, incluso cada uno de sus campos extra
 
                 /*
-                    si se ha especificado algun valor en $model->newPassword se asume
-                    que se quiere cambiar la clave:
-                */
+                  si se ha especificado algun valor en $model->newPassword se asume
+                  que se quiere cambiar la clave:
+                 */
                 $newPwd = trim($model->newPassword);
                 Yii::log("deteccion de nueva clave: newPassword: [" . $newPwd . "]", "info");
                 if ($newPwd != '') {
                     Yii::log("\n\n***NUEVA CLAVE***\n\n", "info");
                     Yii::app()->user->um->changePassword($model, $newPwd);
-                   // Yii::app()->crugemailer->sendPasswordTo($model, $newPwd);
+                    // Yii::app()->crugemailer->sendPasswordTo($model, $newPwd);
                 }
 
                 if (Yii::app()->user->um->save($model, 'update')) {
@@ -276,20 +262,19 @@ class UiController extends Controller
             }
         }
         $this->render(
-            "usermanagementupdate",
-            array(
-                'model' => $model
+                "usermanagementupdate", array(
+            'model' => $model
             ,
-                'boolIsUserManagement' => $boolIsUserManagement
-            )
+            'boolIsUserManagement' => $boolIsUserManagement
+                )
         );
     }
 
     /*
-        solo se crea el ICrugeStoredUser, no todo el perfil.
-    */
-    public function actionUserManagementCreate()
-    {
+      solo se crea el ICrugeStoredUser, no todo el perfil.
+     */
+
+    public function actionUserManagementCreate() {
         $model = Yii::app()->user->um->createBlankUser();
 
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']])) {
@@ -317,14 +302,13 @@ class UiController extends Controller
         $this->render("usermanagementcreate", array('model' => $model));
     }
 
-    public function actionRegistration($datakey = '')
-    {
+    public function actionRegistration($datakey = '') {
 
         $this->layout = CrugeUtil::config()->registrationLayout;
 
 
         $model = Yii::app()->user->um->createBlankUser();
-		$model->bypassCaptcha = false;
+        $model->bypassCaptcha = false;
         $model->terminosYCondiciones = false;
         if (Yii::app()->user->um->getDefaultSystem()->getn('registerusingterms') == 0) {
             $model->terminosYCondiciones = true;
@@ -388,13 +372,13 @@ class UiController extends Controller
     }
 
     /* este es un evento emitido por actionRegistration y actionUserManagementCreate
-        el cual informa que un nuevo usuario ha sido creado.
+      el cual informa que un nuevo usuario ha sido creado.
 
-        segun la configuracion general del sistema este usuario
-        sera activado de inmediato, o por email, o manualmente.
-    */
-    private function onNewUser(ICrugeStoredUser $model, $newPwd = "")
-    {
+      segun la configuracion general del sistema este usuario
+      sera activado de inmediato, o por email, o manualmente.
+     */
+
+    private function onNewUser(ICrugeStoredUser $model, $newPwd = "") {
         Yii::log(__METHOD__ . "\n", "info");
 
         $opt = Yii::app()->user->um->getDefaultSystem()->getn("registerusingactivation");
@@ -403,9 +387,8 @@ class UiController extends Controller
         Yii::log(__METHOD__ . "\n role: " . $role, "info");
         if (Yii::app()->user->rbac->getAuthItem($role) != null) {
             Yii::log(
-                __METHOD__ . "\n asignando role: " . $role . " a userid:"
-                    . $model->getPrimaryKey(),
-                "info"
+                    __METHOD__ . "\n asignando role: " . $role . " a userid:"
+                    . $model->getPrimaryKey(), "info"
             );
             Yii::app()->user->rbac->assign($role, $model->getPrimaryKey());
         }
@@ -427,24 +410,36 @@ class UiController extends Controller
         }
     }
 
-
-    public function actionWelcome()
-    {
+    public function actionWelcome() {
         $this->layout = CrugeUtil::config()->registrationLayout;
         $this->render("welcome");
     }
 
-    public function actionUserSaved($layout = null)
-    {
+    public function actionUserSaved($layout = null) {
         if ($layout != null) {
             $this->layout = $layout;
         }
         $this->render("usersaved");
     }
 
+    public function actionUserManagementActive($id) {
+        $model = Yii::app()->user->um->loadUserById($id);
+        $model->state = CRUGEUSERSTATE_ACTIVATED;
+        if ($model->update()) {
+            $m = CrugeTranslator::t('admin', 'The user {username} was successfully activated', array('{username}' => $model->username));
+            $user = Yii::app()->getComponent('user')->setFlash(
+                    'success', $m
+            );
+        } else {
+            $m = "Se estan presentando algunas fallas en el sistema.";
+            Yii::app()->getComponent('user')->setFlash(
+                    'success', $m
+            );
+        }
+        $this->redirect(array('usermanagementadmin'));
+    }
 
-    public function actionUserManagementDelete($id)
-    {
+    public function actionUserManagementDelete($id) {
         $model = Yii::app()->user->um->loadUserById($id);
         $model->scenario = 'delete';
         $model->deleteConfirmation = 0;
@@ -457,7 +452,8 @@ class UiController extends Controller
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeStoredUser']];
             if ($model->validate()) {
                 if ($model->deleteConfirmation == 1) {
-                    if ($model->delete()) {
+                    $model->state = CRUGEUSERSTATE_SUSPENDED;
+                    if ($model->update()) {
                         $this->redirect(array('usermanagementadmin'));
                     }
                 }
@@ -469,9 +465,7 @@ class UiController extends Controller
         $this->render("usermanagementdelete", array('model' => $model));
     }
 
-
-    public function actionFieldsAdminList()
-    {
+    public function actionFieldsAdminList() {
         $model = Yii::app()->user->um->getSearchModelICrugeField();
         $model->unsetAttributes();
         if (isset($_GET[CrugeUtil::config()->postNameMappings['CrugeField']])) {
@@ -481,22 +475,20 @@ class UiController extends Controller
         $this->render("fieldsadminlist", array('model' => $model, 'dataProvider' => $dataProvider));
     }
 
-    public function actionFieldsAdminUpdate($id)
-    {
+    public function actionFieldsAdminUpdate($id) {
         $model = Yii::app()->user->um->loadFieldById($id);
-		if($model != null){
-			$this->_fieldAdminForm($model);
-		}else
-			throw new CrugeException("Identificador de campo es invalido");
+        if ($model != null) {
+            $this->_fieldAdminForm($model);
+        } else
+            throw new CrugeException("Identificador de campo es invalido");
     }
 
-    public function actionFieldsAdminCreate()
-    {
+    public function actionFieldsAdminCreate() {
         $model = Yii::app()->user->um->createEmptyField();
-		$this->_fieldAdminForm($model);
+        $this->_fieldAdminForm($model);
     }
-	
-	private function _fieldAdminForm($model){
+
+    private function _fieldAdminForm($model) {
         if (isset($_POST[CrugeUtil::config()->postNameMappings['CrugeField']])) {
             $model->attributes = $_POST[CrugeUtil::config()->postNameMappings['CrugeField']];
             if ($model->save()) {
@@ -504,10 +496,9 @@ class UiController extends Controller
             }
         }
         $this->render("fieldsadminupdate", array('model' => $model));
-	}
+    }
 
-    public function actionFieldsAdminDelete($id)
-    {
+    public function actionFieldsAdminDelete($id) {
         $model = Yii::app()->user->um->loadFieldById($id);
         if ($model != null) {
             if (Yii::app()->request->isAjaxRequest) {
@@ -516,30 +507,25 @@ class UiController extends Controller
         }
     }
 
-
-    public function actionRbacListRoles()
-    {
+    public function actionRbacListRoles() {
         Yii::app()->user->rbac->autoDetect();
         $dataProvider = Yii::app()->user->rbac->getDataProviderRoles();
         $this->render('rbaclistroles', array('dataProvider' => $dataProvider));
     }
 
-    public function actionRbacListTasks()
-    {
+    public function actionRbacListTasks() {
         Yii::app()->user->rbac->autoDetect();
         $dataProvider = Yii::app()->user->rbac->getDataProviderTasks();
         $this->render('rbaclisttasks', array('dataProvider' => $dataProvider));
     }
 
-    public function actionRbacListOps($filter = '0')
-    {
+    public function actionRbacListOps($filter = '0') {
         Yii::app()->user->rbac->autoDetect();
         $dataProvider = Yii::app()->user->rbac->getDataProviderOperations(
-            $filter
+                $filter
         );
         $this->render('rbaclistops', array('dataProvider' => $dataProvider));
     }
-
 
     /**
      * actionAjaxRbacItemDescr
@@ -560,23 +546,21 @@ class UiController extends Controller
      * @access public
      * @return void
      */
-    public function actionAjaxRbacItemDescr()
-    {
-		$action = $_POST['action']; 
-		$itemname = $_POST['itemname'];
+    public function actionAjaxRbacItemDescr() {
+        $action = $_POST['action'];
+        $itemname = $_POST['itemname'];
         $item = Yii::app()->user->rbac->getAuthItem($itemname);
         Yii::app()->user->rbac->setTaskAction($item, $action);
         header("Content-type: application/json");
         echo CJSON::encode(array('description' => $item->getDescription()));
     }
-    
+
     /**
      * Con este metodo se busca asignar los permisos de lectura a cualquier usuario que se le cree un rol.
      * @author Oskar
      * @param type $nameRol
      */
-    public function asignarPermisosDeLectura($nameRol)
-    {
+    public function asignarPermisosDeLectura($nameRol) {
         Yii::import('application.modules.cruge.components.CrugeAuthManager');
         $permisosLectura = MathAuthitem::model()->findAll('name LIKE "%index%" OR name LIKE "%view%"');
         $crugeAuthManager = new CrugeAuthManager();
@@ -590,8 +574,7 @@ class UiController extends Controller
     // CAuthItem::TYPE_ROLE,CAuthItem::TYPE_TASK,CAuthItem::TYPE_OPERATION
     // parametro llamado 'extra' es usado y enviado por CrugeAuthManager
     // para indicar la creacion de una tarea enlazada a otra
-    public function actionRbacAuthItemCreate($type)
-    {
+    public function actionRbacAuthItemCreate($type) {
         $editor = new CrugeAuthItemEditor('insert');
         $editor->name = "";
         $editor->description = "";
@@ -626,13 +609,10 @@ class UiController extends Controller
 
 
                 $newAi = Yii::app()->user->rbac->createAuthItem(
-                    $editor->name,
-                    $type,
-                    $editor->description,
-                    $editor->businessRule
+                        $editor->name, $type, $editor->description, $editor->businessRule
                 );
-                
-                
+
+
 //                echo '<pre>';
 //                print_r($editor->name);
 //                exit();
@@ -653,9 +633,7 @@ class UiController extends Controller
         $this->render('rbacauthitemcreate', array('model' => $editor));
     }
 
-
-    public function actionRbacAuthItemUpdate($id)
-    {
+    public function actionRbacAuthItemUpdate($id) {
 
         $aiModel = Yii::app()->user->rbac->getAuthItem($id);
         if ($aiModel == null) {
@@ -707,8 +685,7 @@ class UiController extends Controller
         $this->render('rbacauthitemupdate', array('model' => $editor));
     }
 
-    public function actionRbacAuthItemDelete($id)
-    {
+    public function actionRbacAuthItemDelete($id) {
         $aiModel = Yii::app()->user->rbac->getAuthItem($id);
         if ($aiModel == null) {
             throw new CrugeException("el item de autenticacion senalado no existe");
@@ -751,8 +728,7 @@ class UiController extends Controller
         $this->render('rbacauthitemdelete', array('model' => $editor));
     }
 
-    public function actionRbacAuthItemChildItems($id)
-    {
+    public function actionRbacAuthItemChildItems($id) {
         Yii::app()->user->rbac->autoDetect();
         $aiModel = Yii::app()->user->rbac->getAuthItem($id);
         if ($aiModel == null) {
@@ -762,19 +738,18 @@ class UiController extends Controller
     }
 
     /**
-    este action debe ser invocado bajo request POST, y su postdata debe contener
-    un objeto JSON de esta forma:
+      este action debe ser invocado bajo request POST, y su postdata debe contener
+      un objeto JSON de esta forma:
 
-    ejemplo:
+      ejemplo:
 
-    { parent: 'updateOwnPost' , child: 'updatePost' , setflag: true }
+      { parent: 'updateOwnPost' , child: 'updatePost' , setflag: true }
 
-    esto indica que al 'parent' se le agregara o removera (setflag), el item 'child'
+      esto indica que al 'parent' se le agregara o removera (setflag), el item 'child'
 
-    cualquier error debe ser reportado bajo una excepcion.
+      cualquier error debe ser reportado bajo una excepcion.
      */
-    public function actionRbacAjaxSetChildItem()
-    {
+    public function actionRbacAjaxSetChildItem() {
         if (Yii::app()->request->isAjaxRequest) {
             if (Yii::app()->request->isPostRequest) {
 
@@ -790,12 +765,11 @@ class UiController extends Controller
                 $setflag = ($obj['setflag'] == 1 ? "true" : "false");
 
                 Yii::log(
-                    __CLASS__ . "\nactionRbacAjaxSetChildItem\natributos leidos:\n"
+                        __CLASS__ . "\nactionRbacAjaxSetChildItem\natributos leidos:\n"
                         . "parent=" . $parent . "\n"
                         . "child=" . $child . "\n"
                         . "setflag='" . $setflag . "'\n"
-                    ,
-                    "info"
+                        , "info"
                 );
 
                 // parent y child deben existir
@@ -840,23 +814,22 @@ class UiController extends Controller
         }
     }
 
-
     /* asigna o revoca un authitem a un usuario en particular. puede ser un rol, una tarea o una operacion, pero por razones de orden en la vista que llama a este action solo se habilitan roles para ser agregados.
 
-    la contraparte de este action es:
-    actionRbacUsersAssignments()  la cual maneja la vista que asigna/revoca un rol de forma masiva
-    a varios usuarios.
+      la contraparte de este action es:
+      actionRbacUsersAssignments()  la cual maneja la vista que asigna/revoca un rol de forma masiva
+      a varios usuarios.
 
-        funciona via ajax y post, espera que el cuerpo del post traiga lo siguiente:
-        { authitem: 'nombrerol' , userid: 123 , setflag: true }
+      funciona via ajax y post, espera que el cuerpo del post traiga lo siguiente:
+      { authitem: 'nombrerol' , userid: 123 , setflag: true }
 
-        lo que hara con ese objeto json es:
+      lo que hara con ese objeto json es:
 
-        asignar (<setflag> es true=asignar) el <authitem>, al usuario con primaryKey <userid>,
-        si no puede emite una excepcion
-    */
-    public function actionRbacAjaxAssignment()
-    {
+      asignar (<setflag> es true=asignar) el <authitem>, al usuario con primaryKey <userid>,
+      si no puede emite una excepcion
+     */
+
+    public function actionRbacAjaxAssignment() {
         if (Yii::app()->request->isAjaxRequest) {
             if (Yii::app()->request->isPostRequest) {
                 $rbac = Yii::app()->user->rbac;
@@ -869,12 +842,11 @@ class UiController extends Controller
                 $setflag = ($obj['setflag'] == 1 ? "true" : "false");
 
                 Yii::log(
-                    __CLASS__ . "\nactionRbacAjaxAssignment\natributos leidos:\n"
+                        __CLASS__ . "\nactionRbacAjaxAssignment\natributos leidos:\n"
                         . "authitemName=" . $authitemName . "\n"
                         . "userId=" . $userId . "\n"
                         . "setflag='" . $setflag . "'\n"
-                    ,
-                    "info"
+                        , "info"
                 );
 
                 // comprueba que el authitem exista
@@ -902,9 +874,8 @@ class UiController extends Controller
                             $accion .= "[asignado exitosamente]";
                         } else {
                             Yii::log(
-                                __CLASS__ . "\nactionRbacAjaxAssignment\n"
-                                    . $accion . "\n[no se pudo asignar]\n",
-                                "error"
+                                    __CLASS__ . "\nactionRbacAjaxAssignment\n"
+                                    . $accion . "\n[no se pudo asignar]\n", "error"
                             );
                             throw new CrugeException("no se pudo asignar");
                         }
@@ -918,9 +889,8 @@ class UiController extends Controller
                             $accion .= "[revocado exitosamente]";
                         } else {
                             Yii::log(
-                                __CLASS__ . "\nactionRbacAjaxAssignment\n"
-                                    . $accion . "\n[no se pudo revocar]\n",
-                                "error"
+                                    __CLASS__ . "\nactionRbacAjaxAssignment\n"
+                                    . $accion . "\n[no se pudo revocar]\n", "error"
                             );
                             throw new CrugeException("no se pudo revocar");
                         }
@@ -928,9 +898,8 @@ class UiController extends Controller
                 }
 
                 Yii::log(
-                    __CLASS__ . "\nactionRbacAjaxAssignment\n"
-                        . $accion . "\n[operacion finalizada]\n",
-                    "info"
+                        __CLASS__ . "\nactionRbacAjaxAssignment\n"
+                        . $accion . "\n[operacion finalizada]\n", "info"
                 );
 
                 $result = array();
@@ -945,9 +914,7 @@ class UiController extends Controller
         }
     }
 
-
-    public function actionRbacAjaxGetAssignmentBizRule()
-    {
+    public function actionRbacAjaxGetAssignmentBizRule() {
         if (Yii::app()->request->isAjaxRequest) {
             if (Yii::app()->request->isPostRequest) {
                 $rbac = Yii::app()->user->rbac;
@@ -987,8 +954,7 @@ class UiController extends Controller
         }
     }
 
-    public function actionRbacAjaxSetAssignmentBizRule()
-    {
+    public function actionRbacAjaxSetAssignmentBizRule() {
         if (Yii::app()->request->isAjaxRequest) {
             if (Yii::app()->request->isPostRequest) {
                 $rbac = Yii::app()->user->rbac;
@@ -998,7 +964,6 @@ class UiController extends Controller
                 $authitemName = $obj['authitem'];
                 $userId = $obj['userid'];
                 $nuevoBz = $obj['bz']; // el business rule modificado
-
                 // comprueba que el authitem exista
                 $_ai = $rbac->getAuthItem($authitemName);
                 if ($_ai == null) {
@@ -1033,51 +998,50 @@ class UiController extends Controller
     }
 
     /**
-    maneja la asignacion masiva de usuarios a roles.  su contraparte es el action:
-    actionRbacAjaxAssignment.
+      maneja la asignacion masiva de usuarios a roles.  su contraparte es el action:
+      actionRbacAjaxAssignment.
 
-    como funciona este action:
+      como funciona este action:
 
-    La vista 'rbacusersassignments.php' tiene dos CGridView, cada uno llenado
-    con los DataProviders que aqui se emiten. El primer es la lista de usuarios
-    asignados a un rol, el segundo es la lista completa de usuarios.
+      La vista 'rbacusersassignments.php' tiene dos CGridView, cada uno llenado
+      con los DataProviders que aqui se emiten. El primer es la lista de usuarios
+      asignados a un rol, el segundo es la lista completa de usuarios.
 
-    por eso en la llamada cruda a la vista se entregan dos data providers,
-    ,array(
-    'roleUsersDataProvider'=>$roleUsersDataProvider,
-    'allUsersDataProvider'=>$allUsersDataProvider,
-    )
+      por eso en la llamada cruda a la vista se entregan dos data providers,
+      ,array(
+      'roleUsersDataProvider'=>$roleUsersDataProvider,
+      'allUsersDataProvider'=>$allUsersDataProvider,
+      )
 
-    una vez en la vista se muestra una -lista de roles- a la cual al hacerle click en un
-    rol se actualizara al CGridView que presenta al dataprovider: roleUsersDataProvider,
-    mientras que el segundo CGridView permanece inalterado.
+      una vez en la vista se muestra una -lista de roles- a la cual al hacerle click en un
+      rol se actualizara al CGridView que presenta al dataprovider: roleUsersDataProvider,
+      mientras que el segundo CGridView permanece inalterado.
 
-    el CGridView que aloja a roleUsersDataProvider sera actualizado cada vez que se haga
-    click en un rol, eso generara una llamada con modalidad ajaxRequest a este action,
-    y aqui se recibira entonces un argumento extra llamado: itemName
+      el CGridView que aloja a roleUsersDataProvider sera actualizado cada vez que se haga
+      click en un rol, eso generara una llamada con modalidad ajaxRequest a este action,
+      y aqui se recibira entonces un argumento extra llamado: itemName
 
-    // invocado cuando se hace click en un ROL (itemName)
-    $.fn.yiiGridView.update('_lista1',{ data : "itemName="+itemName });
+      // invocado cuando se hace click en un ROL (itemName)
+      $.fn.yiiGridView.update('_lista1',{ data : "itemName="+itemName });
 
-    cuando un usuario hace click en el link "#asignarSeleccion", lo que se hace
-    basicamente es volver a invocar a $.fn.yiiGridView.update('_lista1',{ data : "itemName="+itemName });,  pero con mas argumentos:
+      cuando un usuario hace click en el link "#asignarSeleccion", lo que se hace
+      basicamente es volver a invocar a $.fn.yiiGridView.update('_lista1',{ data : "itemName="+itemName });,  pero con mas argumentos:
 
-    mode	: puede ser 'assign' : 'revoke'
-    userid	: lista de userid
+      mode	: puede ser 'assign' : 'revoke'
+      userid	: lista de userid
 
-    por esta razon se ve que se hace:
-    if(Yii::app()->request->isAjaxRequest && isset($_GET['mode']))
+      por esta razon se ve que se hace:
+      if(Yii::app()->request->isAjaxRequest && isset($_GET['mode']))
 
-    para poder reconocer el ajaxRequest de:
-    $.fn.yiiGridView.update('_lista1',{ data : "itemName="+itemName });
-    del otro que trae los argumentos extra.
+      para poder reconocer el ajaxRequest de:
+      $.fn.yiiGridView.update('_lista1',{ data : "itemName="+itemName });
+      del otro que trae los argumentos extra.
 
-    cuando se detecta que el argumento MODE viene en la URL entonces se sabe
-    que se quiere asignar o revocar un permiso (itemName) a una lista de usuarios (userid).
+      cuando se detecta que el argumento MODE viene en la URL entonces se sabe
+      que se quiere asignar o revocar un permiso (itemName) a una lista de usuarios (userid).
 
      */
-    public function actionRbacUsersAssignments()
-    {
+    public function actionRbacUsersAssignments() {
 
         $pageSize = 20;
         $rbac = Yii::app()->user->rbac;
@@ -1124,27 +1088,24 @@ class UiController extends Controller
 
         Yii::log(__CLASS__ . "\nactionRbacUsersAssignments\ndebug:\n" . $debug, "info");
 
-		$boolLoadCustomFields = true;
+        $boolLoadCustomFields = true;
 
         $roleUsersDataProvider = $um->listUsersDataProviderFromArray(
-            $rbac->getUsersAssigned($authItemName),
-            $pageSize, $boolLoadCustomFields
+                $rbac->getUsersAssigned($authItemName), $pageSize, $boolLoadCustomFields
         );
         $allUsersDataProvider = $um->listAllUsersDataProvider(
-			array(), $pageSize, $boolLoadCustomFields);
+                array(), $pageSize, $boolLoadCustomFields);
 
         $this->render(
-            'rbacusersassignments'
-            ,
-            array(
-                'roleUsersDataProvider' => $roleUsersDataProvider,
-                'allUsersDataProvider' => $allUsersDataProvider,
-            )
+                'rbacusersassignments'
+                , array(
+            'roleUsersDataProvider' => $roleUsersDataProvider,
+            'allUsersDataProvider' => $allUsersDataProvider,
+                )
         );
     }
 
-    public function actionSessionAdmin()
-    {
+    public function actionSessionAdmin() {
         $model = Yii::app()->user->um->getSearchModelICrugeSession();
         $model->unsetAttributes();
         if (isset($_GET[CrugeUtil::config()->postNameMappings['CrugeSession']])) {
@@ -1154,8 +1115,7 @@ class UiController extends Controller
         $this->render("sessionadmin", array('model' => $model, 'dataProvider' => $dataProvider));
     }
 
-    public function actionSessionAdminDelete($id)
-    {
+    public function actionSessionAdminDelete($id) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = Yii::app()->user->um->loadSessionById($id);
             if ($model != null) {
@@ -1164,8 +1124,7 @@ class UiController extends Controller
         }
     }
 
-    public function actionSystemUpdate()
-    {
+    public function actionSystemUpdate() {
         $model = Yii::app()->user->um->getDefaultSystem();
 
         Yii::app()->user->setFlash('systemFormFlash', null);
@@ -1175,9 +1134,8 @@ class UiController extends Controller
             if ($model->validate()) {
                 if ($model->save()) {
                     Yii::app()->user->setFlash(
-                        'systemFormFlash'
-                        ,
-                        CrugeTranslator::t("Los datos del sistema han sido actualizados.")
+                            'systemFormFlash'
+                            , CrugeTranslator::t("Los datos del sistema han sido actualizados.")
                     );
                 }
             }
@@ -1187,14 +1145,14 @@ class UiController extends Controller
     }
 
     /*
-        este action debera tener acceso directo desde la calle para activar una cuenta.
+      este action debera tener acceso directo desde la calle para activar una cuenta.
 
-        en el caso de este action, quiza no se quiera presentar el mismo layout que
-        los demas actions, en este caso se puede tomar un valor de config del modulo
-        para indicar que layout se quiere usar.
-    */
-    public function actionActivationUrl($key)
-    {
+      en el caso de este action, quiza no se quiera presentar el mismo layout que
+      los demas actions, en este caso se puede tomar un valor de config del modulo
+      para indicar que layout se quiere usar.
+     */
+
+    public function actionActivationUrl($key) {
         $this->layout = CrugeUtil::config()->activateAccountLayout;
 
         $model = Yii::app()->user->um->loadUserByKey($key);
@@ -1207,7 +1165,7 @@ class UiController extends Controller
 
                 if (Yii::app()->user->um->save($model)) {
                     $resp = CrugeTranslator::t(
-                        "su cuenta ha sido activada, ahora debe iniciar sesion con las credenciales otorgadas"
+                                    "su cuenta ha sido activada, ahora debe iniciar sesion con las credenciales otorgadas"
                     );
                 }
 
@@ -1216,8 +1174,7 @@ class UiController extends Controller
         }
     }
 
-    public function actionAjaxResendRegistrationEmail($id)
-    {
+    public function actionAjaxResendRegistrationEmail($id) {
         $newPassword = CrugeUtil::passwordGenerator();
         $model = Yii::app()->user->um->loadUserById($id);
         if ($model != null) {
@@ -1231,16 +1188,15 @@ class UiController extends Controller
         }
     }
 
-    public function actionAjaxGenerateNewPassword()
-    {
+    public function actionAjaxGenerateNewPassword() {
         echo CrugeUtil::passwordGenerator();
     }
 
-    protected function performAjaxValidation($formid, $model)
-    {
+    protected function performAjaxValidation($formid, $model) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === $formid) {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
     }
+
 }

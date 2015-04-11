@@ -26,8 +26,8 @@
 
     $cols[] = array(
         'class' => 'CButtonColumn',
-        'template' => '{update} {eliminar}',
-        'deleteConfirmation' => CrugeTranslator::t('admin', '¿Está seguro que desea eliminar este usuario?'),
+        'template' => '{update} {eliminar} {activar}',
+        'deleteConfirmation' => CrugeTranslator::t('admin', '¿Está seguro que suspender la cuenta de este usuario?'),
         'buttons' => array(
             'update' => array(
                 'label' => CrugeTranslator::t('admin', 'Update User'),
@@ -35,10 +35,18 @@
                 'options' => array("rel" => "tooltip", 'class' => 'icon-trash')
             ),
             'eliminar' => array(
+                'visible' => '$data->state == CRUGEUSERSTATE_SUSPENDED?false:true',
                 'label' => CrugeTranslator::t('admin', 'Delete User'),
                 'imageUrl' => Yii::app()->user->ui->getResource("delete.png"),
                 'url' => 'array("usermanagementdelete","id"=>$data->getPrimaryKey())',
-                'options' => array("data-original-title" => "Borrar", "rel" => "tooltip", 'class' => 'delete')
+                'options' => array("data-original-title" => "Suspender", "rel" => "tooltip", 'class' => 'delete')
+            ),
+            'activar' => array(
+                'visible' => '$data->state == CRUGEUSERSTATE_SUSPENDED?true:false',
+                'label' => CrugeTranslator::t('admin', 'Enabled user account'),
+                'imageUrl' => Yii::app()->user->ui->getResource("activate.png"),
+                'url' => 'array("usermanagementActive","id"=>$data->getPrimaryKey())',
+                'options' => array("data-original-title" => "Activar", "rel" => "tooltip", 'class' => 'delete')
             ),
         ),
     );
