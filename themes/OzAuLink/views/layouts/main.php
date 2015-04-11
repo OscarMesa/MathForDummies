@@ -59,10 +59,8 @@
             </div>
 
         </div>
-        <div id="footer">
-            <p style="text-align: center;">
-            </p>
-        </div><!-- footer -->
+
+
 
     </body>
 </html>
@@ -134,5 +132,7 @@
 ?>
 
 
-<?php echo Yii::app()->user->ui->displayErrorConsole(); ?>
+<?php 
+ //echo Yii::app()->user->ui->displayErrorConsole(); 
+ ?>
 

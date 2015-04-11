@@ -17,8 +17,15 @@
                 <?php echo $this->renderpartial('application.views.flash._messagesPpal');?>
             </div>
             <?php echo $content; ?>
+
         </div><!-- content -->
+
     </div>
 
+</div>
+<div style="text-align:center;" id="footer">
+                Copyright &copy; 2015 Federico Ozanam -
+                Todos los derechos reservados - 
+                Potenciado por Oscar Mesa - Diego Ochoa.            
 </div>
 <?php $this->endContent(); ?>
