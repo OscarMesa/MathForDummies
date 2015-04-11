@@ -21,7 +21,7 @@
 			'buttonType'=>'submit',
 			'type'=>'primary',
 			'label'=> 'Cambiar',
-                        'htmlOptions'=>array('class'=>'btn-danger'),
+                        'htmlOptions'=>array('class'=>'btn-primary'),
 		)); ?>
 </div>
 <?php $this->endWidget(); ?>
