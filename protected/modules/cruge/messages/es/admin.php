@@ -5,7 +5,11 @@
  * @date 4/12/12 06:11 PM
  */
 return array(
+    'The user {username} was successfully activated' => 'El usuario {username} fue activo exitosamente',
+    'Enabled user account' => 'Activar cuenta de usuario',
     'User Manager' => 'Administrador de Usuarios',
+    'Disable user' => 'Desactivar usuario',
+    'check to confirm deactivation box' => 'Marque la casilla para confirmar la desactivación',
     'Update Profile' => 'Editar Perfil',
     'This message is displayed because you have "debug" parameter enabled in the config file.' => 'Este mensaje se muestra porque tiene activo el parámetro "debug" en el archivo de configuración.',
     'Manage Users' => 'Administrar Usuarios',

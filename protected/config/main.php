@@ -9,7 +9,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'OzAuLink',
     'language' => "es",
-    'defaultController' => 'usuarios/inicio',
+    'defaultController' => 'site/index',
     'theme' => 'OzAuLink',
     // preloading 'log' component
     'preload' => array(
@@ -103,12 +103,12 @@ return array(
 'loginLayout' => '//layouts/column2',
             'registrationLayout' => '//layouts/column2',
             'activateAccountLayout' => '//layouts/column2',
-            //'editProfileLayout' => '//layouts/column2',
+            'editProfileLayout' => '//layouts/column2',
             // en la siguiente puedes especificar el valor "ui" o "column2" para que use el layout
             // de fabrica, es basico pero funcional.  si pones otro valor considera que cruge
             // requerirá de un portlet para desplegar un menu con las opciones de administrador.
             //
-           'generalUserManagementLayout' => 'ui',
+           'generalUserManagementLayout' => '//layouts/column2',
             // permite indicar un array con los nombres de campos personalizados,
             // incluyendo username y/o email para personalizar la respuesta de una consulta a:
             // $usuario->getUserDescription();

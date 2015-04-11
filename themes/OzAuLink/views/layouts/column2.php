@@ -3,36 +3,19 @@
  <?php // if(!Yii::app()->user->isGuest)
      echo $this->renderPartial('application.views.layouts._menu'); ?>
 <div class="content-wrapper" style="min-height: 884px;">
+    
     <div class="alpha grid_3">
-    <div id="sidebar">
-        &nbsp;
-        <?php
-        if (!Yii::app()->user->isGuest) {
-            ?>
-            <br>
-            <div id="menu-admin" class="input-append">
-                <div class="btn-group">
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        Actiones
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <?php
-                        foreach ($this->menu as $option) {
-                            echo '<li><a href="'.$option['url'][0].'">' . $option['label'] . '</a></li>';
-                        }
-                        ?> 
-                    </ul>
-                </div>
-            </div>
-            <?php
-        }
-        ?>
-
+    
+        <div id="sidebar">
+            &nbsp;
+        
     </div><!-- sidebar -->
 </div> 
     <div class="grid_13 omega">
         <div id="content">
+            <div id="messages-app">
+                <?php echo $this->renderpartial('application.views.flash._messagesPpal');?>
+            </div>
             <?php echo $content; ?>
         </div><!-- content -->
     </div>
