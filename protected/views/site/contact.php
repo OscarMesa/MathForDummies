@@ -75,7 +75,7 @@ $this->breadcrumbs=array(
 	<?php endif; ?>
 
 	<div class="control-group buttons ">
-		<?php echo CHtml::submitButton('Submit',array('class'=>'btn-primary btn ')); ?>
+		<?php echo CHtml::submitButton('Envíar',array('class'=>'btn-primary btn ')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

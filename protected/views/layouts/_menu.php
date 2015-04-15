@@ -92,6 +92,51 @@
                     </li>
                 </ul>                
             </li>
+            
+            
+            <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'contenidos')?'active':''); ?>">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> 
+                    <span>Contenidos</span> 
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="<?php echo Yii::app()->createUrl('contenidos/admin') ?>">
+                            <i class="fa fa-angle-double-right"></i> Administrar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo Yii::app()->createUrl('contenidos/create') ?>">
+                            <i class="fa fa-angle-double-right"></i>Crear
+                        </a>
+                    </li>
+                </ul>                
+            </li>
+            
+            
+            
+             <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'ejercicios')?'active':''); ?>">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> 
+                    <span>Ejercicios</span> 
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="<?php echo Yii::app()->createUrl('ejercicios/admin') ?>">
+                            <i class="fa fa-angle-double-right"></i> Administrar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo Yii::app()->createUrl('ejercicios/create') ?>">
+                            <i class="fa fa-angle-double-right"></i>Crear
+                        </a>
+                    </li>
+                </ul>                
+            </li>
+            
+            
 
             <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'asignatura')?'active':''); ?>">
                 <a href="#">

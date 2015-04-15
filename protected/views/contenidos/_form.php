@@ -43,6 +43,7 @@ Yii::app()->clientScript->registerScript("script_crear_contenido", "
             $('#aform .dz-preview').remove();
             $('#Contenidos_detalle').code('');//limpiesa del editor y el textarea
             form[0].reset();
+            location.href='".Yii::app()->createAbsoluteUrl('contenidos/admin')."';
         },'json');
         
         return false;

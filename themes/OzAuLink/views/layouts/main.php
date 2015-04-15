@@ -82,8 +82,8 @@
                         'items' => array(
                                         array('label' => 'Inicio', 'url' => array('/site/index')),
                                         array('label' => 'Contáctanos', 'url' => array('/site/contact')),
-                                        array('label' => 'Login'
-                                            , 'url' => Yii::app()->user->ui->loginUrl
+                                        array('label' => 'Iniciar sesión'
+                                            , 'url' => array('site/login')
                                             , 'visible' => Yii::app()->user->isGuest
                                             ,),
                                         

@@ -24,7 +24,7 @@
     </head>
 
     <body>
-        <div id="cargando" class="alert alert-warning procesando alert-block" style="display: none;"><img src="<?php echo Yii::app()->createAbsoluteUrl('themes/PoliAuLink/images/ajax-loader.gif');?>"/> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
+        <div id="cargando" class="alert alert-warning procesando alert-block" style="display: none;"><img src="<?php echo Yii::app()->createAbsoluteUrl('themes/OzAuLink/images/ajax-loader.gif');?>"/> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
         <div  class="grid_16">
             <?php
             $this->widget('bootstrap.widgets.TbAlert', array(

@@ -73,7 +73,7 @@ class SiteController extends Controller {
                         "MIME-Version: 1.0\r\n" .
                         "Content-Type: text/plain; charset=UTF-8";
 
-                mail(Yii::app()->params['adminEmail'], $subject, $model->body, $headers);
+                mail('poliaulink@gmail.com',  $subject, $model->body, $headers);
                 Yii::app()->user->setFlash('contact', Yii::t('polimsn', 'Thank you for contacting us. We will respond to you as soon as possible.'));
                 $this->refresh();
             }

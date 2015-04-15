@@ -14,7 +14,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     ),
         ));
 ?>
-<div id="cargando" class="alert alert-warning procesando alert-block" style="display: none; width: 29%;margin-top:0px"><img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/PoliAuLink/images/ajax-loader.gif"/> Procesando, por favor espere un momento... </div>
+<div id="cargando" class="alert alert-warning procesando alert-block" style="display: none; width: 29%;margin-top:0px"><img src="<?php echo Yii::app()->getBaseUrl(true) ?>/themes/OzAuLink/images/ajax-loader.gif"/> Procesando, por favor espere un momento... </div>
 <?php
 
 echo $form->textFieldRow($modelRegistro, 'username', array('class' => 'span3'));

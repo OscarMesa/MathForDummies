@@ -13,7 +13,6 @@
                         )); ?>
 
 <?php 
-            Yii::app()->clientScript->registerCssFile(Yii::app()->createAbsoluteUrl('/themes/PoliAuLink/css/column3.css'), 'screen, projection');
 
             Yii::app()->clientScript->registerScript('procesando','$(function(){'
                     . ' $(document).submit(function() {
@@ -29,7 +28,7 @@
               
              
         ?>
-<div id="cargando" class="alert alert-warning procesando alert-block" style="display: none;"><img src="<?php echo Yii::app()->createAbsoluteUrl('themes/PoliAuLink/images/ajax-loader.gif');?>"> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
+<div id="cargando" class="alert alert-warning procesando alert-block" style="display: none;"><img src="<?php echo Yii::app()->createAbsoluteUrl('themes/OzAuLink/images/ajax-loader.gif');?>"> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
       
 <div class="span-19">
 	<div id="content">

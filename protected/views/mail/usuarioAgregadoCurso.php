@@ -109,7 +109,7 @@ html
 </table>
     <table width="600" border="0" align="center" bgcolor="#F2F2F2" cellpadding="0" cellspacing="5" id="separador">
       <tr>
-    <td height="25" valign="middle" style="font-size: 16px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>¡PoliAuLink!</strong></td>
+    <td height="25" valign="middle" style="font-size: 16px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif"><strong>¡OzAuLink!</strong></td>
   </tr>
 </table>
 <table width="600" border="0" cellspacing="0" cellpadding="0">

@@ -25,7 +25,7 @@
     </head>
     
     <body>
-        <div id="cargando" class="alert alert-warning procesando alert-block" style="display: block;"><img src="/themes/PoliAuLink/images/ajax-loader.gif"> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
+        <div id="cargando" class="alert alert-warning procesando alert-block" style="display: block;"><img src="/themes/OzAuLink/images/ajax-loader.gif"> <?php echo Yii::t('polimsn', 'Processing , Please wait a moment...') ?> </div>
         <div id="footer">
             <p style="text-align: center;">
             </p>

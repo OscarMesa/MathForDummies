@@ -25,6 +25,7 @@ return array(
         'application.modules.cruge.components.*',
         'application.modules.cruge.extensions.crugemailer.*',
         'application.vendor.Utilidades',
+        'application.vendors.phpexcel.Classes.PHPExcel',
     ),
     'modules' => array(
         'jbackup' => array(
