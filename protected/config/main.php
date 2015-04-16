@@ -24,8 +24,8 @@ return array(
         'ext.yii-mail.YiiMailMessage',
         'application.modules.cruge.components.*',
         'application.modules.cruge.extensions.crugemailer.*',
-        'application.vendor.Utilidades',
-        'application.vendors.phpexcel.Classes.PHPExcel',
+        'application.vendors.Utilidades',
+        'application.vendors.phpexcel.PHPExcel',
     ),
     'modules' => array(
         'jbackup' => array(

@@ -59,7 +59,8 @@ class ContenidosDocumentosAdjuntos extends CActiveRecord
 	public function eliminar_relacion_adj($id=false)
 	{
 		$adj = $this->find('id_document_adj="'.$id.'"');
-		$adj->delete();
+                if($adj!=null)
+                    $adj->delete();
 	}
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

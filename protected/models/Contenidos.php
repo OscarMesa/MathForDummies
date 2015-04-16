@@ -33,7 +33,7 @@ class Contenidos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_usuario_creador', 'required'),
+			array('id_usuario_creador,titulo, detalle', 'required'),
 			array('id_usuario_creador', 'numerical', 'integerOnly'=>true),
 			array('state_contenido', 'length', 'max'=>8),
 			array('titulo', 'length', 'max'=>45),

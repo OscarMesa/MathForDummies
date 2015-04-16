@@ -11,7 +11,7 @@
         ));
     ?>
             <?php echo $form->hiddenField($model, 'id_usuario_creador', array('class' => 'span11', 'value'=> Yii::app()->user->getId() )); ?>
-            <?php echo $form->textFieldRow($model, 'titulo', array('class' => 'span11')); ?>
+            <?php echo $form->textFieldRow($model, 'titulo', array('style' => 'width:99%')); ?>
             
             <?php $this->widget('Summernote', array('title'=> 'Detalle', 'nom'=>'Contenidos[detalle]', 'val'=>$model->detalle) ); ?>
             <?php echo $form->error($model, 'detalle', array('class' => 'help-block error', 'maxlength' => 10)); ?>
@@ -26,7 +26,7 @@
 
     <?php $this->endWidget(); ?>
     <?php
-        $this->widget('dropzone', array('action'=>Yii::app()->createUrl('contenidos/subir_documento_adjunto'), 'files' => $files));
+        $this->widget('Dropzone', array('action'=>Yii::app()->createUrl('contenidos/subir_documento_adjunto'), 'files' => $files));
     ?>
 </div>
 <?php

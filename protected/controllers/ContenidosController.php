@@ -75,6 +75,7 @@ class ContenidosController extends Controller {
         catch(Exception $e)
         {
            $transaction->rollback();
+           print_r($e);
         }
     }
 
@@ -168,9 +169,19 @@ class ContenidosController extends Controller {
                                               FROM contenidos_documentos_adjuntos t1, 
                                                    documentos_adjuntos t2
                                               WHERE 
+                                                    (
                                                     t1.id_contenido = '".$id."' 
                                                     AND   
-                                                    t2.id_doc_adj = t1.id_document_adj")
+                                                    t2.id_doc_adj = t1.id_document_adj
+                                                    )
+                                                    OR
+                                                    (
+                                                    t2.state_doc_adj = 0
+                                                    AND
+                                                    t2.id_usuario_doc_adj = '".Yii::app()->user->getId()."'
+                                                    )
+                                                    GROUP BY t2.id_doc_adj
+                                               ")
                                         ->queryAll()
             ));
         }
