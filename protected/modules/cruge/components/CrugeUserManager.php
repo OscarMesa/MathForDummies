@@ -62,7 +62,7 @@ class CrugeUserManager
             case CRUGEUSERSTATE_NOTCONFIRMATEADMIN:
                 return CrugeTranslator::t("Cuenta no confirmada por el administrador");
             case CRUGEUSERSTATE_RECOVERPASSWORD:
-                return CrugeTranslator::t("Esta cuenta ha solicitudo reuperar la contraseña");
+                return CrugeTranslator::t("Esta cuenta ha solicitado recuperar la contraseña");
             case CRUGEUSERSTATE_NOTCONFIRMATE:
                 return CrugeTranslator::t("Cuenta no confirmada");
             

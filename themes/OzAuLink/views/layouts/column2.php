@@ -8,9 +8,8 @@
     
         <div id="sidebar">
             &nbsp;
-        
-    </div><!-- sidebar -->
-</div> 
+        </div><!-- sidebar -->
+    </div> 
     <div class="grid_13 omega">
         <div id="content">
             <div id="messages-app">
@@ -26,6 +25,6 @@
 <div style="text-align:center;" id="footer">
                 Copyright &copy; 2015 Federico Ozanam -
                 Todos los derechos reservados - 
-                Potenciado por Oscar Mesa - Diego Ochoa.            
+                Potenciado por <b>Oscar Mesa - Diego Ochoa</b>.            
 </div>
 <?php $this->endContent(); ?>
