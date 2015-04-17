@@ -10,6 +10,8 @@ array('label'=>'Manage SeguimientoUsuarioCurso','url'=>array('admin')),
 );
 ?>
 
-<h1>Create SeguimientoUsuarioCurso</h1>
+<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
+
+<h3>Crear nota de seguimiento</h3>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

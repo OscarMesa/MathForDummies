@@ -41,10 +41,9 @@ class SeguimientoUsuarioCursoController extends Controller {
      */
     public function actionCreate($id) {
         $model = new SeguimientoUsuarioCurso;
-
+        $this->layout = '//layouts/modal';
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
         if (isset($_POST['SeguimientoUsuarioCurso'])) {
             $model->attributes = $_POST['SeguimientoUsuarioCurso'];
             if ($model->save())
@@ -53,6 +52,7 @@ class SeguimientoUsuarioCursoController extends Controller {
 
         $this->render('create', array(
             'model' => $model,
+            'curso' => Cursos::model()->findByPk($id)
         ));
     }
 
