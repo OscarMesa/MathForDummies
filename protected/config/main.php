@@ -26,6 +26,7 @@ return array(
         'application.modules.cruge.extensions.crugemailer.*',
         'application.vendors.Utilidades',
         'application.vendors.phpexcel.PHPExcel',
+        'ext.yiireport.*',
     ),
     'modules' => array(
         'jbackup' => array(
