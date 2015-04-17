@@ -3,10 +3,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
-
-<?php echo $form->errorSummary($model); ?>
-
+<p class="help-block">Campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->dropDownListRow($model, 'state_ejercicios', array('active'=>'Activo','inactive'=>'Inactivo'),array('style'=> 'width:100%')) ?> 
 
@@ -59,7 +56,7 @@
         {
             $(this).parent().parent().parent().children('.panel-body').append('<div class="orden-contenido-ejercio"><label><span>Orden</span><input type="text" name="Ejercicios[contenidos][orden]['+$(this).attr('value')+']"></label></div>');
         }else{
-             $(this).parent().parent().parent().children('.panel-body').children('.orden-contenido-ejercio').remove();
+            $(this).parent().parent().parent().children('.panel-body').children('.orden-contenido-ejercio').remove();
         }
     });
 </script>
