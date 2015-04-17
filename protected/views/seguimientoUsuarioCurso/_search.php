@@ -1,55 +1,26 @@
-<?php
-/* @var $this SeguimientoUsuarioCursoController */
-/* @var $model SeguimientoUsuarioCurso */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_curso'); ?>
-		<?php echo $form->textField($model,'id_curso'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'id_curso',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_usuario'); ?>
-		<?php echo $form->textField($model,'id_usuario'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'id_usuario',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_tipo_nota'); ?>
-		<?php echo $form->textField($model,'id_tipo_nota'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'id_tipo_nota',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'nota'); ?>
-		<?php echo $form->textField($model,'nota'); ?>
-	</div>
+		<?php echo $form->textFieldRow($model,'porcentaje',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'porcentaje'); ?>
-		<?php echo $form->textField($model,'porcentaje'); ?>
-	</div>
+		<?php echo $form->textAreaRow($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'descripcion'); ?>
-		<?php echo $form->textArea($model,'descripcion',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'type'=>'primary',
+			'label'=>'Search',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->

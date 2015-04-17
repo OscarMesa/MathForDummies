@@ -8,7 +8,6 @@
  * @property integer $id_curso
  * @property integer $id_usuario
  * @property integer $id_tipo_nota
- * @property integer $nota
  * @property integer $porcentaje
  * @property string $descripcion
  *
@@ -35,11 +34,11 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_curso, id_usuario, id_tipo_nota, nota, porcentaje, descripcion', 'required'),
-			array('id_curso, id_usuario, id_tipo_nota, nota, porcentaje', 'numerical', 'integerOnly'=>true),
+			array('id_curso, id_usuario, id_tipo_nota, porcentaje, descripcion', 'required'),
+			array('id_curso, id_usuario, id_tipo_nota, porcentaje', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_curso, id_usuario, id_tipo_nota, nota, porcentaje, descripcion', 'safe', 'on'=>'search'),
+			array('id, id_curso, id_usuario, id_tipo_nota, porcentaje, descripcion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +66,6 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 			'id_curso' => 'Id Curso',
 			'id_usuario' => 'Id Usuario',
 			'id_tipo_nota' => 'Id Tipo Nota',
-			'nota' => 'Nota',
 			'porcentaje' => 'Porcentaje',
 			'descripcion' => 'Descripcion',
 		);
@@ -95,7 +93,6 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 		$criteria->compare('id_curso',$this->id_curso);
 		$criteria->compare('id_usuario',$this->id_usuario);
 		$criteria->compare('id_tipo_nota',$this->id_tipo_nota);
-		$criteria->compare('nota',$this->nota);
 		$criteria->compare('porcentaje',$this->porcentaje);
 		$criteria->compare('descripcion',$this->descripcion,true);
 

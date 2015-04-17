@@ -36,7 +36,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             <ul class="dropdown-menu">
                 <li><a href="#" onclick="AbrirModal('Temas del curso', '800px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/tema/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Agregar temas al curso, relacionados <br/>con <?php echo $model->materia->nombre_materia; ?>">Agregar temas</a></li>
                 <li><a href="#" onclick="AbrirModal('Estudiante del curso', '600px', '90%', '<?php echo Yii::app()->getBaseUrl(true) ?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
-                <li><a href="#" onclick="AbrirModal('Evaluaciónes del curso', '750px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/evaluacion/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar Evaluación</a></li>
+                <li><a href="#" onclick="AbrirModal('Evaluaciónes del curso', '750px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/evaluacion/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no inscritos a este curso.">Agregar Evaluación</a></li>
+                <li><a href="#" onclick="AbrirModal('Seguimiento', '750px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/seguimientoUsuarioCurso/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Realizar la gestión del seguimiento <br/>de las notas dentro del curso.">Gestón de seguimiento</a></li>
             </ul>
         </div>
     <?php } ?>
