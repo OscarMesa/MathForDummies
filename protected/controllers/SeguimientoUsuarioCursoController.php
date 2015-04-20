@@ -63,7 +63,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        $this->layout = '//layouts/modal';
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -110,6 +110,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      */
     public function actionAdmin() {
         $model = new SeguimientoUsuarioCurso('search');
+        $this->layout = '//layouts/modal';
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['SeguimientoUsuarioCurso']))
             $model->attributes = $_GET['SeguimientoUsuarioCurso'];
