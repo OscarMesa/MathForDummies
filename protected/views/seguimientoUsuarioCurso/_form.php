@@ -7,11 +7,12 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->textFieldRow($model,'id_curso',array('class'=>'span5')); ?>
+	<?php echo $form->hiddenField($model,'id_curso',array('class'=>'span5', 'value'=> $id_curso)); ?>
 
-	<?php echo $form->textFieldRow($model,'id_usuario',array('class'=>'span5')); ?>
+	<?php echo $form->hiddenField($model,'id_usuario',array('class'=>'span5', 'value'=> Yii::app()->user->getId())); ?>
 
-	<?php echo $form->textFieldRow($model,'id_tipo_nota',array('class'=>'span5')); ?>
+	<?php echo $form->dropDownListRow($model, 'id_tipo_nota', CHtml::listData(TipoNota::model()->findAll(), 'id', 'descripcion'), array('class' => 'span5')); ?>
+
 
 	<?php echo $form->textFieldRow($model,'porcentaje',array('class'=>'span5')); ?>
 

@@ -5,7 +5,10 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_curso')); ?>:</b>
-	<?php echo CHtml::encode($data->id_curso); ?>
+	   <?php 
+
+	   ?>
+	   <?php echo CHtml::encode($data->id_curso); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_usuario')); ?>:</b>
@@ -26,3 +29,19 @@
 
 
 </div>
+
+<?php $this->widget('bootstrap.widgets.TbDetailView',array(
+'data'=>$model,
+'attributes'=>array(
+		'id_curso',
+		array(
+                    'name'=>'id_tipo_nota',
+                    'value'=>function($data){
+                    	
+                        return ;
+                    }
+        ),
+		'porcentaje',
+		'descripcion'
+),
+)); ?>

@@ -29,6 +29,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = '//layouts/modal';
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -52,7 +53,8 @@ class SeguimientoUsuarioCursoController extends Controller {
 
         $this->render('create', array(
             'model' => $model,
-            'curso' => Cursos::model()->findByPk($id)
+            'curso' => Cursos::model()->findByPk($id),
+            'id_curso' => $id
         ));
     }
 
