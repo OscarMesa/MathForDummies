@@ -1,29 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "seguimiento_usuario_curso".
+ * This is the model class for table "nota_seguimiento_usuario".
  *
- * The followings are the available columns in table 'seguimiento_usuario_curso':
+ * The followings are the available columns in table 'nota_seguimiento_usuario':
  * @property integer $id
- * @property integer $id_curso
  * @property integer $id_usuario
- * @property integer $id_tipo_nota
- * @property integer $porcentaje
- * @property string $descripcion
+ * @property integer $id_seguimiento_usuario_curso
+ * @property double $nota
+ * @property string $observacion
  *
  * The followings are the available model relations:
- * @property TipoNota $idTipoNota
- * @property Cursos $idCurso
+ * @property SeguimientoUsuarioCurso $idSeguimientoUsuarioCurso
  * @property MathUser $idUsuario
  */
-class SeguimientoUsuarioCurso extends CActiveRecord
+class NotaSeguimientoUsuario extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'seguimiento_usuario_curso';
+		return 'nota_seguimiento_usuario';
 	}
 
 	/**
@@ -34,11 +32,12 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_curso, id_usuario, id_tipo_nota, porcentaje, descripcion', 'required'),
-			array('id_curso, id_usuario, id_tipo_nota, porcentaje', 'numerical', 'integerOnly'=>true),
+			array('id_seguimiento_usuario_curso, nota, observacion', 'required'),
+			array('id_usuario, id_seguimiento_usuario_curso', 'numerical', 'integerOnly'=>true),
+			array('nota', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_curso, id_usuario, id_tipo_nota, porcentaje, descripcion', 'safe', 'on'=>'search'),
+			array('id, id_usuario, id_seguimiento_usuario_curso, nota, observacion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,10 +49,8 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idTipoNota' => array(self::BELONGS_TO, 'TipoNota', 'id_tipo_nota'),
-			'idCurso' => array(self::BELONGS_TO, 'Cursos', 'id_curso'),
+			'idSeguimientoUsuarioCurso' => array(self::BELONGS_TO, 'SeguimientoUsuarioCurso', 'id_seguimiento_usuario_curso'),
 			'idUsuario' => array(self::BELONGS_TO, 'MathUser', 'id_usuario'),
-			'notaSeguimiento' => array(self::HAS_MANY, 'NotaSeguimientoUsuario', 'id_seguimiento_usuario_curso'),
 		);
 	}
 
@@ -64,11 +61,10 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_curso' => 'Id Curso',
 			'id_usuario' => 'Id Usuario',
-			'id_tipo_nota' => 'Id Tipo Nota',
-			'porcentaje' => 'Porcentaje',
-			'descripcion' => 'Descripcion',
+			'id_seguimiento_usuario_curso' => 'Id Seguimiento Usuario Curso',
+			'nota' => 'Nota',
+			'observacion' => 'Observacion',
 		);
 	}
 
@@ -91,11 +87,10 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('id_curso',$this->id_curso);
 		$criteria->compare('id_usuario',$this->id_usuario);
-		$criteria->compare('id_tipo_nota',$this->id_tipo_nota);
-		$criteria->compare('porcentaje',$this->porcentaje);
-		$criteria->compare('descripcion',$this->descripcion,true);
+		$criteria->compare('id_seguimiento_usuario_curso',$this->id_seguimiento_usuario_curso);
+		$criteria->compare('nota',$this->nota);
+		$criteria->compare('observacion',$this->observacion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -106,7 +101,7 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return SeguimientoUsuarioCurso the static model class
+	 * @return NotaSeguimientoUsuario the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

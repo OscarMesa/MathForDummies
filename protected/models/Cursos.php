@@ -61,6 +61,7 @@ class Cursos extends CActiveRecord
                     'materia' => array(self::BELONGS_TO, 'Materias', 'idmateria'),
                     'grado' => array(self::BELONGS_TO, 'Grado', 'id_grado'),
                     'temas' => array(self::HAS_MANY, 'Tema', 'idcurso'),
+                    'seguimientos' => array(self::HAS_MANY, 'SeguimientoUsuarioCurso', 'id_curso'),
 		);
 	}
         

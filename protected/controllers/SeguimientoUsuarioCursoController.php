@@ -34,7 +34,26 @@ class SeguimientoUsuarioCursoController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
-
+    /**
+     * http://yiiplayground.com/index.php?r=UiModule/dataview/gridViewArray
+     * @param int $id  id del curso
+     */
+    public function actionNotas($id){
+        $curso = Cursos::model()->findByPk($id);
+        $seguimientos = $curso->seguimientos;
+        $estudiantes = $curso->participantes;
+        print_r($estudiantes);die;
+        foreach ($estudiantes as $key => $value) {
+            
+        }
+        
+        
+        $this->render('create', array(
+            'model' => $model,
+            'curso' => Cursos::model()->findByPk($id)
+        ));
+    }    
+    
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
