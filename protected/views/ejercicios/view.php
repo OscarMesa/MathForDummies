@@ -13,17 +13,28 @@ array('label'=>'Manage Ejercicios','url'=>array('admin')),
 );
 ?>
 
-<h1>View Ejercicios #<?php echo $model->id_ejercicio; ?></h1>
 
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
-'data'=>$model,
-'attributes'=>array(
-		'id_ejercicio',
-		'state_ejercicios',
-		'idMateria',
-		'ejercicio',
-		'idusuariocreador',
-		'idDificultad',
-		'visible',
-),
-)); ?>
+<div class="well span6">
+	<span class="label label-info" style='position:absolute; margin-left:67.7%; margin-top:-15px'> Estado: <?php echo CHtml::encode($model->state_ejercicios); ?></span>
+	<b>Breve resumen del ejericio:</b>
+	<?php echo CHtml::encode($model->ejercicio); ?>
+	<br />
+
+	<b>Materia asociada:</b>
+	<?php echo CHtml::encode($model->idMateria0->nombre_materia); ?>
+	<br />
+
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('idDificultad')); ?>:</b>
+	<?php echo CHtml::encode($model->idDificultad0->descripcion); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('visible')); ?>:</b>
+	<?php echo CHtml::encode($model->visible); ?>
+	<br />
+
+	<b>Autor: </b>
+	<?php echo CHtml::encode($model->idusuariocreador0->username); ?>
+	<br />
+
+</div>

@@ -9,7 +9,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('idMateria')); ?>:</b>
-	<?php echo CHtml::encode($data->idMateria); ?>
+	<?php echo CHtml::encode($data->idMateria0->nombre_materia); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('ejercicio')); ?>:</b>
