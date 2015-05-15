@@ -9,6 +9,16 @@ $(document).on("ready", function() {
 
 });
 
+    function closeModalSave(id_grid, id_modal)
+    {
+        setTimeout(function(){
+           // if($('#'+id_grid).length > 0)
+            window.parent.$.fn.yiiGridView.update(id_grid);
+
+            window.parent.$('#'+id_modal).modal('hide');
+        },1200);
+    }
+
     function AbrirModal(titulo, ancho, alto, direccion)
     {
         $("#myModal .modal-header .modal-title").html(titulo);
@@ -33,7 +43,7 @@ $(document).on("ready", function() {
         $(".modal-body").css('height', alto);
         $(".modal-content").css('height', alto);
 //        $("#myModal").css('height', ancho+'px');
-        $("#myModal").attr('style', 'width:'+ancho+';top:0; height:'+alto);
+        $("#myModal").attr('style', 'width:'+ancho+';top:0;left: 45%; height:'+alto);
         $("#myModal").modal({show: true});
         return false;
     }

@@ -25,5 +25,7 @@ return array(
     'Thank you for contacting us. We will respond to you as soon as possible.' => 'Gracias por contactarnos. Nosotros responderemos a la mayor brevedad posible.',
     'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'=>'Si tiene consultas u otras preguntas, por favor diligencia el siguiente formulario para contactarnos. Gracias.',
     'Please enter the letters as they are shown in the image above.' => 'Por favor, introduzca las letras tal y como aparecen en la imagen de arriba.',
-    'Letters are not case-sensitive.' => 'Las letras no distinguen entre mayúsculas y minúsculas.'
+    'Letters are not case-sensitive.' => 'Las letras no distinguen entre mayúsculas y minúsculas.',
+    'Note tracking updated successfully.' => 'Nota de seguimiento actualizada exitosamente.',
+    'The note should be in the range of 1-5.' => 'La nota debe encontrarse en un rango de 1 a 5.'
 );

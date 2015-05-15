@@ -12,6 +12,6 @@ array('label'=>'Manage SeguimientoUsuarioCurso','url'=>array('admin')),
 
 <?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
 
-<h3>Crear nota de seguimiento</h3>
+<h3>Notas de seguimiento</h3>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('seguimientos' => $seguimientos,'model'=>$model,'curso'=>$curso,'arrayDataProvider'=>$arrayDataProvider)); ?>

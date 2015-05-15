@@ -1,6 +1,6 @@
 <?php
 
-class SeguimientoUsuarioCursoController extends Controller {
+class NotaSeguimientoUsuarioController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -12,7 +12,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array('accessControl', array('CrugeAccessControlFilter'));
+         return array('accessControl', array('CrugeAccessControlFilter'));
     }
 
     /**
@@ -33,76 +33,35 @@ class SeguimientoUsuarioCursoController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
-    /**
-     * http://yiiplayground.com/index.php?r=UiModule/dataview/gridViewArray
-     * @param int $id  id del curso
-     */
-    public function actionNotas($id){
-        $curso = Cursos::model()->findByPk($id);
-        $seguimientos = $curso->seguimientos;
-        $estudiantes = $curso->participantes;
-        $rawData = array();
-        foreach ($estudiantes as $estudiante) {
-            $registro = array();
-            $registro['id'] = $estudiante->iduser;
-            $registro['estudiante'] = $estudiante;
-            $registro['ColumnsNotaSeguimiento'] = array();
-            foreach ($seguimientos as $seguimiento) {
-                $registro[$seguimiento->id]['seguimiento'] = $seguimiento;
-                $nota = NotaSeguimientoUsuario::model()->find('id_seguimiento_usuario_curso=? AND id_usuario = ?',array($seguimiento->id,$estudiante->iduser));
-                if($nota != null)
-                {
-                    $registro[$seguimiento->id]['nota'] = $nota;
-                }else{
-                    $registro[$seguimiento->id]['nota'] = null;
-                }
-            }
-            $rawData[] = $registro;
-        }
-        $arrayDataProvider = new CArrayDataProvider($rawData, array(
-           'id'=>'id',
-           /* 'sort'=>array(
-               'attributes'=>array(
-                   'username', 'email',
-               ),
-           ), */
-           'pagination'=>array(
-               'pageSize'=>10,
-         ),
-       ));
-        
-        $this->render('create', array(
-                'model' => null,
-                'curso' => Cursos::model()->findByPk($id),
-                'arrayDataProvider' => $arrayDataProvider,
-                'seguimientos' => $seguimientos,
-            )
-        );
-    }
-    
-    public function actionModificarNota() {
-        
-    }
-    
+
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param int $id id del curso
      */
-    public function actionCreate($id) {
-        $model = new SeguimientoUsuarioCurso;
+    public function actionCreate() {
         $this->layout = '//layouts/modal';
+        $model = new NotaSeguimientoUsuario();
+        $model->idSeguimientoUsuarioCurso = SeguimientoUsuarioCurso::model()->findByPk($_REQUEST['seguimiento']);
+        $model->idUsuario = MathUser::model()->findByPk($_REQUEST['estudiante']);
+        
+        $model->id_usuario = $_REQUEST['estudiante'];
+        $model->id_seguimiento_usuario_curso = $_REQUEST['seguimiento'];
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-        if (isset($_POST['SeguimientoUsuarioCurso'])) {
-            $model->attributes = $_POST['SeguimientoUsuarioCurso'];
+
+        if (isset($_POST['NotaSeguimientoUsuario'])) {
+            $model->attributes = $_POST['NotaSeguimientoUsuario'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            {
+                $m = Yii::t('polimsn', 'Note tracking updated successfully.');
+                $user = Yii::app()->getComponent('user')->setFlash(
+                        'success', $m
+                );
+            }
         }
 
         $this->render('create', array(
             'model' => $model,
-            'curso' => Cursos::model()->findByPk($id)
         ));
     }
 
@@ -118,10 +77,15 @@ class SeguimientoUsuarioCursoController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['SeguimientoUsuarioCurso'])) {
-            $model->attributes = $_POST['SeguimientoUsuarioCurso'];
+        if (isset($_POST['NotaSeguimientoUsuario'])) {
+            $model->attributes = $_POST['NotaSeguimientoUsuario'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            {
+                $m = Yii::t('polimsn', 'Note tracking updated successfully.');
+                $user = Yii::app()->getComponent('user')->setFlash(
+                        'success', $m
+                );
+            }
         }
 
         $this->render('update', array(
@@ -150,7 +114,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('SeguimientoUsuarioCurso');
+        $dataProvider = new CActiveDataProvider('NotaSeguimientoUsuario');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -160,10 +124,10 @@ class SeguimientoUsuarioCursoController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new SeguimientoUsuarioCurso('search');
+        $model = new NotaSeguimientoUsuario('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['SeguimientoUsuarioCurso']))
-            $model->attributes = $_GET['SeguimientoUsuarioCurso'];
+        if (isset($_GET['NotaSeguimientoUsuario']))
+            $model->attributes = $_GET['NotaSeguimientoUsuario'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -176,7 +140,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = SeguimientoUsuarioCurso::model()->findByPk($id);
+        $model = NotaSeguimientoUsuario::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -187,7 +151,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'seguimiento-usuario-curso-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'nota-seguimiento-usuario-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
