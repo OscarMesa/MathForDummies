@@ -14,9 +14,11 @@ $this->menu = array(
 <h1>Administrador de Cursos</h1>
 
 <p>
-    También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-    or <b>=</b>) al inicio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
+    <?php echo Yii::t('polimsn','You may optionally enter a comparison operator');?> (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
+        &lt;&gt;</b>
+    <?php echo Yii::t('polimsn','or');?> <b>=</b>) <?php echo Yii::t('polimsn','at the beginning of each of your search values to specify how the comparison should be done.'); ?>
 </p>
+
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(

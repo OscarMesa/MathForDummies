@@ -29,6 +29,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = '//layouts/modal';
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -39,7 +40,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      */
     public function actionNotas($id){
         $curso = Cursos::model()->findByPk($id);
-        $seguimientos = $curso->seguimientos;
+        $seguimientos = SeguimientoUsuarioCurso::model()->findAll('id_curso=? AND estado_seguimiento=?',array($id,ACTIVE));
         $estudiantes = $curso->participantes;
         $rawData = array();
         foreach ($estudiantes as $estudiante) {
@@ -47,7 +48,9 @@ class SeguimientoUsuarioCursoController extends Controller {
             $registro['id'] = $estudiante->iduser;
             $registro['estudiante'] = $estudiante;
             $registro['ColumnsNotaSeguimiento'] = array();
+            
             foreach ($seguimientos as $seguimiento) {
+//                if($seguimiento->estado_seguimiento == INACTIVE)continue;
                 $registro[$seguimiento->id]['seguimiento'] = $seguimiento;
                 $nota = NotaSeguimientoUsuario::model()->find('id_seguimiento_usuario_curso=? AND id_usuario = ?',array($seguimiento->id,$estudiante->iduser));
                 if($nota != null)
@@ -97,12 +100,13 @@ class SeguimientoUsuarioCursoController extends Controller {
         if (isset($_POST['SeguimientoUsuarioCurso'])) {
             $model->attributes = $_POST['SeguimientoUsuarioCurso'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                Yii::app()->user->setFlash('success', "<strong>Exito!</strong> El seguimiento fue creado correctamente." );
         }
 
-        $this->render('create', array(
+        $this->render('createKW', array(
             'model' => $model,
-            'curso' => Cursos::model()->findByPk($id)
+            'curso' => Cursos::model()->findByPk($id),
+            'id_curso' => $id
         ));
     }
 
@@ -114,17 +118,16 @@ class SeguimientoUsuarioCursoController extends Controller {
     public function actionUpdate($id) {
         $this->layout = '//layouts/modal';
         $model = $this->loadModel($id);
-
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['SeguimientoUsuarioCurso'])) {
             $model->attributes = $_POST['SeguimientoUsuarioCurso'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                    Yii::app()->user->setFlash('success', "<strong>Exito!</strong> El seguimiento de este curso fue actualizado correctamente." );
         }
 
-        $this->render('update', array(
+        $this->render('updateKW', array(
             'model' => $model,
         ));
     }
@@ -136,14 +139,26 @@ class SeguimientoUsuarioCursoController extends Controller {
      */
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
-// we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+        // we only allow deletion via POST request
+        SeguimientoUsuarioCurso::model()->updateByPk($id,array('estado_seguimiento'=>INACTIVE));
 
-// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if (!isset($_GET['ajax']))
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+    
+    public function actionActive($id) {
+        if (Yii::app()->request->isPostRequest) {
+        // we only allow deletion via POST request
+        SeguimientoUsuarioCurso::model()->updateByPk($id,array('estado_seguimiento'=>ACTIVE));
+
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if (!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        } else
+            throw new CHttpException(400, Yii::t('polimsn','Invalid request. Please do not repeat this request again.'));
     }
 
     /**
@@ -159,14 +174,18 @@ class SeguimientoUsuarioCursoController extends Controller {
     /**
      * Manages all models.
      */
-    public function actionAdmin() {
+    public function actionAdmin($id) {
         $model = new SeguimientoUsuarioCurso('search');
+        $model->id_curso = $id; 
+        $this->layout = '//layouts/modal';
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['SeguimientoUsuarioCurso']))
             $model->attributes = $_GET['SeguimientoUsuarioCurso'];
 
         $this->render('admin', array(
             'model' => $model,
+            'id_curso' => $id,
+            'curso' => Cursos::model()->findByPk($id),
         ));
     }
 

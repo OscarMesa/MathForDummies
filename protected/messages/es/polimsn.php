@@ -27,5 +27,9 @@ return array(
     'Please enter the letters as they are shown in the image above.' => 'Por favor, introduzca las letras tal y como aparecen en la imagen de arriba.',
     'Letters are not case-sensitive.' => 'Las letras no distinguen entre mayúsculas y minúsculas.',
     'Note tracking updated successfully.' => 'Nota de seguimiento actualizada exitosamente.',
-    'The note should be in the range of 1-5.' => 'La nota debe encontrarse en un rango de 1 a 5.'
+    'The note should be in the range of 1-5.' => 'La nota debe encontrarse en un rango de 1 a 5.',
+    'You may optionally enter a comparison operator' => 'Opcionalmente, puede introducir un operador de comparación',
+    'at the beginning of each of your search values to specify how the comparison should be done.' => 'al comienzo de cada uno de sus valores de búsqueda para especificar cómo se debe hacer la comparación.',
+    'or' => 'o',
+    'Invalid request. Please do not repeat this request again.' => 'Solicitud no válida. Por favor, no repita esta solicitud de nuevo.'
 );

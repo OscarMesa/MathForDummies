@@ -80,10 +80,12 @@ class DefaultController extends Controller {
      * @return string query with sentences in the table 
      */
     private function getColumns($tableName) {
+       try{
         $sql = 'SHOW CREATE TABLE ' . $tableName;
         $cmd = Yii::app()->db->createCommand($sql);
         $table = $cmd->queryRow();
-
+        //print_r($table);die;
+        if(!isset($table['Create Table']))throw new Exception();
         $create_query = $table['Create Table'] . '~';
 
         $create_query = preg_replace('/^CREATE TABLE/', 'CREATE TABLE IF NOT EXISTS', $create_query);
@@ -96,6 +98,9 @@ class DefaultController extends Controller {
             $this->tables[$tableName]['create'] = $create_query;
             return $create_query;
         }
+       }  catch (Exception $e){
+           return;
+       }
     }
 
     /**

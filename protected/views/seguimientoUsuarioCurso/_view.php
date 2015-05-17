@@ -26,3 +26,19 @@
 
 
 </div>
+
+
+<?php $this->widget('bootstrap.widgets.TbDetailView',array(
+'data'=>$model,
+'attributes'=>array(
+		'id_curso',
+		array(
+                    'name'=>'id_tipo_nota',
+                    'value'=>function($data){
+                        return $data->idTipoNota->descripcion;
+                    }
+        ),
+		'porcentaje',
+		'descripcion'
+),
+)); ?>
