@@ -66,6 +66,7 @@ class SeguimientoUsuarioCurso extends CActiveRecord
         
         public function validarPorcenje($attribute,$params) 
         {
+            if($this->id_curso == null || $this->criterio_evaluacion==null)return;
             $suma = SeguimientoUsuarioCurso::model()->findBySql('SELECT SUM(porcentaje) totalSuma FROM seguimiento_usuario_curso WHERE id_curso = ? AND criterio_evaluacion = ?', array($this->id_curso, $this->criterio_evaluacion));
             $suma->totalSuma = $suma->totalSuma != null ? $suma->totalSuma : 0;
             $por = SeguimientoUsuarioCurso::model()->findBySql('(SELECT porcentaje_criterio porcentaje_r FROM criterios_evaluativos WHERE id_criterio = ? LIMIT 1); ', array($this->criterio_evaluacion));

@@ -38,6 +38,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 <li><a href="#" onclick="AbrirModal('Estudiante del curso', '600px', '90%', '<?php echo Yii::app()->getBaseUrl(true) ?>/cursos/agregarEstudiantes/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no incritos a este curso.">Agregar estudiantes</a></li>
                 <li><a href="#" onclick="AbrirModal('Evaluaciónes del curso', '750px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/evaluacion/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-original-title="Agregar usuarios no inscritos a este curso.">Agregar Evaluación</a></li>
                 <li><a href="#" onclick="AbrirModal('Seguimiento', '750px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/seguimientoUsuarioCurso/create/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Realizar la gestión del seguimiento <br/>de las notas dentro del curso.">Gestón de seguimiento</a></li>
+                <li><a href="#" onclick="AbrirModal('Códigos de acceso', '750px', '100%', '<?php echo Yii::app()->getBaseUrl(true) ?>/codigoIngresoCurso/admin/<?php echo $model->id; ?>')" data-toggle="tooltip" data-placement="right" data-html='true' data-original-title="Realice la gestion de códigos de acceso masivo a el curso.">Códigos de acceso</a></li>
             </ul>
         </div>
     <?php } ?>
