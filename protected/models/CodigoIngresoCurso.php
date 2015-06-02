@@ -35,6 +35,7 @@ class CodigoIngresoCurso extends CActiveRecord
 			array('codigo_verficacion, id_curso, fecha_creacion', 'required'),
 			array('id_curso, estado', 'numerical', 'integerOnly'=>true),
 			array('codigo_verficacion', 'length', 'max'=>15),
+                        array('codigo_verficacion','uniqueCodigo'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_codigo, codigo_verficacion, id_curso, fecha_creacion, estado', 'safe', 'on'=>'search'),
@@ -53,8 +54,15 @@ class CodigoIngresoCurso extends CActiveRecord
 			'estado0' => array(self::BELONGS_TO, 'Estados', 'estado'),
 		);
 	}
+        
+        public function uniqueCodigo($attribute,$params){
+            if($this->find('id_curso=? AND codigo_verficacion=?', array($this->id_curso,  $this->codigo_verficacion)) != NULL)
+            {
+                $this->addError($attribute, Yii::t('polimsn','This code is not available for this course, please try another difetente'));
+            }
+        }
 
-	/**
+        /**
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
@@ -91,7 +99,9 @@ class CodigoIngresoCurso extends CActiveRecord
 		$criteria->compare('id_curso',$this->id_curso);
 		$criteria->compare('fecha_creacion',$this->fecha_creacion,true);
 		$criteria->compare('estado',$this->estado);
-
+                
+                $criteria->order = "fecha_creacion DESC";
+                
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
