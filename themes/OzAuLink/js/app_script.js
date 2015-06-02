@@ -19,7 +19,7 @@ $(document).on("ready", function() {
         },1200);
     }
 
-    function AbrirModal(titulo, ancho, alto, direccion)
+    function AbrirModal(titulo, ancho, alto, direccion, left=false)
     {
         $("#myModal .modal-header .modal-title").html(titulo);
         $("#iframeApp").attr('src', direccion);
@@ -43,7 +43,7 @@ $(document).on("ready", function() {
         $(".modal-body").css('height', alto);
         $(".modal-content").css('height', alto);
 //        $("#myModal").css('height', ancho+'px');
-        $("#myModal").attr('style', 'width:'+ancho+';top:0;left: 45%; height:'+alto);
+        $("#myModal").attr('style', 'width:'+ancho+';top:0;left: '+((left)?left:'45%')+'; height:'+alto);
         $("#myModal").modal({show: true});
         return false;
     }
