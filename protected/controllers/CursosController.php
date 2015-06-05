@@ -7,6 +7,7 @@ class CursosController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
+    public $render = true;
 
     /**
      * @return array action filters
@@ -36,6 +37,55 @@ class CursosController extends Controller {
     }
 
     /**
+     * Este metodo permite validar si un usuario ya esta registrado en un curso o no.
+     * @param type $id_usuario
+     * @return boolean Description
+     */
+    public function validarExitenciaUsuarioEnCurso($id_usuario, $id_curso) {
+        if (IntegrantesCurso::model()->count("id_integrante = ? AND cursos_id = ?", array($id_usuario, $id_curso)) > 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Este metodo verifica s
+     * @param type $codigo
+     * @param type $id_curso
+     * @return boolean
+     */
+    public function validarCodigoEnCurso($codigo, $id_curso) {
+        if (CodigoIngresoCurso::model()->count('codigo_verficacion = ? AND id_curso = ? AND estado = ?', array($codigo, $id_curso, ACTIVE)) > 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * 
+     * @throws Exception
+     */
+    public function actionAgregarEstudiantexCodigo() {
+        $cod = $_REQUEST['codigo'];
+        $id_curso = $_REQUEST['id_curso'];
+        $respuesta = array('respuesta' => false, 'mensaje' => '');
+        if (!$this->validarExitenciaUsuarioEnCurso(Yii::app()->user->id, $id_curso)) {
+            if ($this->validarCodigoEnCurso($cod, $id_curso)) {
+                $this->render = false;
+                $_POST['estudiantes'] = Yii::app()->user->id;
+                $this->actionAgregarEstudiantes($id_curso);
+                $respuesta['respuesta'] = true;
+                $respuesta['mensaje'] = Yii::app()->user->getFlash('success');
+            } else {
+                $respuesta['mensaje'] = Yii::t('polimsn', 'The code entered does not exist for this course');
+            }
+        } else {
+            $respuesta['mensaje'] = Yii::t('polimsn', 'The user is already connected to the course');
+        }
+        echo json_encode($respuesta);
+    }
+
+    /**
      * este mètodo me elimna un usuario del curso.
      * @author Oskar<oscarmesa.elpoli@gmail.com>
      */
@@ -53,7 +103,7 @@ class CursosController extends Controller {
     public function actionAgregarEstudiantes($id) {
         if ($id > 0) {
             $this->layout = "//layouts/column3";
-            $curso = Cursos::model()->findByPk($id,array(
+            $curso = Cursos::model()->findByPk($id, array(
                 'with' => array(
                     'temas' => array(
                         'condition' => "estado='active'"
@@ -77,8 +127,9 @@ class CursosController extends Controller {
                         } catch (CDbException $ex) {
                             if ($ex->errorInfo[1] == 1062) {
                                 $integran_cursos->updateAll(array('estado' => 1), 'id_integrante = ' . $_POST['estudiantes'] . ' AND cursos_id = ' . $id);
-                            }else{
-                                print_r($ex);die;
+                            } else {
+                                print_r($ex);
+                                die;
                             }
                         }
                         $this->enviarNotificacionEstudianteAgregado($usuario, $curso);
@@ -103,11 +154,13 @@ class CursosController extends Controller {
                         $t->rollback();
                     }
                 }
-                $this->render('agregarEstudiante', array(
-                    'dataproviderEstudiantes' => $modEstudiante->participantesCurso($id),
-                    'model' => $modEstudiante,
-                    'id' => $id
-                ));
+                if ($this->render) {
+                    $this->render('agregarEstudiante', array(
+                        'dataproviderEstudiantes' => $modEstudiante->participantesCurso($id),
+                        'model' => $modEstudiante,
+                        'id' => $id
+                    ));
+                }
             } else {
                 throw new CHttpException(400, 'Este curso no existe o no tiene temas vinculados.');
             }
@@ -126,7 +179,7 @@ class CursosController extends Controller {
         $message = new YiiMailMessage;
         $message->view = "usuarioAgregadoCurso";
         $params = array('curso' => $curso, 'usuario' => $usuario);
-        $message->subject = Yii::t('polimsn', 'Successful linkage course {name_course}',array('{name_course}'=>ucwords($curso->nombre_curso)));
+        $message->subject = Yii::t('polimsn', 'Successful linkage course {name_course}', array('{name_course}' => ucwords($curso->nombre_curso)));
         $message->setBody($params, 'text/html');
         $message->to = array($usuario->email => 'importaciones');
         $message->from = array(Yii::app()->params['email'] => Yii::app()->name);
@@ -181,7 +234,7 @@ class CursosController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-        
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 

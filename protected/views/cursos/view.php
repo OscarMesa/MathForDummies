@@ -27,7 +27,12 @@ $this->menu=array(
 	),
 )); ?>
 
-
+<?php if(!$this->validarExitenciaUsuarioEnCurso(Yii::app()->user->id, $model->id)){?>
+<div id="sec-registrar-estudante"
+     <label>Ingresar código: <?php echo CHtml::telField('registrarEstudiante',array())?></label><?php echo CHtml::button('Registrar en curso',array('class'=>'btn btn-primary','id'=>'btn-regCurso')); ?>
+<div class="help-block error" id="registrar_estudiante_error" style=""></div>
+</div>
+<?php } ?>
 <?php
     if(isset($contenido)){
     Yii::import('application.controllers.ContenidosController');
@@ -45,3 +50,24 @@ $this->menu=array(
 );
    } 
     ?>
+<style>
+    .help-block, .help-inline{
+          color: #b94a48;
+    }
+</style>
+<script type="text/javascript">
+    $("#btn-regCurso").click(function(){
+    $('#registrar_estudiante_error').html("");
+    $.post('<?php echo Yii::app()->createAbsoluteUrl('cursos/agregarEstudiantexCodigo');?>',{'codigo':$('#registrarEstudiante').val(),'id_curso':<?php echo $model->id; ?>},function(data){
+            if(data.respuesta == false){
+                $('#registrar_estudiante_error').html(data.mensaje);
+            }else if(data.respuesta == true){
+                $("#sec-registrar-estudante").hide('slow', function(){ 
+                    $("#sec-registrar-estudante").remove(); 
+                    $("#messages-app #yw1").html('<div class="alert in alert-block fade alert-success"><a href="#" class="close" data-dismiss="alert">×</a>'+data.mensaje+'</div>');
+                    $('body,html').animate({scrollTop: 0}, 800);
+                });
+            }
+        },'json');
+    });
+</script>
