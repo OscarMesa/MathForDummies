@@ -19,8 +19,10 @@ function closeModalSave(id_grid, id_modal)
     }, 1200);
 }
 
-function AbrirModal(titulo, ancho, alto, direccion)
+function AbrirModal(titulo, ancho, alto, direccion,style)
 {
+    if(style == undefined)
+        style = "left: 45%";
     $("#myModal .modal-header .modal-title").html(titulo);
     $("#iframeApp").attr('src', direccion);
     $("#iframeApp").attr('src', direccion);
@@ -43,7 +45,7 @@ function AbrirModal(titulo, ancho, alto, direccion)
     $(".modal-body").css('height', alto);
     $(".modal-content").css('height', alto);
 //        $("#myModal").css('height', ancho+'px');
-    $("#myModal").attr('style', 'width:' + ancho + ';top:0;left: 45%; height:' + alto);
+    $("#myModal").attr('style', 'width:' + ancho + ';top:0; height:' + alto + ";" + (style));
     $("#myModal").modal({show: true});
     return false;
 }

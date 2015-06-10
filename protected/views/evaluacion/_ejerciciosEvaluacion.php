@@ -12,7 +12,7 @@
     <?php }else{ ?>    
       <div class="checkbox"><?php echo CHtml::checkBox('Evaluacion[ejercicios][check]['.$data->id_ejercicio.']', 0, array('value'=>$data->id_ejercicio))?>
     <?php } ?>      
-          <a class="full-scream-ejercicio" href="#" onclick="AbrirModal('Ejercico #<?php echo $data->id_ejercicio;?>','500px','90%','<?php echo Yii::app()->createAbsoluteUrl('ejercicios/view', array('id'=>$data->id_ejercicio)); ?>')"><i class="icon-fullscreen"></i></a>  </div>
+          <a class="full-scream-ejercicio" href="#" onclick="AbrirModal('Ejercico #<?php echo $data->id_ejercicio;?>','500px','90%','<?php echo Yii::app()->createAbsoluteUrl('ejercicios/view', array('id'=>$data->id_ejercicio)); ?>','left: 13%')"><i class="icon-fullscreen"></i></a>  </div>
     </div>
     <div class="panel-body">
        <?php echo $data->ejercicio;?>
