@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 	array('label'=>'Manage CodigoIngresoCurso','url'=>array('admin')),
 	);
 	?>
+<?php echo $this->renderPartial('_menu',array('model'=>$model->idCurso))?>
+	<h1>Actualizar código de ingreso <?php echo $model->id_codigo; ?></h1>
 
-	<h1>Update CodigoIngresoCurso <?php echo $model->id_codigo; ?></h1>
-
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model,'curso' => $model->idCurso)); ?>

@@ -12,16 +12,28 @@ array('label'=>'Delete CodigoIngresoCurso','url'=>'#','linkOptions'=>array('subm
 array('label'=>'Manage CodigoIngresoCurso','url'=>array('admin')),
 );
 ?>
-
-<h1>View CodigoIngresoCurso #<?php echo $model->id_codigo; ?></h1>
+<?php $this->renderPartial('_menu',array('model'=>$model->idCurso));?>
+<h1><?php echo Yii::t('polimsn', 'code entry');?> #<?php echo $model->id_codigo; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id_codigo',
+//		'id_codigo',
 		'codigo_verficacion',
-		'id_curso',
+		array(
+                    'name' => 'id_curso',
+                    'type' => 'raw',
+                    'value' =>  function($data){
+                        return $data->idCurso->nombre_curso;
+                    }
+                    ),
 		'fecha_creacion',
-		'estado',
+		array(
+                    'name' => 'estado',
+                    'type' => 'raw',
+                    'value' => function($data){
+                            return $data->estado0->nombre;
+                    }
+                    ),
 ),
 )); ?>

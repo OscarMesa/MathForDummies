@@ -28,8 +28,13 @@ return array(
     'Letters are not case-sensitive.' => 'Las letras no distinguen entre mayúsculas y minúsculas.',
     'Note tracking updated successfully.' => 'Nota de seguimiento actualizada exitosamente.',
     'The note should be in the range of 1-5.' => 'La nota debe encontrarse en un rango de 1 a 5.',
+    'generate code' => 'Generar código',
     'You may optionally enter a comparison operator' => 'Opcionalmente, puede introducir un operador de comparación',
     'at the beginning of each of your search values to specify how the comparison should be done.' => 'al comienzo de cada uno de sus valores de búsqueda para especificar cómo se debe hacer la comparación.',
     'or' => 'o',
+    'code entry' =>  'Código de ingreso',
+    'The code was updated successfully' => 'El código fue actualizado correctamente',
+    'This code is not available for this course, please try another difetente' => 'Este código no se encuentra disponible para este curso, por favor intente con otro difetente',
+    'The code for this course this was stored successfully' => 'El código para esta este curso fue almacenado exitosamente',
     'Invalid request. Please do not repeat this request again.' => 'Solicitud no válida. Por favor, no repita esta solicitud de nuevo.'
 );

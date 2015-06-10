@@ -23,12 +23,28 @@ class CodigoIngresoCursoController extends Controller {
     public function accessRules() {
         return array();
     }
+    
+    /**
+     * Este metodo se encarga de buscar un codigo aleatorio que no se encuentre en un curso.
+     * @param int $id codigo del curso
+     */
+    public function actionGenerarCodigoCurso($id) {
+       $cod = 0;
+        do{
+           $cod = mt_rand(1000,10000000) ;
+           if(CodigoIngresoCurso::model()->find('id_curso = ? AND codigo_verficacion=?', array($_REQUEST['curso_id'],$cod))==NULL){
+               break;
+           }
+       }while(true);
+       echo json_encode(array('codigo'=>$cod));
+    }
 
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = '//layouts/modal';
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -49,7 +65,7 @@ class CodigoIngresoCursoController extends Controller {
             $model->attributes = $_POST['CodigoIngresoCurso'];
             $model->fecha_creacion = date('Y-m-d');
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_codigo));
+                 Yii::app()->user->setFlash('success', "<strong>Exito!</strong>".Yii::t('polimsn', 'The code for this course this was stored successfully') );
         }
 
         $this->render('create', array(
@@ -64,6 +80,7 @@ class CodigoIngresoCursoController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
+        $this->layout = "//layouts/modal";
         $model = $this->loadModel($id);
 
 // Uncomment the following line if AJAX validation is needed
@@ -72,7 +89,7 @@ class CodigoIngresoCursoController extends Controller {
         if (isset($_POST['CodigoIngresoCurso'])) {
             $model->attributes = $_POST['CodigoIngresoCurso'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_codigo));
+                Yii::app()->user->setFlash('success', "<strong>Exito!</strong>".Yii::t('polimsn', 'The code was updated successfully') );
         }
 
         $this->render('update', array(
@@ -88,7 +105,24 @@ class CodigoIngresoCursoController extends Controller {
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
 // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+            $codigo = $this->loadModel($id);
+            $codigo->estado = INACTIVE;
+            $codigo->update();
+
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if (!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+    
+    
+    public function actionActive($id) {
+        if (Yii::app()->request->isPostRequest) {
+// we only allow deletion via POST request
+            $codigo = $this->loadModel($id);
+            $codigo->estado = ACTIVE;
+            $codigo->update();
 
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
