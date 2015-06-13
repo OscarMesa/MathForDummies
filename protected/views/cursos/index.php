@@ -9,9 +9,21 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cursos</h1>
+<div class="media well">
 
-<?php $this->widget('bootstrap.widgets.TbListView',array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+	<h1>Cursos</h1>
+
+    <?php
+    $cusos = new Cursos('serach');
+
+    $this->widget('bootstrap.widgets.TbListView', array(
+        'id' => 'list-evaluaciones-items',
+        'dataProvider' => $cusos->search(),
+        'itemView' => 'application.views.site._cursosInicio',
+//        'sortableAttributes' => array(
+//            'name',
+//        ),
+    ));
+    ?>
+
+</div>

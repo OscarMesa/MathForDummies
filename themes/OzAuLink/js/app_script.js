@@ -25,7 +25,6 @@ function AbrirModal(titulo, ancho, alto, direccion,style)
         style = "left: 45%";
     $("#myModal .modal-header .modal-title").html(titulo);
     $("#iframeApp").attr('src', direccion);
-    $("#iframeApp").attr('src', direccion);
 
     $('#myModal .modal-dialog').css({
         width: ancho, //choose your width
