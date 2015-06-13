@@ -51,48 +51,81 @@
                     <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/systemupdate"); ?>"><i class="fa fa-user"></i>Variables del Sistema</a></li>
                 </ul>
             </li>
-            
-            <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'cursos')?'active':''); ?>">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> 
-                    <span>Cursos</span> 
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="<?php echo Yii::app()->createUrl('cursos/admin') ?>">
-                            <i class="fa fa-angle-double-right"></i> Administrar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo Yii::app()->createUrl('cursos/create') ?>">
-                            <i class="fa fa-angle-double-right"></i>Crear
-                        </a>
-                    </li>
-                </ul>                
-            </li>
+            <?php if( Yii::app()->user->checkAccess('action_cursos_admin')  
+                  OR  Yii::app()->user->checkAccess('action_cursos_create')
+                  OR  Yii::app()->user->checkAccess('action_cursos_index')  ): ?>
+                <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'cursos')?'active':''); ?>">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> 
+                        <span>Cursos</span> 
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <?php if( Yii::app()->user->checkAccess('action_cursos_admin') ): ?>
+                            <li>
+                                <a href="<?php echo Yii::app()->createUrl('cursos/admin') ?>">
+                                    <i class="fa fa-angle-double-right"></i> Administrar
+                                </a>
+                            </li>
+                        <?php endif; ?>
 
+                        <?php if( Yii::app()->user->checkAccess('action_cursos_create') ): ?>
+                            <li>
+                                <a href="<?php echo Yii::app()->createUrl('cursos/create') ?>">
+                                    <i class="fa fa-angle-double-right"></i>Crear
+                                </a>
+                            </li>
+                        <?php endif; ?>
 
-            <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'area')?'active':''); ?>">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> 
-                    <span>Areas</span> 
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="<?php echo Yii::app()->createUrl('area/admin') ?>">
-                            <i class="fa fa-angle-double-right"></i> Administrar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo Yii::app()->createUrl('area/create') ?>">
-                            <i class="fa fa-angle-double-right"></i>Crear
-                        </a>
-                    </li>
-                </ul>                
-            </li>
+                        <?php if( Yii::app()->user->checkAccess('action_cursos_index') ): ?>
+                            <li>
+                                <a href="<?php echo Yii::app()->createUrl('cursos/index') ?>">
+                                    <i class="fa fa-angle-double-right"></i>Lista
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
+                    </ul>                
+                </li>
+            <?php endif; ?>
             
+            <?php if( Yii::app()->user->checkAccess('action_area_admin')
+                   OR Yii::app()->user->checkAccess('action_area_index')
+                   OR Yii::app()->user->checkAccess('action_area_create')): ?>
+                    <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'area')?'active':''); ?>">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> 
+                            <span>Areas</span> 
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <?php if(Yii::app()->user->checkAccess('action_area_admin')): ?>
+                                <li>
+                                    <a href="<?php echo Yii::app()->createUrl('area/admin') ?>">
+                                        <i class="fa fa-angle-double-right"></i> Administrar
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if(Yii::app()->user->checkAccess('action_area_create')): ?>
+                                <li>
+                                    <a href="<?php echo Yii::app()->createUrl('area/create') ?>">
+                                        <i class="fa fa-angle-double-right"></i>Crear
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if(Yii::app()->user->checkAccess('action_area_index')): ?>
+                                <li>
+                                    <a href="<?php echo Yii::app()->createUrl('area/index') ?>">
+                                        <i class="fa fa-angle-double-right"></i>Lista
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                        </ul>                
+                    </li>
+            <?php endif; ?>
             
             <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'contenidos')?'active':''); ?>">
                 <a href="#">
