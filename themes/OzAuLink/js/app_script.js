@@ -19,25 +19,12 @@ function closeModalSave(id_grid, id_modal)
     }, 1200);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    function AbrirModal(titulo, ancho, alto, direccion, left=false)
-    {
-        $("#myModal .modal-header .modal-title").html(titulo);
-        $("#iframeApp").attr('src', direccion);
-        $("#iframeApp").attr('src', direccion);
-=======
-function AbrirModal(titulo, ancho, alto, direccion)
-=======
 function AbrirModal(titulo, ancho, alto, direccion,style)
->>>>>>> b76cacec5453549032c80e31961b398134c7c861
 {
     if(style == undefined)
         style = "left: 45%";
     $("#myModal .modal-header .modal-title").html(titulo);
     $("#iframeApp").attr('src', direccion);
-    $("#iframeApp").attr('src', direccion);
->>>>>>> 3ab7b7fd30cd6d57777128b0cf464d29b27ae324
 
     $('#myModal .modal-dialog').css({
         width: ancho, //choose your width
@@ -57,15 +44,7 @@ function AbrirModal(titulo, ancho, alto, direccion,style)
     $(".modal-body").css('height', alto);
     $(".modal-content").css('height', alto);
 //        $("#myModal").css('height', ancho+'px');
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $("#myModal").attr('style', 'width:'+ancho+';top:0;left: '+((left)?left:'45%')+'; height:'+alto);
-        $("#myModal").modal({show: true});
-=======
-    $("#myModal").attr('style', 'width:' + ancho + ';top:0;left: 45%; height:' + alto);
-=======
     $("#myModal").attr('style', 'width:' + ancho + ';top:0; height:' + alto + ";" + (style));
->>>>>>> b76cacec5453549032c80e31961b398134c7c861
     $("#myModal").modal({show: true});
     return false;
 }
@@ -80,7 +59,6 @@ function activar()
 {
     var grid = jQuery(this).attr('grid');
     if (!confirm('¿Está seguro que desea activar este elemento?'))
->>>>>>> 3ab7b7fd30cd6d57777128b0cf464d29b27ae324
         return false;
     $.ajax({
         url: jQuery(this).attr('href'),
