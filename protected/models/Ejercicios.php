@@ -70,11 +70,11 @@ class Ejercicios extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_ejercicio' => 'Id Ejercicio',
+			'id_ejercicio' => 'ID',
 			'state_ejercicios' => 'Estado',
 			'idMateria' => 'Materia',
 			'ejercicio' => 'Resumen',
-			'idusuariocreador' => 'Idusuariocreador',
+			'idusuariocreador' => 'Creador',
 			'idDificultad' => 'Nivel de Dificultad',
 			'visible' => 'Privacidad',
 		);
@@ -136,6 +136,17 @@ class Ejercicios extends CActiveRecord
 		$criteria->addCondition('visible="publico"');
 		$criteria->addCondition('(visible="privado" AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
                 return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+        
+        
+         public function cargarMisRespuestas()
+	{
+		$criteria=new CDbCriteria;
+                
+		$criteria->compare('id_ejercicio',$this->id_ejercicio);
+		return new CActiveDataProvider(new Respuestaejercicio(), array(
 			'criteria'=>$criteria,
 		));
 	}

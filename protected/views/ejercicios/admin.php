@@ -26,11 +26,10 @@ Yii::app()->clientScript->registerScript('search', "
 <h1>Administrador de Ejercicios</h1>
 
 <p>
-    También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
+    <?php echo Yii::t('polimsn','You may optionally enter a comparison operator');?> (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
         &lt;&gt;</b>
-    o <b>=</b>) al inicio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
+    <?php echo Yii::t('polimsn','or');?> <b>=</b>) <?php echo Yii::t('polimsn','at the beginning of each of your search values to specify how the comparison should be done.'); ?>
 </p>
-
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'ejercicios-grid',
@@ -38,10 +37,28 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'filter' => $model,
     'columns' => array(
         'id_ejercicio',
-        'state_ejercicios',
-        'idMateria',
+        array(
+            'name' => 'state_ejercicios',
+            'type' => 'raw',
+            'value' => function($data){
+                return $data->state_ejercicios == 'active' ? "Activo":($data->state_ejercicios == 'inactive' ? "Inactivo" : "");
+            } 
+        ),
+        array(
+            'name' => 'idMateria',
+            'type' => 'raw',
+            'value' => function($data){
+                return $data->idMateria0->nombre_materia;
+            } 
+        ),        
         'ejercicio',
-        'idusuariocreador',
+        array(
+            'name' => 'idusuariocreador',
+            'type' => 'raw',
+            'value' => function($data){
+                return $data->idusuariocreador0->username;
+            } 
+        ),          
         'idDificultad',
         /*
           'visible',

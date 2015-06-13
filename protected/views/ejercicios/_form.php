@@ -24,6 +24,23 @@
 				        <div class="bql-evaluacion-content">
 				            <?php
 				            $this->widget('bootstrap.widgets.TbListView', array(
+				                'id' => 'list-respuestas-items',
+				                'dataProvider' => $model->cargarMisRespuestas(),
+				                'itemView' => '_respuestasEjercicios',
+				                'viewData' => array('model' => $model),
+				                'sortableAttributes' => array(
+				                    'idRespuestaEjercicio',
+				                ),
+				            ));
+				            ?>
+				        </div>
+				    </div>
+				    <?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10, 'style'=>'margin-top: 7px;')); ?>
+				</div>
+
+<div id="respuestas-ejercicios" style="margin-top: 15px;" class="bql-evaluacion-content">
+    <?php
+				            $this->widget('bootstrap.widgets.TbListView', array(
 				                'id' => 'list-evaluaciones-items',
 				                'dataProvider' => $Mcontenidos->searchForContenido(),
 				                'itemView' => '_contenidosEjercicio',
@@ -33,17 +50,17 @@
 				                ),
 				            ));
 				            ?>
-				        </div>
-				    </div>
-				    <?php echo $form->error($model, 'ejercicios', array('class' => 'help-block error', 'maxlength' => 10, 'style'=>'margin-top: 7px;')); ?>
-				</div>
+</div>
+<input type="button" id="agregar-nueva-respuesta" class="btn btn-success btn-agregar" value="Agregar"/>
+
+                                 para agregar respuestas al ejercicio: https://d13yacurqjgara.cloudfront.net/users/90530/screenshots/845092/alert_messages_mobile.jpg
 	<?php endif; ?>
 
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? 'Crear' : 'Guardar',
 		)); ?>
 </div>
 
@@ -58,5 +75,9 @@
         }else{
             $(this).parent().parent().parent().children('.panel-body').children('.orden-contenido-ejercio').remove();
         }
+    });
+    
+    $(document).on('click',"#agregar-nueva-respuesta",function(e){
+        AbrirModal('Agregar respuesta al ejercicio #<?php echo $model->id_ejercicio;?>','700px','95%','<?php echo Yii::app()->createAbsoluteUrl('respuestaejercicio/create',array('id_ejercicio',$model->id_ejercicio)); ?>','');
     });
 </script>
