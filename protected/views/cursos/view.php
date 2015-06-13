@@ -49,7 +49,7 @@ $this->menu=array(
 
 <?php if(!$this->validarExitenciaUsuarioEnCurso(Yii::app()->user->id, $model->id)){?>
 <div id="sec-registrar-estudante"
-     <label><span style="display: inline-block;vertical-align: middle;line-height: normal;  margin-top: -13px;margin-right: 5px;">Ingresar código:</span> <?php echo CHtml::telField('registrarEstudiante',array())?></label><?php echo CHtml::button('Registrar en curso',array('class'=>'btn btn-primary','id'=>'btn-regCurso','style'=>'  padding: 5px;margin-left: 7px;margin-top: -9px;')); ?><img style="  margin: 5px; display: none" id="img-load" src="<?php echo Yii::app()->createAbsoluteUrl("themes\OzAuLink\images\ajax-loader.gif");?>"/>
+     <label><span style="display: inline-block;vertical-align: middle;line-height: normal;  margin-top: -13px;margin-right: 5px;">Ingresar código:</span> <?php echo CHtml::textField('registrarEstudiante',array())?></label><?php echo CHtml::button('Registrar en curso',array('class'=>'btn btn-primary','id'=>'btn-regCurso','style'=>'  padding: 5px;margin-left: 7px;margin-top: -9px;')); ?><img style="  margin: 5px; display: none" id="img-load" src="<?php echo Yii::app()->createAbsoluteUrl("themes\OzAuLink\images\ajax-loader.gif");?>"/>
 <div class="help-block error" id="registrar_estudiante_error" style=""></div>
 </div>
 <?php 
