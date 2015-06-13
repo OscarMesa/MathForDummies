@@ -20,6 +20,7 @@ function closeModalSave(id_grid, id_modal)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     function AbrirModal(titulo, ancho, alto, direccion, left=false)
     {
         $("#myModal .modal-header .modal-title").html(titulo);
@@ -27,7 +28,12 @@ function closeModalSave(id_grid, id_modal)
         $("#iframeApp").attr('src', direccion);
 =======
 function AbrirModal(titulo, ancho, alto, direccion)
+=======
+function AbrirModal(titulo, ancho, alto, direccion,style)
+>>>>>>> b76cacec5453549032c80e31961b398134c7c861
 {
+    if(style == undefined)
+        style = "left: 45%";
     $("#myModal .modal-header .modal-title").html(titulo);
     $("#iframeApp").attr('src', direccion);
     $("#iframeApp").attr('src', direccion);
@@ -52,10 +58,14 @@ function AbrirModal(titulo, ancho, alto, direccion)
     $(".modal-content").css('height', alto);
 //        $("#myModal").css('height', ancho+'px');
 <<<<<<< HEAD
+<<<<<<< HEAD
         $("#myModal").attr('style', 'width:'+ancho+';top:0;left: '+((left)?left:'45%')+'; height:'+alto);
         $("#myModal").modal({show: true});
 =======
     $("#myModal").attr('style', 'width:' + ancho + ';top:0;left: 45%; height:' + alto);
+=======
+    $("#myModal").attr('style', 'width:' + ancho + ';top:0; height:' + alto + ";" + (style));
+>>>>>>> b76cacec5453549032c80e31961b398134c7c861
     $("#myModal").modal({show: true});
     return false;
 }
