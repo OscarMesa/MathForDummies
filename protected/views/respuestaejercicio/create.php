@@ -10,6 +10,4 @@ array('label'=>'Manage Respuestaejercicio','url'=>array('admin')),
 );
 ?>
 
-<h3>Crear respuesta</h3>
-
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

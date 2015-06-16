@@ -4,6 +4,7 @@
  * This is the model class for table "contenidos_ejercicio".
  *
  * The followings are the available columns in table 'contenidos_ejercicio':
+ * @property integer $contenido_ejercicio_id
  * @property integer $contenidos_id
  * @property string $state_ce
  * @property integer $ejercicios_id
@@ -28,7 +29,7 @@ class ContenidosEjercicio extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('contenidos_id, ejercicios_id, orden', 'required'),
-			array('contenidos_id, ejercicios_id, orden', 'numerical', 'integerOnly'=>true),
+			array('contenido_ejercicio_id, contenidos_id, ejercicios_id, orden', 'numerical', 'integerOnly'=>true),
 			array('state_ce', 'length', 'max'=>8),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -53,6 +54,7 @@ class ContenidosEjercicio extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+                        'contenido_ejercicio_id' => 'ID',
 			'contenidos_id' => 'Contenidos',
 			'state_ce' => 'State Ce',
 			'ejercicios_id' => 'Ejercicios',
@@ -78,6 +80,7 @@ class ContenidosEjercicio extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('contenido_ejercicio_id',$this->contenido_ejercicio_id);
 		$criteria->compare('contenidos_id',$this->contenidos_id);
 		$criteria->compare('state_ce',$this->state_ce,true);
 		$criteria->compare('ejercicios_id',$this->ejercicios_id);

@@ -73,6 +73,15 @@ $this->menu=array(
 ?>
 
 <?php } ?>
+
+<?php 
+
+    $this->widget('bootstrap.widgets.TbListView',array(
+        'dataProvider'=>$model->buscarEvaluacionesActivas(),
+        'itemView'=>'application.views.evaluacion._view',
+        )); 
+?>
+
 <?php
     if(isset($contenido)){
     Yii::import('application.controllers.ContenidosController');

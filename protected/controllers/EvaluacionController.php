@@ -48,7 +48,7 @@ class EvaluacionController extends Controller {
     public function ajustarFechasEvaluacion(&$model) {
         $fecha = explode(' - ', $_POST['Evaluacion']['fecha_inicio']);
         if (count($fecha) == 2) {
-            var_dump($fecha); 
+//            var_dump($fecha); 
             $fecha1 = explode(" ", $fecha[0]);
 
             $k = $fecha1[1] . " " . $fecha1[2];

@@ -12,9 +12,7 @@ class RespuestaejercicioController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
+        return array('accessControl', array('CrugeAccessControlFilter'));
     }
 
     /**
@@ -23,23 +21,7 @@ class RespuestaejercicioController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-        return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
-                'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
-        );
+        return array();
     }
 
     /**
@@ -65,21 +47,27 @@ class RespuestaejercicioController extends Controller {
 
         if (isset($_POST['Respuestaejercicio'])) {
             $model->attributes = $_POST['Respuestaejercicio'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->idRespuestaEjercicio));
+            $model->estado_respuesta = ACTIVE;
+            if ($model->save()) {
+                $model->guardo = true;
+                Yii::app()->getComponent('user')->setFlash(
+                        'success', Yii::t('polimsn', 'The answer was stored successfully')
+                );
+            }
         }
 
         $this->render('create', array(
             'model' => $model,
         ));
     }
-
+    
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
+        $this->layout = "//layouts/modal";
         $model = $this->loadModel($id);
 
 // Uncomment the following line if AJAX validation is needed
@@ -88,7 +76,12 @@ class RespuestaejercicioController extends Controller {
         if (isset($_POST['Respuestaejercicio'])) {
             $model->attributes = $_POST['Respuestaejercicio'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->idRespuestaEjercicio));
+            {
+                $model->guardo = true;
+                Yii::app()->getComponent('user')->setFlash(
+                        'success', Yii::t('polimsn', 'answer was successfully updated')."."
+                );
+            }
         }
 
         $this->render('update', array(
@@ -102,10 +95,12 @@ class RespuestaejercicioController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-        if (Yii::app()->request->isPostRequest) {
+        if (Yii::app()->request->isPostRequest && isset($_REQUEST['confirmaEliminacion']) && $_REQUEST['confirmaEliminacion'] == 1) {
 // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
-
+            $m = $this->loadModel($id);
+            $m->estado_respuesta = INACTIVE;
+            $m->update();
+            echo true;
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

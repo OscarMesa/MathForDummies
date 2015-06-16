@@ -6,6 +6,11 @@
  */
 
 return array(
+    '<strong>Success!</strong> The exercise was successfully updated' => '<strong>Exito!</strong> El ejercicio fue actualizado exitosamente',
+    'not content associated with your user they found' => 'No se encontraron contenidos asociados a su usuario',
+    'answer was successfully updated' => 'La respuesta fue actualizada exitosamente',
+    'the number entered is already in use by another response to this exercise' => 'El número ingresado ya se encuentra en uso por otra respuesta de este ejercicio',
+    'The answer was stored successfully' => 'La respuesta fue almacenada exitosamente',
     'Invalid request. Please do not repeat this request again.' => 'Solicitud no válida . Por favor, no repita esta solicitud de nuevo.',
     'this user has not yet confirmed your account' => 'Este usuario aún no ha confirmado su cuenta.',
     'this user has requested password change' => 'Este usuario ha solicitado cambio de contraseña.',

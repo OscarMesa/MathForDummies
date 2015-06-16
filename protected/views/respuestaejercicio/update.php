@@ -13,6 +13,5 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Update Respuestaejercicio <?php echo $model->idRespuestaEjercicio; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

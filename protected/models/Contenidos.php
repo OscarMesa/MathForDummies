@@ -65,10 +65,10 @@ class Contenidos extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'state_contenido' => 'State Contenido',
+			'state_contenido' => 'Estado',
 			'titulo' => 'Titulo',
 			'detalle' => 'Detalle',
-			'id_usuario_creador' => 'Id Usuario Creador',
+			'id_usuario_creador' => 'Creador',
 			'visible' => 'Visible',
 		);
 	}
@@ -110,7 +110,7 @@ class Contenidos extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 
-		$criteria->compare('id',$this->id);
+                $criteria->compare('id',$this->id);
 		$criteria->compare('state_contenido',$this->state_contenido,true);
 		$criteria->compare('titulo',$this->titulo,true);
 		$criteria->compare('detalle',$this->detalle,true);
