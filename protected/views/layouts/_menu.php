@@ -33,23 +33,29 @@
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="header">Administrador de Usuarios</li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/editprofile"); ?> "><i class="fa fa-user"></i>Editar Perfil</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/usermanagementcreate"); ?>"><i class="fa fa-user"></i>Crear Usuario</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/usermanagementadmin"); ?>"><i class="fa fa-user"></i>Administrar</a></li>
-                    <li class="header">Campos Personalizados</li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/fieldsadminlist"); ?>"><i class="fa fa-user"></i> Listar Campos de Perfil</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/fieldsadmincreate"); ?>"><i class="fa fa-user"></i>Crear Campo de Perfil</a></li>
-                    <li class="header">Roles y Asignaciones</li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbaclistroles"); ?>"><i class="fa fa-user"></i>Roles</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbaclisttasks"); ?>"><i class="fa fa-user"></i>Tareas</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbaclistops"); ?>"><i class="fa fa-user"></i>Operaciones</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbacusersassignments"); ?>"><i class="fa fa-user"></i>Asignar Roles a Usuarios</a></li>
-                    <li class="header">Sistema</li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/sessionadmin"); ?>"><i class="fa fa-user"></i>Sesiones</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/systemupdate"); ?>"><i class="fa fa-user"></i>Variables del Sistema</a></li>
-                </ul>
+
+                <?php 
+
+                    //if():
+                ?>
+                        <ul class="treeview-menu">
+                            <li class="header">Administrador de Usuarios</li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/editprofile"); ?> "><i class="fa fa-user"></i>Editar Perfil</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/usermanagementcreate"); ?>"><i class="fa fa-user"></i>Crear Usuario</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/usermanagementadmin"); ?>"><i class="fa fa-user"></i>Administrar</a></li>
+                            <li class="header">Campos Personalizados</li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/fieldsadminlist"); ?>"><i class="fa fa-user"></i> Listar Campos de Perfil</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/fieldsadmincreate"); ?>"><i class="fa fa-user"></i>Crear Campo de Perfil</a></li>
+                            <li class="header">Roles y Asignaciones</li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbaclistroles"); ?>"><i class="fa fa-user"></i>Roles</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbaclisttasks"); ?>"><i class="fa fa-user"></i>Tareas</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbaclistops"); ?>"><i class="fa fa-user"></i>Operaciones</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/rbacusersassignments"); ?>"><i class="fa fa-user"></i>Asignar Roles a Usuarios</a></li>
+                            <li class="header">Sistema</li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/sessionadmin"); ?>"><i class="fa fa-user"></i>Sesiones</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl("cruge/ui/systemupdate"); ?>"><i class="fa fa-user"></i>Variables del Sistema</a></li>
+                        </ul>
+                <?php //endif; ?>
             </li>
             <?php if( Yii::app()->user->checkAccess('action_cursos_admin')  
                   OR  Yii::app()->user->checkAccess('action_cursos_create')
