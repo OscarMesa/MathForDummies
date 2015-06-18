@@ -138,6 +138,26 @@ class Cursos extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        /**
+         * Este metodo se encarga de retornar el dataprovider de las lista de evaluaciones pendieintes de un curso.
+         * @return \CActiveDataProvider
+         */
+        public function buscarEvaluacionesActivas()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		//$criteria->compare('id',$this->id);
+//		$criteria->compare('state_curso','active',true);
+		//$criteria->compare('id_docente',$this->id_docente);
+		$criteria->compare('cursos_id',$this->id);
+		
+		return new CActiveDataProvider(new Evaluacion(), array(
+			'criteria'=>$criteria,
+		));
+	}
 
 	/**
 	 * Returns the static model of the specified AR class.

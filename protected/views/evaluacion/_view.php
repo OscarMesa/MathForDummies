@@ -20,8 +20,8 @@
 	<?php echo CHtml::encode($data->tiempo_limite); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('estado_evaluación')); ?>:</b>
-	<?php echo CHtml::encode($data->estado_evaluación); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado_evaluacion')); ?>:</b>
+	<?php echo CHtml::encode($data->estado_evaluacion); ?>
 	<br />
 
 

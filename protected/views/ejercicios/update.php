@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Update Ejercicios <?php echo $model->id_ejercicio; ?></h1>
+	<h1>Actualizar Ejercicio <?php echo $model->id_ejercicio; ?></h1>
 
 
 <?php echo $this->renderPartial('_form',array('model'=>$model,'Mcontenidos'=> $Mcontenidos)); ?>

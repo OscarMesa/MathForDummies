@@ -70,11 +70,11 @@ class Ejercicios extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_ejercicio' => 'Id Ejercicio',
+			'id_ejercicio' => 'ID',
 			'state_ejercicios' => 'Estado',
 			'idMateria' => 'Materia',
 			'ejercicio' => 'Resumen',
-			'idusuariocreador' => 'Idusuariocreador',
+			'idusuariocreador' => 'Creador',
 			'idDificultad' => 'Nivel de Dificultad',
 			'visible' => 'Privacidad',
 		);
@@ -139,6 +139,18 @@ class Ejercicios extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+         public function cargarMisRespuestas()
+	{
+		$criteria=new CDbCriteria;
+                $criteria->order = "ordenposicion";
+		$criteria->compare('id_ejercicio',$this->id_ejercicio);
+		$criteria->compare('estado_respuesta',ACTIVE);
+		return new CActiveDataProvider(new Respuestaejercicio(), array(
+			'criteria'=>$criteria,
+		));
+	}
 
     public function getContenidos() {
         return $this->contenidos;
@@ -149,13 +161,13 @@ class Ejercicios extends CActiveRecord
     }
 
     public function guardarContenidos(){
-        
         ContenidosEjercicio::model()->deleteAll(array(
             'condition' => 'ejercicios_id=?',
             'params' => array($this->id_ejercicio)
             )
         );
-
+        
+//        print_r($this->contenidos);die;
         if(property_exists($this,"contenidos")){
             foreach ($this->contenidos['check'] as $contenido) {
                 $n = new ContenidosEjercicio();
@@ -163,7 +175,8 @@ class Ejercicios extends CActiveRecord
                 $n->ejercicios_id = $this->id_ejercicio;
                 $n->orden = $this->contenidos['orden'][$contenido];
                 if(!$n->save()){
-                    print_r($n->errors);die;
+                    $this->addErrors($n->errors);
+                    throw new Exception('A ocurrido un error');
                 }
             }
         }
