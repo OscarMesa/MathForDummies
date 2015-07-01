@@ -247,7 +247,34 @@
                                                 </a>
                                             </li>
                                     <?php endif; ?>
-                                    <?php if(Yii::app()->user->checkAccess('action_asignatura_create') ) ?>
+                                    <?php if(Yii::app()->user->checkAccess('action_asignatura_create') ): ?>
+                                            <li>
+                                                <a href="<?php echo Yii::app()->createUrl('asignatura/create') ?>">
+                                                    <i class="fa fa-angle-double-right"></i>Crear
+                                                </a>
+                                            </li>
+                                    <?php endif; ?>
+                                </ul>                
+                            </li>
+            <?php endif; ?>  
+
+            <?php if( Yii::app()->user->checkAccess('action_asignatura_admin') 
+                    OR  Yii::app()->user->checkAccess('action_asignatura_create') ): ?>
+                            <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'asignatura')?'active':''); ?>">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i> 
+                                    <span>Asignatura</span> 
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <?php if(Yii::app()->user->checkAccess('action_asignatura_admin') ): ?>
+                                            <li>
+                                                <a href="<?php echo Yii::app()->createUrl('asignatura/admin') ?>">
+                                                    <i class="fa fa-angle-double-right"></i> Administrar
+                                                </a>
+                                            </li>
+                                    <?php endif; ?>
+                                    <?php if(Yii::app()->user->checkAccess('action_asignatura_create') ): ?>
                                             <li>
                                                 <a href="<?php echo Yii::app()->createUrl('asignatura/create') ?>">
                                                     <i class="fa fa-angle-double-right"></i>Crear
@@ -259,25 +286,25 @@
             <?php endif; ?>
 
 
-            <?php if( Yii::app()->user->checkAccess('action_grado_admin') 
-                      OR  Yii::app()->user->checkAccess('action_grado_create') ): ?>
-                        <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'grado')?'active':''); ?>">
+            <?php if( Yii::app()->user->checkAccess('action_talleres_admin') 
+                      OR  Yii::app()->user->checkAccess('action_talleres_create') ): ?>
+                        <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'talleres')?'active':''); ?>">
                             <a href="#">
                                 <i class="fa fa-dashboard"></i> 
-                                <span>Grados</span> 
+                                <span>Talleres</span> 
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <?php  if(Yii::app()->user->checkAccess('action_grado_admin')): ?>
+                                <?php  if(Yii::app()->user->checkAccess('action_talleres_admin')): ?>
                                         <li>
-                                            <a href="<?php echo Yii::app()->createUrl('grado/admin') ?>">
+                                            <a href="<?php echo Yii::app()->createUrl('talleres/admin') ?>">
                                                 <i class="fa fa-angle-double-right"></i> Administrar
                                             </a>
                                         </li>
                                 <?php endif; ?>
-                                <?php if(Yii::app()->user->checkAccess('action_grado_create') ): ?>
+                                <?php if(Yii::app()->user->checkAccess('action_talleres_create') ): ?>
                                         <li>
-                                            <a href="<?php echo Yii::app()->createUrl('grado/create') ?>">
+                                            <a href="<?php echo Yii::app()->createUrl('talleres/create') ?>">
                                                 <i class="fa fa-angle-double-right"></i>Crear
                                             </a>
                                         </li>
@@ -293,8 +320,6 @@
                             </a>
                         </li>
             <?php endif ?>
-
-
 
         </ul>
         <?php } ?>
