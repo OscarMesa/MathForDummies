@@ -11,7 +11,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <?php echo $form->dropDownListRow($model, 'state_ejercicios', array('active' => 'Activo', 'inactive' => 'Inactivo'), array('style' => 'width:100%')) ?> 
 
-<?php echo $form->dropDownListRow($model, 'idMateria', CHtml::listData(Materias::model()->findAll(), 'idMateria', 'nombre_materia')); ?>
+<?php echo $form->dropDownListRow($model, 'idMateria', CHtml::listData(Materias::model()->findAll(), 'idmaterias', 'nombre_materia')); ?>
 
 <?php echo $form->textAreaRow($model, 'ejercicio', array('rows' => 6, 'cols' => 50, 'class' => 'span8')); ?>
 

@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "contenidos_ejercicio".
+ * This is the model class for table "ejercicios_respuesta_usuario".
  *
- * The followings are the available columns in table 'contenidos_ejercicio':
- * @property integer $contenido_ejercicio_id
- * @property integer $contenidos_id
- * @property string $state_ce
- * @property integer $ejercicios_id
- * @property integer $orden
+ * The followings are the available columns in table 'ejercicios_respuesta_usuario':
+ * @property integer $ejercicios_respuesta_usuario_id
+ * @property integer $id_respuesta
+ * @property integer $id_usuario
+ * @property integer $evaluacion_integrante_id
+ *
+ * The followings are the available model relations:
+ * @property Respuestaejercicio $idRespuesta
+ * @property MathUser $idUsuario
+ * @property EvaluacionIntegrante $evaluacionIntegrante
  */
-class ContenidosEjercicio extends CActiveRecord
+class EjerciciosRespuestaUsuario extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'contenidos_ejercicio';
+		return 'ejercicios_respuesta_usuario';
 	}
 
 	/**
@@ -28,12 +32,11 @@ class ContenidosEjercicio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contenidos_id, ejercicios_id, orden', 'required'),
-			array('contenido_ejercicio_id, contenidos_id, ejercicios_id, orden', 'numerical', 'integerOnly'=>true),
-			array('state_ce', 'length', 'max'=>8),
+			array('id_respuesta, id_usuario, evaluacion_integrante_id', 'required'),
+			array('id_respuesta, id_usuario, evaluacion_integrante_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('contenidos_id, state_ce, ejercicios_id, orden', 'safe', 'on'=>'search'),
+			array('ejercicios_respuesta_usuario_id, id_respuesta, id_usuario, evaluacion_integrante_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,7 +48,9 @@ class ContenidosEjercicio extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'contenido' => array(self::BELONGS_TO, 'Contenidos','contenidos_id')
+			'idRespuesta' => array(self::BELONGS_TO, 'Respuestaejercicio', 'id_respuesta'),
+			'idUsuario' => array(self::BELONGS_TO, 'MathUser', 'id_usuario'),
+			'evaluacionIntegrante' => array(self::BELONGS_TO, 'EvaluacionIntegrante', 'evaluacion_integrante_id'),
 		);
 	}
 
@@ -55,11 +60,10 @@ class ContenidosEjercicio extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-                        'contenido_ejercicio_id' => 'ID',
-			'contenidos_id' => 'Contenidos',
-			'state_ce' => 'State Ce',
-			'ejercicios_id' => 'Ejercicios',
-			'orden' => 'Orden',
+			'ejercicios_respuesta_usuario_id' => 'Ejercicios Respuesta Usuario',
+			'id_respuesta' => 'Id Respuesta',
+			'id_usuario' => 'Id Usuario',
+			'evaluacion_integrante_id' => 'Evaluacion Integrante',
 		);
 	}
 
@@ -81,11 +85,10 @@ class ContenidosEjercicio extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('contenido_ejercicio_id',$this->contenido_ejercicio_id);
-		$criteria->compare('contenidos_id',$this->contenidos_id);
-		$criteria->compare('state_ce',$this->state_ce,true);
-		$criteria->compare('ejercicios_id',$this->ejercicios_id);
-		$criteria->compare('orden',$this->orden);
+		$criteria->compare('ejercicios_respuesta_usuario_id',$this->ejercicios_respuesta_usuario_id);
+		$criteria->compare('id_respuesta',$this->id_respuesta);
+		$criteria->compare('id_usuario',$this->id_usuario);
+		$criteria->compare('evaluacion_integrante_id',$this->evaluacion_integrante_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -96,7 +99,7 @@ class ContenidosEjercicio extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ContenidosEjercicio the static model class
+	 * @return EjerciciosRespuestaUsuario the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -12,7 +12,8 @@ $this->breadcrumbs=array(
 	array('label'=>'Manage Evaluacion','url'=>array('admin')),
 	);
 	?>
+<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
 
-	<h1>Actualizar Evaluación #<?php echo $model->cursos_id; ?></h1>
+	<h1>Actualizar Evaluación #<?php echo $model->id_evaluacion; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model, 'Mejercicios' => $Mejercicios,'temas' => $temas,'select_array'=>$select_array)); ?>

@@ -58,8 +58,15 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value' => function($data){
                 return $data->idusuariocreador0->username;
             } 
-        ),          
-        'idDificultad',
+        ), 
+         array(
+            'name' => 'idDificultad',
+            'type' => 'raw',
+            'filter' => CHtml::listData(Dificultad::model()->findAll(), 'idDificultad', 'descripcion'),
+            'value' => function($data){
+                return $data->idDificultad0->descripcion;
+            }
+         ),
         /*
           'visible',
          */

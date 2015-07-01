@@ -123,7 +123,7 @@ class Cursos extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		//$criteria->compare('id',$this->id);
+		$criteria->compare('id',$this->id);
 //		$criteria->compare('state_curso','active',true);
 		//$criteria->compare('id_docente',$this->id_docente);
 		$criteria->compare('idmateria',$this->idmateria);
@@ -151,8 +151,9 @@ class Cursos extends CActiveRecord
 
 		//$criteria->compare('id',$this->id);
 //		$criteria->compare('state_curso','active',true);
-		//$criteria->compare('id_docente',$this->id_docente);
+		$criteria->compare('tipo_evaluacion_id',TP_EVALUACION_VIRTUAL);
 		$criteria->compare('cursos_id',$this->id);
+                $criteria->order =  "fecha_creacion DESC";
 		
 		return new CActiveDataProvider(new Evaluacion(), array(
 			'criteria'=>$criteria,

@@ -6,6 +6,8 @@
  */
 
 return array(
+    'There is no exercise associated with this evaluation' => 'No existe ningún ejercicio asociado a esta evaluación.',
+    'The evaluation was stored successfully' => 'La evaluación fue almacenada exitosamente.',
     '<strong>Success!</strong> The exercise was successfully updated' => '<strong>Exito!</strong> El ejercicio fue actualizado exitosamente',
     'not content associated with your user they found' => 'No se encontraron contenidos asociados a su usuario',
     'answer was successfully updated' => 'La respuesta fue actualizada exitosamente',
@@ -44,5 +46,10 @@ return array(
     'The code was updated successfully' => 'El código fue actualizado correctamente',
     'This code is not available for this course, please try another difetente' => 'Este código no se encuentra disponible para este curso, por favor intente con otro difetente',
     'The code for this course this was stored successfully' => 'El código para esta este curso fue almacenado exitosamente',
-    'Invalid request. Please do not repeat this request again.' => 'Solicitud no válida. Por favor, no repita esta solicitud de nuevo.'
-);
+    'Invalid request. Please do not repeat this request again.' => 'Solicitud no válida. Por favor, no repita esta solicitud de nuevo.',
+    'You must select one or more of the options' => 'Debe selecciona una o varias de las opciones.',
+    'You must select an option' => 'Debe selecciona una opción.',
+    'The answer was inserted correctly' => 'La respuesta se inserto correctamente.',
+    'All exercises must be solved' => 'Todos los ejercicios deben ser resueltos.',
+    'An error occurred during the Information Store idle' => 'Ocurrio un error durante el almcenamiento de la información',
+        );

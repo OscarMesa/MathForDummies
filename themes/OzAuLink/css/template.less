@@ -42,6 +42,20 @@
 }
 
 
+.bs-docs-contenidos:after {
+    background-color: #F5F5F5;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 0;
+    color: #9DA0A4;
+    content: "Contenido";
+    font-size: 12px;
+    font-weight: bold;
+    left: -1px;
+    padding: 3px 7px;
+    position: absolute;
+    top: -1px; 
+}
+
 .bs-docs-archivos:after {
     background-color: #F5F5F5;
     border: 1px solid #DDDDDD;
@@ -55,7 +69,7 @@
     position: absolute;
     top: -1px;
 }
-.bs-docs-archivos {
+.bs-docs-archivos, .bs-docs-contenidos {
     background-color: #FFFFFF;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
@@ -64,7 +78,7 @@
     position: relative;
 }
 
-.bs-docs-archivos{
+.bs-docs-archivos, .bs-docs-contenidos{
     input[type="file"]{
         display:block;
     }
@@ -5806,4 +5820,41 @@ textarea:read-only,
     width: 30%;
     margin-left: 7px;
     margin-top: 5px;
+}
+
+a.img-evalucion img {
+  width: 14%;
+} 
+
+.content-examen{
+    display: inline-block;  
+    padding: 5px;
+    .content-img-examen{ 
+      text-align: center;
+    }
+    .content-description{
+        em{
+              margin-left: 41px;
+        }
+    }
+}
+
+.sec-realizar-evaluacion-btn{
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.ctn-envioRepuesta {  
+    padding: 13px;
+    text-align: right;  
+}
+
+.errorEnvio, .exitoMsn {
+    margin-top: 20px;  
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .btn-success.disabled, .btn-success[disabled] {
+  color: #ffffff;
+  background-color: #2C7940;
 }

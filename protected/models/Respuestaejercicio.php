@@ -17,6 +17,7 @@
 class Respuestaejercicio extends CActiveRecord {
     
     public $guardo = false;
+    public $cantidad;  
     /**
      * @return string the associated database table name
      */
@@ -109,6 +110,7 @@ class Respuestaejercicio extends CActiveRecord {
         $criteria->compare('ordenposicion', $this->ordenposicion);
         $criteria->compare('es_verdadero', $this->es_verdadero, true);
         $criteria->compare('estado_respuesta', $this->estado_respuesta, true);
+        $criteria->select = '*,"A" AS cantidad';
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

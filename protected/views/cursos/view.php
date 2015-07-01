@@ -20,9 +20,6 @@ $this->menu=array(
 		<p> Fecha Finalizacion: <?php echo $model->fecha_cierre; ?> </p>	
 </div>
 
-
-
-
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -73,12 +70,12 @@ $this->menu=array(
 ?>
 
 <?php } ?>
-
+<h3>Lista de evaluciones pendientes</h3>
 <?php 
 
     $this->widget('bootstrap.widgets.TbListView',array(
         'dataProvider'=>$model->buscarEvaluacionesActivas(),
-        'itemView'=>'application.views.evaluacion._view',
+        'itemView'=>'application.views.evaluacion._realizarEvaluaciones',
         )); 
 ?>
 
