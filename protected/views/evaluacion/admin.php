@@ -26,6 +26,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
+        'id_evaluacion',
         array(
             'name' => 'cursos_id',
             'filter' => false,

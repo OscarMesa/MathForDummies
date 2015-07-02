@@ -62,6 +62,23 @@ class ContenidosController extends Controller {
          
             echo $val['registro_doc_adj'];
     }
+    
+    public function actionDescargaDocumento($id)
+    {
+        $model = DocumentosAdjuntos::model()->findByPk($id);
+        if(!is_null($model)){
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Content-Transfer-Encoding: binary');
+            header('Content-length: '.$model->tamanio_doc_adj);
+            header('Content-Type: '.$model->extension_doc_adj);
+            header('Content-Disposition: attachment; filename='.str_replace(' ','-',$model->nom_original_doc_adj));
+            echo $model->registro_doc_adj;
+        }else{
+            throw new Exception("Esta imagen no fue encontrada.");
+        }
+    }
 
     public function actionEliminar_documento_adjunto()
     {

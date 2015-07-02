@@ -11,105 +11,149 @@
  * @author omesa
  */
 class Utilidades {
-    
-    public static $mail = "poliaulink@gmail.com";
 
+    public static $mail = "poliaulink@gmail.com";
 
     //put your code here
     public static function hola() {
         echo 'hola';
     }
+    
+    /**
+     * 
+     * @param type $fehca
+     */
+    public static function dividirFecha($fehca){ 
+        $f = explode(" ",$fehca);//divido la fecha fin
+        $h = explode(":",$f[1]);//tomo las h:i:s
+        $f = explode("-",$f[0]);//tomo Y-m-d
+        return array('year'=>$f[0],'month'=>$f[1],'day'=>$f[2],'hours'=>$h[0],'minutes'=>$h[1],'seconds'=>$h[2]);
+    }
+
+
+    /**
+     * Funcion que dado un valor timestamp, devuelve el numero de dias, horas
+     * minutos y segundos
+     * Ejemplo: timestampToHuman(strtotime(date1)-strtotime(date2))
+     * http://www.lawebdelprogramador.com
+     */
+    public function timestampToHuman($timestamp) {
+        $return = array('dias'=>'00','horas'=>'00','minutos'=>'00','segundos'=>'00');
+        # Obtenemos el numero de dias
+        $days = floor((($timestamp / 60) / 60) / 24);
+        if ($days > 0) {
+            $timestamp-=$days * 24 * 60 * 60;
+            //$return.=$days . " días ";
+            $return['dias'] = $days;
+        }
+        # Obtenemos el numero de horas
+        $hours = floor(($timestamp / 60) / 60);
+        if ($hours > 0) {
+            $timestamp-=$hours * 60 * 60;
+            //$return.=str_pad($hours, 2, "0", STR_PAD_LEFT) . ":";
+            $return['horas'] = str_pad($hours, 2, "0", STR_PAD_LEFT);
+        } else{ 
+            //$return.="00:";
+            $return['horas'] = "00";
+        }
+        # Obtenemos el numero de minutos
+        $minutes = floor($timestamp / 60);
+        if ($minutes > 0) {
+            $timestamp-=$minutes * 60;
+            //$return.=str_pad($minutes, 2, "0", STR_PAD_LEFT) . ":";
+            $return['minutos'] = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+        } else{
+            //$return.="00:";
+            $return['minutos'] = "00";
+        }
+        # Obtenemos el numero de segundos
+        $return['segundos'] = str_pad($timestamp, 2, "0", STR_PAD_LEFT);
+        //$return.=str_pad($timestamp, 2, "0", STR_PAD_LEFT);
+        return $return;
+    }
 
     public static function popDropBox($data) {
         $links = '';
         foreach ($data as $row) {
-            $links .= '<li><a href="' . Yii::app()->baseUrl.'/protected/data/adjuntos/' . $row->filename . '">' . $row->filename . '</a></li>';
-            }
+            $links .= '<li><a href="' . Yii::app()->baseUrl . '/protected/data/adjuntos/' . $row->filename . '">' . $row->filename . '</a></li>';
+        }
         return $links;
     }
 
     public static function generarLink($data) {
-        return $data->revisionMax==0?'<a href="' . Yii::app()->createUrl('programa/subirArchivo/' . $data->id) . '" class="btn btn-small"><i class="icon-upload "></i></a>':'';
+        return $data->revisionMax == 0 ? '<a href="' . Yii::app()->createUrl('programa/subirArchivo/' . $data->id) . '" class="btn btn-small"><i class="icon-upload "></i></a>' : '';
     }
-    
-    public static function generarEstado($data, $perfil)
-    {
-        if($perfil != null && count($data->adjuntos) > 0)
-        {
+
+    public static function generarEstado($data, $perfil) {
+        if ($perfil != null && count($data->adjuntos) > 0) {
             $max = $data->revisionMax;
             $estado = TipoEstadoRevision::model()->findByPk($max);
-                switch ($max){
+            switch ($max) {
                 case 1:
-                    return $perfil->id==8?'<a href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id.'/1') . '" class=""><i>'.$estado->nombre_estado.'</i></a>':'<p>'.$estado->nombre_estado.'<p/>'; 
+                    return $perfil->id == 8 ? '<a href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id . '/1') . '" class=""><i>' . $estado->nombre_estado . '</i></a>' : '<p>' . $estado->nombre_estado . '<p/>';
                     break;
                 case 2:
-                    return $perfil->id==7?'<a href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id.'/2') . '" class=""><i>'.$estado->nombre_estado.'</i></a>':'<p>'.$estado->nombre_estado.'<p/>'; 
+                    return $perfil->id == 7 ? '<a href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id . '/2') . '" class=""><i>' . $estado->nombre_estado . '</i></a>' : '<p>' . $estado->nombre_estado . '<p/>';
                     break;
                 case 3:
-                    return $perfil->id==7?'<a style="color:red;" href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id.'/3') . '" class=""><i>'.$estado->nombre_estado.'</i></a>':'<p>'.$estado->nombre_estado.'<p/>'; 
+                    return $perfil->id == 7 ? '<a style="color:red;" href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id . '/3') . '" class=""><i>' . $estado->nombre_estado . '</i></a>' : '<p>' . $estado->nombre_estado . '<p/>';
                     break;
                 case 4:
-                    return $perfil->id==8?'<a href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id.'/4') . '" class=""><i>'.$estado->nombre_estado.'</i></a>':'<p>'.$estado->nombre_estado.'<p/>'; 
+                    return $perfil->id == 8 ? '<a href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id . '/4') . '" class=""><i>' . $estado->nombre_estado . '</i></a>' : '<p>' . $estado->nombre_estado . '<p/>';
                     break;
                 case 5:
-                    return $perfil->id==8?'<a style="color:red;" href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id.'/5') . '" class=""><i>'.$estado->nombre_estado.'</i></a>':'<p>'.$estado->nombre_estado.'<p/>'; 
+                    return $perfil->id == 8 ? '<a style="color:red;" href="' . Yii::app()->createUrl('programa/ActualizaEstado/' . $data->id . '/5') . '" class=""><i>' . $estado->nombre_estado . '</i></a>' : '<p>' . $estado->nombre_estado . '<p/>';
                     break;
-                }
+            }
         }
         return '';
     }
-    
+
     /**
      * Como un usuario puede tener varios perfiles o pertenecer a varios grupos, me interesa saber su perfil especificamente, si es administrador, es super administrador(8) de nettic y si es administrador (7) es usuario administrador normal de resto no me interesa 
      * @param Object $perfiles
      * @return null | Object
      */
-    
-    public static function validarTipoUsuario($perfiles)
-    {
+    public static function validarTipoUsuario($perfiles) {
         $configPerfil = null;
         foreach ($perfiles as $perfil) {
-            if($perfil->id == 7)
+            if ($perfil->id == 7)
                 $configPerfil = $perfil;
-            if($perfil->id == 8)
-            {
-                 $configPerfil = $perfil;
-                 return $perfil;
+            if ($perfil->id == 8) {
+                $configPerfil = $perfil;
+                return $perfil;
             }
         }
         return $perfil;
     }
-    
-    public static function generarLinkActInactUsuario($estado,$id)
-    {
-        return ($estado=='active'?'<a href="' . Yii::app()->createUrl('usuarios/inactive/' . $id) . '" class="btn btn-small"><i class="icon-hand-down"></i>Innactivar</a>':'<a href="' . Yii::app()->createUrl('usuarios/active/' . $id) . '" class="btn btn-small"><i class="icon-hand-up"></i>Activar</a>');
+
+    public static function generarLinkActInactUsuario($estado, $id) {
+        return ($estado == 'active' ? '<a href="' . Yii::app()->createUrl('usuarios/inactive/' . $id) . '" class="btn btn-small"><i class="icon-hand-down"></i>Innactivar</a>' : '<a href="' . Yii::app()->createUrl('usuarios/active/' . $id) . '" class="btn btn-small"><i class="icon-hand-up"></i>Activar</a>');
     }
-    
-    public static function generarLinkEditarUsuario($id)
-    {
-        return '<a href="' . Yii::app()->createUrl('usuarios/update/' .$id) . '" class="btn btn-small"><i class="icon-edit "></i></a>';
+
+    public static function generarLinkEditarUsuario($id) {
+        return '<a href="' . Yii::app()->createUrl('usuarios/update/' . $id) . '" class="btn btn-small"><i class="icon-edit "></i></a>';
     }
-    
-    public static function generarLiPerfiles($perfiles)
-    {
+
+    public static function generarLiPerfiles($perfiles) {
         foreach ($perfiles as $perfil) {
-            echo '<p><i class="icon-user"></i>'.$perfil->nombre.'</p>';
+            echo '<p><i class="icon-user"></i>' . $perfil->nombre . '</p>';
         }
     }
-    
+
     /**
      * Acorta texto.
      * @param type $text
      * @param type $limit
      * @return type
      */
-    public static function limitText($text, $limit)
-    {
+    public static function limitText($text, $limit) {
         if (strlen($text) > $limit)
             return substr($text, 0, $limit) . '...';
         else
             return $text;
     }
+
 }
 
 ?>

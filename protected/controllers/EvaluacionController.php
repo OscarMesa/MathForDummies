@@ -162,7 +162,7 @@ class EvaluacionController extends Controller {
         $select_array = array();
         $this->render('update', array(
             'model' => $model,
-            'curso' => Cursos::model()->findByPk($id),
+            'curso' => Cursos::model()->findByPk($model->cursos_id),
             'temas' => $temas,
             'Mejercicios' => $Mejercicios,
             'select_array' => $select_array

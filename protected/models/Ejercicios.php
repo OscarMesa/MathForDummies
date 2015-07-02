@@ -61,6 +61,8 @@ class Ejercicios extends CActiveRecord
 			'idMateria0' => array(self::BELONGS_TO, 'Materias', 'idMateria'),
 			'idusuariocreador0' => array(self::BELONGS_TO, 'MathUser', 'idusuariocreador'),
 			'evaluacions' => array(self::MANY_MANY, 'Evaluacion', 'ejercicios_evaluaciones(ejercicios_id_ejercicio, evaluaciones_id)'),
+                        'respuestas' => array(self::HAS_MANY, 'Respuestaejercicio', 'id_ejercicio', 'condition'=>'estado_respuesta = 1', 'alias'=>'tbl_ejercicos','order'=>'tbl_ejercicos.ordenposicion', 'select'=>'tbl_ejercicos.*,(SELECT COUNT(idRespuestaEjercicio) FROM respuestaejercicio WHERE id_ejercicio = tbl_ejercicos.id_ejercicio AND es_verdadero=1 AND estado_respuesta = 1) as cantidad'),
+                        'respuestasVerdaderas' => array(self::HAS_MANY, 'Respuestaejercicio', 'id_ejercicio', 'condition'=>'estado_respuesta = 1 AND es_verdadero = "v"', 'alias'=>'tbl_ejercicos',),
 		);
 	}
 
@@ -72,7 +74,7 @@ class Ejercicios extends CActiveRecord
 		return array(
 			'id_ejercicio' => 'ID',
 			'state_ejercicios' => 'Estado',
-			'idMateria' => 'Materia',
+			'idMateria' => 'Asignatura',
 			'ejercicio' => 'Resumen',
 			'idusuariocreador' => 'Creador',
 			'idDificultad' => 'Nivel de Dificultad',
@@ -133,8 +135,7 @@ class Ejercicios extends CActiveRecord
 		$criteria->compare('ejercicio',$this->ejercicio,true);
 		$criteria->compare('idDificultad',$this->idDificultad);
 		$criteria->compare('idMateria',$this->idMateria);
-		$criteria->addCondition('visible="publico"');
-		$criteria->addCondition('(visible="privado" AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
+		$criteria->addCondition(' visible="publico" OR (visible in ("privado","publico") AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
                 return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
