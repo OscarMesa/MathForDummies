@@ -3,30 +3,42 @@
  * @var EvaluacionIntegrante model
  */
 if(strtotime(date('Y-m-d H:i:s')) < strtotime($model->idEvaluacion->fecha_fin)){
+    if(strtotime(date('Y-m-d H:i:s')) >= strtotime($model->idEvaluacion->fecha_inicio)){
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl() . "/js/tree/file-tree.js");
 Yii::app()->clientScript->registerCssFile(Yii::app()->getBaseUrl() . "/css/tree/file-tree.min.css");
 if (count($model->idEvaluacion->ejerciciosEvaluacion) > 0) {
     if (is_null($model->fecha_inicio)) {
         ?>
         <div id="sec-realizar-evaluacion"class="alert">
-            <strong><h1>Atención!</h1></strong> <h4>Esta a punto de iniciar esta evaluación del curso, una ves acepte tendrá <?php echo ceil((strtotime($model->idEvaluacion->fecha_fin) - strtotime($model->idEvaluacion->fecha_inicio)) / 60); ?> miniutos para realizarla.El exámen se compone de preguntas de multiple selección o de unica respuesta.</h4>
+            <strong><h1>Atención!</h1></strong> <h4>El horario diseño para esta evaluación es <?php echo $model->idEvaluacion->fecha_inicio." - ".$model->idEvaluacion->fecha_fin;?>.<br/>Esta a punto de iniciar esta evaluación del curso, usted cuenta con <?php echo ceil((strtotime($model->idEvaluacion->fecha_fin) - strtotime(date('Y-m-d H:i:s'))) / 60); ?> miniutos para realizarla.El exámen se compone de preguntas de multiple selección o de unica respuesta.</h4>
             <div class="sec-realizar-evaluacion-btn" style="text-align: center;padding-top: 4px">
-                <input type="button" value="Aceptar" id="btn-aceptar-evaluacion" class="btn btn-primary">
+                <input type="button" value="Iniciar" id="btn-aceptar-evaluacion" class="btn btn-primary">
                 <input type="button" value="Cancelar" id="btn-cancelar-evaluacion" class="btn btn-danger">
             </div>
-        </div
+        </div>
         <?php
         Yii::app()->clientScript->registerScript("registroCurso", "$(document).on('click','#btn-aceptar-evaluacion',function(e){
         $(\"#sec-realizar-evaluacion\").hide('slow',function(){
-            $.post('" . Yii::app()->createAbsoluteUrl('evaluacionIntegrante/iniciarEvaluacion', array('id' => $model->evaluacion_integrante_id)) . "',function(){
-                $(\"#sec-form-evaluacion\").show(\"slow\"); 
-            });
+            $.post('" . Yii::app()->createAbsoluteUrl('evaluacionIntegrante/iniciarEvaluacion', array('id' => $model->evaluacion_integrante_id)) . "',function(data){
+                                jQuery('#countdown_dashboard').countDown({
+				targetDate: {
+					'day': 		data.day, // Put the date here
+					'month': 	data.month, // Month
+					'year': 	data.year, // Year
+					'hour': 	data.hours,
+					'min': 		data.minutes,
+					'sec': 		data.seconds
+				} //,omitWeeks: true
+		});
+                    $(\"#sec-form-evaluacion\").show(\"slow\"); 
+            },'json');
         });
     });
     
     $(document).on('click','#btn-cancelar-evaluacion',function(e){
         window.history.back();
     });");
+        
         ?>
     <?php } ?>
        <?php 
@@ -34,12 +46,33 @@ if (count($model->idEvaluacion->ejerciciosEvaluacion) > 0) {
 //           echo $model->idEvaluacion->fecha_fin.'<br/>';
 //           echo $model->idEvaluacion->fecha_inicio.'<br/>';
 //           echo "<pre>"; print_r(Utilidades::timestampToHuman(strtotime($model->idEvaluacion->fecha_fin)-strtotime($model->idEvaluacion->fecha_inicio)));echo"</pre>";
-       $this->renderPartial('_relojEvaluacion',array());
-        
         ?> 
 
     <div id="sec-form-evaluacion" style="display: <?php echo is_null($model->fecha_inicio) ? 'none' : 'inline-block' ?>">
         <?php
+            
+            if(!is_null($model->fecha_inicio)){
+            $data = Utilidades::dividirFecha($model->idEvaluacion->fecha_fin);
+            Yii::app()->clientScript->registerScript("registrarReloj",""
+                    . "jQuery('#countdown_dashboard').countDown({
+				targetDate: {
+					'day': 		".$data['day'].", 
+					'month': 	".$data['month'].",
+					'year': 	".$data['year'].", 
+					'hour': 	".$data['hours'].",
+					'min': 		".$data['minutes'].",
+					'sec': 		".$data['seconds']."
+				},
+                                onComplete: function(){
+                                  $.post('" . Yii::app()->createAbsoluteUrl('evaluacionIntegrante/terminarEvaluacion', array('id' => $model->evaluacion_integrante_id)) . "',function(data){
+                                            $('#sec-form-evaluacion').html('<div class=\'\'><div class=\'row\'><div class=\"span10 alert alert-success\"><strong>Finalizó</strong><br/>La evaluación a finalizado.<br/>Ejercicios buenos: '+data.Nbuenas+'<br/>Ejercicios malos: '+data.Nmalas+' </div></div></div>');
+                                    },'json');
+                                }
+		});
+    ", CClientScript::POS_END);
+        }
+        
+           $this->renderPartial('_relojEvaluacion',array());
         $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id' => 'evaluacion-integrante-form',
             'enableAjaxValidation' => false,
@@ -84,6 +117,7 @@ if (count($model->idEvaluacion->ejerciciosEvaluacion) > 0) {
 
         <?php $this->endWidget(); ?>
     </div>
+
 
     <script type="text/javascript">
         $('.btn-editarRepuesta').click(function () {
@@ -136,10 +170,18 @@ if (count($model->idEvaluacion->ejerciciosEvaluacion) > 0) {
         <h4>Atención</h4>
         <?php echo Yii::t('polimsn', 'There is no exercise associated with this evaluation') ?>
     </div>
-<?php }
+    <?php }
+}else{
+    ?>
+    <div class="alert alert-warning" style="">
+        <h4 style="color: rgb(0, 0, 0);">Lo sentimos :)</h4>
+        <br/><?php echo  "Esta evaluación aun no a iniciado. Su programación se diseño en el siguiente horario ".$model->idEvaluacion->fecha_inicio." - ".$model->idEvaluacion->fecha_fin;?>
+    </div>
+    <?php
+}
 }else{ ?>
     <div class="alert alert-warning" style="  background-color: #777777!important;text-shadow: none">
         <h4 style="color: rgb(187, 32, 32);">Lo sentimos :(</h4>
-        <br/><?php echo  "La fecha de esta evaluacón ya expiro. Su programación se diseño en el siguiente horario ".$model->idEvaluacion->fecha_inicio." y ".$model->idEvaluacion->fecha_fin;?>
+        <br/><?php echo  "La fecha de esta evaluacón ya expiro. Su programación se diseño en el siguiente horario ".$model->idEvaluacion->fecha_inicio." - ".$model->idEvaluacion->fecha_fin;?>
     </div>
 <?php } ?>

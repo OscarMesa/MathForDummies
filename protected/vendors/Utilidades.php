@@ -20,6 +20,18 @@ class Utilidades {
     }
     
     /**
+     * 
+     * @param type $fehca
+     */
+    public static function dividirFecha($fehca){ 
+        $f = explode(" ",$fehca);//divido la fecha fin
+        $h = explode(":",$f[1]);//tomo las h:i:s
+        $f = explode("-",$f[0]);//tomo Y-m-d
+        return array('year'=>$f[0],'month'=>$f[1],'day'=>$f[2],'hours'=>$h[0],'minutes'=>$h[1],'seconds'=>$h[2]);
+    }
+
+
+    /**
      * Funcion que dado un valor timestamp, devuelve el numero de dias, horas
      * minutos y segundos
      * Ejemplo: timestampToHuman(strtotime(date1)-strtotime(date2))

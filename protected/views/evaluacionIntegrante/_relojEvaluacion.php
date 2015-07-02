@@ -1,7 +1,7 @@
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->getBaseUrl() . "/css/reloj/main.css");
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl() . "/js/reloj/jquery.lwtCountdown-1.0.js", CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl() . "/js/reloj/main.js", CClientScript::POS_END);
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->getBaseUrl() . "/js/reloj/main.js", CClientScript::POS_END);
 ?>	
 
 <div class="row" style="text-align:right">

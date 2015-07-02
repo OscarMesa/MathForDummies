@@ -39,7 +39,40 @@ class EvaluacionIntegranteController extends Controller {
      * @param int $id Id de evaluacion del integrante.
      */
     public function actionIniciarEvaluacion($id) {
-        echo $id;
+        $ev_integratnte = EvaluacionIntegrante::model()->findByPk($id);
+        $ev_integratnte->fecha_inicio = date('Y-m-d H:i:s');
+        $ev_integratnte->save();
+        echo json_encode(Utilidades::dividirFecha($ev_integratnte->idEvaluacion->fecha_fin));
+    }
+    
+    public function actionTerminarEvaluacion($id) {
+        $ev_integratnte = EvaluacionIntegrante::model()->findByPk($id);
+        $ev_integratnte->fecha_fin = date('Y-m-d H:i:s');
+        $r = array('buenas'=>array(),'malas'=>array());
+        foreach($ev_integratnte->idEvaluacion->ejerciciosEvaluacion as $ejer_evalu)
+        {
+            //echo $ejer_evalu->ejercicio->ejercicio;
+            //print_r($ejer_evalu->ejercicio->respuestasVerdaderas);
+            $cont = 0;
+            $id_respuesta = "";
+            foreach ($ejer_evalu->ejercicio->respuestasVerdaderas as $respuesta) {
+                $id_respuesta .= $respuesta->idRespuestaEjercicio.",";
+                $cont++;
+            }
+            $id_respuesta = rtrim($id_respuesta, ",");
+            $respuestas_usuario = EjerciciosRespuestaUsuario::model()->findAll('id_respuesta IN('.$id_respuesta.')');
+            if(count($respuestas_usuario) == $cont){
+                $r['buenas'][] = array($ejer_evalu->ejercicio->id_ejercicio => $id_respuesta);
+            }else{
+                $r['malas'][] = array($ejer_evalu->ejercicio->id_ejercicio => $id_respuesta);
+            } 
+        }
+        $ev_integratnte->save();
+        echo json_encode(array('Nbuenas' => count($r['buenas']), 'Nmalas' => count($r['malas']),'resultados'=>$r));
+    }
+    
+    public function calculoHario($fecha_fin, $fecha_inicio){
+        return Utilidades::timestampToHuman(strtotime($fecha_fin)-strtotime($fecha_inicio));
     }
 
     /**
