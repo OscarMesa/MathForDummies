@@ -83,18 +83,33 @@ class TalleresController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $Mejercicios = new Ejercicios('search');
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['Talleres'])) {
             $model->attributes = $_POST['Talleres'];
-            if ($model->save())
+            if ($model->save()){
+                $model->guardarEjercicios();
                 $this->redirect(array('view', 'id' => $model->idtalleres));
+            }
+        }else{
+
+            $model->ejercicios = array();
+            $model->ejercicios['check'] = CHtml::listData($model->ejerciciosTaller, 'ejercicios_id_ejercicio', 'ejercicios_id_ejercicio');
+
         }
 
+        $temas = Tema::model()->findAll(array('condition' => 'estado="active"'));
+
+        $select_array = array();
         $this->render('update', array(
             'model' => $model,
+            'curso' => Cursos::model()->findByPk($id),
+            'temas' => $temas,
+            'Mejercicios' => $Mejercicios,
+            'select_array' => $select_array
         ));
     }
 

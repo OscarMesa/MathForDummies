@@ -15,4 +15,4 @@ $this->breadcrumbs=array(
 
  <div class='titulos_admin'>Actualizar Taller <?php echo $model->nombre; ?></div>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model, 'Mejercicios'=> $Mejercicios)); ?>
