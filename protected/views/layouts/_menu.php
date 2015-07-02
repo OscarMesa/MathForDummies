@@ -258,25 +258,25 @@
                             </li>
             <?php endif; ?>  
 
-            <?php if( Yii::app()->user->checkAccess('action_asignatura_admin') 
-                    OR  Yii::app()->user->checkAccess('action_asignatura_create') ): ?>
-                            <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'asignatura')?'active':''); ?>">
+            <?php if( Yii::app()->user->checkAccess('action_grado_admin') 
+                    OR  Yii::app()->user->checkAccess('action_grado_create') ): ?>
+                            <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'grado')?'active':''); ?>">
                                 <a href="#">
                                     <i class="fa fa-dashboard"></i> 
-                                    <span>Asignatura</span> 
+                                    <span>Grados</span> 
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <?php if(Yii::app()->user->checkAccess('action_asignatura_admin') ): ?>
+                                    <?php if(Yii::app()->user->checkAccess('action_grado_admin') ): ?>
                                             <li>
-                                                <a href="<?php echo Yii::app()->createUrl('asignatura/admin') ?>">
+                                                <a href="<?php echo Yii::app()->createUrl('grado/admin') ?>">
                                                     <i class="fa fa-angle-double-right"></i> Administrar
                                                 </a>
                                             </li>
                                     <?php endif; ?>
-                                    <?php if(Yii::app()->user->checkAccess('action_asignatura_create') ): ?>
+                                    <?php if(Yii::app()->user->checkAccess('action_grado_create') ): ?>
                                             <li>
-                                                <a href="<?php echo Yii::app()->createUrl('asignatura/create') ?>">
+                                                <a href="<?php echo Yii::app()->createUrl('grado/create') ?>">
                                                     <i class="fa fa-angle-double-right"></i>Crear
                                                 </a>
                                             </li>
@@ -312,6 +312,7 @@
                             </ul>                
                         </li>
             <?php endif; ?>
+
 
             <?php  if(Yii::app()->user->checkAccess('action_jbackup')): ?>
                         <li class="treeview <?php echo (strstr(strtolower(Yii::app()->controller->uniqueID), 'jbackup')?'active':''); ?>">
