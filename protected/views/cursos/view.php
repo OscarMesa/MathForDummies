@@ -58,7 +58,7 @@ $this->menu=array(
                         }else if(data.respuesta == true){
                             $("#sec-registrar-estudante").hide(\'slow\', function(){ 
                                 $("#sec-registrar-estudante").remove(); 
-                                $("#messages-app #yw1").html(\'<div class="alert in alert-block fade alert-success"><a href="#" class="close" data-dismiss="alert">×</a>\'+data.mensaje+\'</div>\');
+                                $("#messages-app div").html(\'<div class="alert in alert-block fade alert-success"><a href="#" class="close" data-dismiss="alert">×</a>\'+data.mensaje+\'</div>\');
                                 $(\'body,html\').animate({scrollTop: 0}, 800);
                             });
                         }
