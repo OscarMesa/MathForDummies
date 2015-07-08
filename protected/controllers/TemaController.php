@@ -41,7 +41,7 @@ class TemaController extends Controller {
         $this->layout ="modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'curso' => $curso,
+            'curso' => Cursos::model()->findByPk($id),
         ));
     }
     
@@ -68,7 +68,7 @@ class TemaController extends Controller {
 
     /**
      * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Metodo encargado de crear un tema de un curso
      */
     public function actionCreate($id) {
         $this->layout = "modal";
@@ -85,7 +85,6 @@ class TemaController extends Controller {
                             'success', "<strong>Exito!</strong> El tema fue almacenado exitosamente."
                 );
                 $this->redirect(Yii::app()->getBaseUrl(true).'/tema/view/'.$model->idcurso);
-                $this->redirect(array('create', 'id' => $model->idtema));
             }
         }
         $this->render('create', array(
