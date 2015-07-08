@@ -82,9 +82,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 )
             )
         ),
-        array(
-            'class' => 'bootstrap.widgets.TbButtonColumn',
-        ),
     ),
 ));
 ?>
