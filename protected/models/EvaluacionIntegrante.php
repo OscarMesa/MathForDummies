@@ -124,9 +124,32 @@ class EvaluacionIntegrante extends CActiveRecord {
 
         return new CActiveDataProvider(new Ejercicios(), array(
             'criteria' => $criteria,
+             'pagination'=>array(
+                'pageSize'=>100,
+             ),
         ));
     }
+    
+    /**
+    * 
+    */
+    public function obtenerTemasEvaluacion() {
+        $criteria = new CDbCriteria;
+        $criteria->with = array(
+            'evaluaciones' => array(
+                'condition' => 'evaluaciones_evaluaciones.evaluaciones_id = ?',
+                'params' => array($this->id_evaluacion),
+                'together' => true
+            )
+        );
 
+        return new CActiveDataProvider(new Tema(), array(
+            'criteria' => $criteria,
+             'pagination'=>array(
+                'pageSize'=>100,
+             ),
+        ));
+    }
     /**
      * Este metodo se encarga de validar que la cantidad de respuestas ingresadas sea igual a la cantidad de ejercicio asociados a la ecaluación
      * @author Oskar<oscarmesa.elpoli@gmail.com>
@@ -135,6 +158,19 @@ class EvaluacionIntegrante extends CActiveRecord {
         if(count($this->repuestasUsuario)<count($this->idEvaluacion->ejerciciosEvaluacion))
         {
             $this->addError('evaluacion_integrante_id', Yii::t('polimsn', 'All exercises must be solved'));
+        }
+    }
+    
+    public function guardarNotaSeguminetoUsuario($nota_final)
+    {
+        $n = NotaSeguimientoUsuario::model()->find('id_seguimiento_usuario_curso = ? AND id_usuario = ?',array($this->idEvaluacion->id_seguimiento_usuario_curso,Yii::app()->user->id));
+        if(is_null($n)){
+            $n_seguimiento = new NotaSeguimientoUsuario();
+            $n_seguimiento->id_usuario = Yii::app()->user->id;
+            $n_seguimiento->id_seguimiento_usuario_curso = $this->idEvaluacion->id_seguimiento_usuario_curso;
+            $n_seguimiento->nota = $nota_final;
+            $n_seguimiento->observacion = "Nota generada por el sistema.";
+            $n_seguimiento->save();
         }
     }
 

@@ -9,8 +9,6 @@
 
 		<?php echo $form->textFieldRow($model,'fecha_fin',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldRow($model,'porcentaje',array('class'=>'span5','maxlength'=>10)); ?>
-
 		<?php echo $form->textFieldRow($model,'tiempo_limite',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldRow($model,'estado_evaluacion',array('class'=>'span5')); ?>

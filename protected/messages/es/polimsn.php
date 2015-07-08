@@ -6,8 +6,11 @@
  */
 
 return array(
+    'Sorry, this press monitoring was already assigned to another evaluation of this course' => 'Lo sentimos, esta nota de seguimiento ya fue asignada en otra  evaluación de este curso.',
+    'end assessment' => 'Terminar evaluación',
     'There is no exercise associated with this evaluation' => 'No existe ningún ejercicio asociado a esta evaluación.',
     'The evaluation was stored successfully' => 'La evaluación fue almacenada exitosamente.',
+    'The evaluation successfully completed' => 'La evaluación finalizo exitosamente.',
     '<strong>Success!</strong> The exercise was successfully updated' => '<strong>Exito!</strong> El ejercicio fue actualizado exitosamente',
     'not content associated with your user they found' => 'No se encontraron contenidos asociados a su usuario',
     'answer was successfully updated' => 'La respuesta fue actualizada exitosamente',
@@ -52,4 +55,5 @@ return array(
     'The answer was inserted correctly' => 'La respuesta se inserto correctamente.',
     'All exercises must be solved' => 'Todos los ejercicios deben ser resueltos.',
     'An error occurred during the Information Store idle' => 'Ocurrio un error durante el almcenamiento de la información',
+    'Is about to complete the evaluation, this is what you want to do?' => 'Esta apunto de terminar la evaluación, ¿realmente es lo que desea hacer?'
         );

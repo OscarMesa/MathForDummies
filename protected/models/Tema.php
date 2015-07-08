@@ -53,6 +53,7 @@ class Tema extends CActiveRecord
 		return array(
 			'curso' => array(self::BELONGS_TO, 'Cursos', 'idcurso'),
 			'periodo' => array(self::BELONGS_TO, 'Periodo', 'idperiodo'),
+                        'evaluaciones' => array(self::MANY_MANY, 'Evaluacion', 'tema_evaluaciones(tema_idtema,evaluaciones_id)')
 		);
 	}
 
@@ -89,7 +90,7 @@ class Tema extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('titulo',$this->titulo);
+		$criteria->compare('titulo',$this->titulo,true);
 		$criteria->compare('idtema',$this->idtema);
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('idcurso',$this->idcurso);

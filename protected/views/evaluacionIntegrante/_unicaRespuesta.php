@@ -2,9 +2,10 @@
     <div class="chk">
 <?php
     $disable = count($respuestasHechas)>0?'disabled':'';
+    $rand = rand();
     foreach ($data as $repuesta) {
         $r = EjerciciosRespuestaUsuario::model()->find('id_respuesta=?',array($repuesta->idRespuestaEjercicio));
-        echo "<label>".CHtml::radioButton('respuesta['.$repuesta->id_ejercicio.']',(!is_null($r)?true:false),array('value'=>$repuesta->idRespuestaEjercicio,$disable=>$disable)).$repuesta->respuesta_ejercicio."</label>";
+        echo "<label>".CHtml::radioButton('respuesta['.$repuesta->id_ejercicio.']['.$rand.']',(!is_null($r)?true:false),array('value'=>$repuesta->idRespuestaEjercicio,$disable=>$disable)).$repuesta->respuesta_ejercicio."</label>";
     }
 ?>
     </div>

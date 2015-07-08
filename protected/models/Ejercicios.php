@@ -63,6 +63,7 @@ class Ejercicios extends CActiveRecord
 			'evaluacions' => array(self::MANY_MANY, 'Evaluacion', 'ejercicios_evaluaciones(ejercicios_id_ejercicio, evaluaciones_id)'),
                         'respuestas' => array(self::HAS_MANY, 'Respuestaejercicio', 'id_ejercicio', 'condition'=>'estado_respuesta = 1', 'alias'=>'tbl_ejercicos','order'=>'tbl_ejercicos.ordenposicion', 'select'=>'tbl_ejercicos.*,(SELECT COUNT(idRespuestaEjercicio) FROM respuestaejercicio WHERE id_ejercicio = tbl_ejercicos.id_ejercicio AND es_verdadero=1 AND estado_respuesta = 1) as cantidad'),
                         'respuestasVerdaderas' => array(self::HAS_MANY, 'Respuestaejercicio', 'id_ejercicio', 'condition'=>'estado_respuesta = 1 AND es_verdadero = "v"', 'alias'=>'tbl_ejercicos',),
+                        'respuestasFalsas' => array(self::HAS_MANY, 'Respuestaejercicio', 'id_ejercicio', 'condition'=>'estado_respuesta = 1 AND es_verdadero = "f"', 'alias'=>'tbl_ejercicos',),
 		);
 	}
 

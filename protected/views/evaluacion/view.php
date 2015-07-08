@@ -27,7 +27,6 @@ array('label'=>'Manage Evaluacion','url'=>array('admin')),
                 ),
 		'fecha_inicio',
 		'fecha_fin',
-		'porcentaje',
 		'tiempo_limite',
 		array(
                     'type'=>'raw',

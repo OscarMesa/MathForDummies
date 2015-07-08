@@ -21,6 +21,7 @@ $this->menu = array(
 
 
 <?php
+$model->cursos_id = $curso->id;
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'evaluacion-grid',
     'dataProvider' => $model->search(),
@@ -35,13 +36,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'fecha_inicio',
         'fecha_fin',
         array(
-            'name' => 'porcentaje',
-            'value' => function($data){ return $data->porcentaje."%"; }
-        ), 
-        array(
             'name' => 'tiempo_limite',
             'value' => function($data){ return gmdate("H:i:s", $data->tiempo_limite); }
-        ),            
+        ),  
+        array(
+            'name' => 'id_seguimiento_usuario_curso',
+            'filter' => CHtml::listData(SeguimientoUsuarioCurso::model()->findAll('id_curso=? AND estado_seguimiento=?',array($curso->id,ACTIVE)), 'id', 'nombre_seguimiento'),
+            'value' => function($data){return $data->seguimientoUsuario->nombre_seguimiento;}
+            ),
         array(
             'name' => 'estado_evaluacion',
             'filter' => CHtml::listData(Estados::model()->findAll(), 'id_estado', 'nombre'),

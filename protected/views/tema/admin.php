@@ -52,13 +52,13 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 return $data->titulo;
             }
         ),        
-        array(
+        /*array(
             'name' => 'idcurso',
             'filter' => false,
             'value' => function($data) {
         return $data->curso->nombre_curso;
     }
-        ),
+        ),*/
         array(
             'name' => 'idperiodo',
             'filter' => CHtml::listData(Periodo::model()->findAll(), 'id_periodo', 'valor_numerico'),

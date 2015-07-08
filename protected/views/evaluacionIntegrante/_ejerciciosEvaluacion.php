@@ -1,6 +1,7 @@
+<?php $ejercicioEvaluacion = EjerciciosEvaluaciones::model()->find('evaluaciones_id=? AND ejercicios_id_ejercicio=?',array($evaluacion_id, $data->id_ejercicio)); ?>
 <div class="ejercicio-evaluacion well well-small" style="">
-    <?php echo $data->ejercicio; ?><span class="required"> *</span>
-
+    <div style="display: inline-block;  width: 87%;margin-bottom: 18px;"><?php echo $data->ejercicio; ?><span class="required"> *</span></div>
+    <div class="alert-info" style="color: black;padding: 2px; margin-bottom: 4px;  display: inline-block;vertical-align: top;"><?php echo "Porcentaje: ".$ejercicioEvaluacion->valoracion_porcentaje;?>%</div>
     <div class="accordion" id="accordion<?php echo $data->id_ejercicio; ?>">
         <div class="accordion-group">
             <div class="accordion-heading">

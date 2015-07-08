@@ -6,6 +6,5 @@
     </div><br/>
     <span class="content-description">
         <em>Duración del exámen: <?php echo ceil((strtotime($data->fecha_fin) - strtotime($data->fecha_inicio)) / 60); ?> minutos.</em><br/>
-        <em>Porcentaje del curso: <?php echo $data->porcentaje;?>%</em>
     </span>
 </div>

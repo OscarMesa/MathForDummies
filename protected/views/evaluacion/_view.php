@@ -12,10 +12,6 @@
 	<?php echo CHtml::encode($data->fecha_fin); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('porcentaje')); ?>:</b>
-	<?php echo CHtml::encode($data->porcentaje); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tiempo_limite')); ?>:</b>
 	<?php echo CHtml::encode($data->tiempo_limite); ?>
 	<br />

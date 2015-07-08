@@ -44,35 +44,59 @@ class EvaluacionIntegranteController extends Controller {
         $ev_integratnte->save();
         echo json_encode(Utilidades::dividirFecha($ev_integratnte->idEvaluacion->fecha_fin));
     }
-    
+
     public function actionTerminarEvaluacion($id) {
         $ev_integratnte = EvaluacionIntegrante::model()->findByPk($id);
         $ev_integratnte->fecha_fin = date('Y-m-d H:i:s');
-        $r = array('buenas'=>array(),'malas'=>array());
-        foreach($ev_integratnte->idEvaluacion->ejerciciosEvaluacion as $ejer_evalu)
-        {
+        $r = array('buenas' => array(), 'malas' => array());
+        $notaFinal = 0;
+        foreach ($ev_integratnte->idEvaluacion->ejerciciosEvaluacion as $ejer_evalu) {
             //echo $ejer_evalu->ejercicio->ejercicio;
             //print_r($ejer_evalu->ejercicio->respuestasVerdaderas);
             $cont = 0;
             $id_respuesta = "";
+            //estas son las respuestas verdaderas
             foreach ($ejer_evalu->ejercicio->respuestasVerdaderas as $respuesta) {
-                $id_respuesta .= $respuesta->idRespuestaEjercicio.",";
+                $id_respuesta .= $respuesta->idRespuestaEjercicio . ",";
                 $cont++;
             }
+//            if($ejer_evalu->ejercicio->id_ejercicio == 4)
+//                echo "oscar ".$cont."<br>".count($ev_integratnte->repuestasUsuario);
+//            
             $id_respuesta = rtrim($id_respuesta, ",");
-            $respuestas_usuario = EjerciciosRespuestaUsuario::model()->findAll('id_respuesta IN('.$id_respuesta.')');
-            if(count($respuestas_usuario) == $cont){
-                $r['buenas'][] = array($ejer_evalu->ejercicio->id_ejercicio => $id_respuesta);
-            }else{
-                $r['malas'][] = array($ejer_evalu->ejercicio->id_ejercicio => $id_respuesta);
-            } 
+            //buscamos cuales fueron las respuestas verdaderas hechas por el usuario
+            $respuestas_usuario = EjerciciosRespuestaUsuario::model()->findAll('id_usuario='.Yii::app()->user->id.' AND id_respuesta IN(' . $id_respuesta . ')');
+            //Si la cantidad de respuestas hechas por el usuario son iguales a la candidad de respuestas verdaderas del ejercicio y si la cantidad de respuestas hechas por el usuario menor o igual ya que si yo tengo varias respuestas hechas en seleccion multiple y contesto todas bien y marco tambien malas, se debe tomar como si el ejercicio no fuera bueno y debe pasar a la otra opcion y no entrar por aqui. 
+            if (count($respuestas_usuario) == $cont) {
+                $notaFinal += ($ejer_evalu->valoracion_porcentaje / 100) * 5;
+                $r['buenas'][] = array($id_respuesta => $ejer_evalu->ejercicio->attributes);
+            } else {
+                $notaFinal += ((count($respuestas_usuario) / $cont) * (($ejer_evalu->valoracion_porcentaje / 100) * 5));
+                $r['malas'][] = array($id_respuesta => $ejer_evalu->ejercicio->attributes);
+            }
         }
-        $ev_integratnte->save();
-        echo json_encode(array('Nbuenas' => count($r['buenas']), 'Nmalas' => count($r['malas']),'resultados'=>$r));
+        if(!isset($_REQUEST['no_guardad']))
+            $ev_integratnte->save();
+        $ev_integratnte->guardarNotaSeguminetoUsuario($notaFinal);
+        echo json_encode(array('notaFinal' => $notaFinal, 'Nbuenas' => count($r['buenas']), 'Nmalas' => count($r['malas']), 'resultados' => $r));
+    }
+
+    public function calculoHario($fecha_fin, $fecha_inicio) {
+        return Utilidades::timestampToHuman(strtotime($fecha_fin) - strtotime($fecha_inicio));
     }
     
-    public function calculoHario($fecha_fin, $fecha_inicio){
-        return Utilidades::timestampToHuman(strtotime($fecha_fin)-strtotime($fecha_inicio));
+    /**
+     * Este metodo se encarga de buscar una nota asociada a la evaluacion
+     * @param int $evaluacion_integrante_id Description
+     */
+    public function buscarCalificacionEvaluacionIntegrante($evaluacion_integrante_id)
+    {
+        $n = NotaSeguimientoUsuario::model()->find('evaluacion_integrante_id=?', array($evaluacion_integrante_id));
+        return count($n);
+    }
+    
+    public function gurdarNotaSeguimientoEvaluacion($id_usuario,$f){
+        
     }
 
     /**
@@ -95,9 +119,17 @@ class EvaluacionIntegranteController extends Controller {
             }
             $model = EvaluacionIntegrante::model()->find('id_evaluacion = ? AND id_integrante_curso = ?', array($_REQUEST['id_evaluacion'], Yii::app()->user->id));
             $model->scenario = 'saveEjercicios';
-            if($model->validate())
-            {
-                Yii::app()->user->setFlash('success', "<strong>Exito!</strong>".Yii::t('polimsn', 'The evaluation was stored successfully') );
+            if ($model->validate()) {
+//                echo '<pre>';print_r($_REQUEST);die;
+                if ($_REQUEST['terminar_evaluacion'] == 1) {
+                    $model->fecha_fin = date('Y-m-d H:i:s');
+                    if($model->save()){
+                        
+                        Yii::app()->user->setFlash('success', "<strong>Exito! </strong>" . Yii::t('polimsn', 'The evaluation successfully completed'));
+                    }
+                } else {
+                    Yii::app()->user->setFlash('success', "<strong>Exito! </strong>" . Yii::t('polimsn', 'The evaluation was stored successfully'));
+                }
             }
         } else {
             $model = EvaluacionIntegrante::model()->find('id_evaluacion = ? AND id_integrante_curso = ?', array($_REQUEST['id_evaluacion'], Yii::app()->user->id));
@@ -169,10 +201,13 @@ class EvaluacionIntegranteController extends Controller {
         $error = 0;
         if ($_REQUEST['tipo'] == 'u') {
             try {
-                foreach ($_REQUEST['respuesta'] as $ejercio_id => $respuesta_id) {
-                    $this->eliminarRepuestasEjercicoEvaluado($_REQUEST['evaluacion_integrante_id'], $respuesta_id);
-                    $id = $this->guardarRespuestaEvaluacion($_REQUEST['evaluacion_integrante_id'], $_REQUEST['user_id'], $respuesta_id);
+                foreach ($_REQUEST['respuesta'] as $ejercio_id => $array) {
+                    foreach ($array as $rand => $respuesta_id) {
+                        $this->eliminarRepuestasEjercicoEvaluado($_REQUEST['evaluacion_integrante_id'], $respuesta_id);
+                        $id = $this->guardarRespuestaEvaluacion($_REQUEST['evaluacion_integrante_id'], $_REQUEST['user_id'], $respuesta_id);
+                    }
                 }
+
                 $transaction->commit();
             } catch (Exception $e) {
                 $msg = Yii::t('polimsn', 'An error occurred during the Information Store idle');
