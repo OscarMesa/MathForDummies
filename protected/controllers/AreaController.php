@@ -81,7 +81,7 @@ class AreaController extends Controller {
      * Este metodo se encarga de activar un area.
      * @param type $id
      */
-    public function active($id) {
+    public function actionActive($id) {
          if (Yii::app()->request->isPostRequest) {
             $model = $this->loadModel($id);
             $model->idestado = ACTIVE;      
