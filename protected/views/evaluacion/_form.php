@@ -1,5 +1,7 @@
 <?php
 
+$disable = ($model->isNewRecord?FALSE:(TRUE));
+
 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id' => 'evaluacion-form',
     'enableAjaxValidation' => false,
@@ -53,7 +55,7 @@ $this->widget('bootstrap.widgets.TbDateRangePicker', array(
 <?php echo $form->error($model, 'fecha_inicio', array('class' => 'help-block error', 'maxlength' => 10)); ?>
 
 <?php 
-    echo $form->dropDownListRow($model,'id_seguimiento_usuario_curso',  CHtml::listData(SeguimientoUsuarioCurso::model()->findAll('id_curso=? AND estado_seguimiento=?',array($model->cursos_id,ACTIVE)), 'id', 'nombre_seguimiento'), array('empty'=>'--Seleccionar--','disabled'=>($model->isNewRecord?false:true))); 
+    echo $form->dropDownListRow($model,'id_seguimiento_usuario_curso',  CHtml::listData(SeguimientoUsuarioCurso::model()->findAll('id_tipo_nota=7 AND id_curso=? AND estado_seguimiento=?',array($model->cursos_id,ACTIVE)), 'id', 'nombre_seguimiento'), array('empty'=>'--Seleccionar--','disabled'=>($model->isNewRecord?false:true))); 
     if(!$model->isNewRecord)
         echo $form->hiddenField($model,'id_seguimiento_usuario_curso');
 ?>
