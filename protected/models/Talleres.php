@@ -14,6 +14,7 @@
  * The followings are the available model relations:
  * @property Cursos $idCurso
  * @property Materias $idMateria
+ * @property array $ejercicios
  */
 class Talleres extends CActiveRecord
 {
@@ -36,9 +37,11 @@ class Talleres extends CActiveRecord
 			array('id_materia, id_curso, nombre, descripcion', 'required'),
 			array('id_materia, id_curso', 'numerical', 'integerOnly'=>true),
 			array('nombre', 'length', 'max'=>45),
+			array('ejercicios', 'ValidarExistenciaEjericicos'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_materia, id_curso, nombre, descripcion', 'safe', 'on'=>'search'),
+			array('id_materia, id_curso, nombre, descripcion,ejercicios', 'safe', 'on'=>'search'),
+
 		);
 	}
 
@@ -53,8 +56,15 @@ class Talleres extends CActiveRecord
 			'idCurso' => array(self::BELONGS_TO, 'Cursos', 'id_curso'),
 			'idMateria' => array(self::BELONGS_TO, 'Materias', 'id_materia'),
 			'Contenidos' => array(self::MANY_MANY, 'Contenidos', 'contenidos_talleres(talleres_idtalleres,contenidos_id)'),
+			'ejerciciosTaller'=> array(self::MANY_MANY, 'Ejercicios', 'ejercicios_talleres(ejercicios_id_ejercicio,talleres_idtalleres)')
 		);
 	}
+
+    public function ValidarExistenciaEjericicos($attribute, $params) {
+        if ( property_exists($this, 'ejercicios') && count($this->ejercicios['check']) <= 0 && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL)
+            $this->addError($attribute, Yii::t('polimsn', 'You must select at least one exercise for creating evaluation.'));
+    }
+
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -99,8 +109,32 @@ class Talleres extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function setEjercicios($ejercicios) {
+        $this->ejercicios = $ejercicios;
+    }
+ 
+    public function guardarEjercicios() {
         
-        
+        EjerciciosTalleres::model()->deleteAll(array(
+            'condition' => 'talleres_idtalleres=?',
+            'params' => array($this->idtalleres)
+                )
+        );
+
+        if(property_exists($this,"ejercicios") && $this->tipo_evaluacion_id == self::TP_EVL_VIRTUAL){
+
+            foreach ($this->ejercicios['check'] as $ejercicio) {
+                $n = new EjerciciosEvaluaciones();
+                $n->ejercicios_id_ejercicio = $ejercicio;
+                $n->evaluaciones_id = $this->id_evaluacion;
+                if(!$n->save()){
+                    print_r($n->errors);die;
+                }
+            }
+        }
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
