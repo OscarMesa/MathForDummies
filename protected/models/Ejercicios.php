@@ -138,8 +138,8 @@ class Ejercicios extends CActiveRecord
 		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
 		$criteria->compare('ejercicio',$this->ejercicio,true);
 		$criteria->compare('idDificultad',$this->idDificultad);
-		$criteria->compare('idMateria',$this->idMateria,"AND");
 		$criteria->addCondition(' visible="publico" OR (visible in ("privado","publico") AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
+		$criteria->compare('idMateria',$this->idMateria,"AND");
                 return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
