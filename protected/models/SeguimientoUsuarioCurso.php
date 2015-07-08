@@ -42,6 +42,7 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 			array('criterio_evaluacion, id_curso, id_usuario, id_tipo_nota, porcentaje, descripcion,nombre_seguimiento', 'required'),
 			array('id_curso, id_usuario, id_tipo_nota, porcentaje', 'numerical', 'integerOnly'=>true),
 			array('porcentaje','validarPorcenje'),
+			array('porcentaje','numerical','min'=>1),
                         // The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, id_curso, id_usuario, id_tipo_nota, porcentaje, descripcion, estado_seguimiento', 'safe', 'on'=>'search'),
