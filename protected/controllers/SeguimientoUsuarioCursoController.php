@@ -93,7 +93,7 @@ class SeguimientoUsuarioCursoController extends Controller {
      * @param int $id id del curso
      */
     public function actionCreate($id) {
-        echo $id;die;
+
         $model = new SeguimientoUsuarioCurso;
         $this->layout = '//layouts/modal';
 // Uncomment the following line if AJAX validation is needed
