@@ -73,15 +73,15 @@ class SeguimientoUsuarioCurso extends CActiveRecord
 //            echo '<pre>';var_dump($this->isNewRecord);var_dump($por->porcentaje_r);var_dump($suma->totalSuma);die;
             if($this->isNewRecord){
                 if(($suma->totalSuma + $this->porcentaje) > $por->porcentaje_r)
-                $this->addError($attribute, "El porcentaje acomulado de momento es de ".$suma->totalSuma. " el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r.").");
+                $this->addError($attribute, "El porcentaje acomulado de momento es de ".$suma->totalSuma. " el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r."%).");
             }else{
                 $modelOriginal = SeguimientoUsuarioCurso::model()->findByPk($this->id);
                 if($modelOriginal->criterio_evaluacion == $this->criterio_evaluacion){
                   if(($suma->totalSuma - $modelOriginal->porcentaje + $this->porcentaje) > $por->porcentaje_r)
-                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma - $modelOriginal->porcentaje)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r.").");
+                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma - $modelOriginal->porcentaje)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r."%).");
                 }else{
                     if(($suma->totalSuma + $this->porcentaje) > $por->porcentaje_r)
-                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r.").");
+                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r."%).");
                 }
             }
         }
