@@ -124,7 +124,10 @@ class Ejercicios extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
+        /**
+         * @author Diego
+         * @return \CActiveDataProvider
+         */
     public function searchForEvaluacion()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -135,7 +138,7 @@ class Ejercicios extends CActiveRecord
 		$criteria->compare('state_ejercicios',$this->state_ejercicios,true);
 		$criteria->compare('ejercicio',$this->ejercicio,true);
 		$criteria->compare('idDificultad',$this->idDificultad);
-		$criteria->compare('idMateria',$this->idMateria);
+		$criteria->compare('idMateria',$this->idMateria,"AND");
 		$criteria->addCondition(' visible="publico" OR (visible in ("privado","publico") AND idusuariocreador = "'.$this->idusuariocreador.'")','OR');
                 return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
