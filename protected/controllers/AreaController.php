@@ -77,8 +77,21 @@ class AreaController extends Controller {
         ));
     }
     
+    /**
+     * Este metodo se encarga de activar un area.
+     * @param type $id
+     */
     public function active($id) {
-        
+         if (Yii::app()->request->isPostRequest) {
+            $model = $this->loadModel($id);
+            $model->idestado = ACTIVE;      
+            $model->update();
+
+            if (!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        } else{
+            throw new CHttpException(400, Yii::t('polimsn','Invalid request. Please do not repeat this request again.'));
+        }
     }
     
     /**
