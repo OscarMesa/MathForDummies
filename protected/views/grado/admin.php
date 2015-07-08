@@ -31,7 +31,7 @@ return false;
 	o <b>=</b>) al comienzo de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
 </p>
 
-<?php echo CHtml::link('Busqueda avanzada','#',array('class'=>'search-button btn')); ?>
+<?php // echo CHtml::link('Busqueda avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -46,6 +46,14 @@ return false;
 		'id_grado',
 		'desc_numerica',
 		'desc_verbal',
+                array(
+                    'name'=>'estado_id',
+                    'type' => 'raw',
+                    'filter' => CHtml::listData(Estados::model()->findAll(), 'id_estado', 'nombre'),
+                    'value' => function($data){
+                        return $data->estado_id;
+                    }
+                    ),
 array(
 'class'=>'bootstrap.widgets.TbButtonColumn',
 ),
