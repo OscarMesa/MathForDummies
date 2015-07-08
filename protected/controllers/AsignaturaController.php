@@ -111,11 +111,14 @@ class AsignaturaController extends Controller {
             throw new CHttpException(400, Yii::t('polimsn', 'Invalid request. Please do not repeat this request again.'));
     }
     
-    
+    /**
+     * Este metodo se encarga de listar las asignaturas de un area que es enviada
+     * @author Oskar<oscarmesa.elpoli@gmail.com>
+     */
     public function actionListarAsignaturasXArea()
     {
         $idArea = $_POST['id'];
-        $asignaturas = Materias::model()->findAll('idarea = ? ',array($idArea));
+        $asignaturas = Materias::model()->findAll('idarea = ? AND estado_id = ?',array($idArea,ACTIVE));
         $result = array();
         foreach ($asignaturas as $asignatura) {
             $result[] = array('id'=>$asignatura->idmaterias,'text'=>$asignatura->nombre_materia);
