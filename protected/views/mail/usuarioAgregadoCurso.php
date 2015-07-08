@@ -67,7 +67,7 @@ html
     <td align="right">
     <table width="130"  align="center" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="130" height="28"><img src="http://fc08.deviantart.net/fs70/f/2011/160/0/a/gmail_metal_icon_256x256_px_by_agamemmnon-d3igont.png" width="41" height="33" /></td>
+        <td width="130" height="28"><img src="http://png.findicons.com/files/icons/1620/crystal_project/32/mail_post_to.png" width="41" height="33" /></td>
         </tr>
     </table></td>
   </tr>
