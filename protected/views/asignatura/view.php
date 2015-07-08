@@ -17,7 +17,13 @@ array('label'=>'Administrador de Materias','url'=>array('admin')),
 'attributes'=>array(
 		'idmaterias',
 		'nombre_materia',
-		'state_materia',
+                array(
+                    'name'=>'state_materia',
+                    'type' => 'raw',
+                    'value'=>function($data){
+                        return $data->state_materia == 'active'?"Activo":"Inactivo";
+                    }
+                    ),
 		array(
                     'name'=>'idarea',
                     'type' => 'raw',
