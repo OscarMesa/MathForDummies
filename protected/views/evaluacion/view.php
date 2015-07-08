@@ -27,7 +27,7 @@ array('label'=>'Manage Evaluacion','url'=>array('admin')),
                 ),
 		'fecha_inicio',
 		'fecha_fin',
-		'tiempo_limite',
+//		'tiempo_limite',
 		array(
                     'type'=>'raw',
                     'label'=>  Evaluacion::model()->getAttributeLabel('estado_evaluacion'),
