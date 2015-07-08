@@ -52,7 +52,7 @@ $this->menu=array(
      </label>
 
      <?php echo CHtml::button('Registrar en curso',array('class'=>'btn btn-primary','id'=>'btn-regCurso','style'=>'padding: 5px;margin-left: 7px;margin-top: -9px;')); ?>
-     <img style="  margin: 5px; display: none" id="img-load" src="<?php echo Yii::app()->createAbsoluteUrl("themes\OzAuLink\images\ajax-loader.gif");?>"/>
+     <img style="  margin: 5px; display: none" id="img-load" src="<?php echo Yii::app()->getBaseUrl()."\themes\OzAuLink\images\ajax-loader.gif";?>"/>
 <div class="help-block error" id="registrar_estudiante_error" style=""></div>
 </div>
 <?php 
