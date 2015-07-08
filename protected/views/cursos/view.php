@@ -11,14 +11,6 @@ $this->menu=array(
 	array('label'=>'Administrador de Cursos','url'=>array('../admin')),
 );
 ?>
-<div class="jumbotron">
-		<h3>Curso:  <?php echo $model->nombre_curso; ?></h3>
-		<p> Descripcion: <?php echo $model->descripcion_curso; ?> </p>
-		<p> Estado Curso: <?php echo $model->state_curso; ?> </p>
-		<p> Docente Creador del Curso: <?php echo $model->usuario->username; ?> </p>
-		<p> Asignatura Asociada: <?php echo $model->materia->nombre_materia; ?> </p>
-		<p> Fecha Finalizacion: <?php echo $model->fecha_cierre; ?> </p>	
-</div>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
