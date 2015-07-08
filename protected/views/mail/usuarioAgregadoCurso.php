@@ -98,7 +98,7 @@ html
       <tr>
           <td>
               <p><span>Diríjase al siguiente link para darle un vistazo al curso.</span></p> <br/>
-              <a href="<?php echo Yii::app()->createAbsoluteUrl('cursos/index',array($curso->id)); ?>">Click aqui</a>
+              <a href="<?php echo Yii::app()->createAbsoluteUrl('cursos',array('id'=>$curso->id)); ?>">Click aqui</a>
           </td>
       </tr>
 </table>
