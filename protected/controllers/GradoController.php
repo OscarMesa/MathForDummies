@@ -81,7 +81,7 @@ class GradoController extends Controller {
      * Este metodo se encarga de activar el grado
      * @param int $id
      */
-    public function acttionActive($id) {
+    public function actionActive($id) {
         if (Yii::app()->request->isPostRequest) {
            $model =  $this->loadModel($id);
            $model->estado_id = ACTIVE;
