@@ -110,9 +110,11 @@ class EvaluacionIntegranteController extends Controller {
                 foreach ($_POST['respuesta'] as $ejericio => $respuesta) {
                     if (is_array($respuesta)) {
                         foreach ($respuesta as $respuesta_id => $seleccionado) {
+                            $this->eliminarRepuestasEjercicoEvaluado($_REQUEST['evaluacion_integrante_id'], $respuesta_id);
                             $this->guardarRespuestaEvaluacion($_REQUEST['evaluacion_integrante_id'], $_REQUEST['user_id'], $respuesta_id);
                         }
                     } else {
+                        $this->eliminarRepuestasEjercicoEvaluado($_REQUEST['evaluacion_integrante_id'], $respuesta);
                         $this->guardarRespuestaEvaluacion($_REQUEST['evaluacion_integrante_id'], $_REQUEST['user_id'], $respuesta);
                     }
                 }
