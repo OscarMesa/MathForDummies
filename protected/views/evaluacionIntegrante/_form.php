@@ -11,7 +11,7 @@ if (strtotime(date('Y-m-d H:i:s')) < strtotime($model->idEvaluacion->fecha_fin))
                 if (is_null($model->fecha_inicio)) {
                     ?>
                     <div id="sec-realizar-evaluacion"class="alert">
-                        <strong><h1>Atención!</h1></strong> <h4>El horario diseño para esta evaluación es <?php echo $model->idEvaluacion->fecha_inicio . " - " . $model->idEvaluacion->fecha_fin; ?>.<br/>Esta a punto de iniciar esta evaluación del curso, usted cuenta con <?php echo ceil((strtotime($model->idEvaluacion->fecha_fin) - strtotime(date('Y-m-d H:i:s'))) / 60); ?> miniutos para realizarla.El exámen se compone de preguntas de multiple selección o de unica respuesta.</h4>
+                        <strong><h1>Atención!</h1></strong> <h4>El horario diseño para esta evaluación es <?php echo $model->idEvaluacion->fecha_inicio . " - " . $model->idEvaluacion->fecha_fin; ?>.<br/>Esta a punto de iniciar esta evaluación del curso, usted cuenta con <?php echo ceil((strtotime($model->idEvaluacion->fecha_fin) - strtotime(date('Y-m-d H:i:s'))) / 60); ?> miniutos para realizarla.El exámen se compone de preguntas de multiple selección o de una unica respuesta.</h4>
                         <div class="sec-realizar-evaluacion-btn" style="text-align: center;padding-top: 4px">
                             <input type="button" value="Iniciar" id="btn-aceptar-evaluacion" class="btn btn-primary">
                             <input type="button" value="Cancelar" id="btn-cancelar-evaluacion" class="btn btn-danger">

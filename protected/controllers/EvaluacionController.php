@@ -138,7 +138,7 @@ class EvaluacionController extends Controller {
             $this->ajustarFechasEvaluacion($model);
             if ($model->save()) {
                 
-                //$model->guardarEjercicios();
+                $model->guardarEjercicios();
                 $model->guardarTemas();
                
                 $user = Yii::app()->getComponent('user');
