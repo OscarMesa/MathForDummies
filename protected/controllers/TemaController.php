@@ -38,11 +38,10 @@ class TemaController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        echo 'esete es '.$id;die;
+
         $this->layout ="modal";
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'curso' => Cursos::model()->findByPk($id),
         ));
     }
     
