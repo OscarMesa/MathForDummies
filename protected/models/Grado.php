@@ -53,8 +53,8 @@ class Grado extends CActiveRecord
 	{
 		return array(
 			'id_grado' => 'Id grado',
-			'desc_numerica' => 'Descripción numerica',
-			'desc_verbal' => 'Descripcion textual, por ejemplo: sexto, decimo, once',
+			'desc_numerica' => 'Descripción numérica',
+			'desc_verbal' => 'Descripcion textual',
 		);
 	}
 

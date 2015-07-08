@@ -13,7 +13,7 @@ array('label'=>'Administrador de grados','url'=>array('admin')),
 );
 ?>
 
-<h1>View Grado #<?php echo $model->id_grado; ?></h1>
+<h1>Ver Grado #<?php echo $model->id_grado; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,

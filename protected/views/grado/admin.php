@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Administrador de grados</h1>
+<h1>Administración de grados</h1>
 
 <p>
 	También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
