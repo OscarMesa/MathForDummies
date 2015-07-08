@@ -84,7 +84,7 @@ class TemaController extends Controller {
                 $user->setFlash(
                             'success', "<strong>Exito!</strong> El tema fue almacenado exitosamente."
                 );
-                $this->redirect(Yii::app()->getBaseUrl(true).'/tema/view/'.$model->idcurso);
+                $this->redirect(Yii::app()->getBaseUrl(true).'/tema/view/'.$model->idtema);
             }
         }
         $this->render('create', array(
