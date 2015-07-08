@@ -69,20 +69,19 @@ class SeguimientoUsuarioCurso extends CActiveRecord
             if($this->id_curso == null || $this->criterio_evaluacion==null)return;
             $suma = SeguimientoUsuarioCurso::model()->findBySql('SELECT SUM(porcentaje) totalSuma FROM seguimiento_usuario_curso WHERE id_curso = ? AND criterio_evaluacion = ?', array($this->id_curso, $this->criterio_evaluacion));
             $suma->totalSuma = $suma->totalSuma != null ? $suma->totalSuma : 0;
-            echo $suma->totalSuma;die;
             $por = SeguimientoUsuarioCurso::model()->findBySql('(SELECT porcentaje_criterio porcentaje_r FROM criterios_evaluativos WHERE id_criterio = ? LIMIT 1); ', array($this->criterio_evaluacion));
 //            echo '<pre>';var_dump($this->isNewRecord);var_dump($por->porcentaje_r);var_dump($suma->totalSuma);die;
             if($this->isNewRecord){
                 if(($suma->totalSuma + $this->porcentaje) > $por->porcentaje_r)
-                $this->addError($attribute, "El porcentaje acomulado de momento es de ".$suma->totalSuma. " el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación.");
+                $this->addError($attribute, "El porcentaje acomulado de momento es de ".$suma->totalSuma. " el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r.").");
             }else{
                 $modelOriginal = SeguimientoUsuarioCurso::model()->findByPk($this->id);
                 if($modelOriginal->criterio_evaluacion == $this->criterio_evaluacion){
                   if(($suma->totalSuma - $modelOriginal->porcentaje + $this->porcentaje) > $por->porcentaje_r)
-                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma - $modelOriginal->porcentaje)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación.");
+                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma - $modelOriginal->porcentaje)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r.").");
                 }else{
                     if(($suma->totalSuma + $this->porcentaje) > $por->porcentaje_r)
-                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación.");
+                    $this->addError($attribute, "El porcentaje acomulado de momento es de ".($suma->totalSuma)." el cual sumado con ".$this->porcentaje." supera el porcentaje permitido por este criterio de evaluación (".$por->porcentaje_r.").");
                 }
             }
         }
