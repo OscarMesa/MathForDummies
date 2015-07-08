@@ -72,7 +72,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 ),
                 'active' => array(
                     'label' => 'Activar',
-                    'visible' => '($data->idestado != ACTIVE)?true:false',
+                    'visible' => '($data->estado_id != ACTIVE)?true:false',
                     'url' => 'Yii::app()->createUrl("grado/active", array("id"=>$data->id_grado,"ajax"=>"grado-grid"))',
                     'icon' => 'icon-ok',
                     'click' => 'js:activar',
