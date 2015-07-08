@@ -117,7 +117,7 @@ class Contenidos extends CActiveRecord
 		$criteria->addCondition('(visible="privado" AND id_usuario_creador = "'.$this->id_usuario_creador.'")','OR');
                 return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-                    'pager'=>array(
+                    'Pagination'=>array(
                         'pageSize' => 100,
                     )
 		));
