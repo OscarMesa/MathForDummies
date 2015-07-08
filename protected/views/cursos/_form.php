@@ -44,7 +44,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     <?php } ?>
     <?php echo $form->textFieldRow($model, 'nombre_curso', array('class' => 'span5', 'maxlength' => 45)); ?>
 
-    <?php echo $form->dropDownListRow($model, 'id_grado', CHtml::listData(Grado::model()->findAll(), 'id_grado', 'desc_verbal'), array('style' => '')) ?>
+    <?php echo $form->dropDownListRow($model, 'id_grado', CHtml::listData(Grado::model()->findAll('estado_id=?',array(ACTIVE)), 'id_grado', 'desc_verbal'), array('style' => '')) ?>
 
     <?php //$model->?>
     <?php

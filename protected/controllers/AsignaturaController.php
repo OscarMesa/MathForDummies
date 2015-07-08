@@ -118,7 +118,7 @@ class AsignaturaController extends Controller {
     public function actionListarAsignaturasXArea()
     {
         $idArea = $_POST['id'];
-        $asignaturas = Materias::model()->findAll('idarea = ? AND estado_id = ?',array($idArea,ACTIVE));
+        $asignaturas = Materias::model()->findAll('idarea = ? AND state_materia = ?',array($idArea,'active'));
         $result = array();
         foreach ($asignaturas as $asignatura) {
             $result[] = array('id'=>$asignatura->idmaterias,'text'=>$asignatura->nombre_materia);
