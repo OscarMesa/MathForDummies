@@ -62,7 +62,7 @@ html
   <tr>
     <td width="450"><p style="text-align:left; font-size: 15px; color: #000000; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">
             <?php echo ucwords(Yii::app()->user->um->getFieldValueInstance($usuario->iduser,'nombrecompleto')->value); ?>, 
-            tu vinculacion al cursor <b><?php echo $curso->nombre_curso; ?></b> fue exitosa.<br/>
+            tu vinculación al cursor <b><?php echo $curso->nombre_curso; ?></b> fue exitosa.<br/>
       </p></td>
     <td align="right">
     <table width="130"  align="center" border="0" cellspacing="0" cellpadding="0">
@@ -77,14 +77,14 @@ html
     <td>
         <span style="text-align:center; font-size: 13px; color: #0A0A04; line-height:18px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif">
               El curso se encuentran habilitado a partir de 
-              <?php echo $curso->fecha_inicio ?>, su culminacion sera en el <?php echo $curso->fecha_cierre; ?>.
+              <?php echo $curso->fecha_inicio ?>, su culminación será en el <?php echo $curso->fecha_cierre; ?>.
           
       </span>
     </td>
   </tr>
       <tr>
           <td>
-              <b><?php echo $curso->nombre_curso; ?> contiene los siguentes temas:</b>
+              <b><?php echo $curso->nombre_curso; ?> contiene los siguientes temas:</b>
               <?php
                   echo "<table><ul>";
                   foreach ($curso->temas as $val) {
@@ -92,13 +92,13 @@ html
                   } 
                   echo "</ul></table>";
               ?>
-              Cualquier sugerencia o inquietud se podra comunicar con le profesor <b><?php echo ucwords(Yii::app()->user->um->getFieldValueInstance($curso->id_docente,'nombrecompleto')->value); ?></b>
+              Cualquier sugerencia o inquietud se podrá comunicar con le profesor <b><?php echo ucwords(Yii::app()->user->um->getFieldValueInstance($curso->id_docente,'nombrecompleto')->value); ?></b>
           </td>
       </tr>    
       <tr>
           <td>
-              <p><span>Dirijace al siguiente link para darle un vistaso al curso.</span></p> <br/>
-              <a href="#">Click aqui</a>
+              <p><span>Diríjase al siguiente link para darle un vistazo al curso.</span></p> <br/>
+              <a href="<?php echo Yii::app()->createAbsoluteUrl('cursos',array($curso->id)); ?>">Click aqui</a>
           </td>
       </tr>
 </table>
