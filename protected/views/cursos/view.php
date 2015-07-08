@@ -46,26 +46,32 @@ $this->menu=array(
 
 <?php if(!$this->validarExitenciaUsuarioEnCurso(Yii::app()->user->id, $model->id)){?>
 <div id="sec-registrar-estudante"
-     <label><span style="display: inline-block;vertical-align: middle;line-height: normal;  margin-top: -13px;margin-right: 5px;">Ingresar código:</span> <?php echo CHtml::textField('registrarEstudiante',array())?></label><?php echo CHtml::button('Registrar en curso',array('class'=>'btn btn-primary','id'=>'btn-regCurso','style'=>'  padding: 5px;margin-left: 7px;margin-top: -9px;')); ?><img style="  margin: 5px; display: none" id="img-load" src="<?php echo Yii::app()->createAbsoluteUrl("themes\OzAuLink\images\ajax-loader.gif");?>"/>
+     <label>
+     <span style="display: inline-block;vertical-align: middle;line-height: normal;  margin-top: -13px;margin-right: 5px;">Ingresar código:</span> 
+            <?php echo CHtml::textField('registrarEstudiante'); ?>
+     </label>
+
+     <?php echo CHtml::button('Registrar en curso',array('class'=>'btn btn-primary','id'=>'btn-regCurso','style'=>'padding: 5px;margin-left: 7px;margin-top: -9px;')); ?>
+     <img style="  margin: 5px; display: none" id="img-load" src="<?php echo Yii::app()->createAbsoluteUrl("themes\OzAuLink\images\ajax-loader.gif");?>"/>
 <div class="help-block error" id="registrar_estudiante_error" style=""></div>
 </div>
 <?php 
     Yii::app()->clientScript->registerScript('registrarEstudianteXCodigo',''
-            . '$("#btn-regCurso").click(function(){
-        $("#img-load").css("display","inline-block");    
-        $(\'#registrar_estudiante_error\').html("");
-        $.post("'.Yii::app()->createAbsoluteUrl('cursos/agregarEstudiantexCodigo').'",{\'codigo\':$(\'#registrarEstudiante\').val(),\'id_curso\':'.$model->id.'},function(data){
-                if(data.respuesta == false){
-                    $(\'#registrar_estudiante_error\').html(data.mensaje);
-                }else if(data.respuesta == true){
-                    $("#sec-registrar-estudante").hide(\'slow\', function(){ 
-                        $("#sec-registrar-estudante").remove(); 
-                        $("#messages-app #yw1").html(\'<div class="alert in alert-block fade alert-success"><a href="#" class="close" data-dismiss="alert">×</a>\'+data.mensaje+\'</div>\');
-                        $(\'body,html\').animate({scrollTop: 0}, 800);
-                    });
-                }
-                $("#img-load").css("display","none");
-            },\'json\');
+                .'$("#btn-regCurso").click(function(){
+                $("#img-load").css("display","inline-block");    
+                $(\'#registrar_estudiante_error\').html("");
+                $.post("'.Yii::app()->createAbsoluteUrl('cursos/agregarEstudiantexCodigo').'",{\'codigo\':$(\'#registrarEstudiante\').val(),\'id_curso\':'.$model->id.'},function(data){
+                        if(data.respuesta == false){
+                            $(\'#registrar_estudiante_error\').html(data.mensaje);
+                        }else if(data.respuesta == true){
+                            $("#sec-registrar-estudante").hide(\'slow\', function(){ 
+                                $("#sec-registrar-estudante").remove(); 
+                                $("#messages-app #yw1").html(\'<div class="alert in alert-block fade alert-success"><a href="#" class="close" data-dismiss="alert">×</a>\'+data.mensaje+\'</div>\');
+                                $(\'body,html\').animate({scrollTop: 0}, 800);
+                            });
+                        }
+                        $("#img-load").css("display","none");
+                    },\'json\');
         });');
 ?>
 

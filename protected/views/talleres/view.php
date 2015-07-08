@@ -24,3 +24,6 @@ array('label'=>'Manage Talleres','url'=>array('admin')),
 		'descripcion',
 ),
 )); ?>
+
+
+
