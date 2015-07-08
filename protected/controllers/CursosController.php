@@ -42,7 +42,7 @@ class CursosController extends Controller {
      * @return boolean Description
      */
     public function validarExitenciaUsuarioEnCurso($id_usuario, $id_curso) {
-        if (IntegrantesCurso::model()->count("id_integrante = ? AND cursos_id = ?", array($id_usuario, $id_curso)) > 0)
+        if (IntegrantesCurso::model()->count("id_integrante = ? AND cursos_id = ? AND estado = ?", array($id_usuario, $id_curso, ACTIVE)) > 0)
             return true;
         else
             return false;
