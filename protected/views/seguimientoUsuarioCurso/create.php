@@ -10,8 +10,8 @@ array('label'=>'Manage SeguimientoUsuarioCurso','url'=>array('admin')),
 );
 ?>
 
-<?php echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
+<?php // echo $this->renderPartial("_menu",array('model' => $curso, 'activeCreate' => true ));?>
 
-<h3>Notas de seguimiento</h3>
+<h1>Notas de seguimiento</h1>
 
 <?php echo $this->renderPartial('_form', array('seguimientos' => $seguimientos,'model'=>$model,'curso'=>$curso,'arrayDataProvider'=>$arrayDataProvider)); ?>
