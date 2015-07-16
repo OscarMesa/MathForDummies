@@ -83,6 +83,61 @@ class SeguimientoUsuarioCursoController extends Controller {
         );
     }
     
+    
+    /**
+     * Este metodo me perimite exportatr la tabla de notas a excel.
+     * @param int $id id del curso
+     */
+    public function actionExportNotasExcel($id)
+    {
+        $curso = Cursos::model()->findByPk($id);
+        $seguimientos = SeguimientoUsuarioCurso::model()->findAll('id_curso=? AND estado_seguimiento=?',array($id,ACTIVE));
+        $estudiantes = $curso->participantes;
+        $rawData = array();
+        foreach ($estudiantes as $estudiante) {
+            $registro = array();
+            $registro['id'] = $estudiante->iduser;
+            $registro['estudiante'] = $estudiante;
+            $registro['ColumnsNotaSeguimiento'] = array();
+            
+            foreach ($seguimientos as $seguimiento) {
+//                if($seguimiento->estado_seguimiento == INACTIVE)continue;
+                $registro[$seguimiento->id]['seguimiento'] = $seguimiento;
+                $nota = NotaSeguimientoUsuario::model()->find('id_seguimiento_usuario_curso=? AND id_usuario = ?',array($seguimiento->id,$estudiante->iduser));
+                if($nota != null)
+                {
+                    $registro[$seguimiento->id]['nota'] = $nota;
+                }else{
+                    $registro[$seguimiento->id]['nota'] = null;
+                }
+            }
+            $rawData[] = $registro;
+        }
+        $arrayDataProvider = new CArrayDataProvider($rawData, array(
+           'id'=>'id',
+           /* 'sort'=>array(
+               'attributes'=>array(
+                   'username', 'email',
+               ),
+           ), */
+           'pagination'=>false
+       ));
+        
+        
+        header("Content-type: application/vnd.ms-excel; name='excel'");
+        header("Content-Disposition: filename=ficheroExcel.xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        
+        echo $this->renderPartial('exportExcel',array(
+            'model' => null,
+                'curso' => Cursos::model()->findByPk($id),
+                'arrayDataProvider' => $arrayDataProvider,
+                'seguimientos' => $seguimientos,
+        ),true);
+        
+    }
+    
     public function actionModificarNota() {
         
     }

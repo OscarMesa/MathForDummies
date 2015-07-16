@@ -1,4 +1,12 @@
-<?php $columns = array(); 
+<script type="text/javascript">
+    $(document).on('click','#export-excel',function(){ 
+        window.location.href  = "<?php echo Yii::app()->createAbsoluteUrl('seguimientoUsuarioCurso/exportNotasExcel/'.$curso->id); ?>"
+    });
+</script>
+
+<?php 
+    
+$columns = array(); 
 $columns[] =
     array(
         'name' => 'Estudiante', 
@@ -53,3 +61,6 @@ function myFunc(){
                 )
             ); 
 ?>
+
+
+<?php echo CHtml::button('Exportar a excel',array('class'=>'btn btn-primary','id'=>'export-excel')); ?>
